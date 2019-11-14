@@ -45,21 +45,21 @@ aşağıda bulunan D kodunun hafızada nasıl temsil edildiğini inceleyelim.
 Dizgi olarak ilklendirilen bir değişkenin bellekte kullandığı stack ve heap bölümleri aşağıdakine
 benzer biçimde gösterilir.
 
-             buffer
-                   /   capacity
-                 /   /    length
-               /   /    /
-            +–––+––––+––––+
-stack frame │ • │ 16 │ 15 │ <– s
-            +–│–+––––+––––+
-              │
-            [–│––––––––––––––––––––––––– capacity ––––––––––––––––––––––––––]
-              │
-            +–V–+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+
-       heap │ H │ a │ v │ e │   │ a │   │ n │ i │ c │ e │   │ d │ a │ y │   │
-            +–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+
+                         buffer
+                       /   capacity
+                     /   /    length
+                   /   /    /
+                +–––+––––+––––+
+    stack frame │ • │ 16 │ 15 │ <– s
+                +–│–+––––+––––+
+                  │
+                [–│––––––––––––––––––––––––– capacity ––––––––––––––––––––––––––]
+                  │
+                +–V–+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+
+           heap │ H │ a │ v │ e │   │ a │   │ n │ i │ c │ e │   │ d │ a │ y │   │
+                +–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+
 
-            [––––––––––––––––––––––––– length ––––––––––––––––––––––––––]
+                [––––––––––––––––––––––––– length ––––––––––––––––––––––––––]
 
 Heap ve stack kavramlarının ne olduğuna gelmeden önce stack üzerinde depolanan verinin üç
 kelimeden oluşan sabit boyutlu bir string nesnesi olduğunu bilmek önemlidir. Aşağıdaki alanlar ise
