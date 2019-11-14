@@ -1,4 +1,4 @@
-# Rust Türkçe Dökümanları
+# Rust Programlama Dili Türkçe Dökümanları
 Rust dili ile ilgili Türkçe dökümanları bu depoda bulabilirsiniz. Mevcut dökümanlar üzerinde düzenlemeler yaparak veya yeni döküman ekleyerek bize yardımcı olabilirsiniz.
 
 # Nasıl katkıda bulunabilirim?
