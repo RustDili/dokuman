@@ -118,3 +118,283 @@ Yani bu Rust’ın bir çöp toplama mekanizmasının bulunmadığı gibi, belle
 Bir nesnenin sahibi olmak, o nesnenin yaşam hakkının yalnızca sahibinin elinde olduğu anlamına gelir.
 
 ## Yaşam Alanı ve Süresi
+
+Rust dilinde bazı değişkenler tanımlandıkları sırada hiçbir kaynağa sahip değillerken, sistemden alınmış bulunan her kaynağın sadece bir sahibi bulunur. Benzer şekilde bir değerin sahibine mülkiyeti bıraktırıldığında Rust jargonuyla düşürüldüğünde sahip olunan değer de düşürülür. Daha da ilginci değişkenin bildirildiği bir blok kapsamı, bir işlev, bir if ifadesi veya süslü parantezler arasında sunulan bir kod bloğu vb. Sonlandırıldığı anda hem değişken hem de içeriğindeki değer düşürülür.
+
+```rust
+fn selamla() {
+  let baglam = "İyi günler dilerim".to_string();
+  println!("{}", baglam); // `baglam` değişkeni de burada düşürülür.
+}
+```
+
+Yukarıdaki örneğe bakıldığında, işlev bloğunun sonuna gelindiğinde s değişkeni değerinin düşürüleceğini bildiğimizden, değişkenin yaşam alanını net biçimde gözlemleyebiliyoruz. Bu durum daha karmaşık veri yapılarında da aynen geçerlidir.
+
+```rust
+let names = vec!["Pascal".to_string(), "Christoph".to_string()];
+```
+
+Bu örnek kod ile names adında bir vektör oluşturulmuştur. Rust’ın vektörleri dizi veya listelere benzemekle beraber boyutları dinamik olarak değişebildiğinden push() işlevi yardımıyla çalışma zamanında değer kabul edebilirler. Örneğin kullandığı hafıza aşağıdaki gösterime benzer.
+
+```d
+[–– names ––]
+            +–––+–––+–––+
+stack frame │ • │ 3 │ 2 │
+            +–│–+–––+–––+
+              │
+            [–│–– 0 –––] [–––– 1 ––––]
+            +–V–+–––+–––+–––+––––+–––+–––+–––+
+       heap │ • │ 8 │ 6 │ • │ 12 │ 9 │       │
+            +–│–+–––+–––+–│–+––––+–––+–––+–––+
+              │\   \   \  │
+              │ \   \    length
+              │  \    capacity
+              │    buffer │
+              │           │
+            +–V–+–––+–––+–––+–––+–––+–––+–––+
+            │ P │ a │ s │ c │ a │ l │   │   │
+            +–––+–––+–––+–––+–––+–––+–––+–––+
+                          │
+                          │
+                        +–V–+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+
+                        │ C │ h │ r │ i │ s │ t │ o │ p │ h │   │   │   │
+                        +–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+
+```
+
+Daha önceki string nesnesine benzer şekilde kapasitesi, uzunluğu ve vektöre ait ham verilerinin bulunduğu heap konumu gösteren işaretçisi ile vektör nesnesinin kendisi stack üzerinde depolanırken, vektöre ait ham verilerin oluşturduğu string nesnelerinin kendi tampon bellekleri ile ve sırasıyla heap üzerinde depolanır. Bu şekilde her değerin tek bir değişkene ait olduğu veri ağacı yapısı oluşturularak, names vektöründeki her bir öğenin kapsam dışına çıkıldıkça değerlerinin ve kullandıkları ara belleklerinin düşmesi sağlanmış olur.
+
+## Move
+
+Stack üzerinde depolanan integer bool, char gibi ilkel türler haricinde bir heap üzerinde depolanan kaynaklara sahip olan her nesne, bir diğerine atama yoluyla ya da bir işleve parametre olarak aktarıldığında o kaynağın mülkiyeti de aktarılmış sayılır. Bu duruma Rust terminolojisinde move yani taşıma adı verilir. Ve bir kaynak taşındığında kaynağın bir önceki sahibi artık kullanılamaz hale geleceğinden silinir. Böylelikle halihazırda silinmiş olan bir kaynağın referans verilerek kullanılmasının önüne geçilmiş olunur. 
+Bu noktada nesnenin atanma ya da parametre yoluyla işleve geçirilmesi gibi işlemlerde stack üzerinde depolanan türler kopyalanırken heap üzerinde depolanan türler ise taşınır. Bu durum Rust diliyle kod üretimini etkilediği için oldukça önemlidir.
+
+```rust
+fn islev(x: i32, y: i32) {
+    println!(“İşlevden dönen değerler x: {}, y: {} “, x, y);
+}
+
+fn main() {
+    // Stack allocated integer değeri
+    let x = 5i32;
+
+    // kaynağı taşınmadan x değişkeni y değişkenine kopyalanıyor. 
+    let y = x;
+
+    islev(x, y);
+
+    // İki değişken de birbirinden bağımsız olarak halen kullanılabilir.
+    println!("x değişkeni: {}, ve y değişkeni {}", x, y);
+}
+```
+
+Yukarıdaki örnek x değişkeninde tutulan ilkel bir tür olan integer değeri diğer programlama dillerine benzer şekilde kopyalanırken aşağıdaki örnekte yer alan a değişkeni heap üzerinde depolanan bir değere sahip olduğu için atama işlemin gerçekleştiğinde mülkiyeti de taşınacak, mülkiyetinde bulunan hafiza kaynağı ise, mülkiyeti devralan b değişkenine aktarılacağından, a değeri silinerek kullanılamaz duruma gelecektir.
+
+```rust
+fn main() {
+    // a bir heap allocated integer değeri işaret eder.
+    let a = Box::new(5i32);
+    println!("a: {}", a);
+// a değişkenini b'ye taşıyoruz. Bu andan sonra a kullanım dışı olacak. 
+// Eğer bu noktadan sonra a'yı kullanmaya çalışırsak derleyici 
+// use of moved value hatası üretecek.
+    let b = a;    // a değişkeninin sahip olduğu değer için ayrılmış kaynak
+// artık b’ye taşındığından bu noktadan sonra a artık kullanılamaz
+
+   println!("b'nin taşıdığı değer: {}", b); // Sorunsuz çalışacak
+   println!("a'nın taşıdığı değer: {}", a); // Bu satır hata üretilmesine neden olur
+}
+```
+
+Aşağıdaki örnek main işlevi içinde farklı yapı türleriyle kullanılmak istenilen bir değişkenin yaşamını mülkiyet aktarımı nedeniyle nerelerde sürdüğünü ve değişkenin hangi noktada kullanılamaz hale gelerek kullandığı hafıza kaynağını sisteme geri iade ettiğini anlatır.
+
+```rust
+struct Config {……}
+struct ProductService {……}
+struct BasketService {……}
+
+fn main() {
+    let config = Config { debug_mode: true };
+    // Bu noktada config `main` işlevine aittir.
+    // Bu main işlevinin sonunda hafızanın 
+    // serbest bırakılacağı anlamına gelir
+
+    let product_service = ProductService::new(config);
+    // Bu noktada config `new` işlevinin mülkiyetine girer
+    // Yani main işlevi artık `config` değişkenine sahip olmadığından
+    // `config` değişkeninin kullanılmasına artık izin verilmez. 
+
+    let basket_service = BasketService::new(config);
+    // config değişkeni `main` işlevinin mülkiyetinde olmadığından 
+    // BasketService’e ait olan new işlevinde de kullanılamaz.
+}
+```
+
+Yorum satırları dikkatle okunduğunda akıllara config değişkeninin neden main işlevinin son satırına kadar kullanılamadığı sorusu gelebilir.  Bunun yanıtı config değişkeni değeri için bellekte ayrılan tüm kaynağı ProductService yapısının new işlevine işlev parametresi olarak geçirilmesinde gizlidir.
+
+Mülkiyetin new işlevine geçirilmesiyle artık kaynağın yeni sahibi olan new işlevinin o mülkiyetle ne yapacağı tamamen kendisini ilgilendirir. Mülkiyeti elinde bulunduranın sahip olduğu şeyi imha etme hakkına da sahip olduğunu bildiğimizden, ancak yeni sahibin hafızayı boşaltma kararı verip vermediği bilgisine sahip olmadığımızdan dolayı böyledir.
+
+Mülkiyetin ve üzerindeki tüm tasarrufun başka bir servise aktarıldığı bir bellek alanının başına neyin geldiği bilinmeden başka servislerce de kullanılmasına izin verilmesi korkunç veri kayıplarına neden olabileceğinden Rust derleyici olası bir çalışma zamanını önlemiş olur  
+Heap üzerinde depolanan kaynaklara sahip olan değişkenler parametreleri yoluyla işlevlere geçirildiklerinde sadece o işlevin kod blokları arasında yaşarlar. Doğal olarak taşıdığı değer için ayrılmış kaynakları işleve aktarılan değişken de bir daha kullanılamayacağından silinir.
+
+```rust
+// Aşağıdaki işlev parametre yoluyla kendisine geçirilen a değişkeni için
+// ayrılan kaynakların mülkiyetini de alacağından işlevin bitiminde 
+// c’nin kaynakları da sisteme iade edilecek
+
+fn box_sil(c: Box<i32>) {
+    // <-mülkiyet devralan C değişkeni yaşamaya başlar 
+    
+println!("İşlevin kapsamı boyunca c istenildiği gibi kullanılır: {}", c);
+
+}    // <-C değişkeninin yaşam alanı bu noktada sonlandığından
+// c değişkeni silinerek taşıdığı kaynak sisteme iade edilir.
+
+fn main() {
+    let a = Box::new(5i32);
+    println!("a: {}", a);
+
+    box_sil(a);    // <- a değişkeninin tuttuğu değer için hafızada ayrılan
+// kaynağın mülkiyeti işleve devredildiğinden
+// a değişkeni bu noktadan sonra kullanılamaz
+    println!("a’nın sahip olduğu kaynak taşındığından hata üretilir: {}", a); 
+}    // <- Eğer a değişkenin sahip olduğu kaynak  box_sil işlevine 
+    // aktarılmamış olsaydı a değişkeni yaşam alanı bu noktada sona erecekti
+```
+
+## Borçlanma
+
+Başka programlama dillerine aşina olanlar böyle bir kod tasarımıyla ilk karşılaştıklarında name, a ve b değişkenlerinin her birinin “Pascal” çıktısını üreteceğini tahmin edeceklerdir.
+
+```rust
+let name = "Pascal".to_string();
+let a = name;
+let b = name;
+```
+
+Ancak bu kod Rust derleyicisine gönderildiğinde durumun böyle olmadığı anlaşılacaktır.  
+
+```bash
+error[E0382]: use of moved value: `name`
+ --> src/main.rs:4:11
+  |
+2 |   let name = "Pascal".to_string();
+  |       ---- move occurs because `name` has type `std::string::String`, which does not implement the `Copy` trait
+3 |   let a = name;
+  |           ---- value moved here
+4 |   let b = name;
+  |           ^^^^ value used here after move
+```
+
+Ürettiği oldukça faydalı hata açıklamasında derleyici, name adlı string türündeki değişken içeriğinin a değişkenine taşındıktan sonra b değişkenine de atanmaya çalıştığını ve bu durumun hataya neden olduğunu söyler. Buradaki sorun b değişkenine atanmak istenen isim değişkeninin mülkiyetinin başka bir değişkene aktarılması ve  artık bir değere sahip olmamasıdır. Neler olup bittiğini daha iyi kavrayabilmek için bellekte neler olduğunu anlamakta yarar var. Name değişkeni ilklendiğinde hafızadaki durumu aşağıdaki gibi temsil edilmektedir.
+
+```bash
+            +–––+–––+–––+
+stack frame │ • │ 8 │ 6 │ <– name
+            +–│–+–––+–––+
+              │
+            +–V–+–––+–––+–––+–––+–––+–––+–––+
+       heap │ P │ a │ s │ c │ a │ l │   │   │
+            +–––+–––+–––+–––+–––+–––+–––+–––+
+
+Ancak name değişken değeri a değişkenine atandığında mülkiyeti a değişkenine aktarılmış olduğundan name değişkeni ilklendirilmeden bırakılmış olur. 
+ [–– name ––] [––– a –––]
+            +–––+–––+–––+–––+–––+–––+
+stack frame │   │   │   │ • │ 8 │ 6 │
+            +–––+–––+–––+–│–+–––+–––+
+                          │
+              +–––––––––––+
+              │
+            +–V–+–––+–––+–––+–––+–––+–––+–––+
+       heap │ P │ a │ s │ c │ a │ l │   │   │
+            +–––+–––+–––+–––+–––+–––+–––+–––+
+```
+
+Böyle bir durumda b = name; ifadesinin sürpriz şekilde hatayla sonuçlanmasına şaşırmak yerine, derleyicinin bu kodu daha çalıştırılmadan önce statik olarak analiz etmesine odaklanmak önemlidir. Rust derleyicisi güvensiz kod yazılmasına izin veren derleyicilerden değildir:-)
+
+Ancak derleyicinin bu tutumu değişkenler aracılığıyla birden fazla noktada aynı verilere ulaşılması gerektiğinde maliyetli çözümleri de beraberinde getirir. Böyle bir durumla başa çıkmanın kolay ama pahalı bir yolu değişkene ait olan değeri kopyalamak ya da klonlamak olacak, ancak bu tercih bellekteki verilerin de çoğalacağı anlamına gelecektir.
+
+```rust
+let name = "Pascal".to_string();
+let a = name;
+let b = a.clone();
+```
+
+Yukarıdaki örnekte isim değişkeni a değişkenine atandıktan sonra kendisinden bir değer elde edilemeyeceğinden klonlamanın yeni atanan a değişkeni üzerinden yapıldığına dikkat edilmelidir.  Program çalıştığında bellekteki veriler düşürülmediği sürece aşağıdakine benzer şekilde temsil edilirler.
+
+```bash
+[–– name ––] [––– a –––][–––– b ––––]
+            +–––+–––+–––+–––+–––+–––+–––+–––+–––+
+stack frame │   │   │   │ • │ 8 │ 6 │ • │ 8 │ 6 │
+            +–––+–––+–––+–│–+–––+–––+–│–+–––+–––+
+                          │           │
+              +–––––––––––+           +–––––––+
+              │                               │
+            +–V–+–––+–––+–––+–––+–––+–––+–––+–V–+–––+–––+–––+–––+–––+–––+–––+
+       heap │ P │ a │ s │ c │ a │ l │   │   │ P │ a │ s │ c │ a │ l │   │   │
+            +–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+–––+
+```
+
+Açıkçası verileri klonlamak, uğraşılan verilere bağlı olarak fazla bellek gerektiren pahalı bir işlemdir. Oysa bu senaryoda gerekli olan tek şey bir değere referans vermektir. Bu tür bir yönelim ise özellikle bir değere sahip olmanız gerekmeyen işlevleri yazarken oldukça kullanışlıdır. Kendisine verilen ismi kullanarak selamlama işlevini yerine getiren aşağıdaki gibi bir örnek hayal edelim:
+
+```rust
+fn greet(name: String) {
+  println!("Hello, {}!", name);
+}
+```
+
+Bu işlev kendisinin aynı değişkenle defalarca çağrılmasını önlediği gibi, kendisine geçirilen değerin mülkiyetine de gerek duymaz:
+
+```rust
+let name = "Pascal".to_string();
+greet(name);
+greet(name); // name değişkeni daha önce taşınmış olduğundan derlenmeyecek
+```
+
+Bir değişkenin referansını almak için & sembolünü kullanılır. Ve bu sembol kullanıldığında bir değer üzerinden referans beklendiği açıkça anlaşılır.
+
+Genellikle bu türden API’ler farklı nedenlerden dolayı &str şeklinde daha genel amaçlara yönelik tasarlanmakla birlikte bu aşamada sadece &String’ e ihtiyaç duyulduğundan aşağıdaki şekilde tasarlanmıştır.
+
+```rust
+fn greet(name: &String) {
+  println!("Hello, {}!", name);
+}
+```
+
+İşlev şimdi bir string referansı beklediğinden yapılan bu değişiklik onun defalarca çağrılabilmesine neden olur. 
+
+```rust
+let name = "Pascal".to_string();
+greet(&name);
+greet(&name);
+```
+
+Örnekteki işlev gibi, bir değerin referansını bekleyen işlevler kendilerine aktarılan değerleri sadece *ödünç almış olduklarından o değerlere hiçbir zaman sahip olmazlar.
+
+Artık değişkenleri birden fazla noktada aynı verilere ulaşabilecek şekilde değerlendirebiliriz.
+
+```rust
+let name = "Pascal".to_string();
+let a = &name;
+let b = &name;
+```
+
+Yukarıdaki kodda a ve b değişkenleri name değişkeni değerini referans gösterirken name değişkeni değerinin mülkiyetini hiçbir zaman kaybetmez. Aşağıdaki kod da aynı şekilde değerlendirilir. 
+
+```rust
+let name = "Pascal".to_string();
+let a = &name;
+let b = a;
+```
+
+Artık aşağıdaki atamaları gerçekleştirerek greet() işlevini çağırmak bir soruna yol açmaz.
+
+```rust
+let name = "Pascal".to_string();
+let a = &name;
+greet(a);
+
+let b = a;
+greet(a);
+```
+
+## Referans ve Borçlanma
