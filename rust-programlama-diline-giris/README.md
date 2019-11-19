@@ -2,4 +2,4 @@
 
 # Dizin
 
-[Rust Dilinin Temelleri](dokuman/rust-programlama-diline-giris/rust-dilinin-temelleri.md)
+[Rust Dilinin Temelleri](rust-dilinin-temelleri.md)
