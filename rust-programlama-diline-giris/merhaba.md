@@ -1,3 +1,4 @@
+### Merhaba Dünya!
 Diğer dillerde olduğu gibi Rust dilinde de bir programın kodlamaya başlarken `main()` işlevinden başlanır. Bu  işlevin içindeki ifadeler programın derlenmiş hali çağrıldığı anda yürütülür.
 
 ```Rust
