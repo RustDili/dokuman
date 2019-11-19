@@ -48,7 +48,7 @@ string s = "Have a nice day";
 Dizgi olarak ilklendirilen bir değişkenin bellekte kullandığı stack ve heap bölümleri aşağıdakine
 benzer biçimde gösterilir.
 
-```d
+```bash
                       buffer
                     /   capacity
                   /   /    length
@@ -136,7 +136,7 @@ let names = vec!["Pascal".to_string(), "Christoph".to_string()];
 
 Bu örnek kod ile names adında bir vektör oluşturulmuştur. Rust’ın vektörleri dizi veya listelere benzemekle beraber boyutları dinamik olarak değişebildiğinden push() işlevi yardımıyla çalışma zamanında değer kabul edebilirler. Örneğin kullandığı hafıza aşağıdaki gösterime benzer.
 
-```d
+```bash
 [–– names ––]
             +–––+–––+–––+
 stack frame │ • │ 3 │ 2 │
@@ -177,7 +177,7 @@ fn main() {
     // Stack allocated integer değeri
     let x = 5i32;
 
-    // kaynağı taşınmadan x değişkeni y değişkenine kopyalanıyor. 
+    // kaynağı taşınmadan x değişkeni y değişkenine kopyalanıyor.
     let y = x;
 
     islev(x, y);
@@ -238,12 +238,12 @@ Heap üzerinde depolanan kaynaklara sahip olan değişkenler parametreleri yoluy
 
 ```rust
 // Aşağıdaki işlev parametre yoluyla kendisine geçirilen a değişkeni için
-// ayrılan kaynakların mülkiyetini de alacağından işlevin bitiminde 
+// ayrılan kaynakların mülkiyetini de alacağından işlevin bitiminde
 // c’nin kaynakları da sisteme iade edilecek
 
 fn box_sil(c: Box<i32>) {
-    // <-mülkiyet devralan C değişkeni yaşamaya başlar 
-    
+    // <-mülkiyet devralan C değişkeni yaşamaya başlar
+
 println!("İşlevin kapsamı boyunca c istenildiği gibi kullanılır: {}", c);
 
 }    // <-C değişkeninin yaşam alanı bu noktada sonlandığından
