@@ -34,7 +34,7 @@ let (x, y,z ) = (1, 5, 10);
 Sabitleri tanımlamak için `const` anahtar sözcüğü kullanılır. Ancak bellekte sabit bir adresi bulunmayan bu türlerin ömrü programın yaşam süresi kadardır.
 
 ```Rust
-`fn main() {
+fn main() {
   const N: i32 = 5;
   println!("N sabitinin değeri: {}," N);
 }
@@ -43,7 +43,7 @@ Sabitleri tanımlamak için `const` anahtar sözcüğü kullanılır. Ancak bell
 Bir global değişken türü tanımımlanırken `static` anahtar sözcüğü kullanılır. Bu türlerin her değeri için sadece bir örnek olabilir ve bu örnekler bellekte sabit bir adreste bulunurlar.
 
 ```Rust
-`fn main() {
+fn main() {
   static S: i32 = 10;
   println!("S global değeri: {}," S);
 }
