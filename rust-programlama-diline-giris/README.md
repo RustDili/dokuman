@@ -11,7 +11,7 @@ Bu çalışmanın orjinal hali [Learning Rust](https://github.com/learning-rust/
 - [Merhaba dünya!](merhaba.md)
 - [Paket yönetimi, Sandıklar ve Proje Yapısı](cargo.md)
 - [Yorum satırları ve kodun belgelenmesi](yorum-ve-belge.md)
-- [Değişken bağlama, sabit ve statik değerler](baglam-sabit-statik.md)
+- [Değişken bağlamı, sabit ve statik öğeler](baglam-sabit-statik.md)
 - [İşlevler](islev.md)
 - [Basit veri türleri](ilkeller.md)
 - [Operatörler](operatorler.md)
