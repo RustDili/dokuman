@@ -1,7 +1,7 @@
 # Basit veri türleri
 Rust çok sayıda basit veri türüne erişim sağlar.
 
-- ### Boolean
+### i. Boolean
 **bool:** yalnızca `true` ya da `false` olabilecek bir değeri temsil eden mantıksal veri türüdür. 
 
 ```Rust
@@ -23,7 +23,7 @@ fn main() {
 }
 ````
 
-- ### Char
+### ii. Char
 **char:**  `'a'`, `'@'`,  `'~'` gibi her biri 4 byte’a sığabilen ve tek bir karakteri temsil eden karakter türlerini tutar ve tek tırnak gösterimiyle temsil edilir.
 
 ```Rust
@@ -35,7 +35,7 @@ fn main() {
 }
 ````
 
-- ### i8, i16, i32, i64, i128
+### iii. i8, i16, i32, i64, i128
 8, 16, 32, 64, 128 bit sabit boyutlu ve `(+/-)` işaretli tamsayı değerlerini tutarlar.
 
 | VERİ TÜRÜ | MIN                                      | MAX                                     |
@@ -54,7 +54,7 @@ fn main() {
 }
 ````
 
-- ### u8, u16, u32, u64, u128
+### iv. u8, u16, u32, u64, u128
 8, 16, 32, 64, 128 bit sabit boyutlu ve `(0/+)` işaretli tamsayı değerlerini tutarlar.
 
 | VERİ TÜRÜ | MIN | MAX                                     |
@@ -73,7 +73,7 @@ fn main() {
 }
 ````
 
-- ### isize ve usize
+### v. isize ve usize
 İşaretçi boyutunda işaretli ve işaretsiz tamsayı türlerini tutarlar. Programın derlenmekte olduğu bilgisayar mimarisinin sunduğu en yüksek bit değerine eşittirler. Varsayılan olarak bu değerler 32 bit platformlarda 32 bit, 64 bit platformlarda da 64 bit kabul edilir.
 
 ```Rust
@@ -83,7 +83,7 @@ fn main() {
 }
 ````
 
-- ### f32 ve f64
+### vi. f32 ve f64
 32 ve 64 bit boyutlarında ondalık basamaklı sayıları tutabilen türlerdir. Rust, kayan noktalı sayılar aritmetiğini ifade ederken **IEEE** standartlarına uyar. Bu nedenle `f32` türü, diğer dillerdeki tek duyarlıklı float türüne benzerken, `f64` çift duyarlıklı double türüne benzer.
 Hedeflenen donanım çift hassasiyeti desteklemiyor; yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Rust varsayılan olarak, tamsayılar için `i32`, kayan noktalı sayılar için `f64` türlerini kullanır. Bu nedenle, her ne kadar derleme anında türler çıarsanabliyor olsa da; diğer türlerin tercih edilmesi durumunda bu türlerin açıkça bildirilmesi gereklidir.
 
@@ -98,7 +98,7 @@ fn main() {
 }
 ````
 
-- ### Diziler
+### vii. Diziler
 Aynı veri türündeki öğelerin sabit boyutlu listesini tutarlar. Köşeli parantez içinde tanımlanırlar ve bellekte bitişik olarak depolanırlar. 
 Tür ve uzunluk bilgileri derleme zamanında bilinmesi gerektiğinden `[T; size]` söz dizimiyle kullanılırlar. Köşeli parantez içinde bildirilen birinci bölüm olan `T` dizi elemanlarının türünü, ikinci bölüm olan `size` dizinin büyüklüğünü bildirir.
 
@@ -127,7 +127,7 @@ println!("ys dizisi belleğin stack bölgesinde: {} byte yer kaplıyor.", mem::s
 Diziler varsayılan olarak değişmez kabul edildiklerinden, tanımlandıktan sonra eleman adetleri ve türleri değiştirilemez. Tanımlandıkları sırada aldıkları mut anahtar sözcüğü ile sadece eleman değerleri değiştirebilmektedir.
 Eğer eleman adetlerinin otomatik olarak arttırılabildiği bir diziye ihtiyaç duyuluyorsa bu ihtiyaç için **Vektör**ler tercih edilmelidir. Vektörler türleri aynı olmak kaydıyla her türden elemanı kabul ederler.
 
-- ### Tuples
+### viii. Tuples
 Aynı ya da farklı veri türlerinden oluşan elemanların sabit büyüklükteki listelerini oluşturmak için kullanılan değer topluluklarıdırlar. Her elemanı `(T1, T2, T3...Tn)` kendi türünün imzalı bir değeri olduklarından, işlevlerden çok sayıda değer döndürmek amacıyla da kullanılırlar.
 
 ```Rust
@@ -154,7 +154,7 @@ fn main() {
 
 Bu tür de tıpkı diziler gibi değiştirilemez varsayılır. Değiştirilebilir olabilmesi için `mut` anahtar kelimesiyle tanımlanmış olsalar bile, eleman sayılarının değiştirilmesine izin verilmez.
 
-- ### Dilimler
+### ix. Dilimler
 Başka bir veri yapısına referans veren bu tür dizilere benzer ancak boyutları derleme zamanında belli değildir. 
 Dilim `&[T];` söz dizimiyle ifade edilebilen ve iki parçadan oluşan bir nesne olarak düşünülmelidir. İfadenin ilk parçası erişilen verinin göstergesi olurken, ikinci parçası elde edilecek olan dilimin uzunluğunu yani asıl verinin ne kadarına referans edileceğini gösterir.
 
@@ -200,7 +200,7 @@ fn main() {
 }
 ````
 
-- ### Str
+### x. Str
 Unicode dizgilerinin bir parçasını tutan UTF-8 formatında ve boyutu olmayan dilimlerdir ve dizgi dilimleri olarak adlandırılırlar. Genellikle bir dizgiyi ödünç almak için `&str` kullanılırlar.
 
 ```Rust
