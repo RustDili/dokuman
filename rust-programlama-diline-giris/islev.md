@@ -85,7 +85,7 @@ fn main() {
 ````
 Giriş ve dönüş türlerini belirtmenin isteğe bağlı olduğu bu isimsiz işlevde giriş parametreleri işleve `||` kullanılarak geçirilir ve ifade gövdesi `{};` köşeli parantezler ile sarılır.
 
-Giriş ve geri dönüş türlerinin belirtilmediği bir isimsiz işlev eğer tek bir satırdan oluşuyorsa `{};` köşeli parantes kullanımı zorunlu değildir.
+Giriş ve geri dönüş türlerinin belirtilmediği bir isimsiz işlev eğer tek bir satırdan oluşuyorsa `{};` köşeli parantez kullanımı zorunlu değildir.
 
 ```Rust
 fn main() {
