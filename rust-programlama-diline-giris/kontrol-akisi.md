@@ -241,7 +241,7 @@ fn main() {
 }
 ````
 
-#### vii. 'Outer_for
+#### viii. 'Outer_for
 ```Rust
 fn main() {
     'outer_for: for birinci in 1..6 {
