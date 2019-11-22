@@ -160,25 +160,25 @@ Dilim `&[T];` söz dizimiyle ifade edilebilen ve iki parçadan oluşan bir nesne
 
 ```Rust
 fn main() {
-    let a: [i32; 4] = [1, 2, 3, 4];	// Referans verilecek ana dizi 
+    let dizi: [i32; 4] = [1, 2, 3, 4]; // Referans verilecek ana dizi 
     
     let b: &[i32] = &a;
-    println!("b: {:?}", b);         // Bütün dizi dilimlenir.
+    println!("b: {:?}", b);            // Bütün dizi dilimlenir.
 
     let c = &a[0..4]; 
-    println!("c: {:?}", c);         // index 0 dan başlayarak ilk 4 eleman
+    println!("c: {:?}", c);            // index 0 dan başlayarak ilk 4 eleman
 
     let d = &a[..];
-    println!("d: {:?}", d);         // Bütün dizi dilimlenir.
+    println!("d: {:?}", d);            // Bütün dizi dilimlenir.
     
     let e = &a[1..3];
-    println!("e: {:?}", e);         // [2, 3]
+    println!("e: {:?}", e);            // [2, 3]
 
     let f = &a[1..];
-    println!("f: {:?}", f);         // [2, 3, 4]
+    println!("f: {:?}", f);            // [2, 3, 4]
     
     let g = &a[..3];
-    println!("g: {:?}", g);         // [1, 2, 3]
+    println!("g: {:?}", g);            // [1, 2, 3]
 }
 ````
 
