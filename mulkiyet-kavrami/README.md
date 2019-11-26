@@ -1,4 +1,4 @@
-![Image of Yaktocat](resimler/mulkiyet-kavrami-kapak.png)
+![kapak](/resimler/mulkiyet-kavrami-kapak.png)
 
 # Rust'ın Mülkiyet Kavramı
 
