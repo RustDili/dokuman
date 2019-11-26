@@ -8,7 +8,7 @@ Bu döküman: **Pascal Precht**, **Nazım Can Altınova**, **Christoph Burgdorf*
 
 # Dizin
 - [Başlarken](giris.md)
-- [Hafıza Güvenliği](hafiza-guvanligi.md)
+- [Hafıza Güvenliği](hafiza-guvenligi.md)
 - [Hafızanın Bölümleri: Stack ve Heap](stack-ve-heap.md)
 - [Mülkiyet Kavramını Anlamak](mulkiyet.md)
 - [Yaşam Alanı ve Süresi](yasam-suresi.md)
