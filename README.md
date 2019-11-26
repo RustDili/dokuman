@@ -18,6 +18,7 @@ Rust dili ile ilgili Türkçe dökümanları bu depoda bulabilirsiniz. Mevcut d�
 
 ## Döküman Dizini
  [Rust Programlama Diline Giriş](https://github.com/rust-lang-tr/dokuman/tree/master/rust-programlama-diline-giris)
+ 
  [Rust'ın Mülkiyet Kavramı](https://github.com/rust-lang-tr/dokuman/tree/master/mulkiyet-kavrami)
  
  
