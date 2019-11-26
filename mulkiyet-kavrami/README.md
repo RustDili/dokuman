@@ -1,17 +1,20 @@
-![kapak](/resimler/mulkiyet-kavrami-kapak.png)
+![kapak Resmi](/resimler/mulkiyet-kavrami-kapak.png)
+## Kaynakça 
+Bu döküman: **Pascal Precht**, **Nazım Can Altınova**, **Christoph Burgdorf**' un çalışmalarından derlenmiş olup yazıların orjinal hallerine aşağıdaki bağlantılardan ulaşabilirsiniz.  
+**Pascal Precht:** [Rust’ın Mülkiyet Kavramına Yakından Bakmak”](https://blog.thoughtram.io/ownership-in-rust/)  
+**Christoph Burgdorf:** [“JavaScript Geliştiricileri İçin Rust’ın Mülkiyet Kavramı”](https://blog.thoughtram.io/rust/2015/05/11/rusts-ownership-model-for-javascript-developers.html)  
+**Nazım Can Altınova:** [“Rust’ta Ownership Kavramı”](https://canaltinova.com/blog/posts/rustta-ownership-kavrami/)  
+**Nazım Can Altınova:** [“Rust’ta Borrowing ve Referans Kavramları”](https://canaltinova.com/blog/posts/rustta-borrowing-ve-referans-kavramlari/)
 
-# Rust'ın Mülkiyet Kavramı
-
-Rust programlama dilini diğer dillerden ayıran özelliklerin başında ownership, borrowing ve lifetime
-yani dilimizdeki karşılıklarıyla **mülkiyet**​
-, **borçlanma​** ve **yaşam süresi**​ olan bu üç kavram geliyor.
-Dilin temelini oluşturan bu üç kavramın, bu dili kullanan programcılar için geleneksel programlama
-yaklaşımını tamamen değiştirdiğini ifade edebiliriz. Öyle ki; diğer programlama dillerinin bakış
-açılarına hakim olan programcıların mantıklı bulduğu kodlar Rust ile denendiğinde genellikle
-çalışmaz.
-
-Rust dilinde mülkiyet, öylesine önemli bir kavramdır ki, bu kavramı mümkün olduğunca erken
-anlamak, derleyici hatalarını değerlendirmek ve dili daha çabuk kavramak açısından oldukça
-yararlıdır. Ancak Rust’ın bu kavramları verilerin hafızada depolanma şekli ve hafıza güvenliği ile
-doğrudan ilişkili olduğundan kavramların doğru ve tutarlı anlaşılabilmesi için öncelikle bu konuları
-incelenmesi oldukça önemlidir.
+# Dizin
+- [Başlarken](giris.md)
+- [Hafıza Güvenliği](hafiza-guvanligi.md)
+- [Hafızanın Bölümleri: Stack ve Heap](stack-ve-heap.md)
+- [Mülkiyet Kavramını Anlamak](mulkiyet.md)
+- [Yaşam Alanı ve Süresi](yasam-suresi.md)
+- [Move](move.md)
+- [Borçlanma](borclanma.md)
+- [Referans ve Borçlanma](referans-ve-borclanma.md)
+- [Ref Kalıbı](ref-kalibi.md)
+- [Mutability ve Mülkiyet](mut-mulkiyet.md)
+- [Kaynakca](kaynakca.md)
