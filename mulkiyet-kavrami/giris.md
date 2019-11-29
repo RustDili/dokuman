@@ -3,7 +3,7 @@
 ### Giriş
 
 Rust programlama dilini diğer dillerden ayıran özelliklerin başında ownership, borrowing ve lifetime
-yani dilimizdeki karşılıklarıyla **mülkiyet**​, **borçlanma​** ve **yaşam süresi**​ olan bu üç kavram geliyor.
+yani dilimizdeki karşılıklarıyla; **mülkiyet**​, **borçlanma​** ve **yaşam süresi**​ olan bu üç kavram geliyor.
 Dilin temelini oluşturan bu üç kavramın, bu dili kullanan programcılar için geleneksel programlama
 yaklaşımını tamamen değiştirdiğini ifade edebiliriz. Öyle ki; diğer programlama dillerinin bakış
 açılarına hakim olan programcıların mantıklı bulduğu kodlar Rust ile denendiğinde genellikle
