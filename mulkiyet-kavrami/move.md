@@ -44,7 +44,7 @@ fn main() {
 }
 ```
 
-Aşağıdaki örnek main işlevi içinde farklı yapı türleriyle kullanılmak istenilen bir değişkenin yaşamını mülkiyet aktarımı nedeniyle nerelerde sürdüğünü ve değişkenin hangi noktada kullanılamaz hale gelerek kullandığı hafıza kaynağını sisteme geri iade ettiğini anlatır.
+Aşağıdaki kodun `main()` işlevinde farklı yapı türleriyle kullanılan değişkenin, mülkiyet aktarımları neticesinde yaşamının nerelerde sürdüğünü ve değişkenin hangi noktada kullanılamaz hale gelerek hafıza kaynağını sisteme iade ettiği açıkça anlaşılır.
 
 ```rust
 struct Config {……}
@@ -68,12 +68,10 @@ fn main() {
 }
 ```
 
-Yorum satırları dikkatle okunduğunda akıllara config değişkeninin neden main işlevinin son satırına kadar kullanılamadığı sorusu gelebilir.  Bunun yanıtı config değişkeni değeri için bellekte ayrılan tüm kaynağı ProductService yapısının new işlevine işlev parametresi olarak geçirilmesinde gizlidir.
-
-Mülkiyetin new işlevine geçirilmesiyle artık kaynağın yeni sahibi olan new işlevinin o mülkiyetle ne yapacağı tamamen kendisini ilgilendirir. Mülkiyeti elinde bulunduranın sahip olduğu şeyi imha etme hakkına da sahip olduğunu bildiğimizden, ancak yeni sahibin hafızayı boşaltma kararı verip vermediği bilgisine sahip olmadığımızdan dolayı böyledir.
-
-Mülkiyetin ve üzerindeki tüm tasarrufun başka bir servise aktarıldığı bir bellek alanının başına neyin geldiği bilinmeden başka servislerce de kullanılmasına izin verilmesi korkunç veri kayıplarına neden olabileceğinden Rust derleyici olası bir çalışma zamanını önlemiş olur  
-Heap üzerinde depolanan kaynaklara sahip olan değişkenler parametreleri yoluyla işlevlere geçirildiklerinde sadece o işlevin kod blokları arasında yaşarlar. Doğal olarak taşıdığı değer için ayrılmış kaynakları işleve aktarılan değişken de bir daha kullanılamayacağından silinir.
+Yorum satırları dikkatle okunduğunda akıllara `config` değişkeninin neden `main()` işlevinin son satırına kadar kullanılamadığı sorusu gelebilir. Bunun yanıtı `config` değişkeni değeri için bellekte ayrılan tüm kaynağın, `ProductService` nesnesinin `new()` metoduna işlev parametresi olarak geçirilmesinde gizlidir: Mülkiyetin `new()` işlevine geçirilmesiyle, artık kaynağın yeni sahibi olan `new()` işlevinin o mülkiyetle ne yapacağı tamamen kendisini ilgilendirir. İster `config` değişkenini kullanıp, başka bir yere transfer eder, isterse yaşamına son verip ona ayrılan kaynakların hafızaya iade edilmesini sağlar. Bu bilginin halihazırda `main()` işlevi içinde bilinemiyor olması bu soruyu cevaplar.
+Mülkiyet ve kullanım hakları başka bir servise devredilmiş bellek alanlarının başlarına neyin geldiği bilinmediği müddetçe, başka servisler tarafından kullanılmasına izin verilemesi, telafi edilemez veri kayıplarına neden olabileceğinden, mülkiyet hakları Rust derleyicisi tarafından dikkatlice takip edilerek, olası veri kayıpları ve çalışma zamanı hatalarının önüne geçilmiş olunur.  
+ 
+`Heap` üzerinde depolanan kaynaklara sahip olan değişkenler, parametreleri yoluyla işlevlere geçirildiklerinde sadece o işlevin kod blokları arasında yaşarlar. Doğal olarak, taşıdığı değer için ayrılmış kaynakları işleve aktarılan değişken de bir daha kullanılamayacağından silinir.
 
 ```rust
 // Aşağıdaki işlev parametre yoluyla kendisine geçirilen a değişkeni için
@@ -93,8 +91,10 @@ fn main() {
     println!("a: {}", a);
 
     box_sil(a);    // <- a değişkeninin tuttuğu değer için hafızada ayrılan
-// kaynağın mülkiyeti işleve devredildiğinden
-// a değişkeni bu noktadan sonra kullanılamaz
+    
+    // kaynağın mülkiyeti işleve devredildiğinden
+    // a değişkeni bu noktadan sonra kullanılamaz
+    
     println!("a’nın sahip olduğu kaynak taşındığından hata üretilir: {}", a); 
 }    // <- Eğer a değişkenin sahip olduğu kaynak  box_sil işlevine 
     // aktarılmamış olsaydı a değişkeni yaşam alanı bu noktada sona erecekti
