@@ -1,6 +1,6 @@
 ### Yaşam Alanı ve Süresi
 Rust programlarında bazı değişkenler tanımlandıkları esnada hiçbir kaynağa sahip olmayabilirler. Bununla birlikte sistemden alınmış bulunan her kaynağın sadece bir sahibi bulunur. 
-Benzer şekilde bir değerin sahibine o değerin mülkiyeti bıraktırıldığında, *-ki buna Rust programcıları mülkiyetin düşürülmesi der-* sahip olunan değer de düşürülür. Daha da ilginci, değişkenin bildirildiği **blok kapsamı**, **işlev**, **if ifadesi** veya süslü parantezler arasında sunulan bir **kod bloğu** vb. sonlandırıldığı anda; hem değişken hem de içeriğindeki değer düşürülür
+Benzer şekilde bir değerin sahibine o değerin mülkiyeti bıraktırıldığında, *-ki buna Rust programcıları mülkiyetin düşürülmesi der-* sahip olunan değer de düşürülür. Daha da ilginci, değişkenin bildirildiği **blok kapsamı**, **işlev**, **if ifadesi** veya süslü parantezler arasında sunulan bir **kod bloğu** vb. sonlandırıldığı anda; hem değişken hem de içerdiği değer düşürülür
 
 ```Rust
 fn selamla() {
