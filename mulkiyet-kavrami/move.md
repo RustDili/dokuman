@@ -1,6 +1,6 @@
 ### Move
-Stack üzerinde depolanan `integer`, `bool`, `char` gibi ilkel türler haricinde; heap üzerinde depolanan kaynaklara sahip olan her nesne, bir diğerine atama yoluyla ya da bir işleve parametre olarak aktarıldığında o kaynağın mülkiyeti de aktarılmış sayılır. Bu duruma Rust terminolojisinde **move** yani taşıma adı verilir. Ve bir kaynak taşındığında kaynağın bir önceki sahibi artık kullanılamaz hale geleceğinden silinir. Böylelikle halihazırda silinmiş olan bir kaynağın referans verilerek kullanılmasının önüne geçilmiş olunur. 
-Bu noktada nesnenin atanma ya da parametre yoluyla işleve geçirilmesi gibi işlemlerde stack üzerinde depolanan türler kopyalanırken heap üzerinde depolanan türler ise taşınır. Bu durum Rust diliyle kod üretimini etkilediği için oldukça önemlidir.
+Stack üzerinde depolanan `integer`, `bool`, `char` gibi ilkel türler haricinde; `heap` üzerinde depolanan kaynaklara sahip olan her nesne; bir diğerine atama yoluyla ya da bir işleve parametre olarak aktarıldığında, o kaynağın mülkiyeti de aktarılmış sayılır. Bu duruma Rust terminolojisinde **`move`** yani taşıma adı verilir. Ve bir kaynak taşındığında, kaynağın bir önceki sahibi artık kullanılamaz hale geleceğinden silinir. Böylelikle halihazırda silinmiş olan bir kaynağın referans verilerek kullanılmasının önüne geçilmiş olunur. 
+Bu noktada; nesnenin atama ya da parametre yoluyla işleve geçirilmesi gibi işlemlerde `stack` üzerinde depolanan türler kopyalanırken, `heap` üzerinde depolanan türler ise taşınır. Bu durum Rust'ta kod üretimini etkilediği için oldukça önemlidir.
 
 ```rust
 fn islev(x: i32, y: i32) {
@@ -8,7 +8,7 @@ fn islev(x: i32, y: i32) {
 }
 
 fn main() {
-    // Stack allocated integer değeri
+    // Stack üzerinde depolanan integer değeri
     let x = 5i32;
 
     // kaynağı taşınmadan x değişkeni y değişkenine kopyalanıyor.
@@ -21,18 +21,23 @@ fn main() {
 }
 ```
 
-Yukarıdaki örnek x değişkeninde tutulan ilkel bir tür olan integer değeri diğer programlama dillerine benzer şekilde kopyalanırken aşağıdaki örnekte yer alan a değişkeni heap üzerinde depolanan bir değere sahip olduğu için atama işlemin gerçekleştiğinde mülkiyeti de taşınacak, mülkiyetinde bulunan hafiza kaynağı ise, mülkiyeti devralan b değişkenine aktarılacağından, a değeri silinerek kullanılamaz duruma gelecektir.
+Örnekteki `x` değişkeninde tutulan ve ilkel bir tür olan integer değeri, diğer programlama dillerine benzer şekilde kopyalanırken, aşağıdaki kodda yer alan `a` değişkeni `heap` üzerinde depolandığından, atama işlemi gerçekleştiğinde mülkiyeti de taşınacak, mülkiyetinde bulunan hafiza kaynağı ise, mülkiyeti devralan `b` değişkenine aktarılacak ve `a` değeri silinecektir.
 
 ```rust
 fn main() {
-    // a bir heap allocated integer değeri işaret eder.
+    // a heap'te depolanan integer değeri işaret eder.
+    
     let a = Box::new(5i32);
     println!("a: {}", a);
-// a değişkenini b'ye taşıyoruz. Bu andan sonra a kullanım dışı olacak. 
-// Eğer bu noktadan sonra a'yı kullanmaya çalışırsak derleyici 
-// use of moved value hatası üretecek.
-    let b = a;    // a değişkeninin sahip olduğu değer için ayrılmış kaynak
-// artık b’ye taşındığından bu noktadan sonra a artık kullanılamaz
+
+// a değişkeni b'ye taşınıyor ve bu andan sonra a değişkeni kullanımaz olacak.
+// Bu noktadan sonra a değişkeni kullanılmak istenirse derleyici 
+// `use of moved value` yani `taşınan değer kullanımı` hatası üretecek.
+    
+    let b = a;
+
+// bu noktada `a` değişkeninin sahip olduğu değer için ayrılmış kaynak
+// b değişkenine taşındığından bu noktadan sonra a artık kullanılamaz
 
    println!("b'nin taşıdığı değer: {}", b); // Sorunsuz çalışacak
    println!("a'nın taşıdığı değer: {}", a); // Bu satır hata üretilmesine neden olur
