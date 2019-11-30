@@ -121,7 +121,7 @@ let a = &name;
 let b = a;
 ```
 
-Bu bilgiler yardımıyla gerekli düzenlemeleri gerçekleştirerek `greet()` işlevini çağırmak artık bir soruna yaratmaz.
+Bu bilgiler yardımıyla gerekli düzenlemeleri gerçekleştirip `greet()` işlevini çağırmak artık bir soruna yol açmaz.
 
 ```rust
 fn greet(name: &String) {
