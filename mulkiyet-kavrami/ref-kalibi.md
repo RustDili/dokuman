@@ -10,7 +10,7 @@ fn main() {
 }
 ```
 
-Ampersand **`&`**sembolü kullanılarak alınan referans ile yukarıdaki örnekte kullanılan referans kalıbı arasında hiçbir fark olmamakla birlikte `ref` kalıbı yapısal programlamada işleri biraz daha kolaylaştırmak için kullanılır.
+Ampersand **&** sembolü kullanılarak alınan referans ile yukarıdaki örnekte kullanılan referans kalıbı arasında hiçbir fark olmamakla birlikte `ref` kalıbı yapısal programlamada işleri biraz daha kolaylaştırmak için kullanılır.
 
 ```rust
 struct Point { x: i32, y: i32 }
