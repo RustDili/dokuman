@@ -62,26 +62,28 @@ fn main() {
 }
 ```
 
-Referansın isimsiz bir işlev içinde yaratılıp işlev sonlandığında kendiliğinden yıkılması ve foo() işlevinin çağrıldığı kod uzayında v1 vektörüne verilen bir referansın bulunmaması nedeniyle vektörün mülkiyeti sorunsuz şekilde işleve aktarılacaktır.
+Referansın isimsiz bir işlev içinde yaratılıp işlev sonlandığında kendiliğinden düşürülmesi ve `foo()` işlevinin çağrıldığı kod uzayında `v1` vektörüne ait bir referans kalmaması nedeniyle vektörün mülkiyeti sorunsuz şekilde işleve aktarılacaktır.
 
-Rust değiştirilemez olarak bağlanmış bir değişkenin değişebilir bir referansının oluşturulmasına izin vermez. Bununla birlikte değişebilir olarak tanımlanmış değişkenlerin &T yerine &mut T şeklinde değişebilir olarak bildirilmiş referanslarını da kabul eder.
+Rust, değiştirilemez olarak bildirilmiş değişkelere, değişebilir referanslar verilmesine müsaade etmez. Ancak, değişebilir olarak tanımlanmış değişkenlerin `&T` yerine `&mut T` şeklinde değişebilir referanslarını kabul eder.
 
 ```rust
 fn main() {
     let mut x = 5;
 
     {
-        let y = &mut x;   // değişebilir değişkenin değişebilir referansı.
-        *y += 1;  // Referansın gösterdiği kaynak arttırılır.
+        let y = &mut x; // değişebilir değişkenin değişebilir referansı.
+        *y += 1;        // Referansın gösterdiği kaynak arttırılır.
     }
 
-    println!("{}", x);    // Değişken değeri 6 olduğundan '6' çıktısı verecektir.
+    println!("{}", x);  // Değişken değeri 6 olduğundan '6' çıktısı verecektir.
 }
 ```
 
-Örnekte olduğu gibi let anahtarıyla tanımlanmış bir değişkene değişebilir bir değişkenin referansı geçirilirken **let y = &mut x;** atanan değişkenin de mutable olarak bildirilmesi gerekmez. Rust derleyicisinin tür çıkarsama mekanizması eşitliğin sağ tarafına bakarak çıkarımını gerçekleştirdiğinden bunu gereksiz kılar. Ancak mutable olarak borç alınmış bir değişkenin referansının **let y = &x;** şeklinde değişmez olarak bildirilmesi *y += 1 değişmez olarak borçlanılmış değişkene bir değer atanıyor hatası döndürecektir. Borç alınan değişken x’in let mut x = 5; şekilde tanımlanmamış olması da immutable değişkenin mutable olarak referansı alınıyor hatası ile sonuçlanır.
+Örnekte olduğu gibi `let` anahtar sözcüğüyle tanımlanmış `immutable` değişkene, `mutable` bir değişken referansı geçirilirken, atanan değişkenin `mutable` olmasına ihtiyaç yoktur. Rust derleyicisinin tür çıkarsama mekanizması, eşitliğin sağ tarafına bakarak çıkarımını gerçekleştirdiğinden bunu gereksiz kılar. 
+Ancak `mutable` olarak borç alınmış bir değişken referansının `let y = &x;` şeklinde değişmez olarak bildirilmesi; `*y += 1` "değişmez olarak borçlanılmış değişkene bir değer atanıyor" hatasının alınmasıyla sonuçlanacaktır.
+Borç alınan değişkenin `let mut x = 5;` şekilde tanımlanmamış olması da `immutable` değişkenin `mutable` olarak referansı alınıyor hatası ile sonuçlanır.
 
-Mutable olsun olmasın bir değişkeninin verileri, değişken ödünç alındığında dondurulur. Donmuş veriler bütün referanslar kapsam dışına çıkana kadar orjinal nesne üzerinde değişmez olarak korunur.  Bu işleme **freezing** adı verilir.
+`Mutable` olsun veya olmasın bir değişkene ait veriler değişken ödünç alındığında dondurulur. Bu dondurulmuş veriler, bütün referanslar kapsam dışına çıkana kadar orjinal nesne üzerinde değişmez olarak korunur. Bu işleme **freezing** adı verilir.
 
 ```Rust
 fn main() {
