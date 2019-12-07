@@ -93,10 +93,10 @@ fn main() {
         // 'sayi' ödünç verildiğinde referans kapsamı da başlıyor.
         let ref_sayi = &sayi;
 
-        sayi = 50;    // <- Bu satır, sayı değişkeni referans alındığı için 
-  // hata üretecektir.
-    } // <- Referans kapsamından çıkıyor.
+        sayi = 50;      // <- Bu satır, sayı değişkeni referans alındığı için 
+                        // hata üretecektir.
+    }                   // <- Referans kapsamından çıkıyor.
 
-    sayi = 3;         // <- Referansı kalmayan mutable değişken değiştirilebilecektir.
+    sayi = 3;           // <- Referansı kalmayan mutable değişken değiştirilebilecektir.
 }
 ```
