@@ -1,8 +1,8 @@
 ### Referans ve Borçlanma
-Verileri hafızanın heap bölümünde depolanan bir değişkene ait kaynakların, atandığı başka bir değişkenin mülkiyetine aktarılıyor olması ve bu nedenle düşürülen bir önceki değişken ve kaynaklarına bir daha erişilemiyor olması olumsuz bir özellikmiş gibi görünüyor olabilir. Bir işleve parametre yoluyla geçirilen değişkenlerin programın ilerleyen bölümlerinde bir daha kullanılamıyor olması ise oldukça can sıkıcıdır. Değişkenin mülkiyeti devredilmeden sadece verisine erişilmek istenen bu gibi durumlarda Rust’ ın borçlanma mekanizmasından yararlanılır.
+Hafızanın heap bölümünde depolanan değişken kaynaklarının, atama yoluyla başka bir değişkenin mülkiyetine aktarılması neticesinde önceki değişkene artık erişilemenesi olumsuz bir özellikmiş gibi görünüyor olabilir. Daha da sıkıcı olan şey ise işlevlere parametre yoluyla geçirilen değişkenlerin de programın ilerleyen bölümlerinde bir daha kullanılamıyor olmasıdır. Bir değişkenin mülkiyetine dokunmadan sadece verisine erişmek istendiğinde Rust’ ın borçlanma mekanizmasından yararlanılır.
 
-Bir değişkenin referansı; o değişkenin sahip olduğu verinin kendisi yerine bellekteki adresini gösterdiğinden, nesnenin kendisi yerine referansının kullanılarak işlenmesine borçlanma adını veriyoruz.
-Bir nesnenin referansı işlendiği sürece düşürülmemesi; program derlenmeden önce Rust’ ın dahili **Borrow Checker** adlı mekanizması tarafından referansların geçerliliği kontrol edilerek sağlanır.
+Değişkenin referansı; o değişkenin sahip olduğu verinin kendisi yerine bellekteki adresini gösterdiğinden, nesnenin kendisi yerine referansının kullanılması **borçlanma** olarak adlandırılır.
+Bir nesnenin referansına başvurulduğu sürece o nesnenin yaşamı sona ermez. Rust programları derlenmeden hemen önce **Borrow Checker** adlı dahili bir mekanizma tarafından denetlenerek nesne referanslarının geçerliliğine bakılır. Borç kontrolcüsü tarafından geçerli referansa sahip olmayan ve yaşam alanı sonlanmış bir nesne tespit edildiğinde o nesne düşürülür.
 
 ```rust
 fn main() {
@@ -14,7 +14,8 @@ fn main() {
 }
 ```
 
-Bir değişkenin başka bir değişkene atanması ya da parametre yoluyla bir işleve geçirilmesi esnasında kullanılan & sembolü o değişkenin sadece referans verilmesine neden olacağından yukarıdaki örnekte yer alan boxed_int ve ref_int değişkenlerinin her ikisi de kullanılabilir durumdadırlar. Aşağıdaki örnekte bir vektörün referans yoluyla işlev parametresine geçirilmesi irdelenmektedir.
+Bir değişkenin başka bir değişkene atanması ya da parametre yoluyla bir işleve geçirilmesi sırasında kullanılan **&** sembolü, o değişkenin kendisinin kullanılması yerine referansının değerlendirilmesine neden olacağından yukarıdaki örnekte yer alan `boxed_int` ve `ref_int` değişkenlerinin her ikisi de kullanılabilir durumdadırlar. 
+Aşağıdaki örnekte bir vektörün referans yoluyla işlev parametresine geçirilmesi incelenmektedir.
 
 ```rust
 fn foo(v1: &Vec<i32>) {                       // <--- '&Vec' Parametre bir referanstır
@@ -28,7 +29,7 @@ fn main() {
 }
 ```
 
-Bir kaynağın referansından önce silinmesi referansın artık null bir alanı göstermesine neden olacağından böyle bir duruma Rust’ın statik olarak çalışan Borrow Checker mekanizması tarafından izin verilmez.
+Bir kaynağın referansından önce silinmesi, referansın artık null bir alanı göstermesine neden olacağından, bu durumun yaşanmasına Rust’ın statik çalışan **Borrow Checker** mekanizması tarafından izin verilmez.
 
 ```rust
 fn foo(v1: Vec<i32>) {    // <- İşlev normal bir vektör değeri beklediğinden
@@ -43,7 +44,7 @@ fn main() {
 }  
 ```
 
-Ancak referansın düşürülmesi veya yıkılmasıyla borçlanma da ortadan kalkmış olacağından aşağıdaki işlev beklendiği gibi çalışacaktır.
+Ancak referansın düşürülmesiyle borçlanma da ortadan kalkacağından aşağıdaki program beklendiği gibi çalışacaktır.
 
 ```rust
 fn foo(v1: Vec<i32>) { // <- İşlev normal bir vektör değeri beklediğinden
@@ -55,7 +56,7 @@ fn main() {
     {           // <- Anonim bir blok açıyoruz
         let referans_vec = &v1;
     }           // <- Bir değişkenin ömrü sadece bulunduğu blok içinde anlamlı
-    // olduğundan kapanan parantez ile verilen referans yıkılmış olur.
+    // olduğundan kapanan parantez ile verilen referans düşürülmüş olur.
 
     foo(v1);    // <- Artık nesnenin bir referansı olmadığından işlev çalışır.
 }
