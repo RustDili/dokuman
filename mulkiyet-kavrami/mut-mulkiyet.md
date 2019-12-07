@@ -3,15 +3,15 @@ Aşağıdaki örnekten de hatırlanacağı gibi Rust derleyicisine bir değişke
 
 ```rust
 let x = 10;
-x = 20;    // Değişken bağlamları Rust' da varsayılan olarak 
-// değişmez kabul edildiğinden derleyici hata üretecektir.
+x = 20;             // Değişken bağlamları Rust' da varsayılan olarak 
+                    // değişmez kabul edildiğinden derleyici hata üretecektir.
 
 let mut y = 15;
-y = 25;    // oysa 'mut' anahtar kelimesi kullanılarak tanımlanan değişken
-// değişebilir(mutable) olduğundan bu kod ise sorunsuz çalışacaktır.
+y = 25;             // oysa 'mut' anahtar kelimesi kullanılarak tanımlanan değişken
+                    // değişebilir(mutable) olduğundan bu kod ise sorunsuz çalışacaktır.
 ```
 
-Bir değişkenin değişmezlik durumu mülkiyet transferi gerçekleştirilirken değiştirilebilir. Aşağıdaki örnek değişmez olarak bildirilmiş bir değere ait mülkiyetin başka bir değişkene aktarılması sırasında değiştirilebilir olarak taşınabileceğini gösterir.
+Bir değişkenin değişmezlik durumu mülkiyet transferi gerçekleştirilirken değiştirilebilir. Aşağıdaki örnek, değişmez olarak bildirilmiş bir değere ait mülkiyetin, başka bir değişkene aktarılırken değiştirilebileceğini gösterir.
 
 ```rust
 fn main() {
