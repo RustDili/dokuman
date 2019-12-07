@@ -1,5 +1,5 @@
 ### Ref Kalıbı
-Rust’ ta referansları oluşturmanın bir başka yolu da `ref` anahtar kelimesini kullanmaktan geçer.
+Rust’ ta bir değişkene referans vermenin diğer yolu ise `ref` anahtar kelimesini kullanmaktır.
 
 ```rust
 fn main() {
@@ -10,7 +10,7 @@ fn main() {
 }
 ```
 
-Ampersand **&** sembolü kullanılarak alınan referans ile yukarıdaki örnekte kullanılan referans kalıbı arasında hiçbir fark olmamakla birlikte `ref` kalıbı yapısal programlamada işleri biraz daha kolaylaştırmak için kullanılır.
+Ampersand **&** sembolü kullanılarak alınan referans ile yukarıdaki örnekte kullanılan referans kalıbı arasında hiçbir fark yoktur. Genellikle `ref` kalıbı yapısal programlamada işleri biraz daha kolaylaştırmak için kullanılır.
 
 ```rust
 struct Point { x: i32, y: i32 }
@@ -28,7 +28,7 @@ fn main() {
 }
 ```
 
-Yukarıdaki örnekte Point adındaki yapıdan elde edilen nokta nesnesinin `x` adlı üyesinin değerini bir kapama işlevi yardımıyla `ref` kalıbı kullanılarak  `x_in_kopyasi` adlı değişkene kopyalanıyor.  Bu referans kalıbı yapılarla çalışırken olduğu gibi, çokuzlular ile çalışırken de **Tuple** içindeki değerlerin referanslarını almak için oldukça kullanışlıdır.
+Yukarıdaki örnekte `Point` adlı yapıdan elde edilen nesnenin `x` adlı üye değeri, kapama işlevi yardımıyla `ref` kalıbı kullanılarak  `x_in_kopyasi` değişkenine kopyalanıyor. Bu Kalıp yapılarla çalışırken olduğu gibi, **Tuple**'larla çalışırken öğelerine referans vermek için oldukça kullanışlıdır.
 
 ```rust
 fn main() {
@@ -44,9 +44,9 @@ fn main() {
 }
 ```
 
-Bu tür işlemlerin yapılması sırasında ref kalıbı yerine `&` sembolü üzerinden referans almak bazı durumlarda hata yapılmasını kolaylaştırabileceğinden `ref` kalıbını kullanmak oldukça yararlıdır.
+Bu tür işlemler yapılırken `ref` kalıbı yerine `&` sembolü ile referans vermek, hata yapılmasını kolaylaştırabileceğinden `ref` kalıbını kullanmak oldukça yararlıdır.
 
-Rust’ın bellek yönetim mekanizması referansları takip etmek için değişkenlerin yaşam sürelerini takip etme kavramına dayandığından bazı durumlarda değişkenlerin yaşam sürelerinin açıkça belirtilmesine ihtiyaç duyulur.
+Rust’ın bellek yönetim mekanizması, referansları takip ederken değişkenlerin yaşam sürelerini de hesaba kattığından, bazı durumlarda değişkenlerin yaşam sürelerinin açıkça belirtilmesi gerekir.
 
 ```rust
 struct Product;
