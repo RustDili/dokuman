@@ -1,5 +1,5 @@
 ### Merhaba Dünya!
-Diğer dillerde olduğu gibi Rust dilinde de bir programın kodlamaya başlarken `main()` işlevinden başlanır. Bu  işlevin içindeki ifadeler programın derlenmiş hali çağrıldığı anda yürütülür.
+Diğer dillerde olduğu gibi Rust dilinde de bir programın kodlanmasına `main()` işlevinden başlanır. Bu  işlevin içindeki ifadeler programın derlenmiş hali çağrıldığı anda yürütülür.
 
 ```Rust
 fn main() { 
@@ -8,7 +8,7 @@ fn main() {
 ````
 Örneğimizde `println!;` "Merhaba Dünya!" mesajını ekrana bastıran bir makrodur.
 
-Eğer bu kodu merhaba_dunya.rs olarak kaydettiyseniz terminalinizde rustc merhaba_dunya.rs komutu ile derleyebilir, ./merhaba_dunya komutu ile de çalıştırabilirsiniz.
+Eğer bu kodu merhaba_dunya.rs olarak kaydettiyseniz terminalinizde `rustc merhaba_dunya.rs` komutu ile derleyebilir, `./merhaba_dunya` komutu ile de çalıştırabilirsiniz.
 
 ### Rust Playground
 Rust kodlarınızı internet üzerinde [çevrim içi](https://play.rust-lang.org/) çalıştırabileceğiniz bir alandır.
@@ -40,7 +40,7 @@ fn main() {
 Makrolar, isimlerinin bir ünlem `!` ile bitmesi dışında işlevlere benzerler. Ancak makrolar bir işlev çağrısı oluşturmak yerine, programın geri kalanıyla derlenen kaynak koduna genişletilir. C ve diğer dillerdeki makrolardan farklı olarak, Rust makroları dizgi ön işleme yerine soyut söz dizimi ağaçlarına genişletilir, bu nedenle beklenmedik hatalar ile karşılaşmazsınız.
 
 Rust, meta-programlama yapabileceğimiz güçlü bir makro sistemi sağlar. Bir makro tanımlamak için macro_rules! Deyimini kullanmanız yeterlidir.
-Aşağıdaki örnekte ‘merhaba_de’ adında basit bir makro tanımlanmaktadır.
+Aşağıdaki örnekte `merhaba_de` adında basit bir makro tanımlanmaktadır.
 
 ```Rust
   macro_rules! merhaba_de {
@@ -56,7 +56,7 @@ fn main() {
   merhaba_de!()
 }
 ````
-
-- Kod tekrarını azaltırlar.
-- Belirli bir amaç için özel söz dizimi tanımlanmasına izin verirler.
-- Değişken arayüzlerin tasarlanmasına olanak sağlarlar.
+**macro'ları kullanılması:**
+- Kod tekrarını azaltır,
+- Belirli bir amaç için özel söz dizimi tanımlanmasına izin verir,
+- Değişken arayüzlerin tasarlanmasına olanak sağlar.
