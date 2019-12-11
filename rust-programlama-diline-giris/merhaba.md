@@ -16,19 +16,19 @@ Rust kodlarınızı internet üzerinde [çevrim içi](https://play.rust-lang.org
 ![Playground](https://github.com/rust-lang-tr/dokuman/blob/master/resimler/Rust-Playground.png)
 
 ### Println! Kullanımı
-Bir makro olarak kullanılan println! için farklı kullanım örneklerine göz atalım.
+Bir makro olarak kullanılan `println!` için farklı kullanım örneklerine göz atalım.
 
 ```Rust
 fn main() { 
-  println!("{}, {}!", "Merhaba", "Dünya"); // Merhaba, Dünya! 
+  println!("{}, {}!", "Merhaba", "Dünya");                        // Merhaba, Dünya! 
 
-  println!("{0}, {1}!", "Merhaba", "Plüton"); // Merhaba, Plüton! 
+  println!("{0}, {1}!", "Merhaba", "Plüton");                     // Merhaba, Plüton! 
 
-  println!("{selamla}, {isim}!", selamla="Selam", isim="Erdem"); // Selam, Erdem!
+  println!("{selamla}, {isim}!", selamla="Selam", isim="Erdem");  // Selam, Erdem!
 
-  println!("{:?}", [1,2,3]); // [1, 2, 3] 
+  println!("{:?}", [1,2,3]);                                      // [1, 2, 3] 
 
-  println!("{:#?}", [1,2,3]); /* [ 1, 2, 3 ] */ // 
+  println!("{:#?}", [1,2,3]);                                     /* [ 1, 2, 3 ] */ // 
 
   let x = format!("{}, {}!", "Merhaba", "Mars"); 
 
