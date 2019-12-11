@@ -2,15 +2,15 @@
 ### Cargo
 Rust dilinin yerleşik [paket yöneticisi ve yapılandırma sistemi cargo](https://doc.rust-lang.org/cargo/)'dur ve rustup aracılığıyla yüklenen bu aracın temel kullanımında aşağıdaki komutlar oldukça işlevseldir.
 
-- Yeni bir proje oluşturmak için: cargo new
-- Projeyi yapılandırmak için: cargo build
-- Projeyi çalıştırmak için: cargo run
-- Proje bağımlılıklarını güncellemek için: cargo update
-- Projeyi test etmek için: cargo test
-- Projenin dökümantasyonu için: cargo doc
-- Projenin yapılandırılmasından önce oluşabilecek hataları gözlemleyebilmek için: cargo check
+- Yeni bir proje oluşturmak için: `cargo new`
+- Projeyi yapılandırmak için: `cargo build`
+- Projeyi çalıştırmak için: `cargo run`
+- Proje bağımlılıklarını güncellemek için: `cargo update`
+- Projeyi test etmek için: `cargo test`
+- Projenin dökümantasyonu için: `cargo doc`
+- Projenin yapılandırılmasından önce oluşabilecek hataları gözlemleyebilmek için: `cargo check`
 
-Bu araç yardımıyla yeni bir Rust projesi `cargo new proje_adı --bin` komutuyla başlatılır. `--bin` eki isteğe bağlı olarak kullanılır ve her iki durumda da oluşturulan proje çalıştırılabilir bir dosyadır. Ancak projenin `--lib` parametresi ile başlatılması projenin bir kütüphane olarak oluşturulması için yeterlidir. 
+Bu araç yardımıyla yeni bir Rust projesi `cargo new proje_adı --bin` komutuyla başlatılır. `--bin` parametresi isteğe bağlı olarak kullanılır ve her iki durumda da oluşturulan proje çalıştırılabilir bir dosyadır. Ancak projenin `--lib` parametresi ile başlatılması projenin bir kütüphane olarak oluşturulması için yeterlidir. 
 
 ### Crate
 Rust programlama dilinde [crates.io](https://crates.io) aracılığıyla paylaşılan her paket `Crate` adını alır. Crate' nin Türkçe karşılığı "tahtadan yapılmış kasa" anlamına geldiğinden, dilimizde "sandık" olarak karşılık bulacaktır.
