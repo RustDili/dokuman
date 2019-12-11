@@ -1,7 +1,7 @@
 # Rust Dilinin Temelleri
 ## Başlarken
 
-İngilizce’de kelime anlamı pas demek. Ancak dilin yaratıcısı asla yok edilemeyen bir çeşit küf mantarından esinlenerek bu adı seçmiş. Günümüzün pek çok programlama dilinin olduğu gibi Rust’ın da Ferris adlı bir maskot yengeci var. 
+Rust'ın İngilizce’de kelime anlamı pas'a karşılık gelir. Ancak dilin yaratıcısı, asla yok edilemeyen bir çeşit küf mantarından esinlenerek bu adı seçmiş. Günümüzün pek çok programlama dilinin olduğu gibi Rust’ın da **Ferris** adlı bir maskot yengeci var. 
 
 Rust güvenli, eş zamanlı tasarlanabilen ve hızlı kod yazmayı sağlayan bir sistem programlama dilidir ve bütün bu hedeflerini çöp toplayıcı sistemi kullanmadan hafızayı güvende tutarak gerçekleştirir.  Dil bu hedeflere yönelik tasarlandığından kolaylıkla öğrenilebilme ve hemen proje üretebilmek gibi hedefleri gözetmiyor. Söz diziminin karışık olması kullanıcısının öğrenmesini zorlaştırırken, alt seviye programlama mantığına yakınlaştırıyor. 
 Tasarımcısı Graydon Hoare’ye göre Rust dilinin hedef kitlesi: Sistem seviyesinde iş yaparken performans ve dağıtım özelliklerinden dolayı C++ seçmek zorunda kalan ancak daha güvenilir ve daha az yorucu bir seçenek arayan "Bıkmış usanmış C++ geliştiricileri"dir. 
