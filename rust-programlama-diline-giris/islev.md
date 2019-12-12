@@ -83,7 +83,7 @@ fn main() {
     println!("{}'in karesi: {}", x, karesi(x));
 }
 ````
-Giriş ve dönüş türlerini belirtmenin isteğe bağlı olduğu bu isimsiz işlevde giriş parametreleri işleve `||` kullanılarak geçirilir ve ifade gövdesi `{};` köşeli parantezler ile sarılır.
+Giriş ve dönüş türlerini belirtmenin isteğe bağlı olduğu bu isimsiz işlevde, giriş parametreleri işleve `||` kullanılarak geçirilir ve ifade gövdesi `{};` köşeli parantezler ile sarılır.
 
 Eğer giriş ve dönüş türleri belirtilmeyen isimsiz işlev tek bir satırdan oluşuyorsa `{};` köşeli parantez kullanmak zorunlu değildir.
 
