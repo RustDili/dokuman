@@ -9,7 +9,7 @@ let x = true;         // Tür çıkarsamalı kısa bildirim
 let y: bool = false;  // Açık tür bildirimi
 ````
 
-Bir tamsayı türüne dönüştürüldüğünde `true` için **1** `false` için **0** atandığı görülür. `!`, `&` , `|` operatörleri aracılığıyla  BitAnd, BitOr, Not vb. gibi çeşitli özellikleri uygulanmasını sağlar. Uygulamada TRUE, FALSE, 1, 0 gibi olası karşılık değerleri kullanılmaz.
+Bir tamsayı türüne dönüştürüldüğünde `true` için **1** `false` için **0** atandığı görülür. `!`, `&` , `|` operatörleri aracılığıyla  BitAnd, BitOr, Not vb. gibi çeşitli özelliklerin uygulanmasını sağlar. Uygulamada TRUE, FALSE, 1, 0 gibi olası karşılık değerleri kullanılmaz.
 
 ```Rust
 fn main() {
