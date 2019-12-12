@@ -112,7 +112,7 @@ let e = ["değer"; 3];                             // ["değer", "değer", "değ
 println!("{:?}", a);                              // [1, 2, 3]; 
 println!("{:#?}", a);                             // [ // 1, // 2, // 3 // ];
 
-let xs: [i32; 5] = [1, 2, 3, 4, 5]                // 5 elemanlı statik bir dizi
+let xs: [i32; 5] = [1, 2, 3, 4, 5];               // 5 elemanlı statik bir dizi
 let ys: [i32; 500] = [0; 500];                    // Tüm üyeleri 0 ile ilklenen 500 elemanlı dizi
 let ab: [i32; 5] = [-2, 5];                       // Tüm üyeleri -2 ile ilklenen 5 elemanlı dizi
 
