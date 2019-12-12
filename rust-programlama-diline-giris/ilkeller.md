@@ -9,14 +9,14 @@ let x = true;         // Tür çıkarsamalı kısa bildirim
 let y: bool = false;  // Açık tür bildirimi
 ````
 
-Bir tamsayı türüne dönüştürüldüğünde `true` için **1** `false` için **0** atandığı görülür. `!`, `&` , `|` kullanarak boolean işlemleri gerçekleştirmemize izin veren BitAnd, BitOr, Not vb. gibi çeşitli özellikleri uygular. Uygulamada TRUE, FALSE, 1, 0 gibi olası karşılık değerleri kullanılmaz.
+Bir tamsayı türüne dönüştürüldüğünde `true` için **1** `false` için **0** atandığı görülür. `!`, `&` , `|` operatörleri aracılığıyla  BitAnd, BitOr, Not vb. gibi çeşitli özellikleri uygulanmasını sağlar. Uygulamada TRUE, FALSE, 1, 0 gibi olası karşılık değerleri kullanılmaz.
 
 ```Rust
 fn main() {
    let bugun_hava_yagmurlu = true;
    
    if bugun_hava_yagmurlu {
-       println!("Yürüyüşe çıkarken şemsiye almalıyım.");
+       println!("Dışarıya çıkıyorsan şemsiye almalısın.");
    } else {
        println!("Kahve içerek güneşlenmek için ne güzel bir gün.");
    }
@@ -24,7 +24,7 @@ fn main() {
 ````
 
 ### ii. Char
-**char:**  `'a'`, `'@'`,  `'~'` gibi her biri 4 byte’a sığabilen ve tek bir karakteri temsil eden karakter türlerini tutar ve tek tırnak gösterimiyle temsil edilir.
+**char:**  `'a'`, `'@'`,  `'~'` gibi her biri 4 byte' a sığabilen ve tek bir karakteri temsil eden karakterleri tutar ve tek tırnak gösterimiyle temsil edilir.
 
 ```Rust
 fn main() {
@@ -46,7 +46,7 @@ fn main() {
 | i64       | -9223372036854775808                     | 9223372036854775807                     |
 | i128      | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
 
-**Min ve Max değerleri;** min değerler için -(2n-1) ve max değerler için 2n-1-1 formüllerine dayanmaktadır. Her tamsayı türünün min değerlerine  `min_value()`, max değerlerine ise `max_value()` işlevleri aracılığıyla ulaşılır.
+**Min ve Max değerleri;** min değerler için -(2n-1) ve max değerler için 2n-1-1 formüllerine dayanmaktadır. Türün min değerlerini öğrenmek için `min_value()`, max değerlerini öğrenmek içinse `max_value()` işlevleri kullanılır.
 
 ```Rust
 fn main() {
@@ -74,7 +74,7 @@ fn main() {
 ````
 
 ### v. isize ve usize
-İşaretçi boyutunda işaretli ve işaretsiz tamsayı türlerini tutarlar. Programın derlenmekte olduğu bilgisayar mimarisinin sunduğu en yüksek bit değerine eşittirler. Varsayılan olarak bu değerler 32 bit platformlarda 32 bit, 64 bit platformlarda da 64 bit kabul edilir.
+İşaretçi boyutunda işaretli ve işaretsiz tamsayı türlerini tutarlar. Programın derlenmekte olduğu bilgisayar mimarisinin sunduğu en yüksek bit değerine eşittirler. Varsayılan olarak bu değerler 32 bit platformlarda **32 bit**, 64 bit platformlarda da **64 bit** kabul edilir.
 
 ```Rust
 fn main() {
@@ -85,7 +85,7 @@ fn main() {
 
 ### vi. f32 ve f64
 32 ve 64 bit boyutlarında ondalık basamaklı sayıları tutabilen türlerdir. Rust, kayan noktalı sayılar aritmetiğini ifade ederken **IEEE** standartlarına uyar. Bu nedenle `f32` türü, diğer dillerdeki tek duyarlıklı float türüne benzerken, `f64` çift duyarlıklı double türüne benzer.
-Hedeflenen donanım çift hassasiyeti desteklemiyor; yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Rust varsayılan olarak, tamsayılar için `i32`, kayan noktalı sayılar için `f64` türlerini kullanır. Bu nedenle, her ne kadar derleme anında türler çıarsanabliyor olsa da; diğer türlerin tercih edilmesi durumunda bu türlerin açıkça bildirilmesi gereklidir.
+Hedeflenen donanım çift hassasiyeti desteklemiyor; yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Aksi belirtilmedikçe Rust, tamsayılar için `i32`, kayan noktalı sayılar için `f64` türlerinin kullanılacağını varsayar. Her ne kadar derleme anında türler çıkarsanıyor olsalar da, eğer varsayılan türler haricinde bir tür kullanılmak isteniyorsa, bu türün açıkça bildirilmesi gerekir.
 
 ```Rust
 fn main() {
@@ -113,7 +113,7 @@ println!("{:?}", a);                              // [1, 2, 3];
 println!("{:#?}", a);                             // [ // 1, // 2, // 3 // ];
 
 let xs: [i32; 5] = [1, 2, 3, 4, 5]                // 5 elemanlı statik bir dizi
-let ys: [i32; 500] = [0; 500]                     // Tüm üyeleri 0 ile ilklenen 500 elemanlı dizi
+let ys: [i32; 500] = [0; 500];                    // Tüm üyeleri 0 ile ilklenen 500 elemanlı dizi
 let ab: [i32; 5] = [-2, 5];                       // Tüm üyeleri -2 ile ilklenen 5 elemanlı dizi
 
 println!("Dizinin ilk elemanı: {:?}", xs[0]);     // Dizilerde index 0 dan başlar. 1 yazdırılır.
@@ -121,14 +121,14 @@ println!("Dizinin {} tane üyesi var", ys.len());  // len işlevi dizinin uzunlu
 println!("Dizi elemanları: {:?}", ab);            // [-2, -2, -2, -2, -2];
 
 // use std::mem;
-println!("ys dizisi belleğin stack bölgesinde: {} byte yer kaplıyor.", mem::size_of_val(&ys);
+println!("ys dizisi belleğin stack bölgesinde: {} byte yer kaplıyor.", mem::size_of_val(&ys));
 ````
 
-Diziler varsayılan olarak değişmez kabul edildiklerinden, tanımlandıktan sonra eleman adetleri ve türleri değiştirilemez. Tanımlandıkları sırada aldıkları mut anahtar sözcüğü ile sadece eleman değerleri değiştirebilmektedir.
-Eğer eleman adetlerinin otomatik olarak arttırılabildiği bir diziye ihtiyaç duyuluyorsa bu ihtiyaç için **Vektör**ler tercih edilmelidir. Vektörler türleri aynı olmak kaydıyla her türden elemanı kabul ederler.
+Diziler varsayılan olarak değişmez kabul edildiklerinden, tanımlandıktan sonra eleman adetleri ve türleri değiştirilemez. Tanımlandıkları sırada aldıkları mut anahtar sözcüğü ile sadece eleman değerleri değiştirebilir.
+Eğer eleman adetlerinin otomatik olarak arttırılabildiği bir dizi türü gerekiyorsa bunun için **Vektör**ler tercih edilmelidir. Vektörler türleri aynı olmak kaydıyla istenilen sayıda elemanı kabul ederler.
 
-### viii. Tuples
-Aynı ya da farklı veri türlerinden oluşan elemanların sabit büyüklükteki listelerini oluşturmak için kullanılan değer topluluklarıdırlar. Her elemanı `(T1, T2, T3...Tn)` kendi türünün imzalı bir değeri olduklarından, işlevlerden çok sayıda değer döndürmek amacıyla da kullanılırlar.
+### viii. Çokuzlular
+Aynı ya da farklı veri türlerinden oluşan elemanların sabit büyüklükteki listelerini oluşturmak için kullanılan değer topluluklarıdırlar. Her elemanı `(T1, T2, T3...Tn)` kendi türünün imzalı değeri olduğundan, işlevlerden çok sayıda değer döndürürken oldukça yararlıdır.
 
 ```Rust
 fn main() {
@@ -142,25 +142,24 @@ fn main() {
     println!("c: {:?}, d: {:?}", c, d);           // c: 10, d: 3.5
     
     let (e, _, f, _, g) = a;
-    println!("e: {:?}, f: {}, g: {}", e, f, g);   // e: 1, f: true, g: Merhaba Dünya! _, ilgilenmediğimiz öğeleri temsile der
+    println!("e: {:?}, f: {}, g: {}", e, f, g);   // e: 1, f: true, g: Merhaba Dünya! _, ilgilenmediğiniz öğeleri temsile der
     
     let h = (0,);
-    println!("h: {:?}", h);                       // h: (0,) -> Tek elemanlı Tuple
+    println!("h: {:?}", h);                       // h: (0,) -> Tek elemanlı Çokuzlu
     
     let i = (b, (20, 50), -3.2);
     println!("i: {:?}", i);                       // i: ((10, 3.5), (20, 50), -3.2)
 }
 ````
 
-Bu tür de tıpkı diziler gibi değiştirilemez varsayılır. Değiştirilebilir olabilmesi için `mut` anahtar kelimesiyle tanımlanmış olsalar bile, eleman sayılarının değiştirilmesine izin verilmez.
+Bu türün de tıpkı diziler gibi değiştirilemeyeceği varsayılır. `mut` anahtar kelimesiyle tanımlanmaları sadece öğelerinin değiştirilebilmesini sağlar. Eleman sayılarının değiştirilmesine izin verilmez.
 
 ### ix. Dilimler
-Başka bir veri yapısına referans veren bu tür dizilere benzer ancak boyutları derleme zamanında belli değildir. 
-Dilim `&[T];` söz dizimiyle ifade edilebilen ve iki parçadan oluşan bir nesne olarak düşünülmelidir. İfadenin ilk parçası erişilen verinin göstergesi olurken, ikinci parçası elde edilecek olan dilimin uzunluğunu yani asıl verinin ne kadarına referans edileceğini gösterir.
+Dizilere benzer ancak boyutları derleme zamanında belli değildir. Dilim `&[T];` söz dizimiyle ifade edilebilen ve iki parçadan oluşan bir nesne olarak düşünülmelidir. İfadenin ilk parçası erişilen verinin göstergesi olurken, ikinci parçası elde edilecek olan dilimin uzunluğunu gösterir.
 
 ```Rust
 fn main() {
-    let dizi: [i32; 4] = [1, 2, 3, 4]; // Referans verilecek ana dizi 
+    let a: [i32; 4] = [1, 2, 3, 4]; // Referans verilecek ana dizi 
     
     let b: &[i32] = &a;
     println!("b: {:?}", b);            // Bütün dizi dilimlenir.
@@ -201,7 +200,7 @@ fn main() {
 ````
 
 ### x. Str
-Unicode dizgilerinin bir parçasını tutan UTF-8 formatında ve boyutu olmayan dilimlerdir ve dizgi dilimleri olarak adlandırılırlar. Genellikle bir dizgiyi ödünç almak için `&str` kullanılırlar.
+Unicode dizgilerinin bir parçasını UTF-8 formatında tutan boyutu olmayan dilimlerdir. Dizgi dilimleri olarak adlandırılırlar. Genellikle bir dizgiyi ödünç almak için `&str` şeklinde kullanılırlar.
 
 ```Rust
 fn main() {
