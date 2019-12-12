@@ -39,7 +39,7 @@ mod test {
 
 Sandık ve modül düzeyinde belgeleme yapmak için sadece `//!` kullanmak yeterlidir. Eğer ilk örnekteki gibi mod blokları belgelenecekse   `/// yorum satırı` mod bloğunun dışında kullanılır.
 
-### Belgele nitelikleri
+### Belge nitelikleri
 Kodların belgelenmesinde döküman niteliklerinden de yararlanılır. Aşağıdaki örnekte bulunan her yorum ilgili verinin niteliklerine eşdeğerdir.
 
 ```Rust
