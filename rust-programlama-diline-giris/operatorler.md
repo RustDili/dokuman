@@ -1,6 +1,6 @@
 # Operatörler
 #### i. Aritmetik operatörler
-**`+`, `-`, `/`, `%`** sembolleriyle gösterilirler. Ek olarak **`+`** operatörü dizi ve string birleştirme işlemlerinde de kullanılır.
+**`+`, `-`, `/`, `%`** sembolleriyle gösterilirler. Ek olarak **`+`** operatörü dizi ve string birleştirme işlemlerinde kullanılır.
 
 ```Rust
 let a = 5; 
