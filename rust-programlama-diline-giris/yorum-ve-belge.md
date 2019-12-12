@@ -8,10 +8,10 @@ Yorum satırları programların olmazsa olmazlarıdır. Rust birkaç farklı yor
 /* Rust /* iç içe */ yapılan blok yorumlarını da destekler.
 ````
 
-Dil her ne kadar blok yorumlarını destekliyorsa da, mümkün olduğunca satır içi yorum kullanılması tavsiye edilmektedir.
+Her ne kadar blok yorumlarını destekleniiyorsa da, mümkün olduğunca satır içi yorum kullanılması tavsiye edilmektedir.
 
 ### Belgelendirilen yorum satırları
-Döküman yorumları `markdown` gösterimlerini destekler. `cargo doc` komutuyla bu yorum satırları sayesinde programın`HTML` biçiminde belgelendirilmesi sağlanır.
+Döküman yorumları `markdown` gösterimlerini destekler. Bu yorum satırlarına sahip programlar `cargo doc` komutu kullanılarak `HTML` biçiminde belgelendirilir. 
 
 ```Rust
 /// Satır içi yorumlar: Bir alttaki öğeyi belgeler
