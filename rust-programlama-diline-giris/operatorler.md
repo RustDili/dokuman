@@ -1,6 +1,6 @@
 # Operatörler
 #### i. Aritmetik operatörler
-**`+`, `-`, `/`, `%`** sembolleriyle gösterilirler. Ek olarak **`+`** operatörü dizi ve string birleştirmelerinde de kullanılır.
+**`+`, `-`, `/`, `%`** sembolleriyle gösterilirler. Ek olarak **`+`** operatörü dizi ve string birleştirme işlemlerinde de kullanılır.
 
 ```Rust
 let a = 5; 
@@ -40,7 +40,7 @@ let c = !a;       //false
 let d = a && b;   //false 
 let e = a || b;   //true
 ````
-Tamsayılar için two’s complements gösteriminde **`!`** operatörü bitleri ters çevirir.
+Tamsayılar için `two’s complements` gösteriminde **`!`** operatörü bitleri ters çevirir.
 ```Rust
 let a = !-2;    //1 
 let b = !-1;    //0 
