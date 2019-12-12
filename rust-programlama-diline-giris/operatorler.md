@@ -63,7 +63,7 @@ let g = a >> b;   //0 (a’nın sonundan b değeri kadar bit çıkartılır a ->
 ````
 
 #### v. Atama ve bileşik atama operatörleri
-Atama **`=`** operatörü değer ya da işlevlere isim atamak için kullanılır. Bileşik atama operatörleriyse; artimetik veya bit işlem operatörlerinin atama operatörüyle birleşmesinden oluşur ve **`+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`** sembolleriyle gösterilirler.
+Atama **`=`** operatörü değer ya da işlevlere isim atamak için kullanılır. Bileşik atama operatörleriyse; artimetik veya bit işlem operatörlerinin atama operatörüyle birleşmesinden oluşur ve: **`+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`** sembolleriyle gösterilirler.
 
 ```Rust
 let mut a = 2; 
