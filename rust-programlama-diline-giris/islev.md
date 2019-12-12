@@ -4,7 +4,7 @@ Girilen **n** adet parametreyi alıp, bir mantık çerçevesinde sarmalanmış k
 ### İsimlendirilmiş İşlevler
 - İşlevin İngilizce karşılığı function'ı simgeleyen `fn` anahtar sözcüğü ile bildirilirler.
 - Argüman ile kullanıldığında bu argümanların veri türleri parametre listesinde bildirilir.
-- İşlevlerin boş bir **Tuple ()** döndüreceği varsayılır. İşlevden bir sonuç döndürmesi bekleniyorsa dönüş 	türleri **`->`** işaretinden sonra belirtilir.
+- İşlevlerin boş bir **Tuple ()** döndüreceği varsayılır. İşlevin sonuç döndürmesi isteniyorsa, dönüş türleri **`->`** işaretinden sonra belirtilir.
 
 #### i. Merhaba dünya!
 
@@ -55,9 +55,9 @@ fn ikiyle_topla(a: i32) -> i32 {
 ````
 
 ### İsimsiz işlevler
-Kapama ya da lambda işlevler olarak bilinirler, argümanların veri türlerinin bildirilmesi veya işlevden sonuç döndürmek isteğe bağlıdır.
+Kapama ya da lambda işlevler olarak bilinirler; argümanlarının veri türlerini bildirmek veya işlevden sonuç döndürmek isteğe bağlıdır.
 
-Standart biçimde tasarlanmış bir işlev aşağıdaki gibi yazılabiliyordu.
+Standart biçimde tasarlanmış bir işlev aşağıdaki gibi ifade edelebilir.
 
 ```Rust
 fn get_square_value(x: i32) -> i32 { 
@@ -70,7 +70,7 @@ fn main() {
 } 
 ````
 
-Oysa aynı işlev, isimsiz işlev olarak çok daha basitçe tasarlanabilirdi. Böylece işlevin giriş ve çıkış türleri de isteğe bağlı olarak bildirilmiş olurdu.
+Aynı örneği isimsiz işlev olarak tasarlanamak çok daha pratiktir. Böylece işlevin giriş ve çıkış türlerini bildirmek isteğe bağlı kalır.
 
 ```Rust
 fn main() {
@@ -85,7 +85,7 @@ fn main() {
 ````
 Giriş ve dönüş türlerini belirtmenin isteğe bağlı olduğu bu isimsiz işlevde giriş parametreleri işleve `||` kullanılarak geçirilir ve ifade gövdesi `{};` köşeli parantezler ile sarılır.
 
-Giriş ve geri dönüş türlerinin belirtilmediği bir isimsiz işlev eğer tek bir satırdan oluşuyorsa `{};` köşeli parantez kullanımı zorunlu değildir.
+Eğer giriş ve dönüş türleri belirtilmeyen isimsiz işlev tek bir satırdan oluşuyorsa `{};` köşeli parantez kullanmak zorunlu değildir.
 
 ```Rust
 fn main() {
