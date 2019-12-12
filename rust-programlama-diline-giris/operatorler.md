@@ -13,7 +13,7 @@ let g = 5.0 / 2.0;  //2.5
 ````
 
 #### ii. Karşılaştırma operatörleri
-**`==`, `!=`, `< >`, `<=`, `>=`** sembolleriyle gösterilirler.
+**`==`, `!=`, `<`, `>`, `<=`, `>=`** sembolleriyle gösterilirler.
 
 ```Rust
 let a = 1; 
