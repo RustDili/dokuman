@@ -4,3 +4,9 @@ Diziler aynı türden oluşan verileri liste halinde bir arada tutan sabit uzunl
 `Vec<T>` söz dizimiyle ifade edilirler. Söz diziminde yer alan `T` depolanacak veri türünü temsil eder. Örneğin `i32` türünde bir vektör basitçe `Vec<i32>` olarak ifade edilir. 
 Vektörler boyutları dinamik olarak değişebilen veri türleri olduklarından depoladıkları öğelere ait veriler, `heap` üzerinde kendisi için  özel olarak ayrılmış dinamik bir alanda tutulurlar.
 ### Boş bir vektör oluşturmak
+Boş bir vektörü oluşturmak için türün `new()` işlevini ya da `vec!` makrosunu kullanırız.
+```Rust
+  let v: Vec<i32> = Vec::new()  //1. new() işlevi yardımıyla 
+  let mv: Vec<i32> = vec![];    //2. vec! makrosu kullanarak
+````
+Boş vektörün içinde saklanacak tür derleyici tarafından bilinemeyeceğinden oluşturulurken tür açıklaması eklenir. 
