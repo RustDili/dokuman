@@ -43,3 +43,32 @@ Tür bilgisi vektör ilklendirilirken de bildirilebilir.
  let v5: Vec<i32> = (-5..5).collect();
  println!("Depolanan değerler: {:?}", v5);// [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4];
  ````
+
+### Vektör öğelerine erişmek
+Bir vektörün öğelerine index numarası ya da `.get()` işlevi yardımıyla erişilir. 
+```Rust
+fn main () {
+    let v = vec![1, 2, 3, 4, 5];
+    
+    let ikinci: &i32 = &v[1];
+    println!("Vektörün ikinci Öğesi: {}", ikinci);  // 2
+        
+    let ucuncu = v[2];
+    println!("Vektörün üçüncü Öğesi: {}", ucuncu);  // 3
+    
+    match v.get(2) {
+        Some(ucuncu) => println!("Üçüncü öğenin değeri: {}' dir.", ucuncu),
+        None => println!("Üçüncü öğe bulunmuyor."),
+    }
+}
+````
+
+Dizilerde olduğu gibi beş öğeden oluşan bir vektörün altıncı elemanına index yoluyla erişmeye çalışmak panik üreterek çökmesine neden olur. Ancak aralığın dışında kalan bir öğeye `.get()` işlevi kullanarak erişmeye çalışmak daha kullanıcı dostu olan `None` değerini döndürür.     
+```Rust
+// Olmayan öğeye index yoluyla erişmek 
+println!("Vektörün sondan bir fazlası: {:?}", v[5]);  // Panic!
+
+// Olmayan öğeye .get() işlevi ile erişmek 
+let does_not_exist = v.get(100);
+println!("Yok: {:?}", does_not_exist);                // None
+````
