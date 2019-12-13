@@ -10,7 +10,14 @@ Boş bir vektörü oluşturmak için türün `new()` işlevini ya da `vec!` makr
   let v: Vec<i32> = Vec::new()  //1. new() işlevi yardımıyla 
   let mv: Vec<i32> = vec![];    //2. vec! makrosu kullanarak
 ````
-Boş vektörün içinde saklanacak tür derleyici tarafından bilinemeyeceğinden, oluşturulurken tür açıklaması eklenir. 
+
+Boş vektörün içinde saklanacak tür derleyici tarafından bilinemeyeceğinden, oluşturulurken tür açıklaması eklenir. Öğeleri `mut` anahtar kelimesiyle değişebilir olarak tanımlanan vektör öğeleri kapsam içinde biliniyorsa tür bildirimi atlanabilir.
+```Rust
+let mut v = Vec::new();
+v.push(1);
+v.push(2);
+println!("v: {:?}", v);
+````
 
 ### Veri türü kullanarak vektör oluşturmak
 Aksi belirtilmedikçe Rust, sayısal türler için `i32` türü kullanıldığını varsayacağından, aşağıdaki ifadeyle 32 bit işaretli tam sayı değerlerinden oluşan bir vektör tanımlanır.   
@@ -43,6 +50,17 @@ Tür bilgisi vektör ilklendirilirken de bildirilebilir.
  let v5: Vec<i32> = (-5..5).collect();
  println!("Depolanan değerler: {:?}", v5);// [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4];
  ````
+Vektörler index işlemlerini desteklerler. Değişebilir yapıda tanımlanan öğelere aritmetik işlem uygulamak mümkündür.
+```Rust
+fn main () {
+ 
+   let mut v = vec![1, 2, 3];
+   v[1] = v[1] + 5;
+   
+   println!("v: {:?}", v);  // v: [1, 7, 3] 
+   
+}
+````
 
 ### Vektör öğelerine erişmek
 Bir vektörün öğelerine index numarası ya da `.get()` işlevi yardımıyla erişilir. 
@@ -63,12 +81,65 @@ fn main () {
 }
 ````
 
-Dizilerde olduğu gibi beş öğeden oluşan bir vektörün altıncı elemanına index yoluyla erişmeye çalışmak panik üreterek çökmesine neden olur. Ancak aralığın dışında kalan bir öğeye `.get()` işlevi kullanarak erişmeye çalışmak daha kullanıcı dostu olan `None` değerini döndürür.     
+Dizilerde olduğu gibi beş öğeden oluşan bir vektörün altıncı elemanına index yoluyla erişmeye çalışmak panik üreterek çökmesine neden olur. Ancak aralığın dışında kalan bir öğeye `.get()` işlevi kullanarak erişmeye çalışmak daha kullanıcı dostu olan `None` döndürülmesini sağlar.     
 ```Rust
 // Olmayan öğeye index yoluyla erişmek 
 println!("Vektörün sondan bir fazlası: {:?}", v[5]);  // Panic!
 
 // Olmayan öğeye .get() işlevi ile erişmek 
-let does_not_exist = v.get(100);
-println!("Yok: {:?}", does_not_exist);                // None
+let bu_oge_yok = v.get(100);
+println!("Bu öğe var mı?: {:?}", bu_oge_yok);         // None
+````
+### .push() işlevi
+Bir vektöre yeni öğe eklemek için `.pop()` işlevinden yararlanılır. Öğeler bu işlev kullanıldığında vektörün sonuna eklenirler.
+
+```Rust
+fn main () {
+   let mut v = vec!['C','a', 'l', 'ı'];
+   println!("v: {:?}", v);
+   
+   v.push('ş');
+   println!("v: {:?}", v);
+}
+````
+
+### .pop() işlevi
+Aynı şekilde bir vektörün son elemanı `.pop()` işlevi kullanılarak çıkartılır. 
+```Rust
+fn main () {
+ 
+   let mut v = vec!['C','a', 'l', 'ı', 'ş'];
+   println!("v: {:?}", v);
+   
+   v.pop();
+   v.pop();
+   println!("v: {:?}", v);
+   
+}
+````
+
+Bir vektöre öğe eklemek ya da vektörden eleman çıkartabilmek için o vektörün öğelerinin `mut` anahtar sözcüğüyle değişebilir olarak tanımlanmış olması gerekmektedir. 
+```Rust
+fn main () {
+ 
+   let v = vec![1, 2, 3];
+   
+   v.push(4);
+   println!("v: {:?}", v);
+   // cannot borrow `v` as mutable, as it is not declared as mutable
+}
+````
+Bir vektör yaşam süresi tanımlandığı kapsam boyuncadır. Kapsam dışına gelindiğinde vektörün yaşamı sona erer ve onun için ayrılan hafıza kaynakları boşaltılarak sisteme iade edilir. 
+
+```Rust
+fn main () {
+ 
+   {
+        let  v = vec![1, 2, 3];
+        println!("v: {:?}", v); // v: [1, 2, 3]
+        // işlemler
+        
+   } //<- v bu noktada kapsam dışına çıkar ve kaynakları serbest bırakılır 
+ 
+}
 ````
