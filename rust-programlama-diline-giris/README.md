@@ -17,9 +17,10 @@ Bu çalışmanın orjinal hali [Learning Rust](https://github.com/learning-rust/
   * [Basit veri türleri](ilkeller.md)
   * [Operatörler](operatorler.md)
   * [Kontrol akışı](kontrol-akisi.md)
+
 * İkinci Adım
- * Vektörler
- * Yapılar
- * Enum
- * Generics
- * Uygulama ve özellikler
+  * Vektörler
+  * Yapılar
+  * Enum
+  * Generics
+  * Uygulama ve özellikler
