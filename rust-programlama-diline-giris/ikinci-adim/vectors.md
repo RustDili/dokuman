@@ -180,7 +180,7 @@ fn main () {
 ````
 Vektörün elemanları üzerinde değişiklik yapmak için `*` operatöründen yararlanılır.
 
-### Farklı türleri saklamak için Enum türü kullanmak
+### Enum türünden faydalanmak
 Bazı durumlarda farklı türden öğelere sahip bir liste üzerinde çalışmak gerekebilir. Vektörler aynı tür elemanları depolayabildiklerinden bu gibi durumlarda enum türünden yararlanılır. 
 ```Rust
 #[derive(Debug)]
