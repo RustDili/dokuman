@@ -18,4 +18,8 @@ Bu çalışmanın orjinal hali [Learning Rust](https://github.com/learning-rust/
   * [Operatörler](operatorler.md)
   * [Kontrol akışı](kontrol-akisi.md)
 * İkinci Adım
-
+ * Vektörler
+ * Yapılar
+ * Enum
+ * Generics
+ * Uygulama ve özellikler
