@@ -8,7 +8,7 @@ Bu çalışmanın orjinal hali [Learning Rust](https://github.com/learning-rust/
 ## Rust Programlama Dilinin Temelleri
 
 * İlk Adım
-  * [Başlarken](rust-dilinin-temelleri.md)
+  * [Başlarken](ilk-adim/rust-dilinin-temelleri.md)
   * [Merhaba dünya!](merhaba.md)
   * [Paket yönetimi, Sandıklar ve Proje Yapısı](cargo.md)
   * [Yorum satırları ve kodun belgelenmesi](yorum-ve-belge.md)
