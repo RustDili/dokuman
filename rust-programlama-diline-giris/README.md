@@ -19,7 +19,7 @@ Bu çalışmanın orjinal hali [Learning Rust](https://github.com/learning-rust/
   * [Kontrol akışı](ilk-adim/kontrol-akisi.md)
 
 * İkinci Adım
-  * [Vektörler](vectors.md)
+  * [Vektörler](ikinci-adim/vectors.md)
   * Yapılar
   * Enum
   * Generics
