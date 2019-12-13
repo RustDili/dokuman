@@ -81,7 +81,7 @@ fn main () {
 }
 ````
 
-Dizilerde olduğu gibi beş öğeden oluşan bir vektörün altıncı elemanına index yoluyla erişmeye çalışmak panik üreterek çökmesine neden olur. Ancak aralığın dışında kalan bir öğeye `.get()` işlevi kullanarak erişmeye çalışmak daha kullanıcı dostu olan `None` döndürülmesini sağlar.     
+Dizilerde olduğu gibi beş öğeden oluşan bir vektörün altıncı elemanına index yoluyla erişmeye çalışmak programın panik üreterek çökmesine neden olur. Ancak aralığın dışında kalan bir öğeye `.get()` işlevi kullanarak erişmeye çalışmak daha kullanıcı dostu olan `None` döndürülmesini sağlar.     
 ```Rust
 // Olmayan öğeye index yoluyla erişmek 
 println!("Vektörün sondan bir fazlası: {:?}", v[5]);  // Panic!
