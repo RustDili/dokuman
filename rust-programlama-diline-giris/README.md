@@ -9,14 +9,14 @@ Bu çalışmanın orjinal hali [Learning Rust](https://github.com/learning-rust/
 
 * İlk Adım
   * [Başlarken](ilk-adim/rust-dilinin-temelleri.md)
-  * [Merhaba dünya!](merhaba.md)
-  * [Paket yönetimi, Sandıklar ve Proje Yapısı](cargo.md)
-  * [Yorum satırları ve kodun belgelenmesi](yorum-ve-belge.md)
-  * [Değişken bağlamı, sabit ve statik öğeler](baglam-sabit-statik.md)
-  * [İşlevler](islev.md)
-  * [Basit veri türleri](ilkeller.md)
-  * [Operatörler](operatorler.md)
-  * [Kontrol akışı](kontrol-akisi.md)
+  * [Merhaba dünya!](ilk-adim/merhaba.md)
+  * [Paket yönetimi, Sandıklar ve Proje Yapısı](ilk-adim/cargo.md)
+  * [Yorum satırları ve kodun belgelenmesi](ilk-adim/yorum-ve-belge.md)
+  * [Değişken bağlamı, sabit ve statik öğeler](ilk-adim/baglam-sabit-statik.md)
+  * [İşlevler](ilk-adim/islev.md)
+  * [Basit veri türleri](ilk-adim/ilkeller.md)
+  * [Operatörler](ilk-adim/operatorler.md)
+  * [Kontrol akışı](ilk-adim/kontrol-akisi.md)
 
 * İkinci Adım
   * [Vektörler](vectors.md)
