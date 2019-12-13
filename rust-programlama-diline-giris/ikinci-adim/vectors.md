@@ -144,3 +144,62 @@ fn main () {
  
 }
 ````
+
+### Kapasite ayırmak
+Bir vektörün uzunluğuna `.len()`, kapasitesine ise `capacity()` işlevleri yardımıyla erişilir. Ayrılan kapasitenin aşılması durumunda, kapasite miktarının iki katı bellek yeniden tahsis edilerek vektör kapasitesine eklenir. 
+```Rust
+fn main () {
+    // Uzunluğu: 0, Kapasitesi: 10 olan bir vektör
+    let mut v: Vec<i32> = Vec::with_capacity(10);
+    
+    // Vektör kapasitesi kadar değerlere dolduğunda
+    for i in 0..10 {
+        v.push(i);
+    }
+    println!("Uzunluğu: {:?}, Kapasitesi : {:?}", v.len(), v.capacity()); // Uzunluğu: 10, Kapasitesi : 10
+    
+    // vektör kapasitesinin üstüne çıkıldığında 
+    v.push(11);
+    println!("Uzunluğu: {:?}, Kapasitesi : {:?}", v.len(), v.capacity()); // Uzunluğu: 11, Kapasitesi : 20
+   
+}
+````
+Örnekte de görüleceği gibi kapasitesi 10 olan bir vektöre 11. öğe eklendiğinde kapasitesi otomatik olarak iki kat arttırılır.
+
+### Yineleme yoluyla değerlere erişmek
+Vektörün tuttuğu her bir öğeyi bir kerede ve sırayla elde etmek için döngülerden yararlanılır. 
+```Rust
+fn main () {
+    let mut v = vec![75, 90, 13];
+    
+    for i in &mut v {
+        *i += 50;
+        println!("Öğe: {}", i);
+    }
+}
+````
+Vektörün elemanları üzerinde değişiklik yapmak için `*` operatöründen yararlanılır.
+
+### Farklı türleri saklamak için Enum türü kullanmak
+Bazı durumlarda farklı türden öğelere sahip bir liste üzerinde çalışmak gerekebilir. Vektörler aynı tür elemanları depolayabildiklerinden bu gibi durumlarda enum türünden yararlanılır. 
+```Rust
+#[derive(Debug)]
+
+enum Tablo {
+        No(i32),
+        Hacim(f64),
+        Bilgi(String),
+    }
+    
+fn main () {
+    
+    let satir = vec![
+        Tablo::No(5),
+        Tablo::Hacim(7.65),
+        Tablo::Bilgi(String::from("Konsantre mamül.")),
+        ];
+    println!("satir: {:?}", satir);  
+    // ya da index numarası ile 
+    // println!("satir: {:?}", satir[1]);
+}
+````
