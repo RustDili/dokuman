@@ -36,7 +36,7 @@ fn main() {
 ````
 
 ### iii. i8, i16, i32, i64, i128
-8, 16, 32, 64, 128 bit sabit boyutlu ve `(+/-)` işaretli tamsayı değerlerini tutarlar.
+8, 16, 32, 64, 128 bit sabit boyutlu ve `(+/-)` işaretli tam sayı değerlerini tutarlar.
 
 | VERİ TÜRÜ | MIN                                      | MAX                                     |
 | --------- | ---------------------------------------- | --------------------------------------- |
@@ -55,7 +55,7 @@ fn main() {
 ````
 
 ### iv. u8, u16, u32, u64, u128
-8, 16, 32, 64, 128 bit sabit boyutlu ve `(0/+)` işaretli tamsayı değerlerini tutarlar.
+8, 16, 32, 64, 128 bit sabit boyutlu ve `(0/+)` işaretli tam sayı değerlerini tutarlar.
 
 | VERİ TÜRÜ | MIN | MAX                                     |
 | --------- | --- | --------------------------------------- |
@@ -65,7 +65,7 @@ fn main() {
 | u64       | 0   | 18446744073709551615                    |
 | u128      | 0   | 340282366920938463463374607431768211455 |
 
-**Min ve Max değerleri;** min değerler için 0 ve max değerler için 2n-1 formüllerine dayanmaktadır. Her tamsayı türünün min değerlerine `min_value()`, max değerlerine ise `max_value()` işlevleri aracılığıyla ulaşılır.  
+**Min ve Max değerleri;** min değerler için 0 ve max değerler için 2n-1 formüllerine dayanmaktadır. Her tam sayı türünün min değerlerine `min_value()`, max değerlerine ise `max_value()` işlevleri aracılığıyla ulaşılır.  
 
 ```Rust
 fn main() {
@@ -74,7 +74,7 @@ fn main() {
 ````
 
 ### v. isize ve usize
-İşaretçi boyutunda işaretli ve işaretsiz tamsayı türlerini tutarlar. Programın derlenmekte olduğu bilgisayar mimarisinin sunduğu en yüksek bit değerine eşittirler. Varsayılan olarak bu değerler 32 bit platformlarda **32 bit**, 64 bit platformlarda da **64 bit** kabul edilir.
+İşaretçi boyutunda işaretli ve işaretsiz tam sayı türlerini tutarlar. Programın derlenmekte olduğu bilgisayar mimarisinin sunduğu en yüksek bit değerine eşittirler. Varsayılan olarak bu değerler 32 bit platformlarda **32 bit**, 64 bit platformlarda da **64 bit** kabul edilir.
 
 ```Rust
 fn main() {
@@ -85,7 +85,7 @@ fn main() {
 
 ### vi. f32 ve f64
 32 ve 64 bit boyutlarında ondalık basamaklı sayıları tutabilen türlerdir. Rust, kayan noktalı sayılar aritmetiğini ifade ederken **IEEE** standartlarına uyar. Bu nedenle `f32` türü, diğer dillerdeki tek duyarlıklı float türüne benzerken, `f64` çift duyarlıklı double türüne benzer.
-Hedeflenen donanım çift hassasiyeti desteklemiyor; yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Aksi belirtilmedikçe Rust, tamsayılar için `i32`, kayan noktalı sayılar için `f64` türlerinin kullanılacağını varsayar. Her ne kadar derleme anında türler çıkarsanıyor olsalar da, eğer varsayılan türler haricinde bir tür kullanılmak isteniyorsa, bu türün açıkça bildirilmesi gerekir.
+Hedeflenen donanım çift hassasiyeti desteklemiyor; yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Aksi belirtilmedikçe Rust, tam sayılar için `i32`, kayan noktalı sayılar için `f64` türlerinin kullanılacağını varsayar. Her ne kadar derleme anında türler çıkarsanıyor olsalar da, eğer varsayılan türler haricinde bir tür kullanılmak isteniyorsa, bu türün açıkça bildirilmesi gerekir.
 
 ```Rust
 fn main() {
