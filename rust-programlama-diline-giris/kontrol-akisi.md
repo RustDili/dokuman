@@ -1,5 +1,5 @@
 # Kontrol akışı
-Bir koşulun doğru olup olmadığına bağlı olarak bazı kodların çalıştırılmasına karar vermek veya bir koşul doğru olduğu sürece bazı kodları tekrar tekrar çalıştırmak çoğu programlama dilinde temel yapı taşlarıdır. 
+Bir koşulun doğru olup olmadığına bağlı olarak bazı kodların çalıştırılmasına karar vermek ya da bir koşul doğru olduğu sürece bazı kodları tekrar tekrar çalıştırmak çoğu programlama dilinin olmazsa olmazıdır. 
 
 #### i. If - else if - else
 ```Rust
@@ -33,7 +33,7 @@ fn main() {
     println!("Müşterinin tercihi: {}", beden_aciklamasi);
 }
 ````
-Bir ifade olarak kullanıldığında dönüş değerleri türünün her blokta `text, text``veya `bool, bool` gibi aynı türden olması beklenir. Yukarıdaki örnekler aşağıdaki gibi de optimize edilebilirlerdi.
+Bir ifade olarak kullanıldığında dönüş değerlerinin her blokta `text, text` veya `bool, bool` gibi aynı türden olması beklenir. Yukarıdaki örnekler aşağıdaki gibi de optimize edilebilirlerdi.
 
 ```Rust
 fn main() {
@@ -71,7 +71,7 @@ fn main() {
     println!("Müşterinin tercihi: {}", beden_olcusu);
 }
 ````
-Eşleştirmede kullandığımız **`_`** bir değeri yok saymak için kullanılan bir operatördür. Her şeyle eşleşen ancak bir değişkene bağlanmayan bu operatör desen ile eşleştirme yapılırken tıpkı switch düzeneğinde olduğu gibi bir çeşit varsayılan durum oluşturmak amacıyla son karşılaştırma ifadesinde kullanılır.
+Eşleştirmede kullanılan alt çizgi **`_`** bir değeri yok saymak için kullanılır. Her şeyle eşleşen ancak bir değişkene bağlanmayan bu operatör, desen ile eşleştirme yapılırken tıpkı switch düzeneğinde olduğu gibi bir çeşit varsayılan durum oluşturmak amacıyla son karşılaştırma ifadesinde kullanılır.
 
 ```Rust
 fn main() {
@@ -85,7 +85,7 @@ fn main() {
 }
 ````
 
-Bu karşılaştırma işlemi boolean değer kontrolüne dayandığından sadece olası iki durum karşılaştırılıyor. Bu nedenle **`_`** oparatörünün temsil ettiği varsayılan durum rahatlıkla atlanabilir.
+Bu karşılaştırma işlemi boolean değer kontrolüne dayandığından, sadece olası iki durum karşılaştırılıyor. Bu nedenle **`_`** oparatörünün temsil ettiği varsayılan durum rahatlıkla atlanabilir.
 
 ```Rust
 fn main() {
@@ -103,7 +103,7 @@ fn main() {
 }
 ````
 #### iii. While
-Bildirilen koşul sağlandığı sürece döngünün sürmesini sağlayan anahtar kelimedir. Döngüye girilmeden önce koşul çalıştırılır ve eğer koşul doğru olarak değerlendirilirse döngü içinde yer alan ifadeler işletilir, aksi durumda döngüden çıkılır.
+Bildirilen koşul sağlandığı sürece döngünün devam etmesini sağlayan anahtar kelimedir. Döngüye girilmeden önce koşul çalıştırılır ve eğer koşul doğru olarak değerlendirilirse döngü içinde yer alan ifadeler işletilir, aksi durumda döngüden çıkılır.
 
 ```Rust
 fn main() {
@@ -115,7 +115,7 @@ fn main() {
     }
 }
 ````
-Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme operatörleri Rust'ta bulunmaz bunun yerine  arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır.
+Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme operatörleri Rust'ta bulunmaz. Yerine  arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır.
 
 ```Rust
 fn main() {
@@ -208,7 +208,7 @@ fn main() {
     }
 }
 ````
-Örnekte yer alan `for don in 0..10` ifadesi diğer programlama dillerinde kullanılan for `a = 0; a < 10; a++` ifadesine benzer. Döngü beklendiği gibi 0 ile başlar ve aralığın son değerine ulaştığında durur. Döngünün break ve continue ile kontrolü aşağıdaki gibidir.
+Örnekte yer alan `for sayac in 0..10` ifadesi, diğer programlama dillerinde kullanılan for `a = 0; a < 10; a++` ifadesine benzer. Döngü beklendiği gibi `0` ile başlar ve aralığın son değerine ulaştığında durur. Döngünün `break` ve `continue` anahtar sözcükleriyle yönlendirilmeleri aşağıda örneklenmiştir.
 
 ```Rust
 fn main() {
