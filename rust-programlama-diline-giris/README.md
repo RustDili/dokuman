@@ -1,7 +1,7 @@
 ![Kapak Resmi](https://github.com/rust-lang-tr/dokuman/blob/master/resimler/Rust-Programlama-Diline-Giris-Dumindu-1.jpg)
 
 ## Kaynakça 
-Bu çalışmanın orjinal hali [Learning Rust](https://github.com/learning-rust/site) adresinde Ingilizce olarak bulunmaktadır.    
+Bu çalışmada, orjinal hali [Learning Rust](https://github.com/learning-rust/site) adresinde bulunan, Dumindu Madunuwan'a ait **Learning Rust** adlı çalışma kaynak olarak kullanılmıştır. 
 
 
 # Dizin
