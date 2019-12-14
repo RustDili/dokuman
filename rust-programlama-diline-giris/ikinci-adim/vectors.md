@@ -19,8 +19,8 @@ v.push(2);
 println!("v: {:?}", v);
 ````
 
-### Veri türü kullanarak vektör oluşturmak
-Aksi belirtilmedikçe Rust, sayısal türler için `i32` türü kullanıldığını varsayacağından, aşağıdaki ifadeyle 32 bit işaretli tam sayı değerlerinden oluşan bir vektör tanımlanır.   
+### Vektörleri ilklendirmek
+Aksi belirtilmedikçe Rust, sayısal türler için `i32` türü kullanıldığını varsayar. Aşağıdaki örnekte 32 bit işaretli tam sayı değerlerinden oluşan bir vektör tanımlanmaktadır.
 ```Rust
 let v1 = vec![1, 2, 3];     // (-/+) değerler -2, -1, 0, 1, 2, 3
 println!("v1: {:?}", v1);
