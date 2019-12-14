@@ -1,7 +1,8 @@
 ![Kapak Resmi](https://github.com/rust-lang-tr/dokuman/blob/master/resimler/Rust-Programlama-Diline-Giris-Dumindu-1.jpg)
 
 ## Kaynakça 
-Bu döküman oluşturulurken Dumindu Madunuwan'ın [Learning Rust](https://github.com/learning-rust/site) adlı çalışması baz alınmış, içeriğin güncel olarak korunabilmesi için  [The Rust Programming Language](https://doc.rust-lang.org/book/) ve [Eust By Example](https://doc.rust-lang.org/rust-by-example/) belgelerinden faydalanılmıştır. Rust programlama dilini Türkçe okuyarak öğrenmek isteyecekler için iyi bir başlangıç olacağına inandığımız bu döküman tarafımızdan ve ticari olmamak kaydıyla [MIT](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-MIT) ve [Apache 2.0](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-APACHE) lisansları altında sunulmaktadır. 
+Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://github.com/learning-rust/site) adlı çalışması baz alınmış, içeriğin güncel olarak korunabilmesi için  [The Rust Programming Language](https://doc.rust-lang.org/book/) ve [Eust By Example](https://doc.rust-lang.org/rust-by-example/) belgelerinden faydalanılmıştır. Rust programlama dilini Türkçe okuyarak öğrenmek isteyecekler için iyi bir başlangıç olacağına inandığımız bu döküman tarafımızdan ve ticari olmamak kaydıyla [MIT](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-MIT) ve [Apache 2.0](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-APACHE) lisansları altında sunulmaktadır. 
+
 
 # Dizin
 ## Rust Programlama Dilinin Temelleri
