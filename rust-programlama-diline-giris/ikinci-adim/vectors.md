@@ -26,7 +26,7 @@ let v1 = vec![1, 2, 3];     // (-/+) değerler -2, -1, 0, 1, 2, 3
 println!("v1: {:?}", v1);
 ````
 
-Vektörün türü istenildiğinde depoladığı herhangi bir elemanın türüne ayarlanabilir. Bu durumda vektörün bir arada tuttuğu tüm öğeler ayarlanan türden olurlar.   
+Vektörün türü istenildiğinde depolanan herhangi bir elemanın türüne ayarlanabilir. Bu durumda vektörün bir arada tuttuğu tüm öğeler ayarlanan türden olurlar.   
 
 ```Rust
 let v2 = vec![1, 2u32, 3];		//Vektörün veri türü 2. öğenin türü ile aynı olur 
