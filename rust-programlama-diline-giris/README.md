@@ -20,7 +20,7 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 
 * İkinci Adım
   * [Vektörler](ikinci-adim/vectors.md)
-  * Yapılar
+  * [Yapılar](ikinci-adim/yapilar.md)
   * Enum
   * Generics
   * Uygulama ve özellikler
