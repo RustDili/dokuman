@@ -46,14 +46,14 @@ fn main() {
     println!("Siyah = ({}, {}, {})", siyah.kizil, siyah.yesil, siyah.mavi);  // Siyah = (0, 0, 0)
 }
 ````
-Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken hale getirmek için mut anahtar kelimesi kullanılır. Ancak mut anahtar kelimesinin kullanılması sadece örneğin değişmesine neden olur, yapının alanları düzeyinde değiştirilebilirliği sağlamaz.
+Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken hale getirmek için `mut` anahtar kelimesi kullanılır. Ancak `mut` anahtar kelimesinin kullanılması sadece örneğin değişmesine neden olur, yapının alanları düzeyinde değişkenlik sağlanmaz.
 ```Rust
 let mut ornek = Renk {kizil: 0, yesil: 0, mavi: 255};
 ornek.mavi = 238;
 println!("Örnek = ({}, {}, {})", ornek.kizil, ornek.yesil, ornek.mavi);  // Örnek = (0, 0, 238)
 ````
 
-Bir yapı nesnesinin üyeleri `{..kopyalanacak_ornek}` şeklinde başka bir örnekten kopyalanabilir. Kopyalama yapılırken yeni üyenin bazı üyelerine değer verilebilir. Bu durumda değer ataması yapılmamış kalan üyeler örneklenen kopyanın üye değerlerini edinirler.
+Bir yapı örneğinin üyeleri `{..kopyalanacak_ornek}` şeklinde başka bir örnekten kopyalanabilir. Kopyalama yapılırken yeni üyenin bazı üyelerine değer verilebilir. Bu durumda değer ataması yapılmayan üyeler örneklenen kopyanın üye değerlerini edinirler.
 ```Rust
 let mavi = Renk {mavi:255, ..ornek};
 println!("Mavi = ({}, {}, {})", mavi.kizil, mavi.yesil, mavi.mavi);  // Mavi = (0, 0, 255) 
