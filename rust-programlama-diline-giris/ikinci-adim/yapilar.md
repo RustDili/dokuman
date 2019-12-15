@@ -79,7 +79,7 @@ println!("Destructure Koyu mavi = ({}, {}, {})", k, y, m);  // Destructure Koyu 
 ````
 
 ### Çokuzlu yapıları
-Normal yapılara benzemekle beraber isimlendirilmiş alanlar yerine `struct Tuple(u32, String);` söz diziminde olduğu gibi üyelerinin türleri bildirilir. Çokuzlular gibi kullanılan bu türün üyelerine 0'dan başlayan index değerleri ile ulaşılır. 
+Normal yapılara benzemekle beraber isimlendirilmiş alanlar yerine `struct Tuple(u32, String);` söz diziminde olduğu gibi üyelerinin türleri bildirilir. Çokuzlular gibi kullanılan bu türün üyelerine 0' dan başlayan index değerleri ile ulaşılır. 
 ```Rust
 struct Renk(u8, u8, u8);
 
@@ -88,7 +88,7 @@ fn main() {
     println!("Siyah = {}, {}, {}", siyah.0, siyah.1, siyah.2);  // Siyah = 0, 0, 0
 }
 ````
-Kurallı yapılarda olduğu gibi çokuzlu yapılarının da örnekleri let ile bağlanarak destructure edelebilirler. Bu tercih edildiğinde üyelerine index numarası yerine takma isimler kullanarak  erişmek mümkün olur.
+Kurallı yapılarda olduğu gibi çokuzlu yapılarının da örnekleri `let` ile bağlanarak destructure edelebilirler. Bu tercih edildiğinde üyelerine index numarası yerine takma isimler kullanarak erişmek mümkün olur.
 
 ```Rust
 let Renk(k, y, m) = siyah;
