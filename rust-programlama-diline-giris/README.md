@@ -22,5 +22,5 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
   * [Vektörler](ikinci-adim/vectors.md)
   * [Yapılar](ikinci-adim/yapilar.md)
   * [Enum](ikinci-adim/enum.md)
-  * Generics
+  * [Jenerikler](ikinci-adim/jenerikler.md)
   * Uygulama ve özellikler
