@@ -53,6 +53,8 @@ fn main() {
 }
 ````
 Jenerik işlevlerde olduğu gibi; yapı tanımında bildirilen tür parametresi `<T>`' nin bir kez kullanılması, yapının tüm alanlarının aynı türden oluşacağını gösterir. `let tamsayi = Nokta{x: 5, y: 10.7};` şeklinde oluşturulan bir yapı örneği bu programın hata üretmesine sebep olacaktır. 
+
+Farklı türden alanlara sahip bir yapıya ihtiyaç duyulduğunda, bu türlerin yapı tanımında bildirilmesi yeterlidir. Ancak yapı tanımında çok sayıda tür parametresinin kullanılması kodun okunmasını zorlaştırır. Bir yapı tanımında çok sayıda genel türe ihtiyaç duyuluyorsa belki de kodun küçük parçalar halinde yeniden tasarlanması fikri üzerinde düşünülmelidir.    
 ```Rust
 struct Nokta<T, U> {
     x: T,
@@ -69,4 +71,37 @@ fn main() {
     println!("Karisik için koord: {} - {}", karisik.x, karisik.y);  // Karisik için koord: 7 - 3.2
 }
 ````
-Farklı türden alanlara sahip bir yapıya ihtiyaç duyulduğunda, bu türlerin yapı tanımında bildirilmesi yeterlidir. Ancak yapı tanımında çok sayıda tür parametresinin kullanılması kodun okunmasını zorlaştırır. Bir yapı tanımında çok sayıda genel türe ihtiyaç duyuluyorsa belki de kodun küçük parçalar halinde yeniden tasarlanması fikri üzerinde düşünülmelidir.    
+
+Jenerik yapılar için uygulama eklenirken tür parametreleri `impl` anahtar kelimesinden sonra belirtilmelidir.
+```Rust
+struct Nokta<T, U> {
+    x: T,
+    y: U,
+}
+// Parantez gösterimi
+impl<T, U> Nokta<T, U> {
+    fn yeni(x: T, y: U) -> Self {
+        Self {
+            x,
+            y,
+        }
+    }
+    
+    fn degistir<V, W>(self, oteki: Nokta<V, W>) -> Nokta<T, W> {
+        Nokta {
+            x: self.x,
+            y: oteki.y,
+        }
+    }
+} 
+
+fn main() {
+    let tamsayi = Nokta::yeni(5, 7);
+    println!("{} - {}", tamsayi.x, tamsayi.y);
+    
+    let dizge   = Nokta::yeni("Merhaba", 'p');
+    println!("{} - {}", dizge.x, dizge.y);
+    
+    let donustur   = tamsayi.degistir(dizge);
+    println!("{} - {}", donustur.x, donustur.y);
+}
