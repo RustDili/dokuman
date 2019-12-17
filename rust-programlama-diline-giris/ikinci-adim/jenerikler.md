@@ -36,3 +36,37 @@ fn main() {
 ````
 
 ### Jenerik yapılar
+Jenerik tür parametrelerinin yapı alanlarında kullanılabilmesi için tanımlarında `<T>` söz diziminin kullanılması gereklidir. Herhangi bir türden oluşan `x` ve `y` kordinatlarını tutan `Nokta<T>` yapısı aşağıda örneklenmiştir.
+
+```Rust
+struct Nokta<T> {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let tamsayi = Nokta{x: 5, y: 10};
+    let kesirli = Nokta{x: 3.5, y: 9.2};
+    
+    println!("Tam sayı için koord: {} - {}", tamsayi.x, tamsayi.y); // Tam sayı için koord: 5 - 10
+    println!("Kesirli için koord: {} - {}", kesirli.x, kesirli.y);  // Kesirli için koord: 3.5 - 9.2
+}
+````
+Jenerik işlevlerde olduğu gibi; yapı tanımında bildirilen tür parametresi `<T>`' nin bir kez kullanılması, yapının tüm alanlarının aynı türden oluşacağını gösterir. `let tamsayi = Nokta{x: 5, y: 10.7};` şeklinde oluşturulan bir yapı örneği bu programın hata üretmesine sebep olacaktır. 
+```Rust
+struct Nokta<T, U> {
+    x: T,
+    y: U,
+}
+
+fn main() {
+    let tamsayi = Nokta{x: 5, y: 10};
+    let kesirli = Nokta{x: 3.5, y: 9.2};
+    let karisik = Nokta{x: 7, y: 3.2};
+    
+    println!("Tam sayı için koord: {} - {}", tamsayi.x, tamsayi.y); // Tam sayı için koord: 5 - 10
+    println!("Kesirli için koord: {} - {}", kesirli.x, kesirli.y);  // Kesirli için koord: 3.5 - 9.2
+    println!("Karisik için koord: {} - {}", karisik.x, karisik.y);  // Karisik için koord: 7 - 3.2
+}
+````
+Farklı türden alanlara sahip bir yapıya ihtiyaç duyulduğunda, bu türlerin yapı tanımında bildirilmesi yeterlidir. Ancak yapı tanımında çok sayıda tür parametresinin kullanılması kodun okunmasını zorlaştırır. Bir yapı tanımında çok sayıda genel türe ihtiyaç duyuluyorsa belki de kodun küçük parçalar halinde yeniden tasarlanması fikri üzerinde düşünülmelidir.    
