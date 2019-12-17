@@ -19,4 +19,20 @@ fn farkli_turden_iki_tane<T, U>(x: T, y: U) {
     // Farklı türde parametreler.
 }
 ````
+Bir verinin hangi tür olduğunu öğrenebilmek için `std::any` kütüphanesinden yararlanabiliriz.
+```Rust
+fn her_ture_uygun<T>(_: T) { 
+    // x T türündedir. T ise jenerik türdür yani farklı türleri için genelleştirilmiştir.  
+    println!("Bu veri {} türündedir", std::any::type_name::<T>());
+} 
+
+fn main() {
+    
+    let bir_tur = 6;
+    //let bir_tur = 65u8;
+    // let bir_tur = String::from("Merhaba");
+    her_ture_uygun(bir_tur);
+}
+````
+
 ### Jenerik yapılar
