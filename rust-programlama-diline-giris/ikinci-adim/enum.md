@@ -1,5 +1,6 @@
 # Enum
-Tek bir türden oluşan `enum`, o türün belirli bir zamanda olası değerlerini tutan değişkenlerden ibarettir.
+Farklı varyantların nümeratik sırayla bir araya getirildiği ve olası değerlerlerinin tuttulduğu bir türdür.
+
 ```Rust
 #[derive(Debug)]
 enum Gunler {
