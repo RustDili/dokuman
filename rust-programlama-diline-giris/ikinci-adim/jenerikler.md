@@ -105,3 +105,22 @@ fn main() {
     let donustur   = tamsayi.degistir(dizge);
     println!("{} - {}", donustur.x, donustur.y);
 }
+````
+### Jenerik enum
+Yapılarda olduğu gibi jenerik veri türlerini varyantlarında tutabilen enum türlerinden de yararlanabiliriz. Rust standart kitaplığında daha önceden tanımlanmış özel türlerden Option<T> ve Result<T> türleri bu konuya oldukça iyi birer örnektir.
+```Rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+enum Result<T, E> { 
+    Ok(T), 
+    Err(E), 
+}
+````
+İsteğe bağlı bir `Some` değerine sahip olan  türü soyut kavramları ifade etmekte oldukça yararlıdır. İsteğe bağlı değerin türü ne olursa olsun, `Option<T>` genel bir türü ifade ettiğinden bu soyutlama pekçok veri türüyle kullanılır.  
+
+Duruma göre ya başarılı `Ok` ya da başarısız `Err` değer döndüren Result<T, E> ise iki genel türden oluşur. 
+
+Bir Result türü ise  olabilir. 
