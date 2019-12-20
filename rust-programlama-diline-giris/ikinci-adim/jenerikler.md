@@ -127,7 +127,25 @@ fn uye_numarasini_getir(kullanici: &str) -> Option<usize> {
 ````
 Yukarıdaki işlevde dönüş türü `usize` olarak değil `Option<usize>` olarak ayarlanmıştır. Bu ayarlamayla işlevden `uyeNo` yerine `Some(uyeNo)` döndürülür. Böylece kullanıcıya ait tanıtıcı numara sistemde kayıtlıysa `Some(uyeNo)` bu değere ayarlanarak işlevden döndürülecek, değilse dönüş türü `None` olarak ayarlanacaktır.
 
+```Rust
+struct Gorev {
+    baslik: String,
+    gorevli: Option<Kisi>,
+}
+````
+Görev adlı yapıda ise görev için herhangi bir görevli atanmamış olduğundan `gorevli:Kisi` yerine `Option<Kisi>` seçeneği kullanılmaktadır. İşlevlerden geri dönüş değeri olarak `Option<T>` kullanıldığında, dönüş değerinin çağrı esnasında yakalanabilmesi için desen eşleştirmesi kullanılır. 
+```Rust
+fn main() {
+   let uye_adi = "isimsiz";
+   
+   match uye_numarasini_getir(&uye_adi) {
+       None => println!("Üye bulunamadı"),
+       Some(i) => println!("Üye numarası: {}", i)
+   }
+}
+````
 
+Duruma göre ya başarılı `Ok` ya da başarısız `Err` değer döndüren Result<T, E> ise iki genel türden oluşur. 
 
 ```Rust
 enum Result<T, E> { 
@@ -135,5 +153,25 @@ enum Result<T, E> {
     Err(E), 
 }
 ````
-Duruma göre ya başarılı `Ok` ya da başarısız `Err` değer döndüren Result<T, E> ise iki genel türden oluşur. 
+Bu tanım, `Result<T, E>` enumunun herhangi bir yerde kullanılması için uygun hale getirir. 
+```Rust
+fn dosyadaki_kelime_adedini_bul(dosya_adi: &str) -> Result<u32, &str> {
+    // Dosya sistemde bulunamıyorsa hata döndür
+    return Err("Dosya bulunamıyor!")
+    // Dosyaya erişildiyse kelime adedini döndür
+    // let mut kelime_adedi: u32;
+    Ok(kelime_adedi)
+}
+````
+Yukarıdaki işlevde `Result<T, E>` türünde enum kullanılarak programın bulunamayan dosya için  panik üreterek sonlandırılması yerine `Err("Hata mesajı)` üreterek sonlandırılması sağlanmıştır. Artık ilgili dönüş değerini elde etmek için desen eşleşmesini kullananabiliriz.
+```Rust
+fn main() {
+    let mut dosya_adi = "dosya.txt";
+    
+    match dosyadaki_kelime_adedini_bul(dosya_adi) {
+        Ok(i) => println!("Kelime adedi: {}", i),
+        Err(e) => println!("Hata: {}", e)
+    }
+}
+````
 
