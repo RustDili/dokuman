@@ -73,6 +73,7 @@ fn main() {
 ````
 
 Jenerik yapılar için uygulama eklenirken tür parametreleri `impl` anahtar kelimesinden sonra belirtilmelidir.
+
 ```Rust
 struct Nokta<T, U> {
     x: T,
@@ -113,14 +114,26 @@ enum Option<T> {
     Some(T),
     None,
 }
+````
+İsteğe bağlı bir `Some` değerine sahip olan `Option<T>` türü soyut kavramları ifade etmekte oldukça yararlıdır. İsteğe bağlı değerin türü ne olursa olsun, `Option<T>` genel bir türü ifade ettiğinden bu soyutlama pekçok veri türüyle kullanılır.  
 
+```Rust
+fn uye_numarasini_getir(kullanici: &str) -> Option<usize> {
+    // Eğer, üye Numarası sistemde mevcutsa uyeMo’yu buna ayarla
+    return Some(uyeNo);
+    // else
+    None
+}
+````
+Yukarıdaki işlevde dönüş türü `usize` olarak değil `Option<usize>` olarak ayarlanmıştır. Bu ayarlamayla işlevden `uyeNo` yerine `Some(uyeNo)` döndürülür. Böylece kullanıcıya ait tanıtıcı numara sistemde kayıtlıysa `Some(uyeNo)` bu değere ayarlanarak işlevden döndürülecek, değilse dönüş türü `None` olarak ayarlanacaktır.
+
+
+
+```Rust
 enum Result<T, E> { 
     Ok(T), 
     Err(E), 
 }
 ````
-İsteğe bağlı bir `Some` değerine sahip olan  türü soyut kavramları ifade etmekte oldukça yararlıdır. İsteğe bağlı değerin türü ne olursa olsun, `Option<T>` genel bir türü ifade ettiğinden bu soyutlama pekçok veri türüyle kullanılır.  
-
 Duruma göre ya başarılı `Ok` ya da başarısız `Err` değer döndüren Result<T, E> ise iki genel türden oluşur. 
 
-Bir Result türü ise  olabilir. 
