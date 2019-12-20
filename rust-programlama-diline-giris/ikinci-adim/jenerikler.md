@@ -115,7 +115,7 @@ enum Option<T> {
     None,
 }
 ````
-İsteğe bağlı bir `Some` değerine sahip olan `Option<T>` türü soyut kavramları ifade etmekte oldukça yararlıdır. İsteğe bağlı değerin türü ne olursa olsun, `Option<T>` genel bir türü ifade ettiğinden bu soyutlama pekçok veri türüyle kullanılır.  
+İsteğe bağlı bir `Some` değerine sahip olan `Option<T>`, soyut kavramları ifade etmekte oldukça yararlıdır. İsteğe bağlı değerin türü ne olursa olsun, `Option<T>` genel bir türü ifade ettiğinden bu soyutlama pekçok veri türüyle kullanılır.  
 
 ```Rust
 fn uye_numarasini_getir(kullanici: &str) -> Option<usize> {
@@ -153,7 +153,7 @@ enum Result<T, E> {
     Err(E), 
 }
 ````
-Bu tanım, `Result<T, E>` enumunun herhangi bir yerde kullanılması için uygun hale getirir. 
+Bu tanım, `Result<T, E>` enumunu herhangi bir yerde kullanılması için uygun hale getirir. 
 ```Rust
 fn dosyadaki_kelime_adedini_bul(dosya_adi: &str) -> Result<u32, &str> {
     // Dosya sistemde bulunamıyorsa hata döndür
@@ -163,7 +163,7 @@ fn dosyadaki_kelime_adedini_bul(dosya_adi: &str) -> Result<u32, &str> {
     Ok(kelime_adedi)
 }
 ````
-Yukarıdaki işlevde `Result<T, E>` türünde enum kullanılarak programın bulunamayan dosya için  panik üreterek sonlandırılması yerine `Err("Hata mesajı)` üreterek sonlandırılması sağlanmıştır. Artık ilgili dönüş değerini elde etmek için desen eşleşmesini kullananabiliriz.
+Yukarıdaki işlevde `Result<T, E>` türünde enum kullanılarak programın bulunamayan dosya için  panik üreterek sonlandırılması yerine `Err("Hata mesajı")` üreterek sonlandırılması sağlanmıştır. Artık ilgili dönüş değerini elde etmek için desen eşleşmesini kullananabiliriz.
 ```Rust
 fn main() {
     let mut dosya_adi = "dosya.txt";
