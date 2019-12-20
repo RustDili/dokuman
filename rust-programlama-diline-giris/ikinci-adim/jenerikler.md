@@ -108,7 +108,7 @@ fn main() {
 }
 ````
 ### Jenerik enum
-Yapılarda olduğu gibi jenerik veri türlerini varyantlarında tutabilen enum türlerinden de yararlanabiliriz. Rust standart kitaplığında daha önceden tanımlanmış özel türlerden Option<T> ve Result<T> türleri bu konuya oldukça iyi birer örnektir.
+Yapılarda olduğu gibi jenerik veri türlerini varyantlarında tutabilen `enum` türlerinden de yararlanabiliriz. Rust standart kitaplığında daha önceden tanımlanmış özel türlerden `Option<T>` ve `Result<T>` türleri bu konuya oldukça iyi birer örnektir.
 ```Rust
 enum Option<T> {
     Some(T),
