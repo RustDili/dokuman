@@ -119,7 +119,7 @@ enum Option<T> {
 
 ```Rust
 fn uye_numarasini_getir(kullanici: &str) -> Option<usize> {
-    // Eğer, üye Numarası sistemde mevcutsa uyeMo’yu buna ayarla
+    // Eğer, üye Numarası sistemde mevcutsa uyeNo’yu buna ayarla
     return Some(uyeNo);
     // else
     None
