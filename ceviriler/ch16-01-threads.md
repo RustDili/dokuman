@@ -19,7 +19,7 @@ Yeşil iş parçası olarak bilinen *M:N* modeli, iş parçalarını yönetebilm
 
 Artık Rust’ta bulunan iş parçaları tanımlandığına göre standart kütüphane tarafından sağlanan iş parçasıyla ilgili API’nin kullanımını inceleyebiliriz. 
 
-### Spawn ile yeni bir iş parçası oluşturmak
+### `spawn` ile yeni bir iş parçası oluşturmak
 Yeni bir iş parçası olarak çalıştırılmak istenen kod bir kapama işlevi şeklinde `thread::spawn()` işlevine iletilir. Aşağıdaki örnekte ana iş parçasından alınan bir metin ve ek iş parçasından alınan başka bir metin yazdırılır.
 
 Dosya: src/main.rs
@@ -58,7 +58,7 @@ Selam, ben yeni iş parçasından elde edilen numara 4
 
 Kod çalıştırıldığında sadece ana iş parçasının çıktısı görülüyorsa ana iş parçası üzerindeki `sleep()` değerini biraz arttırarak yeni iş parçasının nasıl çalıştığı gözlemlenmelidir. Ana iş parçası yeteri kadar süre bekletildiğinde yeni iş parçasının 9’a kadar olan döngü adımlarının tamamlayacağı görülecektir.
 
-### `Join` Handle kullanarak tüm iş parçalarının sonlanmasını beklemek 
+### `join` Handle kullanarak tüm iş parçalarının sonlanmasını beklemek 
 İş parçalarının çalışma sıralarının garanti edilememesi, önceki kodda `main()` işlevinin erken sonlanması nedeniyle yeni iş parçasının işletiminin kesilmesine neden olur. Bu yüzden yeni iş parçasının sonlanıp sonlanmayacağı da garanti edilmez. 
 Bu sorunla başa çıkmanın bir yolu yukarıda anlatıldığı gibi `main()` işlevinin bekleme süresini, yeni iş parçasının çalışma süresini bekleyecek şekilde ayarlamaktır.
 Bir başka çözüm ise `thread::spawn()` dönüş değerinin bir değişkende saklanmasıdır. `Thread::spawn()`’dan elde edilen dönüş türüne `JoinHandle` adı verilir bu değer `join` metodunu çağırdığımızda, iş parçasının sonlanmasını bekleyen bir değerdir. Aşağıdaki Program bir önceki örnekte oluşturulan yeni iş parçasının, JoinHandle dönüş değeri kullanılarak yeniden tasarlanmış halidir. Örnekte ana iş parçası sonlanmadan önce yeni iş parçasının işini bitirmesi ve sonlanması beklenmiştir.
