@@ -61,6 +61,7 @@ Kod çalıştırıldığında sadece ana iş parçasının çıktısı görülü
 ### `join` Handle kullanarak tüm iş parçalarının sonlanmasını beklemek 
 İş parçalarının çalışma sıralarının garanti edilememesi, önceki kodda `main()` işlevinin erken sonlanması nedeniyle yeni iş parçasının işletiminin kesilmesine neden olur. Bu yüzden yeni iş parçasının sonlanıp sonlanmayacağı da garanti edilmez. 
 Bu sorunla başa çıkmanın bir yolu yukarıda anlatıldığı gibi `main()` işlevinin bekleme süresini, yeni iş parçasının çalışma süresini bekleyecek şekilde ayarlamaktır.
+
 Bir başka çözüm ise `thread::spawn()` dönüş değerinin bir değişkende saklanmasıdır. `Thread::spawn()`’dan elde edilen dönüş türüne `JoinHandle` adı verilir bu değer `join` metodunu çağırdığımızda, iş parçasının sonlanmasını bekleyen bir değerdir. Aşağıdaki program bir önceki örnekte oluşturulan yeni iş parçasının, `JoinHandle` dönüş değeri kullanılarak yeniden tasarlanmış halidir. Örnekte `main()` sonlanmadan önce yeni iş parçasının işini bitirmesi ve sonlanması beklenmiştir.
 
 Dosya: src/main.rs
