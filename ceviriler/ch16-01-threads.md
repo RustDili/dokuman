@@ -152,3 +152,42 @@ Merhaba, ben ana iş parçasından elde edilen 4 numara!
 Unutulmamalıdır ki birleştirmenin çağrıldığı yer iş parçalarının aynı anda çalışıp çalışmamasını etkileyebilir. Bu nedenle `handle.Join()` işlev çağrısının yapıldığı yerin dikkatlice tasarlanmasını önemlidir.
 
 ### İş parçası ve `move` Kullanımı 
+Bir kapama işlevi olan `move` genellikle `thread::spawn` ile birlikte kullanılır. Çünkü bu işlev bir iş parçasında bulunan verilerin başka bir iş parçasına taşınarak kullanılabilmesini sağlar. 
+Parametre listesinden önce kullanılan `move`; kullanıldığı kapama işlevini, etkileştiği ortam değişkenlerinin mülkiyetini almaya zorlar. Bu teknik, özellikle değerlerin mülkiyet haklarını iş parçalarına aktarırken veya yeni iş parçaları oluştururken kullanışlıdır. 
+
+Örnek 16-1'de, `thread::spawn()`' a geçirilen kapama işlevi hiçbir argüman almadığından, ana iş parçasına ait hiçbir veri, yeni iş parçacısında kullanılamamaktadır. Bir programda tasarlanan ek iş parçalarının ana iş parçasında bulunan verileri kullanabilmeleri için, ait oldukları kapama işlevinin ana iş parçasındaki verilere sahip olması gerekmektedir.
+Aşağıdaki girişim ana iş parçasında oluşturulan bir vektörü yeni iş parçası üzerinde çalıştırmayı amaçlamaktadır. Ancak tahmin edileceği gibi bu yöntem bu şekliyle çalışmaz.
+
+Dosya: src/main.rs
+```Rust
+
+use std::thread; 
+
+fn main() { 
+    let v = vec![1, 2, 3]; 
+    let handle = thread::spawn(|| { 
+        println!("İşte sana bir vektör: {:?}", v); 
+    }); 
+
+    handle.join().unwrap(); 
+}
+````
+Örnek 16.3- Ana iş parçacığı tarafından oluşturulan bir vektörü başka bir iş parçasında kullanma girişimi
+
+`handle` değişkeniyle temsil edilen kapama işlevi `v` bağlamını kullandığından,  `v` vektörünü yakalayarak kapama ortamının parçası haline getirir. Ve işlev `thread::spawn()` tarafından yeni bir iş parçasında çalıştırıldığından, yeni iş parçası içinden `v` verilerine mantıken ulaşılabiliyor olması beklenmektedir. Ancak örnek derlendiğinde aşağıdaki hata ile karşılaşılır:
+```Binary
+error[E0373]: closure may outlive the current function, but it borrows `v`,
+which is owned by the current function
+ --> src/main.rs:6:32
+  |
+6 |     let handle = thread::spawn(|| {
+  |                                ^^ may outlive borrowed value `v`
+7 |         println!("İşte sana bir vektör: {:?}", v);
+  |                                           - `v` is borrowed here
+  |
+help: to force the closure to take ownership of `v` (and any other referenced
+variables), use the `move` keyword
+  |
+6 |     let handle = thread::spawn(move || {
+  |                                ^^^^^^^
+````
