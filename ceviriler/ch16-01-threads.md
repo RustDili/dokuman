@@ -255,4 +255,4 @@ error[E0382]: use of moved value: `v`
 Rust' ın mülkiyet kuralları bizi tekrar kurtardı! Daha önce de örnek 16-3'te tasarlanan iş parçası `v` vektörünün mülkiyetini almak yerine, değerlerini ödünç almaya çalıştığından; Rust derleyicisi riske girmeyi seçmek yerine, `v`' nin mülkiyetinin iş parçasına taşınması gerektiğini bildiren bir hata döndürmüştü. Bu bildirim aynı zamanda `v` vektörünün mülkiyetinin yeni iş parçasına aktarılmasıyla ana iş parçasının artık `v` vektörünü kullanmayacağının da garantisidir. 
 Aynı şekilde örnek 16-4'teki yeni iş parçasında `move` kullanmak; mülkiyeti yeni iş parçasına aktarılan `v` vektörünün ana iş parçasındaki `drop` işlevi üzerinden kullanma girişimi sayılacağından mülkiyet kurallarının ihlal edilmesi anlamına gelir. Buna izin verilmez.
 
-İş parçası ve iş parçası API'sı hakkında edindiğimiz temel bilgiler ışığında, iş parçalarıyla neler yapabileceğimize bakalım.
+İş parçası ve iş parçası API'si hakkında edindiğimiz temel bilgiler ışığında, iş parçalarıyla neler yapabileceğimize bakalım.
