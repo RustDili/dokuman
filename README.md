@@ -21,4 +21,4 @@ Rust dili ile ilgili Türkçe dökümanları bu depoda bulabilirsiniz. Mevcut d�
  
  [Rust'ın Mülkiyet Kavramı](https://github.com/rust-lang-tr/dokuman/tree/master/mulkiyet-kavrami)
  
- [Rust Programlama Dili](https://github.com/rust-lang-tr/dokuman/tree/master/ceviriler)
+ [Rust Programlama Dili Kitap Çevirisi](https://github.com/rust-lang-tr/dokuman/tree/master/ceviriler)
