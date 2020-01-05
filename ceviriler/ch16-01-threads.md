@@ -246,7 +246,7 @@ error[E0382]: use of moved value: `v`
 6  |     let handle = thread::spawn(move || {
    |                                ------- value moved (into closure) here
 ...
-10 |     drop(v); // oh no!
+10 |     drop(v); // Hayır, olamaz!
    |          ^ value used here after move
    |
    = note: move occurs because `v` has type `std::vec::Vec<i32>`, which does
