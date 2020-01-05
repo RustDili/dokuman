@@ -41,4 +41,113 @@ fn main() {
     } 
 }
 ````
-Örnek 16.1- Ana iş parçası çalışırken yeni bir iş parçasını eşzamanlı çalıştırma
+Örnek 16.1- Ana iş parçası çalışırken yeni bir iş parçasını eş zamanlı çalıştırmak
+
+Bu örneğin çıktısında da görüleceği gibi, ana iş parçasının çalışması sona erdiğinde işi bitsin veya bitmesin, yeni iş parçasının çalışması durdurulur. Program her çalıştırıldığında aşağıdakine benzer çıktı üretecektir.
+```binary
+Merhaba, ben ana iş parçasından elde edilen 1 numara!
+Selam, ben yeni iş parçasından elde edilen numara 1
+Merhaba, ben ana iş parçasından elde edilen 2 numara!
+Selam, ben yeni iş parçasından elde edilen numara 2
+Merhaba, ben ana iş parçasından elde edilen 3 numara!
+Selam, ben yeni iş parçasından elde edilen numara 3
+Merhaba, ben ana iş parçasından elde edilen 4 numara!
+Selam, ben yeni iş parçasından elde edilen numara 4
+````
+Örnekte yer alan `thread::sleep()` işlevi o anda çalışan iş parçasının yürütmesini kısa bir süreliğine durdurarak farklı bir iş parçasının çalışmasına izin verir. İş parçaları olasılıkla sırayla işleyecektir ancak bu sıralı çalışma süreci, işletim sisteminin iş parçalarını programlama şekline bağlı olduğundan garanti edilemez. Bu programda da ilk olarak yeni iş parçasının ekrana bir numara bastırması beklenirken, ilk olarak ana iş parçası ekrana yazdırılmakta; hatta yeni iş parçasına 9’a kadar yazması söylenmesine rağmen ana iş parçası kapanana kadar sadece 5’e kadar yazabildiği görünmektedir. 
+
+Kod çalıştırıldığında sadece ana iş parçasının çıktısı görülüyorsa ana iş parçası üzerindeki `sleep()` değerini biraz arttırarak yeni iş parçasının nasıl çalıştığı gözlemlenmelidir. Ana iş parçası yeteri kadar süre bekletildiğinde yeni iş parçasının 9’a kadar olan döngü adımlarının tamamlayacağı görülecektir.
+
+### `Join` Handle kullanarak tüm iş parçalarının sonlanmasını beklemek 
+İş parçalarının çalışma sıralarının garanti edilememesi, önceki kodda `main()` işlevinin erken sonlanması nedeniyle yeni iş parçasının işletiminin kesilmesine neden olur. Bu yüzden yeni iş parçasının sonlanıp sonlanmayacağı da garanti edilmez. 
+Bu sorunla başa çıkmanın bir yolu yukarıda anlatıldığı gibi `main()` işlevinin bekleme süresini, yeni iş parçasının çalışma süresini bekleyecek şekilde ayarlamaktır.
+Bir başka çözüm ise `thread::spawn()` dönüş değerinin bir değişkende saklanmasıdır. `Thread::spawn()`’dan elde edilen dönüş türüne `JoinHandle` adı verilir bu değer `join` metodunu çağırdığımızda, iş parçasının sonlanmasını bekleyen bir değerdir. Aşağıdaki Program bir önceki örnekte oluşturulan yeni iş parçasının, JoinHandle dönüş değeri kullanılarak yeniden tasarlanmış halidir. Örnekte ana iş parçası sonlanmadan önce yeni iş parçasının işini bitirmesi ve sonlanması beklenmiştir.
+
+Dosya: src/main.rs
+```Rust
+
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("Selam, ben yeni iş parçasından elde edilen numara {}", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+    
+    for i in 1..5 {
+        println!("Merhaba, ben ana iş parçasından elde edilen {} numara!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+    
+    handle.join().unwrap();
+}
+````
+Örnek 16.2- `thread::spawn` işlevinden kaydedilen `joinHandle`’ın, iş parçasının görevini tamamlatmak için kullanılması 
+
+Handle’daki birleştirme çağrısı, tanıtıcı tarafından temsil edilen iş parçası sona erene kadar çalışmakta olan iş parçasını engeller. Bir iş parçasının engellenmesi o iş parçasının iş yapması veya sonlanmasının engellenmesi anlamına gelmektedir. Dolayısıyla üstteki programda ana iş parçasının döngüsü biter bitmez `join` çağrısı yapıldığından programın çıktısı aşağıdakine benzeyecektir. 
+
+```Binary
+Merhaba, ben ana iş parçasından elde edilen 1 numara!
+Selam, ben yeni iş parçasından elde edilen numara 1
+Merhaba, ben ana iş parçasından elde edilen 2 numara!
+Selam, ben yeni iş parçasından elde edilen numara 2
+Merhaba, ben ana iş parçasından elde edilen 3 numara!
+Selam, ben yeni iş parçasından elde edilen numara 3
+Merhaba, ben ana iş parçasından elde edilen 4 numara!
+Selam, ben yeni iş parçasından elde edilen numara 4
+Selam, ben yeni iş parçasından elde edilen numara 5
+Selam, ben yeni iş parçasından elde edilen numara 6
+Selam, ben yeni iş parçasından elde edilen numara 7
+Selam, ben yeni iş parçasından elde edilen numara 8
+Selam, ben yeni iş parçasından elde edilen numara 9
+````
+Programın işletildiğinde iki iş parçası dönüşümlü olarak çalışarak ana iş parçasının son adımına kadar ilerlerler. Bu noktada ana iş parçası `handle.join()` çağrısı nedeniyle yeni iş parçasının işini bitirmesini bekler ve program yeni iş parçası işini bitirine kadar sonlanmaz.
+
+Yukarıdaki örneğin `handle.join()` işlevi, `main()` içindeki `for` döngüsünün üstüne alındığında birleştirme işlemi anlamsızlaşır.
+
+Dosya: src/main.rs
+```Rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("Selam, ben yeni iş parçasından elde edilen numara {}", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+    
+    handle.join().unwrap();
+    
+    for i in 1..5 {
+        println!("Merhaba, ben ana iş parçasından elde edilen {} numara!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+````
+Örnek 16.2.1- `Join` işleminin yerinin değişmesi ve sonuçlarının gözlenmesi
+
+Bu durumda ana iş parçası, yeni iş parçasının işini bitirmesini bekler, yeni iş parçasının işi biter bitmez kendi döngüsünü çalıştırmaya başlar ancak handle kaynağında işini bitirmek için bekleyen bir iş parçası olmadığından çıktı artık birleştirilmez.
+
+```Binary
+Selam, ben yeni iş parçasından elde edilen numara 1
+Selam, ben yeni iş parçasından elde edilen numara 2
+Selam, ben yeni iş parçasından elde edilen numara 3
+Selam, ben yeni iş parçasından elde edilen numara 4
+Selam, ben yeni iş parçasından elde edilen numara 5
+Selam, ben yeni iş parçasından elde edilen numara 6
+Selam, ben yeni iş parçasından elde edilen numara 7
+Selam, ben yeni iş parçasından elde edilen numara 8
+Selam, ben yeni iş parçasından elde edilen numara 9
+Merhaba, ben ana iş parçasından elde edilen 1 numara!
+Merhaba, ben ana iş parçasından elde edilen 2 numara!
+Merhaba, ben ana iş parçasından elde edilen 3 numara!
+Merhaba, ben ana iş parçasından elde edilen 4 numara!
+````
+Unutulmamalıdır ki birleştirmenin çağrıldığı yer iş parçalarının aynı anda çalışıp çalışmamasını etkileyebilir. Bu nedenle `handle.Join()` işlev çağrısının yapıldığı yerin dikkatlice tasarlanmasını önemlidir.
+
+### İş parçası ve `move` Kullanımı 
