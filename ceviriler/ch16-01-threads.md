@@ -191,3 +191,49 @@ variables), use the `move` keyword
 6 |     let handle = thread::spawn(move || {
   |                                ^^^^^^^
 ````
+Kapama işlevindeki `println!()` makrosu, `v` bağlamındaki vektörü yazdırabilmesi için `v` referansına ihtiyaç duyduğundan, `v` bağlamını ödünç almaya çalışmakta, bu durum ise programın hata üretmesine neden olmaktadır. Üretilen hata bildiriminde derleyici ihtiyaç duyulan verinin nasıl ödünç alınacağını özetlemektedir. Geçerli olmayan `v`’ ye referans olabilecek daha iyi bir senaryo aşağıda önerilmektedir.
+
+Dosya: src/main.rs
+```Rust
+use std::thread; 
+
+fn main() { 
+    let v = vec![1, 2, 3]; 
+    let handle = thread::spawn(|| { 
+        println!("İşte sana bir vektör: {:?}", v); 
+    }); 
+
+    Drop(v); // Hayır, olamaz!
+    handle.join().unwrap(); 
+}
+````
+Örnek 16.4- `drop()` işlevi yardımıyla ana iş parçasındam referans yakalamaya çalışan bir kapama örneği 
+
+Eğer derleyici bu kodun çalıştırılmasına izin vermiş olsaydı, yeni iş parçasının neredeyse hiç çalıştırılmadan arka plana atılması olasıydı. Çünkü yeni iş parçası halihazırda `v` referansına sahipken, ana iş parçası üzerinde `drop()` işlevinin kullanılması `v` ’nin hemen düşmesine neden olur. Ardından yeni iş parçası yürütülmeye başlandığında `v` artık geçersiz olduğundan buna yapılan başvurular da geçersiz olmaktadır.
+
+Hatayı giderebilmek için hata iletisinde bulunan tavsiyelerden yararlanabiliriz.
+
+```Binary
+help: to force the closure to take ownership of `v` (and any other referenced
+variables), use the `move` keyword
+  |
+6 |     let handle = thread::spawn(move || {
+  |                                ^^^^^^^
+  ````
+`move` anahatar kelimesinin kapama işlevinin önünde kullanılması; derleyiciyi değerleri ödünç almak yerine, kapama işlevini kullanılan değerlere sahip olmaya zorlayacaktır. Yani `move` anahtar kelimesinin kullanılması inisiyatifi derleyiciye bırakmak yerine, kapama işlevine ihtiyaç duyduğu değerlerin mülkiyetini aktararak programın çalışmasını sağlamaktadır.
+
+Dosya: src/main.rs
+```Rust
+use std::thread; 
+
+fn main() { 
+    let v = vec![1, 2, 3]; 
+    let handle = thread::spawn(move || { 
+        println!("İşte sana bir vektör: {:?}", v); 
+    }); 
+
+    handle.join().unwrap(); 
+}
+
+````
+Örnek 16.5- `move` anahtar kelimesi kullanarak kapama işlevini kullandığı değerlerin sahipliğini almaya zorlamak   
