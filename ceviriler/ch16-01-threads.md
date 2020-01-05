@@ -237,3 +237,22 @@ fn main() {
 
 ````
 Örnek 16.5- `move` anahtar kelimesi kullanarak kapama işlevini kullandığı değerlerin sahipliğini almaya zorlamak   
+
+Peki ama örnek 16-4' te, `move` yönetemini kullanmış olsaydık ana iş parçası yani main işlevi içinde kullanmış olduğumuz `drop()` drop işlevine ne olurdu yani `move`' un kullanılması sorunları çözebilir miydi? Maalesef hayır; örnek 16-4'ün yapmaya çalıştığı şeye izin verilmeyeceğinden bu defa farklı bir hata ile karşılaşırdık. O örnekteki kapama işlevinde `move` kullanmış olsaydık `v`' yi kapama işlevine taşımış olur ana iş parçasına değerleri düşürme çağrısı yapamazdık. Bu senaryoda aşağıdaki gibi bir hata ile karşılaşmış olurduk.   
+```Binary
+error[E0382]: use of moved value: `v`
+  --> src/main.rs:10:10
+   |
+6  |     let handle = thread::spawn(move || {
+   |                                ------- value moved (into closure) here
+...
+10 |     drop(v); // oh no!
+   |          ^ value used here after move
+   |
+   = note: move occurs because `v` has type `std::vec::Vec<i32>`, which does
+   not implement the `Copy` trait
+````
+Rust' ın mülkiyet kuralları bizi tekrar kurtardı! Daha önce de örnek 16-3'te tasarlanan iş parçası `v` vektörünün mülkiyetini almak yerine, değerlerini ödünç almaya çalıştığından; Rust derleyicisi riske girmeyi seçmek yerine, `v`' nin mülkiyetinin iş parçasına taşınması gerektiğini bildiren bir hata döndürmüştü. Bu bildirim aynı zamanda `v` vektörünün mülkiyetinin yeni iş parçasına aktarılmasıyla ana iş parçasının artık `v` vektörünü kullanmayacağının da garantisidir. 
+Aynı şekilde örnek 16-4'teki yeni iş parçasında `move` kullanmak; mülkiyeti yeni iş parçasına aktarılan `v` vektörünün ana iş parçasındaki `drop` işlevi üzerinden kullanma girişimi sayılacağından mülkiyet kurallarının ihlal edilmesi anlamına gelir. Buna izin verilmez.
+
+İş parçası ve iş parçası API'sı hakkında edindiğimiz temel bilgiler ışığında, iş parçalarıyla neler yapabileceğimize bakalım.
