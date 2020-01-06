@@ -73,3 +73,46 @@ Verdiğimiz örnekte ana iş parçasının, diğer iş parçasından gelecek mes
 16.8 numaralı örneği çalıştırdığımızda, yeni iş parçasından elde edilen mesajın ana iş parçası tarafından "Alınan Mesaj: Merhaba" olarak bastırılan haliyle karşılaşacağız: **Mükemmel!**
 
 ### Kanallar ve mülkiyet aktarımı
+Mülkiyet kuralları, güvenli ve eş zamanlı kod yazmanıza yardımcı oldukları için, mesaj göndermede hayati rol oynarlar. Rust programlarında mülkiyet kavramı üzerinde düşünmek eş zamanlı programlamada karşılaşılabilecek hataları önlemek açısından da oldukça yararlıdır. 
+Yeni iş parçasında oluşturulan bir değerin, kanala gönderildikten sonra yazdırılmaya çalışılması kanallar ve mülkiyet ilişkisinin nasıl gerçekleştiğini ve olası sorunların üstesinden nasıl gelinebileceğini gösteren deneysel bir örnek olabilir.
+
+Derleyicinin böyle bir kod tasarımının çalıştırılmasına neden izin vermediğini kavrayabilmek için aşağıda yer alan programı çalıştırmayı deneyin.
+
+Dosya: src/main.rs
+```Rust
+use std::thread; 
+use std::sync::mpsc; 
+
+fn main() { 
+    let (tx, rx) = mpsc::channel(); 
+
+    thread::spawn(move || { 
+        let val = String::from("Merhaba"); 
+        tx.send(val).unwrap(); 
+        println!("val değeri {}", val); 
+    }); 
+
+    let received = rx.recv().unwrap(); 
+    println!("Alınan: {}", received); 
+}
+````
+Örnek 16.9- Bir değeri kanala yolladıktan sonra kullanmaya çalışmak
+
+Yukarıdaki örnekte `tx.send()` işlevi aracılığıyla kanala gönderilmiş olan bir değer yeniden kullanılmak isteniyor. Oysa bu değerin gönderildiği iş parçası tarafından değiştirilip değiştirilmediği bilinmeden kullanılmaya kalkışılması ve elbette ki derleyicinin buna izin vermesi oldukça kötü bir fikirdir. Bu durumda programın çalıştırılmasına izin verilmesi, olasılıkla diğer iş parçacığının gerçekleştirebilecekleri değişiklikler nedeniyle tutarsız süreçlere veya var olmayan veriler yüzünden hatalara yahut hiç beklenmeyen sonuçlara neden olabilir. Haliyle yukarıdaki kodu derlemeye kalkışmak, aşağıdaki gibi bir hata ile sonuçlanacaktır.
+
+```Binary
+error[E0382]: use of moved value: `val`
+  --> src/main.rs:10:31
+   |
+9  |         tx.send(val).unwrap();
+   |                 --- value moved here
+10 |         println!("val değeri {}", val);
+   |                               ^^^ value used here after move
+   |
+   = note: move occurs because `val` has type `std::string::String`, which does
+not implement the `Copy` trait
+````
+
+Gönderme işlevi `tx.send()` kendisine bir parametre geçirildiğinde o parametreyi mülkiyetine almakta, ancak alınan mülkiyet `move` aracılığıyla alıcı tarafına aktarılmış olduğundan kodumuz derlenmez. Çünkü Rust’ın mülkiyet sistemi her şeyin yolunda olup olmadığını kontrol ettiğinden, gönderilmiş bir değeri daha sonra yanlışlıkla tekrar kullanmamızı engeller. İşte bu nedenle yukarıdaki program derleme zamanı hatasına neden olur.
+
+### Çoklu veri gönderirken alıcıyı gözlemlemek
