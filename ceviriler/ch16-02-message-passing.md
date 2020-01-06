@@ -21,3 +21,55 @@ fn main() {
 Yukarıdaki örnekte çoklu üretici, tekli tüketici anlamına gelen `mpsc::channel()` işlevini kullanarak yeni bir kanal oluştulmaktadır. Işleve adının baş harfleri `mpsc`' yi yani "çok sayıda üretici, tek bir tane tüketici" kavramını veren özellik, Rust standart kütüphanesinin kanalları uygulama şekli olup; Bir kanalda değer üretebilen birçok gönderme ucu olabileceğini, ancak bu değerleri alıp işleyebilecek sadece bir tane alıcı taraf bulunabileceğini ifade etmektedir. 
 
 Bu durum; aynı anda büyük bir nehre doğru akan çok sayıda dere ve çayın olduğu, bu dere ve çayların herhangi birinin akıntısına bırakılan her şeyin nihayetinde bu nehre ulaşacağını düşünmekle eş değerdedir. Şimdilik buradaki örnekler tek bir üretici kısımla başlayacak ve daha sonra örneklere çok sayıda üreteci kısım eklenecektir. Geleneksel bir yaklaşımla belirlenen `tx` ve `rx` kısaltmaları, sırasıyla alıcı ve verici bölümlerini temsil amacıyla kullanılmakta, kısaltılmış bu isimler ayrıştırılan bir çokuzlu yardımıyla `let` ifadesinde bağlanmaktadır. Değişkenlerden bu şekilde yararlanmak, `mpsc::channel` tarafından döndürülen çokuzlunun parçalarını ayıklamak için uygun bir yaklaşımdır. 
+
+Aşağıdaki örnek, gönderim ucunun yeni iş parçasına bağlanmasıyla aktarılan bir dizgiye odaklanmaktadır. Örnekteki yeni iş parçası, `tx.send()` işlevi üzerinden ana iş parçası ile iletişime geçecektir. Bu süreç tıpkı akan nehir suyuna bir lastik ördek bırakmak ya da bir iş parçacığından diğerine bir sohbet mesajı göndermek gibidir. 
+
+Dosya: src/main.rs
+```Rust
+use std::thread; 
+use std::sync::mpsc; 
+
+fn main() { 
+    let (tx, rx) = mpsc::channel(); 
+
+    thread::spawn(move || { 
+        let val = String::from("Merhaba"); 
+        tx.send(val).unwrap(); 
+    }); 
+}
+````
+Örnek 16.7- Yeni iş parçasına `tx` ucu aracılığıyla "Merhaba" mesajını yollamak
+
+Yukarıdaki örnekte de, yeni bir iş parçası oluşturabilmek için `thread::spawn()` işlevinden ve `tx`'i kapama işlevine gönderebilmek için `move` komutunundan yararlanıyoruz. Ancak bu yeni iş parçasının kanalı kullanarak mesaj yollayabilmesi için kanalın verici ucuna sahip olması gereklidir. 
+
+Bu verici uç doğası gereği iletilecek verileri alarak bunları gönderebilecek özelliklere sahiptir. Dilimizdeki göndermenin kaeşılığı olan `send` adındaki bu özellik kullanıldığında `Result<T, E>` türünde biir değer döndürür. Bu `Result<T, E>` türü bir enum yapısı olup varyantlarından biriyle; eğer alıcı uç ile bağlantı kurulamıyor veya gönderilecek veriler için alıcı tarafında yeteri kadar yer bulunmuyorsa gönderme işlemi sonucunda bir hata döndürülür. 
+
+Aşağıdaki örnekte `main` işlevinde bulunan kanalın alıcı ucundan elde edilen değeri işleyeceğiz. Bu süreç; suya bırakılan lastik ördeği, nehrin sonuna ulaştığında sudan almak, ya da bir sohbet programında arkadaşınızdan "Merhaba" mesajı almaya benzer.
+
+Dosya: src/main.rs
+```Rust
+use std::thread; 
+use std::sync::mpsc; 
+
+fn main() { 
+    let (tx, rx) = mpsc::channel(); 
+    thread::spawn(move || { 
+        let val = String::from("Merhaba"); 
+        tx.send(val).unwrap(); 
+    }); 
+
+    let received = rx.recv().unwrap(); 
+    println!("Alınan Mesaj: {}", received); 
+}
+````
+Örnek 16.8- Ana iş parçası üzerinden "Merhaba" mesajını almak ve yazdırmak
+
+Bir kanalın alıcı ucunda `recv()` ve `try_recv()` adlarında olmak üzere oldukça kullanışlı iki metod bulunur. Yukarıdaki örnekte, kanaldan bir değer gönderilinceye kadar ana iş parçasının yürütülmesini engelleyerek bekletecek olan ve alıcı sözcüğünün kısaltılmış hali olan `recv()` metodunu kullanıyoruz. Bu işlev; kullanılmakta olan kanala bir değer gönderilmişse `Result<T, E>` şeklinde bir sonuç döndürür. Kanalın gönderen ucu kapandığında, `recv()` işlevi daha fazla değer gelmeyeceğini bildiren bir hata döndürür.
+
+Diğer yöntem olan `try_rcv()` işleviyse, ana iş parçasını çalışmasını engellemez. Bunun yerine kanalda kullanılabilir bir mesaj bulunuyorsa `Ok` varyantından, bulunmuyorsa `Err` varyantından oluşan bir `Result<T, E>` türündeki değeri, oldukça hızlı bir biçimde geriye döndürür. Bu yöntem, kullanıldığı iş parçasının **diğer iş parçalarından mesajlar gelene kadar yapacakları başka işleri varsa** kullanışlıdır. Bir döngü yardımıyla `try_recv()` işlevinin çağırılarak kontrol edildiği ve alınan bir mesaj varsa bunun işlenerek sürece devam edildiği, herhangi bir mesaj alınmadıysa iş parçasının kendi işleriyle ilgilendiği bir örnek hayal edin. 
+
+Verdiğimiz örnekte ana iş parçasının, diğer iş parçasından gelecek mesajları beklemekten başka yapacak bir işi olmadığından ve bu nedenle engellenmesinde bir mahsur bulunmadığından, tekniğin kolayca anlaşılabilmesi amacıyla `recv()` yöntemi kullanılmaktadır.
+
+16.8 numaralı örneği çalıştırdığımızda, yeni iş parçasından elde edilen mesajın ana iş parçası tarafından "Alınan Mesaj: Merhaba" olarak bastırılan haliyle karşılaşacağız: **Mükemmel!**
+
+### Kanallar ve mülkiyet aktarımı
