@@ -116,3 +116,48 @@ not implement the `Copy` trait
 Gönderme işlevi `tx.send()` kendisine bir parametre geçirildiğinde o parametreyi mülkiyetine almakta, ancak alınan mülkiyet `move` aracılığıyla alıcı tarafına aktarılmış olduğundan kodumuz derlenmez. Çünkü Rust’ın mülkiyet sistemi her şeyin yolunda olup olmadığını kontrol ettiğinden, gönderilmiş bir değeri daha sonra yanlışlıkla tekrar kullanmamızı engeller. İşte bu nedenle yukarıdaki program derleme zamanı hatasına neden olur.
 
 ### Çoklu veri gönderirken alıcıyı gözlemlemek
+Bir önceki bölümde yer alan örnek 16.8'deki kod derlenip çalışmasına rağmen, iki ayrı iş parçasının kanal üzerinden birbirleriyle haberleşebildiğini açıkça bize gösteremez. Aynı kodun, her iş parçasının eş zamanlı çalıştığını gösteren hali yeniden düzenlenerek aşağıda örneklenmektedir. 
+Yenilenen bu kodda oluşturulan yeni iş parçası, çok sayıda ileti gönderecek ve her ileti arasında bir saniye duraksayarak çalışacaktır.
+
+Dosya: src/main.rs
+```Rust
+use std::thread; 
+use std::sync::mpsc; 
+use std::time::Duration;
+fn main() { 
+    let (tx, rx) = mpsc::channel(); 
+    
+    thread::spawn(move || { 
+        let vals = vec![ 
+        String::from("Merhaba"), 
+        String::from("ben"), 
+        String::from("iş parçasından"), 
+        String::from("geliyorum"), 
+    ]; 
+
+    for val in vals { 
+        tx.send(val).unwrap(); 
+            thread::sleep(Duration::from_secs(1)); 
+        } 
+    }); 
+
+    for received in rx { 
+        println!("Alınan: {}", received); 
+    } 
+} 
+````
+Örnek 16.10- Çoklu mesaj gönderme ve aralarda duraksama
+
+Bu defaki örnekte, yeni iş parçasından ana iş parçasına gönderilmesi beklenen ve dizgilerden oluşan bir vektör bulunuyor. Vektörü oluşturan her öğe, ayrı bir adımda kanala gönderilirken `thread::sleep()` işlevi yardımıyla işlemler arasında bir saniye bekleniyor.
+
+Ana iş parçasında ise `recv()` işlevinin açıkça kullanılması yerine, kanalın alıcı ucu `rx`' in yineleyici olarak kullanıldığı ve alınan her değer için tekrar yazdırıldığı görülüyor. Nihayetinde `rx` ' in çalışması, kanalın kapatılmasına kadar devam edecek, kanal kapandığındaysa bu döngü otomatik olarak sonlanacaktır.  
+
+Kod çalıştırıldığında  aşağıdaki çıktının her bir satırı birer saniye aralıklarla yazdırılır.
+
+```Binary
+Alınan: Merhaba 
+Alınan: ben 
+Alınan: iş parçasından
+Alınan: geliyorum 
+````
+### Vericiyi klonlayarak çok sayıda üretici oluşturmak
