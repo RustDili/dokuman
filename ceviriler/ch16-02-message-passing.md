@@ -161,3 +161,69 @@ Alınan: iş parçasından
 Alınan: geliyorum 
 ````
 ### Vericiyi klonlayarak çok sayıda üretici oluşturmak
+Daha önce `mpsc`'nin "çoklu üretici, tek tüketici" kavramını oluşturan sözcüklerin baş harflarinden oluşan bir kısaltma olduğu belirtilmişti. Örnek 16.10'daki kodu `mpsc` yardımıyla genişleterek, tuttuğu verilerinin tamamını aynı alıcıya gönderen birden fazla iş parçacığı oluşturmak için kullanalım.
+
+Dosya: src/main.rs
+```Rust
+use std::thread;
+use std::sync::mpsc;
+use std::time::Duration;
+
+fn main() {// --snip-- 
+    let (tx, rx) = mpsc::channel(); // Kanal
+
+    let tx1 = mpsc::Sender::clone(&tx); // 1- Gönderici klonu
+    
+    thread::spawn(move || { 
+        let vals = vec![ 
+            String::from("Merhaba"), 
+            String::from("ben"), 
+            String::from("iş parçasından"), 
+            String::from("geliyorum"), 
+        ]; 
+
+        for val in vals { 
+            tx1.send(val).unwrap(); 
+            thread::sleep(Duration::from_secs(1)); 
+        } 
+    }); 
+
+    thread::spawn(move || { // 2- Ana gönderici
+        let vals = vec![ 
+            String::from("daha"), 
+            String::from("fazla"), 
+            String::from("mesaj"), 
+            String::from("getirdim"), 
+        ]; 
+
+
+        for val in vals { 
+            tx.send(val).unwrap(); 
+            thread::sleep(Duration::from_secs(1)); 
+        } 
+    }); 
+
+    for received in rx { // Tek alıcı
+        println!("alınan: {}", received); 
+    }    // --snip--
+}
+````
+Örnek 16.11- Birden fazla üreticiden çok sayıda mesaj gönderme
+
+Yeni iş parçası oluşturulmadan önce, kanalın gönderen ucunda bir klon çağırılır. Bu klonu oluşturmak bize, ilk oluşturulan iş parçasına veri iletebileceğimiz yeni bir gönderi tutamağı sağlar. Bu esnada kanalın asıl gönderen ucunu, ikinci bir iş parçasından geçirmekle, her biri kanalın alıcı ucuna farklı mesajlar gönderen iki iş parçası elde etmiş oluruz. Kod çalıştırıldığında elde edeceğiniz çıktı aşağıdakine benzeyecektir. 
+
+```Binary
+Alınan: Merhaba 
+Alınan: daha
+Alınan: ben 
+Alınan: fazla
+Alınan: iş parçasından
+Alınan: Mesaj
+Alınan: geliyorum
+Alınan: getirdim
+````
+Sisteminize bağlı çıktı satırlarını farklı sırada gözlemleyebilirsiniz. Aslında eş zamanlılığı ilginç ve zorlu hale getiren şey de aslında budur. 
+
+Yukarıdaki örneği iş parçalarının bekleme sürelerine `thread::sleep()` işlevi üzerinden farklı değerler girerek tekrar denediğinizde, her defasında kodun kendine özgü durumunun değiştiğini ve farklı çıktıların oluştuğunu gözlemleyebilirsiniz.
+
+Kanalların nasıl çalıştığına incelediğimize göre, farklı bir eşzamanlılık yöntemine bakabiliriz.
