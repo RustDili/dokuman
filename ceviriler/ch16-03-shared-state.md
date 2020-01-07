@@ -12,4 +12,35 @@ Mutex; tuttuğu verilere aynı anda sadece bir iş parçasının erişmesine izi
   * Verileri kullanmaya başlamadan önce kilidi alınmalıdır.
   * Mutex tarafından korunan verilerin kulanımı sona erdiğinde, kilidin diğer iş parçalarının kullanımına açılması gereklidir.
 
-Mutex’lerin gerçek dünyada neye benzediğini kavrayabilmek için, kalabalık bir grup ve yalnızca bir mikrofon ile gerçekleştirilen bir panel hayal edin: Paneldeki her tartışmacı, konuşmaya başlamadan önce, mikrofonu kullanmak istediklerini bildirmeli veya işaret etmelidir. Ve tartışmacılar sadece mikrofonu aldıklarında konuşabilir, bitirdiklerinde mikrofonu konuşmak isteyen bir sonraki tartışmacıya verebilirler. Ancak konuşanlardan biri işi bittiğinde mikrofonu elinde unutur ya da başka bir tartışmacıya geri vermezse artık hiç kimse konuşamaz. Mikrofon paylaşımı aksadığındaysa tartışma planlandığı gibi ilerlemez. 
+Mutex’lerin gerçek dünyada neye benzediğini kavrayabilmek için, kalabalık bir grup ve yalnızca bir mikrofon ile gerçekleştirilen bir panele katıldığınızı düşünün. Paneldeki her tartışmacı, konuşmaya başlamadan önce, mikrofonu kullanmak istediğini bildirecek veya işaret edecek, konuşmacılar sadece mikrofonu aldıklarında konuşabilecekler ve mikrofonu konuşmalarını bitirdiklerinde bir sonraki tartışmacıya verebileceklerdir. Konuşma sırasının bu şekilde ilerlediği bir toplantıda, konuşmacılardan birinin söylevini bitirdiğiinde mikrofonu elinde unutması veya başka bir tartışmacıya geri vermemesi, diğer konuşmacıların konuşmalarını engelleyeceğinden, mikrofon paylaşımının aksaması halinde tartışmanın planlandığı gibi ilerlemez.
+
+Benzer şekilde, bazı durumlarda mutex mekanizmasının doğru biçimde idaresi oldukça zor olabileceğinden, pekçok programcı tercihlerini kanalları kullanmaktan yana yapar. Bununla birlikte, Rust’in **tür sistemi** ve **mülkiyet kuralları** sayesinde, yanlış kilitleme ve kilit açma işlemini gerçekleştirmeniz mümkün değildir.
+
+### `mutex<T>` Api'si
+Mutex’lerin nasıl kullanılabileceğine dair örneklere aşağıdaki tek iş parçasına sahip kod ile başlayalım. 
+
+Dosya: src/main.rs
+```Rust
+use std::sync::Mutex; 
+fn main() { 
+    let m = Mutex::new(5); 
+    
+    { 
+        let mut num = m.lock().unwrap(); 
+        *num = 6; 
+    } 
+
+    println!("m = {:?}", m); 
+}
+ ````
+ Örnek 16.12- Tek iş parçacıklı basit bir örnek üzerinden `mutex<T>` Api'sini keşfetmek.
+ 
+Rust türlerinin çoğunda olduğu gibi, yeni bir `mutex<T>` oluşturabilmek için türün `new()` işlevinden yararlanılır. Kilidi elde ederek muteks içindeki verilere ulaşmak içinse `lock()` işlevi kullanılır. Bu işlevin çağrılmasıyla, kilit çağıran tarafın yönetimine geçene kadar yürürlükte olan iş parçasını hiçbir şey yapamayacak şekilde engellenir. 
+
+Ancak bu devir teslim sırasında, kilidi elinde tutan iş parçası panik ile sonlanacak bir hata ile karşılaşmış olsaydı, erişilmek istenen verinin, çağrı yapılan iş parçasına ait olması nedeniyle, yapılan çağrı da başarısız olacak ve kilit hiç kimse tarafından elde edilemeyecekti.
+
+Kilit elde edildikten sonra, `num` adlı dönüş değerini, içindeki verilere referans olan bir değişken olarak değerlendirebiliriz. `Mutex<i32>` türündeki `m` değişkenini `i32` türü olarak kullanmadan önce tür sisteminin sağladığı kilidi elde etmemiz gerekir. Tür sistemi mutex kilidi elde edilmeden `i32` değerinin kullanılmasına izin vermez.
+
+Sizin de tahmin edeceğiniz gibi `mutex<T>` aslında akıllı bir işaretçidir. Daha kesin ifadeyle, kilitleme ile birlikte yapılan `unwrap()` çağrısı, `LockResult` ile sarmalanmış `MutexGuard` adında akıllı bir işaretçi döndürür. `MutexGuard` akıllı işaretçisi, hem kapsam içindeki verilerimize işaret eden `Deref` uygulamasına, hem de kapsamın sonuna gelindiğinde kilidi otomatik olarak iade eden serbest bırakma uygulaması olan `Drop` yöntemine sahiptir. Sonuçta hem mutex'in başka iş parçaları tarafından kullanılması önlenmiş, hem de  mekanizmanın otomatik açılmasıyla kilidin kapalı halde unutulması engellenmiş olur. 
+
+Kapsam içinde değiştirilen mutex değerinin elde edilip yazdırılması ise ancak kilidin serbest bırakılmasından sonra gerçekleşir.
