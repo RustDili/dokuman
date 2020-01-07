@@ -44,3 +44,135 @@ Kilit elde edildikten sonra, `num` adlı dönüş değerini, içindeki verilere 
 Sizin de tahmin edeceğiniz gibi `mutex<T>` aslında akıllı bir işaretçidir. Daha kesin ifadeyle, kilitleme ile birlikte yapılan `unwrap()` çağrısı, `LockResult` ile sarmalanmış `MutexGuard` adında akıllı bir işaretçi döndürür. `MutexGuard` akıllı işaretçisi, hem kapsam içindeki verilerimize işaret eden `Deref` uygulamasına, hem de kapsamın sonuna gelindiğinde kilidi otomatik olarak iade eden serbest bırakma uygulaması olan `Drop` yöntemine sahiptir. Sonuçta hem mutex'in başka iş parçaları tarafından kullanılması önlenmiş, hem de  mekanizmanın otomatik açılmasıyla kilidin kapalı halde unutulması engellenmiş olur. 
 
 Kapsam içinde değiştirilen mutex değerinin elde edilip yazdırılması ise ancak kilidin serbest bırakılmasından sonra gerçekleşir.
+
+### İş parçaları arasında `mutex<T>` paylaşımı
+Bir değeri, `mutex <T>` kullanarak çok sayıda iş parçası arasında paylaşmayı deneyelim. Deneyimizde her biri, 0’ dan 10’ a kadar ilerleyen sayacımızın değerini 1 arttıran, 10 adet iş parçamız olsun. Bu örnek ve devamındaki birkaç örnekte karşılaşılacak olan derleme hatalarından edinilecek bilgiler sayesinde mutex konusunu anlamada Rust’ın ne kadar yardımcı olduğunu gözlemleyeceğiz.
+
+Dosya: src/main.rs
+```Rust
+use std::sync::Mutex;
+use std::thread;
+
+fn main() {
+    let counter = Mutex::new(0);
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+````
+Örnek 16.13- `mutex<T>` içinde korunan bir sayacın, 10 ayrı iş parçası tarafından birer birer arttırılması deneyi
+
+Örnek 16.12’de olduğu gibi `i32` türünden oluşturduğumuz sayacın değerini `mutex<T>` içinde tutabileceğimiz `counter` değişkeniyle tanımlıyoruz. Ardından 0..10 arası sayı aralığını yineleyen bir döngüde `thread::spawn` kullanarak 10 adet iş parçası üretiyor ve tüm iş parçalarını aynı şekilde kullanıp sonlandırıyoruz. Her bir iş parçası çalışırken `mutex<T>`'nin `lock` metodunu çağırarak kilit mekanizmasını elde ediyor ve mutex içindeki sayacı bir arttırıyoruz. Sürecin sonunda her bir iş parçasının kapama işlevi tamamlandığında, `num` değişkeni de kapsam dışınana çıkacağından, sahip olduğu kilidi de serbest bırakacak, böylece başka bir iş parçasının bu kilidi elde ederek çalışması sağlanmış olacaktır.
+
+Programda çalışan bütün iş parçalarını ana iş parçası üzerinde bir araya getiriyor ve tüm iş parçalarının çalışmalarını bitirdiğinden emin olmak için her bir tutamağı `join` işleviyle birleştiriyoruz. Bu aşamada ana iş parçası olan `main()` işlevi, mutex kilidini elde edecek ve programın sonucunu yazdırmaya çalışacaktır.
+
+Başında da bu örneğin derlenmeyeceğininden bahsetmiştik. Haydi şimdi neden derlenmediğini anlamaya çalışalım.
+
+```Binary
+error[E0382]: capture of moved value: `counter`
+  --> src/main.rs:10:27
+   |
+9  |         let handle = thread::spawn(move || {
+   |                                    ------- value moved (into closure) here
+10 |             let mut num = counter.lock().unwrap();
+   |                           ^^^^^^^ value captured here after move
+   |
+   = note: move occurs because `counter` has type `std::sync::Mutex<i32>`,
+   which does not implement the `Copy` trait
+
+error[E0382]: use of moved value: `counter`
+  --> src/main.rs:21:29
+   |
+9  |         let handle = thread::spawn(move || {
+   |                                    ------- value moved (into closure) here
+...
+21 |     println!("Result: {}", *counter.lock().unwrap());
+   |                             ^^^^^^^ value used here after move
+   |
+   = note: move occurs because `counter` has type `std::sync::Mutex<i32>`,
+   which does not implement the `Copy` trait
+
+error: aborting due to 2 previous errors
+````
+Hata mesajında `counter` değerinin kapama işlevine aktarıldığı ve kilit çağrısı yapıldığında yakalandığı belirtiliyor. Bu beklediğimiz türden bir açıklama olmasına rağmen sorunun giderilmesi için yeterli değil.  
+
+Bu sorunu programı for in döngüsü ile yaratılan 10 adet iş parçası ile tasarlamak yerine, döngü kulanmaksızın sadece iki ayrı iş parçasından oluşan daha basit bir tasarımla çözümlemeyi deneyelim.
+
+Dosya: src/main.rs
+```Rust
+use std::sync::Mutex;
+use std::thread;
+
+fn main() {
+    let counter = Mutex::new(0);
+    let mut handles = vec![];
+
+    let handle = thread::spawn(move || {
+        let mut num = counter.lock().unwrap();
+
+        *num += 1;
+    });
+    handles.push(handle);
+
+    let handle2 = thread::spawn(move || {
+        let mut num2 = counter.lock().unwrap();
+
+        *num2 += 1;
+    });
+    handles.push(handle2);
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+````
+Örnek 16.13 için yeniden düzenleme
+
+Birbirinin kopyası iki iş parçasından oluşan ve ikinci iş parçasında kullanılan değişken isimleri `handle2` ve `num2` olarak değiştirilen programımızı çalıştırdığımızdaysa aşağıdaki hataları alırız.
+
+```Binary
+error[E0382]: capture of moved value: `counter`
+  --> src/main.rs:16:24
+   |
+8  |     let handle = thread::spawn(move || {
+   |                                ------- value moved (into closure) here
+...
+16 |         let mut num2 = counter.lock().unwrap();
+   |                        ^^^^^^^ value captured here after move
+   |
+   = note: move occurs because `counter` has type `std::sync::Mutex<i32>`,
+   which does not implement the `Copy` trait
+
+error[E0382]: use of moved value: `counter`
+  --> src/main.rs:26:29
+   |
+8  |     let handle = thread::spawn(move || {
+   |                                ------- value moved (into closure) here
+...
+26 |     println!("Result: {}", *counter.lock().unwrap());
+   |                             ^^^^^^^ value used here after move
+   |
+   = note: move occurs because `counter` has type `std::sync::Mutex<i32>`,
+   which does not implement the `Copy` trait
+
+error: aborting due to 2 previous errors
+````
+
+Aha! İlk hata mesajında `counter` değişkeninin, ilgili iş parçasının kapama işlevine taşındığı belirtilir. Bu taşınma kilitlemeye çalıştığımız `counter` değişkenini yakalamamızı ve sonucunu ikinci iş parçasında sakladığımız ` num2` değişkeninde depolamamızı engeliyor. Aslında burada derleyici bize, `counter` değişkeni mülkiyetinin birden fazla iş parçasına aktarılamayacağını söylüyor. Önceki örneğimizde iş parçaların bir döngü yardımıyla oluşturulması ve her adımda hatanın oluştuğu farklı iş parçasına işaret edilmesi gerektiğinden dolayı bu sorunu sağlıklı şekilde gözlemlemek oldukça zordu. Artık mülkiyet paylaşımından kaynaklanan bu sorunu 15. bölümde bahsedilen çoklu mülkiyet yöntemini kullanarak çözümleyebiliriz.
+
+### Çoklu iş parçaları ve çoklu mülkiyet
