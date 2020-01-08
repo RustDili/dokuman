@@ -27,7 +27,7 @@ Aşağıdaki listede, Rust dili tarafından geçerli veya gelecekteki kullanım 
   * `move` - yakalanan her şeyin mülkiyetini devralabilmek için oluşturulan kapama işlevlerinde
   * `mut` - referans, ham tanımlayıcılar veya örüntü bağlamında değişirlik istendiğinde 
   * `pub` - yapı alanları, impl blokları veya modüllerde genel görünürlük gerektiğinde
-  * `refawait - (Rez) Bir Future' ın sonucu hazır olana kadar yürütmeyi askıya alır.` - referans ile bağlamak gerektiğinde
+  * `ref` - referans ile bağlamak gerektiğinde
   * `return` - bir işlevden dönülmesi gerektiğinde
   * `Self` - bir özelliği uygulayan tür lakabının gerektiği hallerde 
   * `self` - halihazırdaki modül veya bir metodun alıcısıne başvurulurken
