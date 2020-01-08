@@ -33,7 +33,7 @@ fn main() {
     println!("m = {:?}", m); 
 }
  ````
- Örnek 16.12- Tek iş parçacıklı basit bir örnek üzerinden `Mutex<T>` Api'sini keşfetmek.
+ Örnek 16.12: Tek iş parçacıklı basit bir örnek üzerinden `Mutex<T>` Api'sini keşfetmek.
  
 Rust türlerinin çoğunda olduğu gibi, yeni bir `Mutex<T>` oluşturabilmek için türün `new()` işlevinden yararlanılır. Kilidi elde ederek muteks içindeki verilere ulaşmak içinse `lock()` işlevi kullanılır. Bu işlevin çağrılmasıyla, kilit çağıran tarafın yönetimine geçene kadar yürürlükte olan iş parçasını hiçbir şey yapamayacak şekilde engellenir. 
 
@@ -73,7 +73,7 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ````
-Örnek 16.13- `Mutex<T>` içinde korunan bir sayacın, 10 ayrı iş parçası tarafından birer birer arttırılması deneyi
+Örnek 16.13: `Mutex<T>` içinde korunan bir sayacın, 10 ayrı iş parçası tarafından birer birer arttırılması deneyi
 
 Örnek 16.12’de olduğu gibi `i32` türünden oluşturduğumuz sayacın değerini `Mutex<T>` içinde tutabileceğimiz `counter` değişkeniyle tanımlıyoruz. Ardından 0..10 arası sayı aralığını yineleyen bir döngüde `thread::spawn` kullanarak 10 adet iş parçası üretiyor ve tüm iş parçalarını aynı şekilde kullanıp sonlandırıyoruz. Her bir iş parçası çalışırken `Mutex<T>`'nin `lock` metodunu çağırarak kilit mekanizmasını elde ediyor ve mutex içindeki sayacı bir arttırıyoruz. Sürecin sonunda her bir iş parçasının kapama işlevi tamamlandığında, `num` değişkeni de kapsam dışınana çıkacağından, sahip olduğu kilidi de serbest bırakacak, böylece başka bir iş parçasının bu kilidi elde ederek çalışması sağlanmış olacaktır.
 
@@ -205,7 +205,7 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ````
-Örnek 16.14- `Rc<T>` kullanılarak çok sayıda iş parçasının `Mutex<T>` ile çalışmasını sağlamak
+Örnek 16.14: `Rc<T>` kullanılarak çok sayıda iş parçasının `Mutex<T>` ile çalışmasını sağlamak
 
 Programı bir kez daha derledik ve bir kez daha derleyicinin farklı şeyler öğrettiği yeni hatalarla karşılaştık.
 
@@ -263,7 +263,7 @@ fn main() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 ````
-Örnek 16.15- Mülkiyetin farklı iş parçalarıyla paylaşılabilmesi için `Mutex<T>` yi saran `Arc<T>` türünün kullanılması.
+Örnek 16.15: Mülkiyetin farklı iş parçalarıyla paylaşılabilmesi için `Mutex<T>` yi saran `Arc<T>` türünün kullanılması.
 
 Sonunda 0’dan 10’a kadar sayarak birer iş parçası oluşturan programımızı çalıştırmayı başardık. Bu başarı çok etkileyici görünmese de `Mutex<T>` ve iş parçası güvenliği hakkında oldukça fazla şey öğrenmemize neden oldu. Programın tasarımından, daha karmaşık kodlar üretmek için yararlanabilir, bu stratejiden faydalanarak kodlarınızdaki hesaplamaları ayrı bölümlere taşıyabilir, her bölümü ayrı iş parçaları arasında paylaştırabilir, ve ardından her iş parçasının kesin sonuçlarını güncellemek için `Mutex<T>` kullanabilirsiniz.
 
