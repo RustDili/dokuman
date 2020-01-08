@@ -58,7 +58,7 @@ Aşağıdaki listede, Rust dili tarafından geçerli veya gelecekteki kullanım 
   * `virtual`
   * `yield`
   
-  ### Ham tanımlayıcılar
+### Ham tanımlayıcılar
 Ham tanımlayıcılar normalde kullanılmasına müsaade edilmeyen anahtar kelimelerin kullanılmasını sağlayan söz dizimleridir. Bir anahtar kelimenin önüne `r#` ön eki getirilerek kullanılır.
   
 Örneğin `match` örüntü eşlemede kullanılan bir anahtar kelimedir. Bu kelimeyi isim olarka kullanmaya çalışan bir işlevi derlemeye çalışırsanız: 
