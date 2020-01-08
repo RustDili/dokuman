@@ -16,7 +16,7 @@ fn main() {
     let (tx, rx) = mpsc::channel(); 
 }
 ````
-Örnek 16.6- Bir kanal oluşturmak ve bu kanalı `tx` ve `rx` adlı iki parçaya atamak 
+Örnek 16.6: Bir kanal oluşturmak ve bu kanalı `tx` ve `rx` adlı iki parçaya atamak 
 
 Yukarıdaki örnekte çoklu üretici, tekli tüketici anlamına gelen `mpsc::channel()` işlevini kullanarak yeni bir kanal oluştulmaktadır. Işleve adının baş harfleri `mpsc`' yi yani "çok sayıda üretici, tek bir tane tüketici" kavramını veren özellik, Rust standart kütüphanesinin kanalları uygulama şekli olup; Bir kanalda değer üretebilen birçok gönderme ucu olabileceğini, ancak bu değerleri alıp işleyebilecek sadece bir tane alıcı taraf bulunabileceğini ifade etmektedir. 
 
@@ -38,7 +38,7 @@ fn main() {
     }); 
 }
 ````
-Örnek 16.7- Yeni iş parçasına `tx` ucu aracılığıyla "Merhaba" mesajını yollamak
+Örnek 16.7: Yeni iş parçasına `tx` ucu aracılığıyla "Merhaba" mesajını yollamak
 
 Yukarıdaki örnekte de, yeni bir iş parçası oluşturabilmek için `thread::spawn()` işlevinden ve `tx`'i kapama işlevine gönderebilmek için `move` komutunundan yararlanıyoruz. Ancak bu yeni iş parçasının kanalı kullanarak mesaj yollayabilmesi için kanalın verici ucuna sahip olması gereklidir. 
 
@@ -62,7 +62,7 @@ fn main() {
     println!("Alınan Mesaj: {}", received); 
 }
 ````
-Örnek 16.8- Ana iş parçası üzerinden "Merhaba" mesajını almak ve yazdırmak
+Örnek 16.8: Ana iş parçası üzerinden "Merhaba" mesajını almak ve yazdırmak
 
 Bir kanalın alıcı ucunda `recv()` ve `try_recv()` adlarında olmak üzere oldukça kullanışlı iki metod bulunur. Yukarıdaki örnekte, kanaldan bir değer gönderilinceye kadar ana iş parçasının yürütülmesini engelleyerek bekletecek olan ve alıcı sözcüğünün kısaltılmış hali olan `recv()` metodunu kullanıyoruz. Bu işlev; kullanılmakta olan kanala bir değer gönderilmişse `Result<T, E>` şeklinde bir sonuç döndürür. Kanalın gönderen ucu kapandığında, `recv()` işlevi daha fazla değer gelmeyeceğini bildiren bir hata döndürür.
 
@@ -96,7 +96,7 @@ fn main() {
     println!("Alınan: {}", received); 
 }
 ````
-Örnek 16.9- Bir değeri kanala yolladıktan sonra kullanmaya çalışmak
+Örnek 16.9: Bir değeri kanala yolladıktan sonra kullanmaya çalışmak
 
 Yukarıdaki örnekte `tx.send()` işlevi aracılığıyla kanala gönderilmiş olan bir değer yeniden kullanılmak isteniyor. Oysa bu değerin gönderildiği iş parçası tarafından değiştirilip değiştirilmediği bilinmeden kullanılmaya kalkışılması ve elbette ki derleyicinin buna izin vermesi oldukça kötü bir fikirdir. Bu durumda programın çalıştırılmasına izin verilmesi, olasılıkla diğer iş parçacığının gerçekleştirebilecekleri değişiklikler nedeniyle tutarsız süreçlere veya var olmayan veriler yüzünden hatalara yahut hiç beklenmeyen sonuçlara neden olabilir. Haliyle yukarıdaki kodu derlemeye kalkışmak, aşağıdaki gibi bir hata ile sonuçlanacaktır.
 
@@ -146,7 +146,7 @@ fn main() {
     } 
 } 
 ````
-Örnek 16.10- Çoklu mesaj gönderme ve aralarda duraksama
+Örnek 16.10: Çoklu mesaj gönderme ve aralarda duraksama
 
 Bu defaki örnekte, yeni iş parçasından ana iş parçasına gönderilmesi beklenen ve dizgilerden oluşan bir vektör bulunuyor. Vektörü oluşturan her öğe, ayrı bir adımda kanala gönderilirken `thread::sleep()` işlevi yardımıyla işlemler arasında bir saniye bekleniyor.
 
@@ -208,7 +208,7 @@ fn main() {// --snip--
     }    // --snip--
 }
 ````
-Örnek 16.11- Birden fazla üreticiden çok sayıda mesaj gönderme
+Örnek 16.11: Birden fazla üreticiden çok sayıda mesaj gönderme
 
 Yeni iş parçası oluşturulmadan önce, kanalın gönderen ucunda bir klon çağırılır. Bu klonu oluşturmak bize, ilk oluşturulan iş parçasına veri iletebileceğimiz yeni bir gönderi tutamağı sağlar. Bu esnada kanalın asıl gönderen ucunu, ikinci bir iş parçasından geçirmekle, her biri kanalın alıcı ucuna farklı mesajlar gönderen iki iş parçası elde etmiş oluruz. Kod çalıştırıldığında elde edeceğiniz çıktı aşağıdakine benzeyecektir. 
 
