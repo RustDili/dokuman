@@ -91,6 +91,6 @@ fn main() {
 }
 ````
 
-Bu kod hatasız derlenecektir. Bir not olarak, işlev adındaki bitişik `r#` ön ekinin yanı sıra, `main()` işlevi içinden yapılan çağrıda da `r#` nin kullanılmış olduğuna dikkat edin.
+Bu kod hatasız derlenecektir. Ek olarak, işlev adındaki bitişik `r#` ön ekinin yanı sıra, `main()` işlevi içinden yapılan çağrıda da `r#` nin kullanılmış olduğuna dikkat edin.
 
 Ham tanımlayıcılar, istediğiniz bir anahtar kelimenin Rust'ın kullanımı için ayrılmış olmasına rağmen yeniden kullanılmasına olanak sağlarlar. Ek olarak bu tanımlayıcılar, sandığınızın kullandığından farklı bir Rust sürümünde yazılmış kütüphanelerin de kullanılmasına izin verir. Örneğin, 2015 sürümünde anahtar kelime olmayan, ancak 2018 sürümünde anahtar kelime olarak ayrılmış bir kelimenin işlev adı olarak kullanıldığı bir program kullanmanız gerektiğini düşünün. Bu programı Rust'ın güncel bir sürümüyle kulanabilmeniz için ham tanımlayıcı söz dizimini kullanmanız gerekir. Sürümler hakkında daha fazla bilgi için [Ek E'ye göz atınız.](https://github.com/rust-https://github.com/rust-lang/book/blob/master/src/appendix-05-editions.htmllang/book/blob/master/src/appendix-05-editions.html) 
