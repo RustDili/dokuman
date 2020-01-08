@@ -41,7 +41,7 @@ fn main() {
     } 
 }
 ````
-Örnek 16.1- Ana iş parçası çalışırken yeni bir iş parçasını eş zamanlı çalıştırmak
+Örnek 16.1: Ana iş parçası çalışırken yeni bir iş parçasını eş zamanlı çalıştırmak
 
 Bu örneğin çıktısında da görüleceği gibi, ana iş parçasının çalışması sona erdiğinde işi bitsin veya bitmesin, yeni iş parçasının çalışması durdurulur. Program her çalıştırıldığında aşağıdakine benzer çıktı üretecektir.
 ```binary
@@ -86,7 +86,7 @@ fn main() {
     handle.join().unwrap();
 }
 ````
-Örnek 16.2- `thread::spawn` işlevinden kaydedilen `joinHandle`’ın, iş parçasının görevini tamamlatmak için kullanılması 
+Örnek 16.2: `thread::spawn` işlevinden kaydedilen `joinHandle`’ın, iş parçasının görevini tamamlatmak için kullanılması 
 
 Handle’daki birleştirme çağrısı, tanıtıcı tarafından temsil edilen iş parçası sona erene kadar çalışmakta olan iş parçasını engeller. Bir iş parçasının engellenmesi o iş parçasının iş yapması veya sonlanmasının engellenmesi anlamına gelmektedir. Dolayısıyla üstteki programda ana iş parçasının döngüsü biter bitmez `join` çağrısı yapıldığından programın çıktısı aşağıdakine benzeyecektir. 
 
@@ -130,7 +130,7 @@ fn main() {
     }
 }
 ````
-Örnek 16.2.1- `Join` işleminin yerinin değişmesi ve sonuçlarının gözlenmesi
+Örnek 16.2.1: `Join` işleminin yerinin değişmesi ve sonuçlarının gözlenmesi
 
 Bu durumda ana iş parçası, yeni iş parçasının işini bitirmesini bekler, yeni iş parçasının işi biter bitmez kendi döngüsünü çalıştırmaya başlar ancak handle kaynağında işini bitirmek için bekleyen bir iş parçası olmadığından çıktı artık birleştirilmez.
 
@@ -172,7 +172,7 @@ fn main() {
     handle.join().unwrap(); 
 }
 ````
-Örnek 16.3- Ana iş parçacığı tarafından oluşturulan bir vektörü başka bir iş parçasında kullanma girişimi
+Örnek 16.3: Ana iş parçacığı tarafından oluşturulan bir vektörü başka bir iş parçasında kullanma girişimi
 
 `handle` değişkeniyle temsil edilen kapama işlevi `v` bağlamını kullandığından,  `v` vektörünü yakalayarak kapama ortamının parçası haline getirir. Ve işlev `thread::spawn()` tarafından yeni bir iş parçasında çalıştırıldığından, yeni iş parçası içinden `v` verilerine mantıken ulaşılabiliyor olması beklenmektedir. Ancak örnek derlendiğinde aşağıdaki hata ile karşılaşılır:
 ```Binary
@@ -207,7 +207,7 @@ fn main() {
     handle.join().unwrap(); 
 }
 ````
-Örnek 16.4- `drop()` işlevi yardımıyla ana iş parçasındam referans yakalamaya çalışan bir kapama örneği 
+Örnek 16.4: `drop()` işlevi yardımıyla ana iş parçasındam referans yakalamaya çalışan bir kapama örneği 
 
 Eğer derleyici bu kodun çalıştırılmasına izin vermiş olsaydı, yeni iş parçasının neredeyse hiç çalıştırılmadan arka plana atılması olasıydı. Çünkü yeni iş parçası halihazırda `v` referansına sahipken, ana iş parçası üzerinde `drop()` işlevinin kullanılması `v` ’nin hemen düşmesine neden olur. Ardından yeni iş parçası yürütülmeye başlandığında `v` artık geçersiz olduğundan buna yapılan başvurular da geçersiz olmaktadır.
 
@@ -236,7 +236,7 @@ fn main() {
 }
 
 ````
-Örnek 16.5- `move` anahtar kelimesi kullanarak kapama işlevini kullandığı değerlerin sahipliğini almaya zorlamak   
+Örnek 16.5: `move` anahtar kelimesi kullanarak kapama işlevini kullandığı değerlerin sahipliğini almaya zorlamak   
 
 Peki ama örnek 16-4' te, `move` yönetemini kullanmış olsaydık ana iş parçası yani main işlevi içinde kullanmış olduğumuz `drop()` drop işlevine ne olurdu yani `move`' un kullanılması sorunları çözebilir miydi? Maalesef hayır; örnek 16-4'ün yapmaya çalıştığı şeye izin verilmeyeceğinden bu defa farklı bir hata ile karşılaşırdık. O örnekteki kapama işlevinde `move` kullanmış olsaydık `v`' yi kapama işlevine taşımış olur ana iş parçasına değerleri düşürme çağrısı yapamazdık. Bu senaryoda aşağıdaki gibi bir hata ile karşılaşmış olurduk.   
 ```Binary
