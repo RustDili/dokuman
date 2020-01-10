@@ -75,7 +75,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
 
 Örnek13-3'teki kod, yavaş hesaplama yapan işleve çok sayıda başvuruda bulunur. İlk `if` bloğu `simulated_expensive_calculation` işlevini iki defa çağırırken, `else` bloğunun içindeki birinci `if` bloğu ise başvuruda bulunmaz. Oysa bir sonraki `else` bloğunda `simulated_expensive_calculation` işlevine yeniden çağrıda bulunulur.  
 
-Öncelikle `generate_workout` işlevinin beklenen davranışı, kullanıcının düşük yoğunluklu bir egzersizi mi (25'ten az bir sayı ile gösterilir) yoksa yüksek yoğunluklu bir egzersizi mi (25 veya daha büyük bir sayı) isteyip istemediğini kontrol etmektir.
+Öncelikle `generate_workout` işlevinin beklenen davranışı, kullanıcının düşük yoğunluklu bir egzersizi mi *(25'ten az bir sayı ile gösterilir)* yoksa yüksek yoğunluklu bir egzersizi mi *(25 veya daha büyük bir sayı)* isteyip istemediğini kontrol etmektir.
 
 Düşük yoğunluklu egzersiz planları, simüle ettiğimiz karmaşık algoritmaya dayanan bir dizi şınav ve mekik antremanını önerecektir. 
 
@@ -121,3 +121,62 @@ Bu değişiklik, `simulated_expensive_calculation` çağrılarını birleştirer
 Oysa biz bu kodu, programımızın tek bir yerinde tanımlamak ve sadece sonuca gerçekten ihtiyaç duyduğumuz yerde işletmek istiyorduk. İşte bu durum tam da kapamaların kullanılmasını gerektiren bir durumdur.
 
 ### Bir kodu kapama kullanarak yeniden düzenlemek
+Her `if` bloğu öncesinde `simulated_expensive_calculation` işlevini çağırmak yerine, örnek 13-5'te gösterildiği gibi bir kapama tanımlayabilir ve tanımlanan kapamayı işlev çağrısının sonucunu saklamak yerine bir değişkene depolayabiliriz. Aslında `simulated_expensive_calculation`' ın tüm gövdesini burada tanıtacağımız kapama içine de taşıyabiliriz.
+
+Dosya adı: src/main.rs
+```Rust
+    let expensive_closure = |num| { 
+        println!("calculating slowly..."); 
+        thread::sleep(Duration::from_secs(2)); 
+        num 
+    };
+````
+Örnek 13-5: Bir kapama tanımlayarak `expensive_closure` adlı değişkeninde saklamak
+
+Kapama tanımı `expensive_closure` değişkenine atanabilmesi için atama operatöründen sonra gerçekleştirilir. Bir kapamanın tanımlanmasına içinde kapama parametrelerinin yer alacağı bir çift dikey boru `(|)` ile başlanır. Bu sözdizimi, Smalltalk ve Ruby'deki kapama tanımlarına benzediğinden dolayı seçilmiştir. Örneğimizdeki kapama, `num` adında yalnızca bir parametreye sahip olduğundan `|num|` biçiminde ifade edilir: Eğer kullanmamız gereken çok sayıda parametremiz olsaydı, bu parametreleri yine çift boru içine `| param1, param2 |` şeklinde virgüllerle ayırırarak kullanmamız gerekecekti.
+
+Parametrelerin ardından, kapama gövdesini tutan kıvrımlı parantezleri yerleştiririz. Eğer kapama gövdesi tek bir ifadeden oluşuyorsa bu parantezleri kullanmak tercihinize bırakılır. `let` ifadesinin tamamlanabilmesi için kapamanın sonunda, yani kıvrımlı parantezin bitiminde, **`;`** noktalı virgülün kullanılması şarttır. İşlev gövdelerinde olduğu gibi kapama gövdelerindeki son değerler de döndürülen değer statüsünde olduklarından *(örneğimizde num)* noktalı virgül ile sonlandırılmazlar. 
+
+`expensive_closure` adındaki bu `let` ifadesinin; isimsiz işlevin çağrılmasıyla oluşan sonuç değerini değil, **isimsiz işlev tanımını** içerdiğine dikkat edin. Kapatmaları: Bir noktada çağrılacak kodu tanımlamak, bu kodu saklamak ve programın ilerleyen safhalarında kendisine başvurabilmek için kullandığımızı unutmayın. Bu aşamada çağırmak istediğimiz kod artık `expensive_closure` içinde saklanmaya başlamıştır. 
+
+Bu aşamada, tanımladığımız kapama programı çalıştırıldığında üretilen değeri kullanacak `if` bloğunun kodunu da değiştirebiliriz. Kapamaları, örnek 13-6’ da gösterilene benzer şekilde, tıpkı bir işlev çağırıyormuş gibi, kapatma tanımını tutan değişken adını verip, parantez içindede alacağı bağımsız değişkenleri belirtirek çağırabiliyoruz.
+
+Dosya adı: src/main.rs
+```Rust
+fn generate_workout(intensity: u32, random_number: u32) { 
+    let expensive_closure = |num| { 
+        println!("calculating slowly..."); 
+        thread::sleep(Duration::from_secs(2)); 
+        num 
+    };
+
+
+    if intensity < 25 { 
+        println!( 
+            "Bugün, {} şınav çek!", 
+            expensive_closure(intensity) 
+        ); 
+        println!( 
+            "Sonrasında {} mekik çek!", 
+            expensive_closure(intensity)
+        ); 
+    } else { 
+        if random_number == 3 { 
+            println!(
+                "Bugün bir mola ver! Sıvı tüketmeyi de ihmal etme!"); 
+        } else { 
+            println!(
+                "Bugün, {} dakika koş!", 
+                expensive_closure(intensity)
+            ); 
+        } 
+    } 
+}
+````
+Örnek 13-6: Tanımladığımız `expensive_closure` kapamasını çağırmak.
+
+Şimdi, pahalı hesaplama işlevi sadece tek bir yerde çağrılıyor ve bu kodu, sadece gerçekten sonuçlara ihtiyacımız olan yerde işletmiş oluyoruz. 
+
+Bununla birlikte bu defa da, ilk `if` bloğunda kapamayı iki kez çağırarak örnek 13-3'teki sorunlardan biriyle yeniden karşılaşıyor ve bu pahalı kodu iki kez çağırmakla, kullanıcının uzun zaman alan iki işlem boyunca beklemesine neden oluyoruz. Bu sorunu ilk `if` bloğu kapsamında, kapamayı çağıran ve elde ettiği sonucu tutan yerel bir değişken tanımlayarak çözümleyebiliriz. Ancak kapamalar bize başka bir çözüm sağlar. Bu çözüm hakkında konuşmaya başlamadan önce, neden kapama tanımında ek açıklamalar bulunmadığından ve kapalarla ilgili bazı özelliklerden bahsedelim.
+
+### Kapamalarda tür çıkarımı ve ek açıklamalar
