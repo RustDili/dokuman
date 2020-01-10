@@ -84,3 +84,40 @@ Kullanıcının yüksek yoğunluklu bir egzersiz planı istemesi halinde; işin 
 Bu kod, şimdilik işverenimizin istediği şekilde çalışmaktadır. Ancak bir süre sonra, şirketimizin veri bilimi ekibinin, `simulated_expensive_calculation` işlevini çağırma yönteminde bir takım değişiklikler yapılması gerektiğine karar verdiğini varsayalım. Bu güncelleme senaryosunda değişikliklerin basit tutulabilmesi için `simulated_expensive_calculation` işlevini kendisine başka bir çağrı eklemeden, sadece bir kez çağırmak ve halihazırda kendisine yapılmakta olan gereksiz çağrıları da kesip atmak istiyoruz. Nihayetinde bu işlev maliyetli bir işlev olduğundan, gerekmedikçe çağrıda bulunmamak, gerekiyorsa da sadece bir kez çağrıda bulunmak istiyoruz. 
 
 ### İşlevleri kullanarak yeniden düzenlemek
+Egzersiz programını birçok şekilde yeniden yapılandırabiliriz. Öncelikle, örnek 13-4' te gösterildiği gibi, `simulated_expensive_calculation` işlevi için tekrarlanan çağrıyı bir değişkene çıkarmayı deneyeceğiz.
+
+Dosya adı: src/main.rs
+```Rust
+fn generate_workout(intensity: u32, random_number: u32) { 
+    let expensive_result = 
+        simulated_expensive_calculation(intensity); 
+
+    if intensity < 25 { 
+        println!( 
+            "Bugün, {} şınav çek!", 
+            expensive_result 
+        ); 
+        println!( 
+            "Sonrasında {} mekik çek!", 
+            expensive_result 
+        ); 
+    } else { 
+        if random_number == 3 { 
+            println!(
+                "Bugün bir mola ver! Sıvı tüketmeyi de ihmal etme!"); 
+        } else { 
+            println!(
+                "Bugün, {} dakika koş!", 
+                expensive_result 
+            ); 
+        } 
+    } 
+}
+````
+Örnek 13-4: `simulated_expensive_calculation` çağrılarını tek bir yere çıkarma ve sonucunu `expensive_result` değişkenine kaydetmek
+
+Bu değişiklik, `simulated_expensive_calculation` çağrılarını birleştirerek işlevi gereksiz yere iki kez çağıran ilk `if` bloğunun sorununu çözecektir. Fakat ne yazık ki, bu defa da sonuç değerini hiç kullanmayan iç `if` bloğu da dahil, her durumda sonucu beklemek zorunda kalıyoruz. 
+
+Oysa biz bu kodu, programımızın tek bir yerinde tanımlamak ve sadece sonuca gerçekten ihtiyaç duyduğumuz yerde işletmek istiyorduk. İşte bu durum tam da kapamaların kullanılmasını gerektiren bir durumdur.
+
+### Bir kodu kapama kullanarak yeniden düzenlemek
