@@ -1,5 +1,5 @@
-uygulanmasını içerir## `Sync` ve `Send` özellikleri ile genişletilebilir eş zamanlılık
-İlginçtir ki, Rust dili çok az eş zamanlılık özelliğine sahiptir. Bu bölümde şimdiye kadar bahsettiğimiz hemen hemen her eş zamanlılık özelliği, dil değil, standart kütüphanenin bir parçasıydı. Rust’ta eş zamanlılığı yönetme seçenekleri dil veya standart kitaplıkla sınırlanmadığından, kendi eş zamanlılık özelliklerinizi yazabilir veya başkaları tarafından yazılanları kullanabilirsiniz.
+## `Sync` ve `Send` özellikleri ile genişletilebilir eş zamanlılık
+İlginçtir ki, Rust dili çok az eş zamanlılık özelliğine sahiptir. Bu bölümde şimdiye kadar bahsettiğimiz hemen hemen her eş zamanlılık özelliği, dilin değil, standart kütüphanenin bir parçasıydı. Rust’ta eş zamanlılığı yönetme seçenekleri, dil veya standart kitaplıkla sınırlanmadığından, kendi eş zamanlılık özelliklerinizi yazabilir veya başkaları tarafından yazılanları kullanabilirsiniz.
 
 Bununla birlikte, `std::marker` kütüphanesi içinde gömülü olan iki eş zamanlılık kavramı: `Sync` ve `Send` özelliklerinden bahsetmek gerek.
 
