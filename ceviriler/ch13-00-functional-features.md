@@ -1,1 +1,1 @@
-## Başlık
+## İşlevsel dil özellikleri: Yineleyiciler ve kapamalar
