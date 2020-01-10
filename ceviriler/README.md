@@ -5,7 +5,7 @@
 
 * [İşlevsel dil özellikleri: Yineleyiciler ve kapamalar](ch13-00-functional-features.md)
   * [Kapamalar: Ortam değişkenlerini yakalayabilen anonim işlevler](ch13-01-closures.md)
-  * [Yineleyicilerle Bir Dizi Öğeyi İşlemek](ch13-02-iterators.md)
+  * [Yineleyiciler ile bir dizi öğeyi işlemek](ch13-02-iterators.md)
 
 * [Korkusuz eş zamanlılık](ch16-00-concurrency.md)
   * [Eş zamanlı kod çalıştırmak için iş parçalarını kullanmak](ch16-01-threads.md)
