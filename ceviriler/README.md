@@ -1,7 +1,7 @@
 
 # Çevrilen Bölümler
 
-# Thinking in Rust
+# Rust' a Göre Düşünmek 
 
 * [İşlevsel dil özellikleri: Yineleyiciler ve kapamalar](ch13-00-functional-features.md)
   * [Kapamalar: Ortam değişkenlerini yakalayabilen anonim işlevler](ch13-01-closures.md)
@@ -14,6 +14,6 @@
   * [Sync ve Send özellikleri ile genişletilebilir eş zamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
   
   
-# Advanced Topics  
+# İleri Seviye Konular  
 * Ekler
   * [A - Anahtar Kelimeler](appendix-01-keywords.md)
