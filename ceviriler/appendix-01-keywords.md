@@ -7,7 +7,7 @@ Aşağıdaki listede, Rust dili tarafından geçerli veya gelecekteki kullanım 
   * `async` - eş zamansız işlemlerde geçerli iş parçasını engellemeden çalışmak gerektiğinde
   * `await` - bir `Future`' ın sonucu hazır olana kadar yürütmeyi askıya almak gerektiğinde
   * `break` - bir döngüden hemen çıkmak gerektiğinde
-  * `const` - sabit öğeleri veya sabit ham tanımlayıcıları bildirirken
+  * `const` - sabit öğeleri veya sabit ham işaretçileri bildirirken
   * `continue`- bir sonraki döngü yinelemesine geçilmek istenirken
   * `crate` - harici bir sandığı veya bir makro içinde sandık temsil ederken
   * `dyn` - bir özellik nesnesine dinamik başvuru yaparken
@@ -25,7 +25,7 @@ Aşağıdaki listede, Rust dili tarafından geçerli veya gelecekteki kullanım 
   * `match` - herhangi bir değeri en uygun kalıpla eşleştirirken
   * `mod` - bir modül tanımlarken ya da bildirirken
   * `move` - yakalanan her şeyin mülkiyetini devralabilmek için oluşturulan kapama işlevlerinde
-  * `mut` - referans, ham tanımlayıcılar veya örüntü bağlamında değişirlik istendiğinde 
+  * `mut` - referans, ham işaretçiler veya örüntü bağlamında değişirlik istendiğinde 
   * `pub` - yapı alanları, impl blokları veya modüllerde genel görünürlük gerektiğinde
   * `ref` - referans ile bağlamak gerektiğinde
   * `return` - bir işlevden dönülmesi gerektiğinde
