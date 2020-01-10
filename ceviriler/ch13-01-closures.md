@@ -126,7 +126,7 @@ Her `if` bloğu öncesinde `simulated_expensive_calculation` işlevini çağırm
 Dosya adı: src/main.rs
 ```Rust
     let expensive_closure = |num| { 
-        println!("calculating slowly..."); 
+        println!("yavaşça hesaplanıyor..."); 
         thread::sleep(Duration::from_secs(2)); 
         num 
     };
@@ -145,7 +145,7 @@ Dosya adı: src/main.rs
 ```Rust
 fn generate_workout(intensity: u32, random_number: u32) { 
     let expensive_closure = |num| { 
-        println!("calculating slowly..."); 
+        println!("yavaşça hesaplanıyor..."); 
         thread::sleep(Duration::from_secs(2)); 
         num 
     };
@@ -180,3 +180,57 @@ fn generate_workout(intensity: u32, random_number: u32) {
 Bununla birlikte bu defa da, ilk `if` bloğunda kapamayı iki kez çağırarak örnek 13-3'teki sorunlardan biriyle yeniden karşılaşıyor ve bu pahalı kodu iki kez çağırmakla, kullanıcının uzun zaman alan iki işlem boyunca beklemesine neden oluyoruz. Bu sorunu ilk `if` bloğu kapsamında, kapamayı çağıran ve elde ettiği sonucu tutan yerel bir değişken tanımlayarak çözümleyebiliriz. Ancak kapamalar bize başka bir çözüm sağlar. Bu çözüm hakkında konuşmaya başlamadan önce, neden kapama tanımında ek açıklamalar bulunmadığından ve kapalarla ilgili bazı özelliklerden bahsedelim.
 
 ### Kapamalarda tür çıkarımı ve ek açıklamalar
+Kapamalar, `fn` işlevlerinin gerektirdiği gibi parametre türlerinde veya dönüş değerlerinde açıklama eklenmesini gerektirmez. İşlevler kullanıcılara açık bir arayüzün parçaları olduklarından tür ek açıklamaları gereklidir. İşlevin ne tür değerler kullandığı veya hangi türden değerler döndürdüğünün, tüm kullanıcılar tarafından açıkça anlaşılabilmesi için, bu arayüzü katı bir şekilde tanımlamak önemlidir. Ancak kapamalar böyle açık bir arayüzde kullanılmak yerine; değişkenlerde depolanmakta, isimsiz olarak kullanılmakta ve kütüphanemizin diğer kullanıcılarına gösterilmeden değerlendirilebilmektedir.
+
+Kapamalar genellikle kısa ve herhangi bir keyfi senaryodan ziyade, sadece dar bir bağlamda geçerlidir. Bu sınırlı bağlamda derleyici, değişken türlerinin çıkarsanmasına benzer şekilde, kapama parametre ve dönüş türlerini güvenli bir şekilde çıkarsayabilmektedir.
+
+Programcıların bu isimsiz ve küçük işlevlerdeki türlere açıklama eklemesi, derleyicinin zaten sahip olduğu bilgilerle oldukça can sıkıcı ve büyük ölçüde gereksiz olacaktır.
+
+Değişkenlerde olduğu gibi, açıklığı ve netliği gerekli olandan daha ayrıntılı olma pahasına artırmak istiyorsak, kapamalara da tür ek açıklamaları ekleyebiliriz. Örnek 13-5'te tanımladığımız kapamanın, kullanacağı türler için ekleyeceğimiz açıklamaları örnek 13-7' deki kodda gösterilmektedir.
+
+Dosya adı: src/main.rs
+```Rust
+    let expensive_closure = |num: u32| -> u32 { 
+        println!("yavaşça hesaplanıyor..."); 
+        thread::sleep(Duration::from_secs(2)); 
+        num 
+    };
+````
+Örnek 13-7: Kapama parametre ve dönüş değerlerine isteğe bağlı tür ek açıklamalarını eklemek.
+
+Tür ek açıklamaları eklenildiğinde, kapama sözdizimi işlev sözdizimine benzemeye başlıyor. Aşağıda, parametresine 1 ekleyen bir işlev tanımı ile aynı davranışa sahip bir kapama sözdiziminin dikey karşılaştırması yer almaktadır. İlgili parçaları hizalamak için bazı alanlar ekledik. Bu örnekleme; boru kullanımı ve isteğe bağlı sözdizimi haricinde, kapama sözdizimi ile işlev söz diziminin birbirlerine nasıl benzediğini göstermektedir:
+
+```Rust
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }
+let add_one_v2 = |x: u32| -> u32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
+````
+
+Örneğin ilk satırında bir işlev tanımı, ikinci satırında giriş ve dönüş türleri açıklanan bir kapama tanımı yer almaktadır. Üçüncü satırda, tür açıklamaları kapama tanımından kaldırılırken, dördüncü satırda  isteğe bağlı olan parantezleri kaldırılmıştır. Hatırlayacağınız gibi bir kapama tanımlanırken, kapatma gövdesi yalnızca bir ifadeden oluştuğunda süslü parantezler kullanılmamaktaydı. Yukarıda sunduğumuz kapama ifadelerinin her biri, çağrıldığında aynı davranışı üretecek geçerli tanımlamalardır.
+
+Kapama tanımlarında, her bir parametre ve dönüş değeri için somut bir tür hesaplanır. Örnek 13-8, yalnızca parametre olarak aldığı değeri döndüren kısa bir kapama tanımını göstermektedir. Bu kapama, sadece bu örneği sunabilmek için tasarlandığında gerçek kullanımda pek yararlı değildir. Kapamayı ik kez çağırdığımızda, dizgiyi bir argüman olarak geçirmeyi başarırız, ancak u32 türü kullanan ikinci denememiz bir hata ile sonuçlanacaktır. Tanıma herhangi bir tür ek açıklaması eklenmediğine dikkat ediniz.
+
+Dosya adı: src/main.rs
+```Rust
+let example_closure = |x| x; 
+let s = example_closure(String::from("hello")); 
+let n = example_closure(5);
+````
+Örnek 13-8: Girdi ve çıktı değerlerinin, iki farklı tür üzerinden çıkarsanması beklenen bir kapama örneği
+
+Derleyici bize şu hatayı verir:
+```Binary
+error[E0308]: mismatched types
+ --> src/main.rs
+  |
+  | let n = example_closure(5);
+  |                         ^ expected struct `std::string::String`, found
+  integer
+  |
+  = note: expected type `std::string::String`
+             found type `{integer}`
+````
+İlk seferinde, yani `example_closure` kapaması dizgi değeri ile çağrıldığında, derleyici `x` parametresi ve dönüş türünü dizgi olarak algılar. Algılanan bu türler daha sonra `example_closure` içindeki kapamaya kilitlenir ve aynı kapama ile farklı bir tür kullanmaya çalışıldığında bir tür hatası ile karşılaşılır.
+
+### Jenerik parametreler ve `Fn` özelliklerini kullanarak kapamaları hafızaya almak
