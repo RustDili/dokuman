@@ -41,7 +41,7 @@ fn main() {
     ); 
 }
 ````
-Örnek 13-2: Kullanıcı girişi ve rastgele sayı oluşturmayı simüle etmek için kodlanmış değerlerden oluşan `main` işlevi
+[Örnek 13-2:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5518c05b80586b24998afa51ea34e405) Kullanıcı girişi ve rastgele sayı oluşturmayı simüle etmek için kodlanmış değerlerden oluşan `main` işlevi
 
 Sadeliği koruyabilmek amacıyla `simulated_user_specified_value` değişkenini 10, `simulated_random_number` değişkenini 7 değerleriyle sabit biçimde kodladık. Oysa gerçek bir programda, yoğunluk numarasını uygulamanın ön ucundan alır ve 2. Bölüm' deki tahmin oyunu örneğinde yaptığımız gibi `rand` sandığını rastgele bir sayı üretmek için kullanmaya çalışırdık. Örneğimizdeki `main` işlevi simüle giriş değerlerini kullanarak `create_workout` işlevini çağırmaktadır.
 
@@ -71,7 +71,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
     }
 }
 ````
-Örnek 13-3: Girdi ve çağrılarına göre egzersiz planları yazdıran `simulated_expensive_calculation` işlevi
+[Örnek 13-3:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5518c05b80586b24998afa51ea34e405) Girdi ve çağrılarına göre egzersiz planları yazdıran `simulated_expensive_calculation` işlevi
 
 Örnek13-3'teki kod, yavaş hesaplama yapan işleve çok sayıda başvuruda bulunur. İlk `if` bloğu `simulated_expensive_calculation` işlevini iki defa çağırırken, `else` bloğunun içindeki birinci `if` bloğu ise başvuruda bulunmaz. Oysa bir sonraki `else` bloğunda `simulated_expensive_calculation` işlevine yeniden çağrıda bulunulur.  
 
@@ -114,7 +114,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
     } 
 }
 ````
-Örnek 13-4: `simulated_expensive_calculation` çağrılarını tek bir yere çıkarma ve sonucunu `expensive_result` değişkenine kaydetmek
+[Örnek 13-4:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d80d33ae3726d2eb7328006f67523fc7) `simulated_expensive_calculation` çağrılarını tek bir yere çıkarma ve sonucunu `expensive_result` değişkenine kaydetmek
 
 Bu değişiklik, `simulated_expensive_calculation` çağrılarını birleştirerek işlevi gereksiz yere iki kez çağıran ilk `if` bloğunun sorununu çözecektir. Fakat ne yazık ki, bu defa da sonuç değerini hiç kullanmayan iç `if` bloğu da dahil, her durumda sonucu beklemek zorunda kalıyoruz. 
 
