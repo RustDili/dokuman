@@ -372,3 +372,98 @@ Buradaki sorun, başlangıçta `c.value`'yu 1 ile çağırdığımızda, Catcher
 Bu uygulamadaki ikinci sorun ise yalnızca `u32` türünde parametre alması ve `u32` türünde değer döndüren kapamaları kabul etmesidir. Örneğin, bir dizgi dilimi alan ve `usize` değerleri döndürem kapama sonuçlarını önbelleğe almak isteyebiliriz. Bu sorunu gidermek ve `Cacher` işlevinin esnekliğini artırmak için jenerik parametreler eklemeyi deneyin.
 
 ### Kapamalar ile ortam bilgilerini elde etmek
+Egzersiz planı oluşturan örneğimizde, kapamaları sadece satır içi isimsiz işlevler olarak kullandık. Bununla birlikte kapamalar, işlevlerin sahip olmadığı ek bir yeteneğe sahiplerdir: ortam bilgilerini yakalayabilir ve tanımlandıkları kapsamdan değişkenlere erişebilirler.
+
+Örnek 13-12'de, tanımlandığı kapsamda bulunan `x` değişkenini `equal_to_x` adlı değişkene depolayarak kullanan bir kapama örneği sunulmaktadır.
+
+Dosya adı: src/main.rs
+```Rust
+fn main() {
+    let x = 4;
+
+    let equal_to_x = |z| z == x;
+
+    let y = 4;
+
+    assert!(equal_to_x(y));
+}
+````
+Örnek 13-12: Tanımlandığı kapsam içindeki bir değişkene başvuran kapama örneği
+
+Burada `x` değişkeni, `equal_to_x` kapamasının parametrelerinden biri olmamasına rağmen, `equal_to_x` kapamasının, kendisiyle aynı kapsamda tanımlanan `x` değişkenini kullanmasına izin verilmektedir.
+
+Oysa aynı şeyi işlevlerle yapamayız; aşağıdaki örnek kod denenmek istendiğinde derlenmeyecektir:
+
+Dosya adı: src/main.rs
+```Rust
+fn main() {
+    let x = 4;
+
+    fn equal_to_x(z: i32) -> bool { z == x }
+
+    let y = 4;
+
+    assert!(equal_to_x(y));
+}
+````
+Alacağımız hata aşağıdaki gibidir:
+```Binary
+error[E0434]: can't capture dynamic environment in a fn item; use the || { ...
+} closure form instead
+ --> src/main.rs
+  |
+4 |     fn equal_to_x(z: i32) -> bool { z == x }
+  | 
+````
+Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
+
+Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklayabilmek için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
+
+Kapamalar, işlevlerin bir parametreyi alabileceği üç yolla doğrudan eşleştiği hallerde ortamlarını yakalayabilirler: **Mülkiyeti almak**, **değişirlik borçlanması** ve **değişmezklik borçlanması**. 
+* Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
+    * `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
+    * `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
+    * `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
+
+Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
+Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
+
+Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
+
+Bölüm 16’da eş zamanlılık hakkında konuşurken kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
+
+Dosya adı: src/main.rs
+```Rust
+fn main() {
+    let x = vec![1, 2, 3];
+
+    let equal_to_x = move |z| z == x;
+
+    println!("can't use x here: {:?}", x);
+
+    let y = vec![1, 2, 3];
+
+    assert!(equal_to_x(y));
+}
+````
+Aldığımız hata aşağıdaki gibidir:
+
+```Binary
+error[E0382]: use of moved value: `x`
+ --> src/main.rs:6:40
+  |
+4 |     let equal_to_x = move |z| z == x;
+  |                      -------- value moved (into closure) here
+5 |
+6 |     println!("can't use x here: {:?}", x);
+  |                                        ^ value used here after move
+  |
+  = note: move occurs because `x` has type `std::vec::Vec<i32>`, which does not
+  implement the `Copy` trait
+````
+
+Kapama tanımlanırken `move` anahtar sözcüğü eklediğimizden `x` değeri kapamaya taşınır. Artık `x`'in mülkiyeti kapamaya ait olduğundan `main` işlevindeki `println!` ifadesinde `x`'i kullanılmasına izin verilmez. Sorunun giderilmesi için `println!` ifadesinin kaldırılması yeterli olacaktır.
+
+Nihayetinde derleyici, kapama gövdesini analiz ederek `FnMut` veya `FnOnce` özelliklerinden hangisine ihtiyacınız olup olmadığını söyleyeceğinden, özellik sınırlarından birini belirlerken, `Fn` ile başlamak çoğu zaman iyi fikirdir
+
+Ortamlarını yakalayabilen kapamaların işlev parametreleri olarak kullanılmasının yararlı olduğu durumları daha iyi gösterebilmek için bir sonraki Yineleyiciler başlığımıza geçelim.
