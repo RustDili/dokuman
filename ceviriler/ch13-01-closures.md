@@ -19,7 +19,7 @@ fn simulated_expensive_calculation(intensity: u32) -> u32 {
     intensity
 }
 ````
-Örnek 13-1: İki saniyelik ayakta durma egzersizinde kullanılan ve çalışması iki saniye süren kurgusal hesaplama işlevi
+[Örnek 13-1:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5bb573085bf90614924400ec1f19d4a7) İki saniyelik ayakta durma egzersizinde kullanılan ve çalışması iki saniye süren kurgusal hesaplama işlevi
 
 Bu programın bir sonraki önemli adımı ise, egzersiz uygulamasının bölümlerini içeren `main` işlevidir. Bu işlevdeyse kullanıcı bir egzersiz planı istediğinde uygulamanın çağıracağı kod yer alır. Çünkü uygulamanın ön ucuyla etkileşim, kapamaların kullanımıyla ilgili olmadığından, programımıza girdileri temsil eden değerleri kodlayacak ve ardından çıktıları yazdıracağız.
 
