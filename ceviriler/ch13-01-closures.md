@@ -234,3 +234,109 @@ error[E0308]: mismatched types
 İlk seferinde, yani `example_closure` kapaması dizgi değeri ile çağrıldığında, derleyici `x` parametresi ve dönüş türünü dizgi olarak algılar. Algılanan bu türler daha sonra `example_closure` içindeki kapamaya kilitlenir ve aynı kapama ile farklı bir tür kullanmaya çalışıldığında bir tür hatası ile karşılaşılır.
 
 ### Jenerik parametreler ve `Fn` özelliklerini kullanarak kapamaları hafızaya almak
+Egzersiz planı üreten uygulamamıza geri dönecek olursak; örnek 13-6' daki kodumuz, halen pahalı hesaplama yapan kapama işlevimizi gerekenden daha çok çağırmaktaydı. Bu sorunu çözmenin bir yolu; maliyetli kapama sonucunu daha sonra yeniden kullanabilmek için  bir değişkene kaydetmek ve bu değişkeni, kapamayı tekrar çağırmak yerine, bu sonuca ihtiyacımız olan yerlerde kullanmaktır. Ancak, bu yöntem de çok sayıda kod tekrarı yapılmasını gerektirir. 
+
+Neyse ki bizim için başka bir çözüm yolu mevcut. Kapamayı tutacak bir yapı tanımlayıp, kapama çağrıldığında sonuç değerini o yapı üzerinden oluşturabiliriz. Tanımlayacağımız bu yapı kapamayı yalnızca sonuç değerine ihtiyaç duyduğumuzda işleterek sonucunu önbelleğe alacak, böylelikle kodun geri kalanı sonucu kaydetmek ve yeniden kullanmak zorunda kalmamış olacaktır. Bu kalıbı daha önceki tecrübelerinizden, **tembel değerlendirmeler** veya **ezberleme** olarak biliyor olabilirsiniz.
+
+Kapama tutabilen yapıların tanımlanabilmesi için, kapama işlevinin giririş ve dönüş türlerinin bildirilmesi gereklidir. Çünkü yapılar oluşturulurken sahip oldukları alanlar isimlendirildiklerinde türlerinin de bildirilmesi bir zorunluluktur. Her kapama örneğinin kendine özgü isimsiz türü olacağından, iki kapama aynı imzaya sahip olsalar bile, farklı türlerde oldukları kabul edilmektedir. Kapamaları kullanan **yapı**, **enum** veya **işlev parametreleri**ni tanımlarken Bölüm 10'da tartıştığımız **jenerikler ve özellik sınırlarını** da kullanabiliyoruz.
+
+`Fn` özellikleriyse standart kütüphane tarafından sağlanmaktadır ve tüm kapama işlevleri; `Fn`, `FnMut` veya `FnOnce` özelliklerinden en az birini uygular. Bu özelliklerin arasındaki farkları [Kapanışlar ile Ortamı Yakalamak](https://github.com/rust-lang/book/blob/master/src/ch13-01-closures.md#capturing-the-environment-with-closures) bölümünde tartışacağız; bu örnek için, `Fn` özelliğini kullanmamızda sakınca yok.
+
+Parametrelerin türlerini temsil etmek ve kapamaların bu özellik sınırıyla eşleşmesi gereken değerleri döndürmek için `Fn` özelliğine bağlı türler ekliyoruz. Bu durumda, kapamamızın `u32` türünde bir parametresi olduğundan ve bir `u32` türü döndüreceğinden belirttiğimiz özellik sınırı `Fn (u32) -> u32` olacaktır.
+
+Örnek 13-9, bir kapama ve opsiyonel sonuç değeri tutan `Cacher` yapısının tanımını gösterir.
+
+Dosya adı: src/main.rs
+```Rust
+struct Cacher<T>
+    where T: Fn(u32) -> u32
+{
+    calculation: T,
+    value: Option<u32>,
+}
+````
+Örnek 13-9: Bir `calculation` ve opsiyonel sonuç değerinden oluşan kapamayı tutan `Cacher` adlı yapının tanımlanması
+
+`Cacher` yapısı, `T` türünde jenerik bir hesaplama alanına sahiptir. `T` üzerindeki özellik sınırları, bunun `Fn` özelliğini kullanmakta olan bir kapatma olduğunu belirtir. Yapının `calculation` adlı hesaplama alanında saklamak istediğimiz tüm kapamaların `u32` türünden bir parametresi *(Fn'den sonra parantez içinde belirtilir)* bulunmalı ve bu kapamadan bir `u32` türünde *(-> işaretinden sonra belirtilir)* değer döndürülmelidir.
+
+```Binary
+Not: İşlevler Fn özelliklerinin üçünü de uygulayabilir. Yapmak istediğimiz şey, ortamdan bir değer yakalamayı gerektirmiyorsa ve Fn özelliğini uygulayan bir şeye ihtiyacımız varsa kapatma yerine işlev kullanmayı tercih edebiliriz.
+````
+
+Yapının `value` adındaki alanı `Option<u32>` türündedir. Kapama işletilmeden önce bu alan `None` varyantını göstermektedir. Eğer `Cacher` yapısını kullanan bir program kapamanın sonucunu isterse, yapı içerisindeki kapamam işletilecek, bu defa da oluşan sonuç değeri `value` alanının `Some` varyantı içinde saklanacaktır. Eğer kapatmanın sonucu bu program tarafından yeniden talep edilirse, sonuç zaten depolanmış olduğundan kapama tekrar işletilmeyecek, bu yapının `Some` varyantında tutulan değer döndürülecektir.
+
+Az önce tanımladığımız `value` alanının mantığı örnek 13-10' da gösterilmektedir.
+
+Dosya adı: src/main.rs
+```Rust
+impl<T> Cacher<T>
+    where T: Fn(u32) -> u32
+{
+    fn new(calculation: T) -> Cacher<T> {
+        Cacher {
+            calculation,
+            value: None,
+        }
+    }
+
+    fn value(&mut self, arg: u32) -> u32 {
+        match self.value {
+            Some(v) => v,
+            None => {
+                let v = (self.calculation)(arg);
+                self.value = Some(v);
+                v
+            },
+        }
+    }
+}
+````
+Örnek 13-10: `Cacher` yapısının önbellek mantığı
+
+Bu yapıyı çağıracak olan kodun alanlardaki değerleri doğrudan değiştirmesini tercih etmek yerine, sadece yapı alanlarının değerleriyle ilgilenmesini istediğimizden alanlar dışarıdan erişime kapatarak özelleştiriyoruz. 
+
+`Cacher::new` işlevi, `Cacher` yapısıyla aynı özelliğe bağlı olarak tanımladığımız jenerik `T` parametresi alır. Daha sonra kapama işlevini henüz gerçekleştirmemiş olduğundan `calculation` alanında belirtilen kapama değerini ve `value` alanındaki `None` değerinden oluşan bir `Cacher` örneği döndürür.
+
+Böylelikle kodu çağıran taraf, kapama işleminden elde edilen sonuca ihtiyaç duyduğunda, kapamayı doğrudan çağırmak yerine `value` yöntemini çağırmış olacaktır. Bu yöntem, `Some` varyantında `self.value` cinsinden sonuç değerine sahip olup olmadığımızı kontrol eder. Bu değere sahipsek kapama bir daha işletilmez ve `Some` içinde depolanmakta olan değer döndürülür.
+
+Ancak `self.value` değeri `None` olarak görünüyorsa, kod `self.calculation`'da depolanan kapamayı çağıracak, sonucu ileride kullanılmak üzere `self.value`'ye kaydedecek ve oluşan değeri çağıran tarafa döndürecektir.
+
+Aşağıdaki örnek, `Cacher` yapısını örnek 13-6'da bulunan `create_workout` işlevinde nasıl kullanabileceğimizi göstermektedir.
+
+Dosya adı: src/main.rs
+```Rust
+fn generate_workout(intensity: u32, random_number: u32) {
+    let mut expensive_result = Cacher::new(|num| {
+        println!("yavaşça hesaplanıyor...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    });
+
+    if intensity < 25 {
+        println!(
+            "Bugün, {} şınav çek!",
+            expensive_result.value(intensity)
+        );
+        println!(
+            "Sonrasında {} mekik çek!",
+            expensive_result.value(intensity)
+        );
+    } else {
+        if random_number == 3 {
+            println!("Bugün bir mola ver! Sıvı tüketmeyi de ihmal etme!");
+        } else {
+            println!(
+                "Bugün, {} dakika koş!",
+                expensive_result.value(intensity)
+            );
+        }
+    }
+}
+````
+[Örnek 13-11:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b9feaef7d951bd0c68a15ba3368d3faf) Önbellek mantığını soyutlamak için generate_workout işlevinde Cacher yapısını kullanmak.
+
+Böylelikle kapamayı doğrudan bir değişkene kaydetmek yerine, bu kapamayı tutması için yeni bir `Cacher` örneğini kaydediyoruz. Bu noktadan itibaren sonuca ihtiyacımız olan her yerde, `Cacher` yapısının bir örneğini oluşturup, `value` metodunu çağırırarak tembelce hesaplanan sonuca ulaşırız. Ayrıca pahalı hesaplama sonucunu döndüren `expensive_result` işlevi en fazla bir kez çağırılacağından `value` yöntemini çağırmak tercihimize kalmıştır.
+
+Bu programı örnek 13-2' deki `main` işleviyle çalıştırmayı deneyin. Tüm `if` ve `else` bloklarında, `yavaşça hesaplanıyor...` çıktısının sadece bir kez ve gerektiğinde göründüğünü test edebilmeniz için `simulated_user_specified_value` ve `simulated_random_number` değişken değerlerini dilediğiniz kadar değiştirebilirsiniz. `Cacher` ön bellek yapısı, pahalı hesaplamayı ihtiyacımız kadar çağırarak `create_workout` iş mantığına rahatlıkla odaklanabilir.
+
+### Cacher Uygulamasının Kısıtlamaları
