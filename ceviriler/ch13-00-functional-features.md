@@ -1,5 +1,5 @@
 ## İşlevsel dil özellikleri: Yineleyiciler ve kapamalar
-Rust'un tasarımında mevcut birçok dil ve teknikten esinlenilmesinin dile en önemli katkısı işlevsel programlama olmuştur. İşlevsel programlamanın temelindeyse; işlevleri bağımsız değişkenlere geçirirerek değer olarak kullanmak, başka işlevlerden değer döndürmek, elde edilen değerleri daha sonra kullamak üzere değişkenlere atamak gibi işlemler bulunur.   
+Rust'un tasarımında mevcut birçok dil ve teknikten esinlenilmesinin dile en önemli katkısı işlevsel programlama olmuştur. İşlevsel programlamanın temelindeyse; işlevleri bağımsız değişkenlere geçirirerek değer olarak kullanmak, başka işlevlerden değer döndürmek, elde edilen değerleri daha sonra kullanmak üzere değişkenlere atamak gibi işlemler bulunur.   
 
 Bu bölümde, işlevsel programlamanın ne olup olmadığını tartışmak yerine Rust'ın, işlevsel olarak adlandırılan birçok dildeki özelliklere benzer bazı özelliklerini tartışacağız.
 
