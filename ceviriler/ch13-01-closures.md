@@ -114,7 +114,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
     } 
 }
 ````
-[Örnek 13-4:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d80d33ae3726d2eb7328006f67523fc7) `simulated_expensive_calculation` çağrılarını tek bir yere çıkarma ve sonucunu `expensive_result` değişkenine kaydetmek
+[Örnek 13-4:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d80d33ae3726d2eb7328006f67523fc7) `simulated_expensive_calculation` çağrılarını tek bir yere çıkarmak ve sonucunu `expensive_result` değişkenine kaydetmek
 
 Bu değişiklik, `simulated_expensive_calculation` çağrılarını birleştirerek işlevi gereksiz yere iki kez çağıran ilk `if` bloğunun sorununu çözecektir. Fakat ne yazık ki, bu defa da sonuç değerini hiç kullanmayan iç `if` bloğu da dahil, her durumda sonucu beklemek zorunda kalıyoruz. 
 
@@ -131,13 +131,13 @@ Dosya adı: src/main.rs
         num 
     };
 ````
-Örnek 13-5: Bir kapama tanımlayarak `expensive_closure` adlı değişkeninde saklamak
+[Örnek 13-5:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=941f75b48e57d6b8dc2ce16fecea9a19) Bir kapamanın tanımlanarak `expensive_closure` adlı değişkende saklanması
 
 Kapama tanımı `expensive_closure` değişkenine atanabilmesi için atama operatöründen sonra gerçekleştirilir. Bir kapamanın tanımlanmasına içinde kapama parametrelerinin yer alacağı bir çift dikey boru `(|)` ile başlanır. Bu sözdizimi, Smalltalk ve Ruby'deki kapama tanımlarına benzediğinden dolayı seçilmiştir. Örneğimizdeki kapama, `num` adında yalnızca bir parametreye sahip olduğundan `|num|` biçiminde ifade edilir: Eğer kullanmamız gereken çok sayıda parametremiz olsaydı, bu parametreleri yine çift boru içine `| param1, param2 |` şeklinde virgüllerle ayırırarak kullanmamız gerekecekti.
 
-Parametrelerin ardından, kapama gövdesini tutan kıvrımlı parantezleri yerleştiririz. Eğer kapama gövdesi tek bir ifadeden oluşuyorsa bu parantezleri kullanmak tercihinize bırakılır. `let` ifadesinin tamamlanabilmesi için kapamanın sonunda, yani kıvrımlı parantezin bitiminde, **`;`** noktalı virgülün kullanılması şarttır. İşlev gövdelerinde olduğu gibi kapama gövdelerindeki son değerler de döndürülen değer statüsünde olduklarından *(örneğimizde num)* noktalı virgül ile sonlandırılmazlar. 
+Parametrelerin ardından, kapama gövdesini tutan kıvrımlı parantezleri yerleştirilir. Eğer kapama gövdesi tek bir ifadeden oluşuyorsa bu parantezleri kullanmak tercihinize bırakılır. `let` ifadesinin tamamlanabilmesi için kapamanın sonunda, yani kıvrımlı parantezin bitiminde, **`;`** noktalı virgülün kullanılması şarttır. İşlev gövdelerinde olduğu gibi kapama gövdelerindeki son değerler de döndürülen değer statüsünde olduklarından *(örneğimizde num)* noktalı virgül ile sonlandırılmazlar. 
 
-`expensive_closure` adındaki bu `let` ifadesinin; isimsiz işlevin çağrılmasıyla oluşan sonuç değerini değil, **isimsiz işlev tanımını** içerdiğine dikkat edin. Kapatmaları: Bir noktada çağrılacak kodu tanımlamak, bu kodu saklamak ve programın ilerleyen safhalarında kendisine başvurabilmek için kullandığımızı unutmayın. Bu aşamada çağırmak istediğimiz kod artık `expensive_closure` içinde saklanmaya başlamıştır. 
+`expensive_closure` adındaki bu `let` ifadesinin; isimsiz işlevin çağrılmasıyla oluşan sonuç değerini değil, **isimsiz işlev tanımını** içerdiğine dikkat edin. Kapamaları: Bir noktada çağrılacak kodu tanımlamak, bu kodu saklamak ve programın ilerleyen safhalarında kendisine yeniden başvurabilmek için kullandığımızı unutmayın. Bu aşamada çağırmak istediğimiz kod artık `expensive_closure` içinde saklanmaya başlamıştır. 
 
 Bu aşamada, tanımladığımız kapama programı çalıştırıldığında üretilen değeri kullanacak `if` bloğunun kodunu da değiştirebiliriz. Kapamaları, örnek 13-6’ da gösterilene benzer şekilde, tıpkı bir işlev çağırıyormuş gibi, kapatma tanımını tutan değişken adını verip, parantez içindede alacağı bağımsız değişkenleri belirtirek çağırabiliyoruz.
 
@@ -173,11 +173,11 @@ fn generate_workout(intensity: u32, random_number: u32) {
     } 
 }
 ````
-Örnek 13-6: Tanımladığımız `expensive_closure` kapamasını çağırmak.
+[Örnek 13-6:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=941f75b48e57d6b8dc2ce16fecea9a19) Tanımladığımız `expensive_closure` kapamasını çağırmak.
 
 Şimdi, pahalı hesaplama işlevi sadece tek bir yerde çağrılıyor ve bu kodu, sadece gerçekten sonuçlara ihtiyacımız olan yerde işletmiş oluyoruz. 
 
-Bununla birlikte bu defa da, ilk `if` bloğunda kapamayı iki kez çağırarak örnek 13-3'teki sorunlardan biriyle yeniden karşılaşıyor ve bu pahalı kodu iki kez çağırmakla, kullanıcının uzun zaman alan iki işlem boyunca beklemesine neden oluyoruz. Bu sorunu ilk `if` bloğu kapsamında, kapamayı çağıran ve elde ettiği sonucu tutan yerel bir değişken tanımlayarak çözümleyebiliriz. Ancak kapamalar bize başka bir çözüm sağlar. Bu çözüm hakkında konuşmaya başlamadan önce, neden kapama tanımında ek açıklamalar bulunmadığından ve kapalarla ilgili bazı özelliklerden bahsedelim.
+Bununla birlikte bu defa da, ilk `if` bloğundaki kapamayı iki kez çağırarak örnek 13-3'teki sorunlardan biriyle yeniden karşılaşıyor ve bu pahalı kodu ikinci kez çağırmakla, kullanıcının uzun zaman alan iki işlem boyunca beklemesine neden oluyoruz. Bu sorunu ilk `if` bloğu kapsamında, kapamayı çağıran ve elde ettiği sonucu tutan yerel bir değişken tanımlayarak çözümleyebiliriz. Ancak kapamalar bize başka bir çözüm sağlar. Bu çözüm hakkında konuşmaya başlamadan önce, neden kapama tanımında ek açıklamalar bulunmadığından ve kapalarla ilgili bazı özelliklerden bahsedelim.
 
 ### Kapamalarda tür çıkarımı ve ek açıklamalar
 Kapamalar, `fn` işlevlerinin gerektirdiği gibi parametre türlerinde veya dönüş değerlerinde açıklama eklenmesini gerektirmez. İşlevler kullanıcılara açık bir arayüzün parçaları olduklarından tür ek açıklamaları gereklidir. İşlevin ne tür değerler kullandığı veya hangi türden değerler döndürdüğünün, tüm kullanıcılar tarafından açıkça anlaşılabilmesi için, bu arayüzü katı bir şekilde tanımlamak önemlidir. Ancak kapamalar böyle açık bir arayüzde kullanılmak yerine; değişkenlerde depolanmakta, isimsiz olarak kullanılmakta ve kütüphanemizin diğer kullanıcılarına gösterilmeden değerlendirilebilmektedir.
