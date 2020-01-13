@@ -1,4 +1,4 @@
-## Kapamalar: Ortam değişkenlerini yakalayabilen anonim işlevler
+## Kapamalar: Ortam değişkenlerini yakalayabilen isimsiz işlevler
 Rust'un kapamaları, bir değişkene kaydedebileceğiniz veya diğer işlevlere argüman olarak iletebileceğiniz isimsiz işlevlerdir. Kapamaları tek bir yerde oluşturabilir ve daha sonra farklı bir bağlamda değerlendirmek için yeniden çağırabilirsiniz. İşlevlerin aksine kapamalar, kullanacakları değerleri tanımlandıkları kapsamdan elde edebilirler. Kapamaların sahip olduğu bu özelliklerin, kodların yeniden kullanımına ve davranışlarının özelleştirilmesine nasıl izin verdiğini göstereceğiz.
 
 ### Kapamalar ile bir davranışı soyutlamak
