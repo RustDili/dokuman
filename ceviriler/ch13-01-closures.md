@@ -340,3 +340,35 @@ Böylelikle kapamayı doğrudan bir değişkene kaydetmek yerine, bu kapamayı t
 Bu programı örnek 13-2' deki `main` işleviyle çalıştırmayı deneyin. Tüm `if` ve `else` bloklarında, `yavaşça hesaplanıyor...` çıktısının sadece bir kez ve gerektiğinde göründüğünü test edebilmeniz için `simulated_user_specified_value` ve `simulated_random_number` değişken değerlerini dilediğiniz kadar değiştirebilirsiniz. `Cacher` ön bellek yapısı, pahalı hesaplamayı ihtiyacımız kadar çağırarak `create_workout` iş mantığına rahatlıkla odaklanabilir.
 
 ### Cacher Uygulamasının Kısıtlamaları
+Değerleri önbelleğe almak, kodumuzun diğer bölümlerinde genellikle farklı kapamalarda kullanmak isteyebileceğimiz yararlı bir davranıştır. Bununla birlikte, `Cacher`'in mevcut uygulamasında, farklı bağlamlarda yeniden kullanılmasını zorlaştıracak iki sorun bulunmaktadır. 
+
+İlk sorun, bir `Cacher` örneğinin `value` metodunda bulunan `arg` parametresinin her zaman aynı değeri alacağı varsalır. Yani, bu `Cacher` testi başarısız olacaktır:
+
+```Rust
+#[test]
+fn call_with_different_values() {
+    let mut c = Cacher::new(|a| a);
+
+    let v1 = c.value(1);
+    let v2 = c.value(2);
+
+    assert_eq!(v2, 2);
+}
+````
+
+Bu testte, kendisine iletilen değeri döndüren bir kapamayla yeni bir `Cacher` örneği oluşturulmaktadır. Örneğin `value` metodunu `arg` parametre değeri olarak önce 1, ardından 2 vererek çağırdığımızda; `arg` 2 değeriyle yaptığımız çağrının 2 değerini döndürmesini bekleriz.
+
+Oysa bu testi örnek 13-9 veya 13-10’daki `Cacher` uygulaması ile gerçekleştirdiğimizde program `assert_eq!`' de başarız olacak ve şu hata mesajını döndürecektir:
+
+```Binary
+thread 'call_with_different_values' panicked at 'assertion failed: `(left == right)`
+  left: `1`,
+ right: `2`', src/main.rs
+````
+Buradaki sorun, başlangıçta `c.value`'yu 1 ile çağırdığımızda, Catcher örneğinin `Some(1)` değerini `self.value` içine kaydetmesinden kaynaklanmaktadır. Bu noktadan sonra, value yöntemine hangi değeri iletirsek iletelim, her zaman başlangıçta verdiğimiz 1 değerini döndürecektir.
+
+`Cacher`'ı tek bir değer yerine bir eşleme tablosu tutacak şekilde değiştirmeyi deneyin. `value` metoduna geçirilecek `arg` değerleri eşleme tablosunun anahtarlarını oluşturacak şekilde verildiğinde, eşleme tablosunun değerlerinde de kapama çağrılarının sonuçları tutulmuş olacaktır. Böylece `self.value` öğesinin doğrudan `Some` veya `None` değeri olup olmadığını kontrol etmek yerine, `value` işlevi eşleme tablosunun anahtarlarında `arg` öğesini arayacak bulduğu anda değerini döndürecektir. Eğer `arg` öğesi tabloda yoksa, `Cacher` tarafından kapama çağırılacak ve oluşan değer, `arg` değeriyle ilişkili eşleme tablosuna kaydedecektir.
+
+Bu uygulamadaki ikinci sorun ise yalnızca `u32` türünde parametre alması ve `u32` türünde değer döndüren kapamaları kabul etmesidir. Örneğin, bir dizgi dilimi alan ve `usize` değerleri döndürem kapama sonuçlarını önbelleğe almak isteyebiliriz. Bu sorunu gidermek ve `Cacher` işlevinin esnekliğini artırmak için jenerik parametreler eklemeyi deneyin.
+
+### Kapamalar ile ortam bilgilerini elde etmek
