@@ -259,9 +259,8 @@ struct Cacher<T>
 
 `Cacher` yapısı, `T` türünde jenerik bir hesaplama alanına sahiptir. `T` üzerindeki özellik sınırları, bunun `Fn` özelliğini kullanmakta olan bir kapatma olduğunu belirtir. Yapının `calculation` adlı hesaplama alanında saklamak istediğimiz tüm kapamaların `u32` türünden bir parametresi *(Fn'den sonra parantez içinde belirtilir)* bulunmalı ve bu kapamadan bir `u32` türünde *(-> işaretinden sonra belirtilir)* değer döndürülmelidir.
 
-```Binary
-Not: İşlevler Fn özelliklerinin üçünü de uygulayabilir. Yapmak istediğimiz şey, ortamdan bir değer yakalamayı gerektirmiyorsa ve Fn özelliğini uygulayan bir şeye ihtiyacımız varsa kapatma yerine işlev kullanmayı tercih edebiliriz.
-````
+>Not: İşlevler Fn özelliklerinin üçünü de uygulayabilir. Yapmak istediğimiz şey, ortamdan bir değer yakalamayı
+> gerektirmiyorsa ve Fn özelliğini uygulayan bir şeye ihtiyacımız varsa kapatma yerine işlev kullanmayı tercih edebiliriz.
 
 Yapının `value` adındaki alanı `Option<u32>` türündedir. Kapama işletilmeden önce bu alan `None` varyantını göstermektedir. Eğer `Cacher` yapısını kullanan bir program kapamanın sonucunu isterse, yapı içerisindeki kapamam işletilecek, bu defa da oluşan sonuç değeri `value` alanının `Some` varyantı içinde saklanacaktır. Eğer kapatmanın sonucu bu program tarafından yeniden talep edilirse, sonuç zaten depolanmış olduğundan kapama tekrar işletilmeyecek, bu yapının `Some` varyantında tutulan değer döndürülecektir.
 
