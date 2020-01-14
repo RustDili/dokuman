@@ -32,3 +32,41 @@ Standart kitaplıklarında yineleyici bulunmayan dillerde bu tarz bir işlev, ol
 Oysa yineleyiciler bütün bu karmaşık sayım sürecindeki mantığı sizin için üstlenebilir, muhtemel kod tekrarlarını azaltarak potansiyel karışıklıkların üstesinden gelebilirler. Yineleyiciler sadece vektörler gibi indekslenebilir veri yapılarıyle değil, aynı mantığın uygulandığı pekçok farklı koleksiyon türüyle kullanılılırken de fazlasıyla esnektirler. Haydi yineleyicilerin bunu nasıl yaptığını birlikte inceleyelim.
 
 ### `Iterator` özelliği ve `next` Metodu
+Tüm yineleyiciler standart kitaplıkta tanımlanan `Iterator` adlı bir özelliği uygular. Özelliğin tanımı şuna benzer:
+
+```Rust
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // Şu an için varsayılan uygulamaları gösterilmeyen metodlar
+}
+````
+Bu tanımda `type Item` ve `Self::Item` gibi bu özelliklerle ilişkilendirilmiş türü bildiren yeni birer söz dizimi kullanıldığına dikkat edin. İlişkili türlerden bölüm 19’da ayrıntılı olarak bahsedeceğimizden şimdilik bilmeniz gereken tek şey; bu kodun yineleyici özelliğini *(`Itarator trait`)* uygulayabilmek için bir öğe türü *(`Item type`)* tanımlanması gerektiği ve bu öğe türünün `next` metodunun dönüş türünde kullanıldığını belirtmesidir. Başka bir deyişle öğe türü yineleyiciden döndürülen tür olacaktır.
+
+Yineleyici özelliği yalnızca bir metodu tanımlamak için uygulayıcılara gereksinim duyar. Tanımlanan `next` metodu yineleme devam ettiği sürece öğeleri `Some` ile sarmalayarak birer birer döndürürken, yineleme sona erdiğinde `None` döndürecektir.
+
+Yineleyicideki `next` metodunu doğrudan kendimiz de çağırabiliriz. Örnek 13-15, `v1` vektöründen oluşturulan yineleyici üzerinde tekrarlanan çağrılardan `next` metoduna hangi değerlerin döndürüldüğünü göstermektedir.
+
+Dosya adı: src/main.rs
+```Rust
+#[test] 
+fn iterator_demonstration() { 
+let v1 = vec![1, 2, 3]; 
+
+let mut v1_iter = v1.iter(); 
+
+assert_eq!(v1_iter.next(), Some(&1)); 
+assert_eq!(v1_iter.next(), Some(&2)); 
+assert_eq!(v1_iter.next(), Some(&3)); 
+assert_eq!(v1_iter.next(), None); 
+}
+````
+[Örnek 13-15:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=e482568e0feb193f65ef94da694624ee) Yineleyicideki `next` metodunu çağırmak
+
+Öncelikle `v1_iter` değişmezinin `mut` anahtar sözcüğüyle değişebilir olarak dönüştürülmesi gerektiğine dikkat edin. Bir yineleyicide `next` metodunun çağrılması, yineleyicinin dizide bulunduğu yeri izlemek için kullandığı iç konumu değiştirir. Başka bir deyişle, metodu çağıran kod yineleyiciyi tüketir veya kullanır. Her `next` metodu çağrısı yineleyicide bir öğenin tüketilmesine neden olur. Oysa `v1_iter` değişkeni `for` döngüsü ile kullanıldığında, değişkenin mülkiyeti döngüye aktarıldığından, durumu perde arkasında değişebilir olarak değiştirilir ve böylelikle `v1_iter` değişmezinin değişebilir olarak dönüştürülmesine gerek duyulmaz.
+
+Ayrıca `next` metodu çağrılarından aldığımız değerlerin vektördeki değerlerin değişmez referansları olduğunu ve `Iter` metodunun değişmez referanslar üzerinde bir yineleyici ürettiğini unutmayın. Eğer `v1` vektörünün mülkiyetini alarak, sahip olunan değerleri döndürecek bir yineleyici oluşturmak istiyorsanız, iter yerine `into_iter` metodunu çağırabilirsiniz. Benzer şekilde, değişebilir referanslar üzerinde yineleme yapmanız gerektiğinde, `iter` kullanmak yerine, `iter_mut` metodunu kullanabilirsiniz.
+
+### Yineleyici kullanan metodlar
