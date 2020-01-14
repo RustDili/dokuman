@@ -51,16 +51,16 @@ Yineleyicideki `next` metodunu doğrudan kendimiz de çağırabiliriz. Örnek 13
 
 Dosya adı: src/main.rs
 ```Rust
-#[test] 
-fn iterator_demonstration() { 
-let v1 = vec![1, 2, 3]; 
+#[test]
+fn iterator_demonstration() {
+    let v1 = vec![1, 2, 3];
 
-let mut v1_iter = v1.iter(); 
+    let mut v1_iter = v1.iter();
 
-assert_eq!(v1_iter.next(), Some(&1)); 
-assert_eq!(v1_iter.next(), Some(&2)); 
-assert_eq!(v1_iter.next(), Some(&3)); 
-assert_eq!(v1_iter.next(), None); 
+    assert_eq!(v1_iter.next(), Some(&1));
+    assert_eq!(v1_iter.next(), Some(&2));
+    assert_eq!(v1_iter.next(), Some(&3));
+    assert_eq!(v1_iter.next(), None);
 }
 ````
 [Örnek 13-15:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=e482568e0feb193f65ef94da694624ee) Yineleyicideki `next` metodunu çağırmak
