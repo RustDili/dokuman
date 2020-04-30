@@ -6,9 +6,13 @@ fn main() {
   println!("Merhaba Dünya!"); 
 }
 ````
-Örneğimizde `println!;` "Merhaba Dünya!" mesajını ekrana bastıran bir makrodur.
+Örneğimizdeki `fn`'in anlamı ingilizcedeki function kelimesinin kısaltması olan işlevi temsil eder. "Merhaba Dünya!" Mesajını ekrana yazdırmak için kullanılan `println!` ise bir makrodur. Makrolar *!* şeklinde gösterilerek işlevlerden ayrılır.
 
-Eğer bu kodu merhaba_dunya.rs olarak kaydettiyseniz terminalinizde `rustc merhaba_dunya.rs` komutu ile derleyebilir, `./merhaba_dunya` komutu ile de çalıştırabilirsiniz.
+💡 Rust dosyalarının uzantısı daima `.rs` olmalıdır ve eğer dosya adı için birden fazla kelime kullanıyorsanız **snake_case** yönelimini tercih edin.
+
+* Yukarıdaki kodu uzantısı `.rs` olacak şekilde dilediğiniz bir isimle kaydedebilirsiniz. Ancak şimdilik burada örnekleyebilmek amacıyla *merhaba.rs* olarak değerlendirilecektir. 
+* Dosyayı `rustc merhaba.rs` komutuyla derleyin.
+* Programınızı Linux veya Mac kullanıyırsanız `./merhaba` Windows kullanıyorsanız `merhaba.exe` komutuyla çalıştırın.
 
 ### Rust Playground
 Rust kodlarınızı internet üzerinde [çevrim içi](https://play.rust-lang.org/) çalıştırabileceğiniz bir alandır.
@@ -16,7 +20,7 @@ Rust kodlarınızı internet üzerinde [çevrim içi](https://play.rust-lang.org
 ![Playground](https://github.com/rust-lang-tr/dokuman/blob/master/resimler/Rust-Playground.png)
 
 ### Println! Kullanımı
-Bir makro olarak kullanılan `println!` için farklı kullanım örneklerine göz atalım.
+💯Bir makro olarak kullanılan `println!` için farklı kullanım örneklerine göz atalım.
 
 ```Rust
 fn main() { 
@@ -57,6 +61,6 @@ fn main() {
 }
 ````
 **macro'ları kullanılması:**
-- Kod tekrarını azaltır,
+ -Kod tekrarını azaltır,
 - Belirli bir amaç için özel söz dizimi tanımlanmasına izin verir,
 - Değişken arayüzlerin tasarlanmasına olanak sağlar.
