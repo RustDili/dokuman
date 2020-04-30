@@ -6,7 +6,8 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 
 # Rust Öğrenmek
 ## Temeller
-* [Başlarken](ilk-adim/rust-dilinin-temelleri.md) -Neden Rust
+* [Neden Rust?](ilk-adim/rust-dilinin-temelleri.md)
+* [Kurulum](ilk-adim/kurulum.md)
 * [Merhaba dünya!](ilk-adim/merhaba.md)
 * [Paket yönetimi, Sandıklar ve Proje Yapısı](ilk-adim/cargo.md)
 * [Yorum satırları ve kodun belgelenmesi](ilk-adim/yorum-ve-belge.md)
