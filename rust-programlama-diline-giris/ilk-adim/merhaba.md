@@ -60,7 +60,8 @@ fn main() {
   merhaba_de!()
 }
 ````
-**macro'ları kullanılması:**
- -Kod tekrarını azaltır,
+**macro'ların kullanılması:**
+
+- Kod tekrarını azaltır,
 - Belirli bir amaç için özel söz dizimi tanımlanmasına izin verir,
 - Değişken arayüzlerin tasarlanmasına olanak sağlar.
