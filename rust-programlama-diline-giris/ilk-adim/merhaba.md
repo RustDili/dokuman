@@ -33,10 +33,10 @@ fn main() {
   println!("{:?}", [1,2,3]);                                      // [1, 2, 3] 
 
   println!("{:#?}", [1,2,3]);                                     /* [ 1, 2, 3 ] */ // 
-
-  let x = format!("{}, {}!", "Merhaba", "Mars"); 
-
-  println!("{}", x); // Merhaba, Mars! 
+  
+  // 🔎 format! makrosu biçimlendirilmiş dizgeyi saklamak için kullanılır.
+  let x = format!("{}, {}!", "Merhaba", "Mars");                  
+  println!("{}", x);                                              // Merhaba, Mars! 
 }
 ````
 
