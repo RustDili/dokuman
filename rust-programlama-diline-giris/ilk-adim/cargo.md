@@ -1,14 +1,18 @@
 # Paket yönetimi, sandıklar ve proje yapısı
 ### Cargo
-Rust dilinin yerleşik [paket yöneticisi ve yapılandırma sistemi cargo](https://doc.rust-lang.org/cargo/)'dur ve rustup aracılığıyla yüklenen bu aracın temel kullanımında aşağıdaki komutlar oldukça işlevseldir.
+Rust dilinin yerleşik [paket yöneticisi ve yapılandırma sistemi cargo](https://doc.rust-lang.org/cargo/)'dur ve rustup aracılığıyla yüklenen bu aracın temel kullanımında aşağıdaki komutlar kullanılabilir.
 
 - Yeni bir proje oluşturmak için: `cargo new`
-- Projeyi yapılandırmak için: `cargo build`
+- Projeyi derlemek için: `cargo build`
 - Projeyi çalıştırmak için: `cargo run`
 - Proje bağımlılıklarını güncellemek için: `cargo update`
 - Projeyi test etmek için: `cargo test`
-- Projenin dökümantasyonu için: `cargo doc`
-- Projenin yapılandırılmasından önce oluşabilecek hataları gözlemleyebilmek için: `cargo check`
+- Proje belgelerini `rustdoc` aracılığıyla oluşturmak için: `cargo doc`
+- Proje derlenmeden önce oluşabilecek hataları gözlemleyebilmek için: `cargo check`
+
+Ayrıca, Rust'un resmi sandıklarının yayınlandığı [crates.io](https://crates.io/) alanında projelerin sandık/paket olarak yayınlanması için kullanılan Cargo komutları da bulunmaktadır.
+
+>💡 Bir sandığın [crates.io](https://crates.io/) üzerinde yayınlanabilmesi için bir API jetonu alınması gereklidir. Jeton, siteye kaydolunduktan sonra [Hesap Ayarları](https://crates.io/me) sekmesinde görünecektir. İleriki bölümlerde [Kod Organizasyonu](dorduncu-adim/kod-organizasyonu.md) başlığı altında bu konu hakkında daha fazla tartışma olanağı bulacağız. 
 
 Bu araç yardımıyla yeni bir Rust projesi `cargo new proje_adı --bin` komutuyla başlatılır. `--bin` parametresi isteğe bağlı olarak kullanılır ve her iki durumda da oluşturulan proje çalıştırılabilir bir dosyadır. Ancak projenin `--lib` parametresi ile başlatılması projenin bir kütüphane olarak oluşturulması için yeterlidir. 
 
