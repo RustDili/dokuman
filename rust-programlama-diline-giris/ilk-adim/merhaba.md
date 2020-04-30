@@ -41,9 +41,9 @@ fn main() {
 ````
 
 ### macro_rules!
-Makrolar, isimlerinin bir ünlem `!` ile bitmesi dışında işlevlere benzerler. Ancak makrolar bir işlev çağrısı oluşturmak yerine, programın geri kalanıyla derlenen kaynak koduna genişletilir. C ve diğer dillerdeki makrolardan farklı olarak, Rust makroları dizgi ön işleme yerine soyut söz dizimi ağaçlarına genişletilir, bu nedenle beklenmedik hatalar ile karşılaşmazsınız.
+Makrolar, isimlerinin bir ünlem `!` ile bitmesi dışında işlevlere benzerler. Ancak makrolar bir işlev çağrısı oluşturmak yerine, programın geri kalanıyla derlenen kaynak koduna genişletilir. C ve diğer dillerdeki makrolardan farklı olarak, Rust makroları dizge ön işleme yerine soyut söz dizimi ağaçlarına genişletildiğinden beklenmedik hatalar oluşmaz.
 
-Rust, meta-programlama yapabileceğimiz güçlü bir makro sistemi sağlar. Bir makro tanımlamak için macro_rules! Deyimini kullanmanız yeterlidir.
+Rust, meta-programlama yapabileceğimiz güçlü bir makro sistemi sağlar. Bir makro tanımlamak için `macro_rules!` Deyimini kullanmanız yeterlidir.
 Aşağıdaki örnekte `merhaba_de` adında basit bir makro tanımlanmaktadır.
 
 ```Rust
