@@ -50,8 +50,7 @@ Yeni bir Rust projesi başlatmak için `cargo new proje_adı --bin` komutu kulla
 
 ### Proje yapısı
 Bir projenin dizin yapısı ise genel olarak aşağıdaki şekle benzeyecektir. Paket düzeni hakkında [Cargo dökümanları](https://doc.rust-lang.org/cargo/guide/project-layout.html)nda daha fazla açıklama bulabilirsiniz
-```Rust
-.
+```Rust.
 ├── Cargo.lock
 ├── Cargo.toml
 ├── benches
