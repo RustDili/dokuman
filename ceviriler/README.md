@@ -15,12 +15,12 @@
   * [16.3. Durum paylaşımlı eş zamanlılık](ch16-03-shared-state.md)
   * [16.4. Sync ve Send özellikleri ile genişletilebilir eş zamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
   
- * [14 Cargo ve Crates.io Hakkında Daha Fazla Bilgi](ch14-00-more-about-cargo.html)
-   * [14.1. Sürüm Profilleriyle Derlemeleri Özelleştirme](ch14-01-release-profiles.html)
-   * [14.2. Bir Sandığı Crates.io Üzerinde Yayınlamak](ch14-02-publishing-to-crates-io.html)
-   * [14.3. Kargo Çalışma Alanları](ch14-03-cargo-workspaces.html)
-   * [14.4. Crates.io'daki ikili Dosyaları `cargo install` Yardımıyla Kurmak](ch14-04-installing-binaries.html)
-   * [14.5. Cargo'yu Özel Komutlarla Genişletme](ch14-05-extending-cargo.html)
+ * [14 Cargo ve Crates.io Hakkında Daha Fazla Bilgi](ch14-00-more-about-cargo.md)
+   * [14.1. Sürüm Profilleriyle Derlemeleri Özelleştirme](ch14-01-release-profiles.md)
+   * [14.2. Bir Sandığı Crates.io Üzerinde Yayınlamak](ch14-02-publishing-to-crates-io.md)
+   * [14.3. Kargo Çalışma Alanları](ch14-03-cargo-workspaces.md)
+   * [14.4. Crates.io'daki ikili Dosyaları `cargo install` Yardımıyla Kurmak](ch14-04-installing-binaries.md)
+   * [14.5. Cargo'yu Özel Komutlarla Genişletme](ch14-05-extending-cargo.md)
 
 
 # İleri Seviye Konular  
