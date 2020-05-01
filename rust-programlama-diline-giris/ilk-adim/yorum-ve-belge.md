@@ -1,5 +1,5 @@
-# Yorum satırları ve kodun belgelenmesi
-### Yorum satırları
+# Yorum Satırları ve Kodun Belgelenmesi
+## Yorum Satırları
 Yorum satırları programların olmazsa olmazlarıdır. Rust birkaç farklı yorum satırını destekler.
 
 ```Rust
@@ -10,25 +10,21 @@ Yorum satırları programların olmazsa olmazlarıdır. Rust birkaç farklı yor
 
 💡 Her ne kadar blok yorumlarını destekleniyorsa da, mümkün olduğunca satır içi yorum kullanılması tavsiye edilmektedir.
 
-### Belgelendirilen yorum satırları
-Döküman yorumları `markdown` gösterimlerini destekler. Bu yorum satırlarına sahip programlar `cargo doc` komutu kullanılarak `HTML` biçiminde belgelendirilir. 
-
+## Belgelendirilen Yorum Satırları
 ```Rust
 /// Satır içi yorumlar: Bir alttaki öğeyi belgeler
 /** Blok Yorumu: Bir alttaki öğeyi belgeler */
 //! Satır içi yorumlar: Alt parçadaki öğeyi kapsam boyunca belgeler
 /*! Blok Yorumu: Alt parçadaki öğeyi kapsam boyunca belgeler !*/
 ````
-
-Aşağıdaki örneklerde görüleceği gibi her iki yorum seti de aynı modülü belgelemek için kullanılıyor. 
-
+Döküman yorumları `markdown` gösterimlerini destekler. Bu yorum satırlarına sahip programlar `cargo doc` komutu kullanılarak `HTML` biçiminde belgelendirilir. Aşağıdaki örnekte her iki doküman yorum seti aynı modülü belgelemek için kullanılıyor. Aralarındaki farkı  inceleyelim:
 ```Rust
 /// Modül testlerini içerir 
 mod test { 
   // ... 
 } 
 ````
-Dikkat ederseniz üstteki yorum seti modülün önüne eklenirken, alttaki yorum setinin modül içinde bulunmaktadır.
+Dikkat ederseniz yukarıdaki yorum seti modülün önüne getirilirken, altta bulunan yorum setiyse modül içinde yer almaktadır.
 
 ```Rust
 mod test { 
@@ -37,10 +33,10 @@ mod test {
 }
 ````
 
-Sandık ve modül düzeyinde belgeleme yapmak için sadece `//!` kullanmak yeterlidir. Eğer ilk örnekteki gibi mod blokları belgelenecekse   `/// yorum satırı` mod bloğunun dışında kullanılır.
+💡 Sandık ve modül düzeyinde belgeleme yapmak için sadece `//!` kullanmak yeterlidir. Eğer ilk örnekteki gibi mod blokları belgelenecekse   `/// yorum satırı` mod bloğunun dışında kullanılır.
 
-### Belge nitelikleri
-Kodların belgelenmesinde döküman niteliklerinden de yararlanılır. Aşağıdaki örnekte bulunan her yorum ilgili verinin niteliklerine eşdeğerdir.
+## Belge Nitelikleri
+Kodların belgelenmesinde döküman niteliklerinden de yararlanabiliriz. Aşağıdaki örnekte bulunan her yorum ilgili verinin niteliklerine eşdeğerdir.
 
 ```Rust
 /// Foo 
@@ -50,4 +46,5 @@ Kodların belgelenmesinde döküman niteliklerinden de yararlanılır. Aşağıd
 #![doc="Foo"]
 ````
 
+🔎 Bir [Öznitelik](https://doc.rust-lang.org/reference.html#attributes); ad, kural, dil ve derleyici sürümüne göre yorumlanan genel, serbest biçimli bir metadatadır. Herhangi bir öğe bildiriminin kendisine uygulanan bir özelliği olabilir. 
 Daha fazla bilgi için [Rust belgelerini](https://doc.rust-lang.org/1.30.0/book/first-edition/documentation.html) inceleyebilirsiniz.
