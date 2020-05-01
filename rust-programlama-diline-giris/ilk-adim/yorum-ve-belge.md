@@ -8,7 +8,7 @@ Yorum satırları programların olmazsa olmazlarıdır. Rust birkaç farklı yor
 /* Rust /* iç içe yapılan blok */ yorumlarını da destekler.*/
 ````
 
-💡 Her ne kadar blok yorumlarını destekleniyorsa da, mümkün olduğunca satır içi yorum kullanılması tavsiye edilmektedir.
+💡 Her ne kadar blok yorumlarını destekleniyorsa da, geleneksel olarak satır içi yorum kullanılması tercih edilmektedir.
 
 ## Belgelendirilen Yorum Satırları
 ```Rust
