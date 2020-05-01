@@ -12,7 +12,7 @@ Rust dilinin yerleşik [paket yöneticisi ve yapılandırma sistemi cargo](https
 
 Ayrıca, Rust'un resmi sandıklarının yayınlandığı [crates.io](https://crates.io/) alanında projelerin sandık/paket olarak yayınlanması için kullanılan Cargo komutları da bulunmaktadır.
 
->💡 Bir sandığın [crates.io](https://crates.io/) üzerinde yayınlanabilmesi için bir API jetonu alınması gereklidir. Jeton, siteye kaydolunduktan sonra [Hesap Ayarları](https://crates.io/me) sekmesinde görünecektir. İleriki bölümlerde [Kod Organizasyonu](dorduncu-adim/kod-organizasyonu.md) başlığı altında bu konu hakkında daha fazla tartışma olanağı bulacağız. 
+>💡 Bir sandığın [crates.io](https://crates.io/) üzerinde yayınlanabilmesi için bir API jetonu alınması gereklidir. Jeton, siteye kaydolunduktan sonra [Hesap Ayarları](https://crates.io/me) sekmesinde görünecektir. İlerleyen bölümlerde [Kod Organizasyonu](dorduncu-adim/kod-organizasyonu.md) başlığı altında bu konu hakkında daha fazla tartışma olanağı bulacağız. 
 
 Bu araç yardımıyla yeni bir Rust projesi `cargo new proje_adı --bin` komutuyla başlatılır. `--bin` parametresi isteğe bağlı olarak kullanılır ve her iki durumda da oluşturulan proje çalıştırılabilir bir dosyadır. Ancak projenin `--lib` parametresi ile başlatılması projenin bir kütüphane olarak oluşturulması için yeterlidir. 
 
