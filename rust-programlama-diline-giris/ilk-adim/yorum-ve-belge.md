@@ -5,7 +5,7 @@ Yorum satırları programların olmazsa olmazlarıdır. Rust birkaç farklı yor
 ```Rust
 // Bu bir satır içi yorumdur
 /* Bu ise sonlandırma imi bildirilene kadar tüm bloğu kapsar */
-/* Rust /* iç içe */ yapılan blok yorumlarını da destekler.
+/* Rust /* iç içe yapılan blok */ yorumlarını da destekler.*/
 ````
 
 💡 Her ne kadar blok yorumlarını destekleniyorsa da, mümkün olduğunca satır içi yorum kullanılması tavsiye edilmektedir.
