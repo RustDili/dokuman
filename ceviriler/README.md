@@ -3,17 +3,26 @@
 
 # Rust' a Göre Düşünmek 
 
-* [İşlevsel dil özellikleri: Yineleyiciler ve kapamalar](ch13-00-functional-features.md)
-  * [Kapamalar: Ortam değişkenlerini yakalayabilen isimsiz işlevler](ch13-01-closures.md)
-  * [Yineleyiciler ile bir dizi öğeyi işlemek](ch13-02-iterators.md)
+* [13.İşlevsel dil özellikleri: Yineleyiciler ve kapamalar](ch13-00-functional-features.md)
+  * [13.1. Kapamalar: Ortam değişkenlerini yakalayabilen isimsiz işlevler](ch13-01-closures.md)
+  * [13.2. Yineleyiciler ile bir dizi öğeyi işlemek](ch13-02-iterators.md)
+  *
+  *
 
-* [Korkusuz eş zamanlılık](ch16-00-concurrency.md)
-  * [Eş zamanlı kod çalıştırmak için iş parçalarını kullanmak](ch16-01-threads.md)
-  * [Mesajlaşma yöntemiyle iş parçaları arasında veri aktarımı sağlamak](ch16-02-message-passing.md)
-  * [Durum paylaşımlı eş zamanlılık](ch16-03-shared-state.md)
-  * [Sync ve Send özellikleri ile genişletilebilir eş zamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
+* [16. Korkusuz eş zamanlılık](ch16-00-concurrency.md)
+  * [16.1. Eş zamanlı kod çalıştırmak için iş parçalarını kullanmak](ch16-01-threads.md)
+  * [16.2. Mesajlaşma yöntemiyle iş parçaları arasında veri aktarımı sağlamak](ch16-02-message-passing.md)
+  * [16.3. Durum paylaşımlı eş zamanlılık](ch16-03-shared-state.md)
+  * [16.4. Sync ve Send özellikleri ile genişletilebilir eş zamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
   
-  
+ * [14 Cargo ve Crates.io Hakkında Daha Fazla Bilgi](ch14-00-more-about-cargo.html)
+   * [14.1. Sürüm Profilleriyle Derlemeleri Özelleştirme](ch14-01-release-profiles.html)
+   * [14.2. Bir Sandığı Crates.io Üzerinde Yayınlamak](ch14-02-publishing-to-crates-io.html)
+   * [14.3. Kargo Çalışma Alanları](ch14-03-cargo-workspaces.html)
+   * [14.4. cargo install Yardımıyla Crates.io'dan BinaryKurulumu](ch14-04-installing-binaries.html)
+   * [14.5. Cargo'yu Özel Komutlarla Genişletme](ch14-05-extending-cargo.html)
+
+
 # İleri Seviye Konular  
 * Ekler
   * [A - Anahtar Kelimeler](appendix-01-keywords.md)
