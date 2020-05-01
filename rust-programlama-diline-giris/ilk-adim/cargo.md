@@ -14,6 +14,11 @@ Ayrıca, Rust'un resmi sandıklarının yayınlandığı [crates.io](https://cra
 
 >💡 Bir sandığın [crates.io](https://crates.io/) üzerinde yayınlanabilmesi için bir API jetonu alınması gereklidir. Jeton, siteye kaydolunduktan sonra [Hesap Ayarları](https://crates.io/me) sekmesinde görünecektir. İlerleyen bölümlerde [Kod Organizasyonu](dorduncu-adim/kod-organizasyonu.md) başlığı altında bu konu hakkında daha fazla tartışma olanağı bulacağız. 
 
+ * API jetonuyla crates.io'ya giriş: `cargo login`
+ * Yerel sandığı [crates.io](https://crates.io/)'ya yüklenebilir hale getirmek için: `cargo package`
+ * Sandığı [crates.io](https://crates.io/)'ya yüklemek için: `cargo publish`
+ Komutlarını kullanabilirisniz.
+
 ### Crate
 Rust programlama dilinde [crates.io](https://crates.io) aracılığıyla paylaşılan her paket `Crate` adını alır. Crate' nin Türkçe karşılığı "tahtadan yapılmış kasa" anlamına geldiğinden, dilimizde "sandık" olarak karşılık bulacaktır. Bir sandık ya çalıştırılabilir dosya ya da kütüphane üretebilir. Başka bir deyişle, bir sandık binary biçiminde veya bir kütüphane şeklinde yayımlanabilir.
 
