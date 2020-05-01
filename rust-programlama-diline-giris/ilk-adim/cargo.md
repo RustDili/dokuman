@@ -7,7 +7,7 @@ Rust dilinin yerleşik [paket yöneticisi ve yapılandırma sistemi cargo](https
 - Projeyi çalıştırmak için: `cargo run`
 - Proje bağımlılıklarını güncellemek için: `cargo update`
 - Projeyi test etmek için: `cargo test`
-- Proje belgelerini `rustdoc` aracılığıyla oluşturmak için: `cargo doc`
+- Proje belgelerini [rustdoc](https://doc.rust-lang.org/stable/rustdoc/) aracılığıyla oluşturmak için: `cargo doc`
 - Proje derlenmeden önce oluşabilecek hataları gözlemleyebilmek için: `cargo check`
 
 Ayrıca, Rust'un resmi sandıklarının yayınlandığı [crates.io](https://crates.io/) alanında projelerin sandık/paket olarak yayınlanması için kullanılan Cargo komutları da bulunmaktadır.
