@@ -19,7 +19,7 @@
    * [14.1. Sürüm Profilleriyle Derlemeleri Özelleştirme](ch14-01-release-profiles.html)
    * [14.2. Bir Sandığı Crates.io Üzerinde Yayınlamak](ch14-02-publishing-to-crates-io.html)
    * [14.3. Kargo Çalışma Alanları](ch14-03-cargo-workspaces.html)
-   * [14.4. cargo install Yardımıyla Crates.io'dan BinaryKurulumu](ch14-04-installing-binaries.html)
+   * [14.4. Crates.io'daki ikili Dosyaları `cargo install` Yardımıyla Kurmak](ch14-04-installing-binaries.html)
    * [14.5. Cargo'yu Özel Komutlarla Genişletme](ch14-05-extending-cargo.html)
 
 
