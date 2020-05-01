@@ -23,7 +23,7 @@ komutlarını kullanabilirisniz.
 ### Crate
 Rust programlama dilinde [crates.io](https://crates.io) aracılığıyla paylaşılan her paket `Crate` adını alır. Crate' nin Türkçe karşılığı "tahtadan yapılmış kasa" anlamına geldiğinden, dilimizde "sandık" olarak karşılık bulacaktır. Bir sandık ya çalıştırılabilir dosya ya da kütüphane üretebilir. Başka bir deyişle, bir sandık binary biçiminde veya bir kütüphane şeklinde yayımlanabilir.
 
-Bu araç yardımıyla yeni bir Rust projesi `cargo new proje_adı --bin` komutuyla başlatılır. `--bin` parametresi isteğe bağlı olarak kullanılır ve her iki durumda da oluşturulan proje çalıştırılabilir bir dosyadır. Ancak projenin `--lib` parametresi ile başlatılması projenin bir kütüphane olarak oluşturulması için yeterlidir. Aksi belirtilmediği sürece yeni bir proje başlatıldığında, proje adıyla çalıştırılabilir dosya oluşturulur. Bu davranış `rustc --crate-type` veya `cargo --bin` parametresi kullanılarak değiştirilebilmektedir. 
+Yeni bir Rust projesi başlatmak için `cargo new proje_adı --bin` komutu kullanılır. `--bin` parametresi isteğe bağlı olarak kullanıldığından her iki durumda da oluşturulan proje çalıştırılabilir bir dosya olacaktır. Ancak projenin `--lib` parametresi ile başlatılması projenin bir kütüphane olarak oluşturulması için yeterlidir. Aksi belirtilmediği sürece yeni bir proje başlatıldığında, proje adıyla çalıştırılabilir dosya oluşturulur. Bu davranış `rustc --crate-type` veya `cargo --bin` parametresi kullanılarak değiştirilebilmektedir. 
 
 `cargo new proje_adi --bin` komutlarıyla başlatılan çalıştırılabilir paket yapılandırmasının proje dizini aşağıdaki gibi görünecektir.
 
