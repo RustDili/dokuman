@@ -1,6 +1,6 @@
 # Paket yönetimi, sandıklar ve proje yapısı
 ### Cargo
-Rust dilinin yerleşik [paket yöneticisi ve yapılandırma sistemi cargo](https://doc.rust-lang.org/cargo/)'dur ve rustup aracılığıyla yüklenen bu aracın temel kullanımında aşağıdaki komutlar kullanılabilir.
+Rust dilinin yerleşik [paket yöneticisi ve yapılandırma sistemi cargo](https://doc.rust-lang.org/cargo/)'dur ve rustup aracılığıyla yüklenen bu aracın temel kullanımında aşağıdaki komutlar oldukça işlevseldir.
 
 - Yeni bir proje oluşturmak için: `cargo new`
 - Projeyi derlemek için: `cargo build`
