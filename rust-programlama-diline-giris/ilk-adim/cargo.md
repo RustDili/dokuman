@@ -42,7 +42,7 @@ Yeni bir Rust projesi başlatmak için `cargo new proje_adı --bin` komutu kulla
 ````
 * **Cargo.toml** (Büyük C harfiyle başlar), Cargo'nun projenizi derlemesi için gereken tüm meta verileri içeren yapılandırma dosyasıdır.
 * **src** klasörü kaynak kodun saklandığı dizindir.
-* Her sandığın üstü kapalı bir sandık kökü yani giriş noktası vardır. Çalıştırılabilir yani ikili sandıklar için bu giriş noktası **main.rs** olurken kütüphane sandıkları için bu sandık kökü **lib.rs**'dir.
+* Her sandığın üstü kapalı bir sandık kökü yani giriş noktası vardır. Çalıştırılabilir ikili sandıklar için bu giriş noktası **main.rs** olurken kütüphane sandıkları için bu sandık kökü **lib.rs**'dir.
 
 💡 Bir ikili sandığı `cargo build` veya `cargo run` komutlarıyla oluşturduğunuzda çalıştırılabilir dosya ` target/debug/` klasöründe saklanır. Ancak sandığı `cargo build --release` komutuyla oluşturusanız saklanacak dizin yolu `target/release/` şeklinde olacaktır.  
 
