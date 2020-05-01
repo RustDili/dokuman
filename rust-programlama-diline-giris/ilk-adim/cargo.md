@@ -49,18 +49,7 @@ Yeni bir Rust projesi başlatmak için `cargo new proje_adı --bin` komutu kulla
 💡 Oluşturduğunuz sandıkları, cargo.toml dosyasında yer alan bağımlılıklarıyla birlikte, Rust ekosisteminde üretilen sandıkların bir arada tutulduğu [crates.io](https://crates.io) adlı Rust resmi sitesi üzerinde dilediğiniz an diğer kullanıcılar ile paylaşabilirsiniz.
 
 ### Proje yapısı
-Oluşturulan her projenin
-
-- Kaynak kodları `src` dizininde tutulur.
-- Varsayılan kütüphane klasörü `src/lib.rs`' dir.
-- Varsayılan çalıştırılabilir dosyası `src/main.rs`' dir.
-- Diğer çalıştırılabilir dosyalar `src/bin/*rs` şeklinde konumlandırılır.
-- Birim testler gibi entegrasyon testleri, test dizininde bulundurulur. 
-- Proje içindeki örnekler ise `examples` dizinine konur.
-- Karşılaştırmalar `benches` adlı dizininde yer alır.
-
-Böyle bir projenin dizin yapısı ise aşağıdaki şekle benzeyecektir.
-
+Bir projenin dizin yapısı ise genel olarak aşağıdaki şekle benzeyecektir. Paket düzeni hakkında [Cargo dökümanları](https://doc.rust-lang.org/cargo/guide/project-layout.html)nda daha fazla açıklama bulabilirsiniz
 ```Rust
 .
 ├── Cargo.lock
@@ -77,3 +66,11 @@ Böyle bir projenin dizin yapısı ise aşağıdaki şekle benzeyecektir.
 └── tests
     └── some-integration-tests.rs
 ````
+Oluşturulan her projenin
+- Kaynak kodları `src` dizininde tutulur.
+- Varsayılan kütüphane klasörü `src/lib.rs`' dir.
+- Varsayılan çalıştırılabilir dosyası `src/main.rs`' dir.
+- Diğer çalıştırılabilir dosyalar `src/bin/*rs` şeklinde konumlandırılır.
+- Birim testler gibi entegrasyon testleri, test dizininde bulundurulur. 
+- Proje içindeki örnekler ise `examples` dizinine konur.
+- Karşılaştırmalar `benches` adlı dizininde yer alır.
