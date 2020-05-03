@@ -87,3 +87,9 @@ Dikkat ederseniz `//!` işaretiyle başlayan son satırdan sonra herhangi bir ko
 
 Artık `cargo doc --open` komutu çalıştırıldığında işaretlenmiş bu satırlar aşağıda yer alan Şekil 14-2'de gösterildiği gibi `my_crate` belgesinin ön sayfasında, sandıktaki genel öğeler listesinin üstünde görüntülenir: 
 
+![Şekil 14-2](https://doc.rust-lang.org/book/img/trpl14-02.png)
+Şekil 14-2: Yorumlar dahil olmak üzere `my_crate` sandığını bir bütün olarak tanımlayan belgeler
+
+Öğeler içindeki belge yorumları, özellikle sandık ve modülleri tanımlamak için kullanışlıdır. Bu yorumları, paketlerinizi kullanacak olan kişilerin paket düzenini anlamalarına yardımcı olmak ve paket kapsamının genel amacını açıklamak için kullanın.
+
+## [pub use](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#exporting-a-convenient-public-api-with-pub-use) Ön Ekiyle Bir API'yi Kamu Kullanımına Uyarlamak
