@@ -92,4 +92,59 @@ Artık `cargo doc --open` komutu çalıştırıldığında işaretlenmiş bu sat
 
 Öğeler içindeki belge yorumları, özellikle sandık ve modülleri tanımlamak için kullanışlıdır. Bu yorumları, paketlerinizi kullanacak olan kişilerin paket düzenini anlamalarına yardımcı olmak ve paket kapsamının genel amacını açıklamak için kullanın.
 
-## [pub use](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#exporting-a-convenient-public-api-with-pub-use) Ön Ekiyle Bir API'yi Kamu Kullanımına Uyarlamak
+## [pub use](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#exporting-a-convenient-public-api-with-pub-use) Ön Ekiyle Bir API'yi Genel Kullanıma Uyarlamak
+Bölüm 7'de, `mod` anahtar kelimesini kullanarak kodumuzu modüller halinde nasıl düzenleyeceğinizi, `pub` anahtar sözcüğüyle öğelerin nasıl genelleştirileceğini ve `use` anahtar kelimesiyle de öğelerin kapsama nasıl dahil edileceğini ele almıştık. Ancak, bir sandık geliştirirken sizin için anlamlı olan yapı, kullanıcılarınız için çok uygun olmayabilir. Yapılarınızı çok katmanlı hiyerarşik bir yapıda düzenlemek isteyebilirsiniz, ancak daha sonra bu hiyerarşinin derinlerinde tanımlamış bulunduğunuz herhangi bir türü kullanmak isteyen kişiler, bu türe erişmekte sorun yaşayabilirler. Ayrıca bu türe `use my_crate::UsefulType;` şeklinde bir söz dizimiyle ulaşmak yerine `my_crate::some_module::another_module::UsefulType;` şeklinde bir söz dizimi kullanmak oldukça rahatsız edici olabilir. 
+
+Bir sandık yayınlarken herkese açık olarak tasarlanmış olan API'nizin yapısı oldukça önemlidir. Sandığınızı kullanan kişiler bu yapıya sizin kadar aşina olmadıklarından, sandığınız büyüyüp karmaşık bir modül hiyerarşisine dönüştüğünde, kullanmak istedikleri API parçalarına ulaşmakta zorluk çekebilirler. İyi haber şu ki, eğer yapınız başkalarının kütüphanelerinde kullanılmaya uygun değilse, API Hiyararşisini ve belki tasarımını baştan başa yeniden düzenlemek yerine, `pub use` anahtar kelimelerini kullanarak, tüm öeğeleriyle bu yapının genel kullanıma uygun bir sürümünü yeniden ihraç edebilirsiniz. Yeniden ihraç herkese açık bir öğeyi bir konumda alır ve başka bir yerde, başka bir konumda tanımlanmış gibi herkese açık hale getirir.
+
+Örneğin, sanatsal kavramları modellemek için `art` adında bir kütüphane tasarladığımızı varsayalım. Örnek 14-3'te de görüleceği gibi; bu kütüphanenin içinde `PrimaryColor` ve `SecondaryColor` adında iki enum içeren bir `kinds` modülü ve `mix` adındaki işlevi içeren `utils` modülü bulunmaktadır:
+
+Dosya: src/lib.rs
+```Rust
+//! # Art
+//!
+//! A library for modeling artistic concepts.
+
+pub mod kinds {
+    /// The primary colors according to the RYB color model.
+    pub enum PrimaryColor {
+        Red,
+        Yellow,
+        Blue,
+    }
+
+    /// The secondary colors according to the RYB color model.
+    pub enum SecondaryColor {
+        Orange,
+        Green,
+        Purple,
+    }
+}
+
+pub mod utils {
+    use crate::kinds::*;
+
+    /// Combines two primary colors in equal amounts to create
+    /// a secondary color.
+    pub fn mix(c1: PrimaryColor, c2: PrimaryColor) -> SecondaryColor {
+        // --snip--
+    }
+}
+````
+Örnek 14-3: `kinds` ve `utils` modüllerinde düzenlenmiş öğeleri içeren bir `art` kütüphanesi
+![resim 14-3](https://doc.rust-lang.org/book/img/trpl14-03.png)
+Şekil 14-3, `cargo doc` tarafından üretilen bu sandık için dokümantasyonun ön sayfasının nasıl görüneceğini göstermektedir:
+
+Ön sayfada `PrimaryColor` ve `SecondaryColor` türleri ve mix() işlevinin listelenmediğine dikkat edin. Onları görmek için `kind` ve `utils` bağlantılarına tıklamak gereklidir. Bu kütüphaneye bağımlı başka bir sandık, halihazırda tanımlanmış olan `art` modül yapısına ait öğeleri kendi kapsamına alabilmek için `use` ifadesini kullanmak zorunda kalacaktır. Örnek 14-4, `art` sandığındaki `PrimaryColor` ve `mix` öğelerini kullanan başka bir sandık örneğini gösterir:
+
+Dosya: src/main.rs
+```Rust
+use art::kinds::PrimaryColor;
+use art::utils::mix;
+
+fn main() {
+    let red = PrimaryColor::Red;
+    let yellow = PrimaryColor::Yellow;
+    mix(red, yellow);
+}
+````
