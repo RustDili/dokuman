@@ -55,3 +55,35 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 İşlev veya örnekteki `assert_eq!` değerini değiştirdiğimizde örnek panikler. Bu durumdayken `cargo test` komutunu yeniden  çalıştırılırsa belge testinde örnek ve kodun birbiriyle senkronize olmadığının tespit edildiğini gözlemleriz.
 
 ## İçerilen Öğelerin Yorumlanması
+Bir başka belgelendirme biçimi olan `//!` ise yorum satırlarının hemen altına eklenenen öğeleri belgelemek yerine, yorumun ait olduğu, yani içerildiği öğeyi belgelendirirmek için kullanılır. Genellikle bu tarz yorum etiketlerini sandık veya modülün tamamını bir bütün olarak belgelemek amacıyla kök dosyasının içinde (kural gereği src/lib.src) ya da bir modül içerisinde kullanırız. 
+
+Örneğin `add_one` işlevini içeren `my_crate` adlı sandığın amacını açıklayan belgeler eklemek istiyorsak src/lib.rs dosyasının en başına örnek 14-2' de gösterileceği gibi  `//!` işaretini belge yorumu olarak ekleyebiliriz.
+
+Dosya: src/lib.rs
+```Rust
+//! # My Crate
+//!
+//! `my_crate` is a collection of utilities to make performing certain
+//! calculations more convenient.
+
+/// Adds one to the number given.
+// --snip--
+///
+/// # Examples
+///
+/// ```
+/// let arg = 5;
+/// let answer = my_crate::add_one(arg);
+///
+/// assert_eq!(6, answer);
+/// ```
+pub fn add_one(x: i32) -> i32 {
+    x + 1
+}
+````
+Örnek 14-2: Bir bütün olarak `my_crate` sandığı belgeleri
+
+Dikkat ederseniz `//!` işaretiyle başlayan son satırdan sonra herhangi bir kod bulunmuyor. Bunun nedeni yorum satırını `///` yerine `//!` işaretiyle başlattığımız için satırın bitiminden sonra gelen satırlardaki öğeler yerine işaretin bulunduğu satırdaki öğeyi belgelenecek olmasıdır. O nedenle, bu yorumu içeren öğe, sandık kökü olan src/lib.rs dosyası olacağından bu yorum satırları tüm sandık için yapılan açıklamaları içerir. 
+
+Artık `cargo doc --open` komutu çalıştırıldığında işaretlenmiş bu satırlar aşağıda yer alan Şekil 14-2'de gösterildiği gibi `my_crate` belgesinin ön sayfasında, sandıktaki genel öğeler listesinin üstünde görüntülenir: 
+
