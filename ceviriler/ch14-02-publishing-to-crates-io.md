@@ -148,3 +148,9 @@ fn main() {
     mix(red, yellow);
 }
 ````
+Örnek 14-4: İç yapısının dışa aktarılmasıyla öğeleri kullanılabilir hale gelen `art` sandığı 
+
+Örnek 14-4'te yer alan `art` sandığını kullanan kodun programcısı, `PrimaryColor` türünün `kinds` modülünde ve `mix()` işlevinin de  `utils` modülünde olduğunu bulabilmelidir. Sandığın modül yapısı, `art` sandığını geliştiren programcılardan çok, bu sandığı kullanan  programcılar için önemlidir. Sandığın parçalarını `kinds` ve `art` modülleri olarak düzenleyen iç yapı, bu sandığın nasıl kullanılacağını öğrenmek isteyenler için herhangi bir yararlı bilgiler içermediği gibi `art` sandığı modül yapısının yarattığı karmaşa, use ifadelerinde modül adlarını belirtmek isteyen kullanıcıların nereye bakacaklarını bilememelerine neden olacağından kullanışsız bir yapıdır. 
+
+Herkesin kullanımına açık olan API'den iç düzenlemeyi kaldırıp, pub use ifadelerini kullanarak öğeleri en üst düzeyde yeniden dışa aktarabilmek için Örnek 14-3'te yer alan `art` sandığının kodlarını, Örnek 14-5'te görğleceği şekilde yeniden düzenleyebiliriz. 
+
