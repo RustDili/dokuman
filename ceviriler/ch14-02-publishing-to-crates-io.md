@@ -154,3 +154,43 @@ fn main() {
 
 Herkesin kullanımına açık olan API'den iç düzenlemeyi kaldırıp, pub use ifadelerini kullanarak öğeleri en üst düzeyde yeniden dışa aktarabilmek için Örnek 14-3'te yer alan `art` sandığının kodlarını, Örnek 14-5'te görğleceği şekilde yeniden düzenleyebiliriz. 
 
+Dosya: src/lib.rs
+```Rust
+//! # Art
+//!
+//! A library for modeling artistic concepts.
+
+pub use self::kinds::PrimaryColor;
+pub use self::kinds::SecondaryColor;
+pub use self::utils::mix;
+
+pub mod kinds {
+    // --snip--
+}
+
+pub mod utils {
+    // --snip--
+}
+````
+Örnek 14-5: Öğeleri yeniden dışa aktarmak için pub use ifadeleri eklemek
+
+`cargo doc` komutunun bu sandık için oluşturduğu API belgeleri, Şekil 14-4'te görebileceğiniz gibi ön sayfada yeniden dışa aktarımları listeleyerek bağlayacak ve `PrimaryColor` ve `SecondaryColor` türlerini ve `mix` işlevini bulmayı kolaylaştıracaktır.
+![Şekil 14-4](https://doc.rust-lang.org/book/img/trpl14-04.png)
+Şekil 14-4: Yenilenen dışa aktarımı listeleyen `art` belgelendirmesinin ön sayfası
+
+Artk `art` sandığını kullanacak olan programcılar, ister Örnek 14-5 ve 14-6'da yenilenen daha uygun yapıyı, isterlerse hâlâ kullanılmaya uygun durumda bulunan Örnek 14-4'te ve 14-3'teki iç yapıyı inceleyip kodlarına dahil edebilirler.
+
+Dosya src/main.rs
+```Rust
+use art::mix;
+use art::PrimaryColor;
+
+fn main() {
+    // --snip--
+}
+````
+Örnek 16-4: Yeniden dışa aktarılan `art` sandığı öğelerini kullanan bir program
+
+Çok sayıda iç içe modülün olduğu durumlarda, türleri en üst düzeyde yeniden ihraç etmek pub use, sandığı kullanan kişilerin deneyiminde önemli bir fark yaratabilir.  Kullanışlı bir genel amaçlı API oluşturmak bir sanat olduğundan kullanılarınıza en uygun olabilecek tasarım için defalarca tekrar yapmanız gerekebilir. ancak `pub use` kullanımı paket iç yapınızı kullanıcılara sunulduğu halinden ayırabildiği için esneklik sağlar. sandık iç yapılarının genel kullanıma açılmış hallerinden farklı olup olmadığını anlamak için çalışmalarına dahil ettiğiniz başka sandıkları incelemeniz yararlı olacaktır. 
+
+## Bir Crates.io Hesabı Oluşturma
