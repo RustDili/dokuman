@@ -194,3 +194,12 @@ fn main() {
 Çok sayıda iç içe modülün olduğu durumlarda, türleri en üst düzeyde yeniden ihraç etmek pub use, sandığı kullanan kişilerin deneyiminde önemli bir fark yaratabilir.  Kullanışlı bir genel amaçlı API oluşturmak bir sanat olduğundan kullanılarınıza en uygun olabilecek tasarım için defalarca tekrar yapmanız gerekebilir. ancak `pub use` kullanımı paket iç yapınızı kullanıcılara sunulduğu halinden ayırabildiği için esneklik sağlar. sandık iç yapılarının genel kullanıma açılmış hallerinden farklı olup olmadığını anlamak için çalışmalarına dahil ettiğiniz başka sandıkları incelemeniz yararlı olacaktır. 
 
 ## Bir Crates.io Hesabı Oluşturma
+Herhangi bir sandığı yayınlayabilmeniz için öncelikle [crates.io](https://crates.io/) üzerinde bir hesap oluşturmanız ve bir API anahtarı almanız gereklidir. Bunun için [crates.io](https://crates.io/) adresini ziyaret ederek GitHub hesabınız ile giriş yapın. (Her ne kadar gelecekte siteye başka yöntemlerle üye olunacağı planlanmış olsa da şu an için yalnızca GitHub hesaplarımız ile giriş kabul edilmektedir.) Sisteme girişinizi yaptıktan sonra, [https://crates.io/me/](https://crates.io/me/) adresindeki hesap ayarlarınızı ziyaret ederek ve API anahtarınızı alın. Ardından, aşağıdaki gibi API anahtarınızla `cargo login` komutunu çalıştırın:
+
+```bash
+$ cargo login abcdefghijklmnopqrstuvwxyz012345
+````
+
+Bu komut Cargo'ya API anahtarınızı bildirecek ve onu yerel olarak `~/.cargo/credentials` içinde depolayacaktır. Anahtarınızı size özel olduğunu, gizli kalması ve kimseyle paylaşılmaması gerektiğini unutmayın. Eğer anahtarınızı herhangi bir sebeple birileriyle  paylaşmışsanız, geçerli olanı deerhal iptal ederek yeni bir anahtar oluşturmalısınız.
+
+## Yeni Oluşturulmuş Sandığa Meta Veri Eklemek
