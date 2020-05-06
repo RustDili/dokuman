@@ -47,4 +47,4 @@ Kodların belgelenmesinde döküman niteliklerinden de yararlanabiliriz. Aşağ�
 ````
 
 🔎 Bir [Öznitelik](https://doc.rust-lang.org/reference.html#attributes); ad, kural, dil ve derleyici sürümüne göre yorumlanan genel, serbest biçimli bir metadatadır. Herhangi bir öğe bildiriminin kendisine uygulanan bir özelliği olabilir. 
-Daha fazla bilgi için Rust kitabının 14. bölümünde yer alan [Bir Sandığı Yayınlamak](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html) adlı konu başlığını veya [Rust belgelerini](https://doc.rust-lang.org/1.30.0/book/first-edition/documentation.html) inceleyebilirsiniz.
+Daha fazla bilgi için Rust kitabının 14. bölümünde yer alan [Bir Sandığı Yayınlamak](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html) adlı konu başlığını veya [Türkçe Rust Belgelerini](https://github.com/rust-lang-tr/dokuman/blob/master/ceviriler/ch14-00-more-about-cargo.md) inceleyebilirsiniz.
