@@ -253,3 +253,23 @@ license = "MIT OR Apache-2.0"
 Başkalarının sandıklarınızı daha kolay keşfedep kullanabilmesini sağlamak için kullanabileceğiniz daga fazla meta-veriye [Cargo Belgeleri](https://doc.rust-lang.org/cargo/)nden kolaylıkla ulaşabilirisiniz.
 
 ## Bir sandığı Crates.io'da Yayınlamak
+Artık bir hesap oluşturduğunuza, API anahtarınızı kaydettiğinize, sandığınız için benzersiz bir ad seçtiğinize ve gerekli meta verileri belirttiğinize göre onu yayınlamaya hazırsınız demektir. Bir sandık yayınlamak, başkalarının kullanması için crates.io'ya belirli bir sürümün yüklenmesi anlamına gelmektedir. 
+
+Bir sandık yayınlandıktan sonra, sürümün üzerine tekrar yazılamayacak, kod o yayın için silinip değiştirilemeyecek şekilde kalıcı olacağından oldukça dikkatli olmanız gereklidir. Bunun nedeni [Crates.io](https://crates.io/)'nun ana hedefi olan kalıcı bir kod arşivi oluşturmaktır. Bu hedef ve tutarlılık sayesinde [crates.io](https://crates.io/)'dan gelen sandıklara bağımlı tüm projeler zaman içerisinde sorunsuz bir şekilde derlenerek çalışmaya devam eder. Sürüm silme işlemine izin vermek bu hedefi olanaksız hale getireceğinden buna izin verilmez ancak sandık versiyonu yayınlama konusunda ise bir sınır yoktur. 
+
+Şimdi `cargo publish` komutunu tekrar çalıştırdığınızda paketinizin başarıyla yayınlandığını göreceksiniz:
+
+```bash
+$ cargo publish
+    Updating crates.io index
+   Packaging guessing_game v0.1.0 (file:///projects/guessing_game)
+   Verifying guessing_game v0.1.0 (file:///projects/guessing_game)
+   Compiling guessing_game v0.1.0
+(file:///projects/guessing_game/target/package/guessing_game-0.1.0)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.19s
+   Uploading guessing_game v0.1.0 (file:///projects/guessing_game)
+````
+
+Tebrikler! Artık kodunuzu Rust topluluğuyla paylaştığınıza göre, herkes sandığınızı projesine bağımlılık olarak kolayca ekleyebilir.
+
+## Mevcut Bir Sandığın Yeni Sürümünü Yayınlamak
