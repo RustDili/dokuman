@@ -275,4 +275,21 @@ Tebrikler! Artık kodunuzu Rust topluluğuyla paylaştığınıza göre, herkes 
 ## Mevcut Bir Sandığın Yeni Sürümünü Yayınlamak
 Önceden yayınlamış olduğunuz bir sandıkta tüm kullanıcıları etkileyen bir değişiklik yaptığınızda veya yeni bir sürüm yayınlamaya hazır olduğunuzda sandığınızın *Cargo.toml* dosyasının `version` bölümünü uygun şekilde değiştirerek paketinizi yeniden yayınlayabilirsiniz. Gerçekleştirdiğiniz değişikliğin türüne göre sonraki sürüm numarasına karar verebilmeniz için [Anlamsal Sürüm Oluşturma Kuralları](http://semver.org/)nı kullanabilirsiniz. Bu işlemlerin ardından `cargo publish` komutunu kullanarak yeni sürümünüzü kolaylıkla yayınlayabilirsiniz.
 
-## Yayınlanmış Sürümleri [`cargo yank`](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#removing-versions-from-cratesio-with-cargo-yank) Komutu Kullanarak Crates.io Üzerinden Kaldırmak
+## Sürümleri [`cargo yank`](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#removing-versions-from-cratesio-with-cargo-yank) Komutu Kullanarak Crates.io Üzerinden Kaldırmak
+Yayımlanmış bir sandığın önceki sürümlerini kaldıramasanız dahi, yeni projelerin bu sürümleri kullanmasını ve bağımlılık olarak eklemesini engelleyebilirsiniz. Bu davranış sandık sürümünüzün bir nedenle bozulduğunda yararlıdır. Bu gibi durumlarda, Cargo `yank` adlı bir komut kullanarak o versiyonu geri çekmenizi sağlar. 
+
+Bir sürümün geri çekilmesi -yani *yanking edilmesi*- yeni projelerin bu sürüme bağlanmasını önlerken ona bağımlı olarak tanımlanmış mevcut projelerin bu sürümü indirmeye ve bağımlı olarak kalmasına izin verir. Temel olarak `yank` yani geri çekme işlemi *Cargo.lock* dosyasına işlenmiş projelerin artık sürümü kullanmaya devam edeceğini, ama yeni bağımlılık talepleri için geri çekilmiş olan bu sürümün kullanılmasına daha fazla izin verilmeyeceği anlamına gelmektedir.
+
+Sandığın geri çekilecek versiyonunu için sürüm bilgisi ile birlikte aşağıda gösterilene benzer biçimde `cargo yank` kodunu çalıştırmanız gerekir:
+
+```bash
+$ cargo yank --vers 1.0.1
+````
+
+Geri çekme işlemini `cargo yank` komutuna `--undo` ekleyerek geçersiz hale getirebilir ve projelerin bu sürüme yeniden bağlanmasına izin verebilirsiniz:
+
+```bash
+$ cargo yank --vers 1.0.1 --undo
+````
+
+Geri çekme işlemi var olan kodları silmez. Örneklersek, projenize yanlışlıkla eklediğiniz bazı özel veya sır olarak kalması gereken kodları `yank` özelliğini kullanarak silmeniz mümkün olmayacağından bu sırları hemen kaldırmanız gerekir. 
