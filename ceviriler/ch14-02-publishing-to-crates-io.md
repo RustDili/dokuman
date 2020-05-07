@@ -222,4 +222,34 @@ See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for
 --snip--
 error: api errors (status 200 OK): missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
 ````
-Bunun sebebi, sandığınızı kullanmak isteyecek programcılar için, sandığınızın neler yaptığını ve hangi koşullar altında kullanılabileceğini düzenleyen açıklama ve lisans bilgileri gibi önemli detayları atlamış olmanızdır. Bu hatayı düzeltebilmeniz için gerekli olan bilgileri paketinizin *Cargo.toml* dosyasına işlemeniz gerekir.  
+Bunun sebebi, sandığınızı kullanmak isteyecek programcılar için, sandığınızın neler yaptığını ve hangi koşullar altında kullanılabileceğini düzenleyen açıklama ve lisans bilgileri gibi önemli detayları atlamış olmanızdır. Bu hatayı düzeltebilmeniz için gerekli olan bilgileri paketinizin *Cargo.toml* dosyasına işlemeniz gerekir. 
+
+Girdiğiniz açıklamalar arama sonuçlarında görüntüleneceğinden en azından bir iki cümle açıklamak eklemeniz yerinde olur. Lisans alanı içinse bir `license` tanımlayıcı değeri vermeniz gereklidir. [Linux Vakfı'nın Yazılım Paketi veri değişimi (SPDX)](http://spdx.org/licenses/), bu alan için kullanabileceğiniz tanımlayıcıları listeler. Örneğin, sandığınızı MIT Lisansı ile lisansladığınızı belirtmek için `MIT` tanımlayıcısını ekleyin:
+
+```bash
+[package]
+name = "guessing_game"
+license = "MIT"
+````
+
+SPDX'te görünmeyen bir lisans kullanmak istiyorsanız, söz konusu lisansın metnini bir dosyaya yerleştirmeniz, dosyayı projenize eklemeniz ve ardından `license` alanındaki tanımı `license-file` şeklinde dosya adını tanımlayacak şekilde belirtmeniz gerekmektedir.
+
+Projeniz için hangi lisansın daha uygun olacağına dair rehberlik bu kitabın kapsamı dışındadır. Rust topluluğunun pek çok üyesi Rust'ın da yapmayı seçtiği gibi projelerini `MIT VEYA Apache-2.0` olarak çifte lisans kullanarak lisanslar. Bu uygulama biçimi projenizi `OR` ekiyle birden fazla lisansa sahip olacak şekilde lisans tanımlayıcısıyla ilişkilendirebileceğinizi gösterir.
+
+`cargo new` komutunu kullanarak benzersiz bir adla oluşturduğunuz sandığınıza, yazar adı, sürüm bilgisi, paket açıklaması ve lisans tanımlayıcısını eklediğinizde, yayına hazır olan projenizin `Cargo.toml` dosyası aşağıdaki yapıya benzeyecektir:
+
+```bash
+[package]
+name = "guessing_game"
+version = "0.1.0"
+authors = ["Your Name <you@example.com>"]
+edition = "2018"
+description = "A fun game where you guess what number the computer has chosen."
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+````
+
+Başkalarının sandıklarınızı daha kolay keşfedep kullanabilmesini sağlamak için kullanabileceğiniz daga fazla meta-veriye [Cargo Belgeleri](https://doc.rust-lang.org/cargo/)nden kolaylıkla ulaşabilirisiniz.
+
+## Bir sandığı Crates.io'da Yayınlamak
