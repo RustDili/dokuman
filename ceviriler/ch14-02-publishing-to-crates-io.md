@@ -203,3 +203,23 @@ $ cargo login abcdefghijklmnopqrstuvwxyz012345
 Bu komut Cargo'ya API anahtarınızı bildirecek ve onu yerel olarak `~/.cargo/credentials` içinde depolayacaktır. Anahtarınızı size özel olduğunu, gizli kalması ve kimseyle paylaşılmaması gerektiğini unutmayın. Eğer anahtarınızı herhangi bir sebeple birileriyle  paylaşmışsanız, geçerli olanı deerhal iptal ederek yeni bir anahtar oluşturmalısınız.
 
 ## Yeni Oluşturulmuş Sandığa Meta Veri Eklemek
+Artık hesabınızı oluşturduğunuza göre, yayınlamak istediğiniz bir sandığınızın olduğunu düşünebiliriz. Ancak sandığınızı yayına almadan hemen önce, *Cargo.toml* dosyasının `package` bölümüne sandığınıza ait meta verileri eklemeniz gerekmektedir. 
+
+Yerel olarak bir sandık üzerinde çalışırken, istediğiniz bir sandığı adlandırabilirsiniz. Ancak yayınlama aşamasına geldiğinizde sandığınızın benzersiz bir isme ihtiyacı olacak. [crates.io](https://crates.io/)'daki sandık adları sadece servise ilk alınanın o isme sahip olması üzerinden yürütüldüğünden, bir sandığa ismi bir kez tahsis edildikten sonra o isin başka bir sandığa verilemez. Başka bir ifadeyle bir sandık adı bir kez alındığında başka hiç kimse tarafından aynı isimde bir başka sandık yayınlanamaz. O nedenle sandığınızı [crates.io](https://crates.io/) üzerinde yayınlanmaya kalkışmadan önce site içinde kullanmak istediğiniz isimde başka bir sandığın olup olmadığını araştırmalısınız. Eğer tercih ettiğiniz sandık adı başka bir sandık tarafından kullanılmaktaysa, yeni seçeceğiniz sandık ismini, paketinizin *Cargo.toml* dosyasında bulunan `[package]` bölümüne isim alanı dahil aşağıda gösterildiğine benzer şekliyle düzenlemeniz gerekecektir.
+
+Dosya: Cargo.toml
+```Rust
+[package]
+name = "guessing_game"
+````
+Her ne kadar benzersiz bir ad seçmiş olsanız bile, sandığı yayınlamak için `cargo publish` komutunu çalıştırdığınızda aşağıdakine benzer bir uyarı ve hata alabilirsiniz:
+
+```bash
+$ cargo publish
+    Updating crates.io index
+warning: manifest has no description, license, license-file, documentation, homepage or repository.
+See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info.
+--snip--
+error: api errors (status 200 OK): missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
+````
+Bunun sebebi, sandığınızı kullanmak isteyecek programcılar için, sandığınızın neler yaptığını ve hangi koşullar altında kullanılabileceğini düzenleyen açıklama ve lisans bilgileri gibi önemli detayları atlamış olmanızdır. Bu hatayı düzeltebilmeniz için gerekli olan bilgileri paketinizin *Cargo.toml* dosyasına işlemeniz gerekir.  
