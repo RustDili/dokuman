@@ -24,7 +24,7 @@ fn main() {
 ````
 
 ### ii. Char
-**char:**  `'a'`, `'@'`,  `'~'` gibi her biri 4 byte' a sığabilen ve tek bir karakteri temsil eden karakterleri tutar ve tek tırnak gösterimiyle temsil edilir.
+**char:**  `'a'`, `'@'`,  `'~'` gibi her biri 4 byte (unicode desteği nedeniyle 32 bit)'a sığabilen ve tek bir karakteri temsil eden karakterleri tutar ve tek tırnak gösterimiyle temsil edilir.
 
 ```Rust
 fn main() {
