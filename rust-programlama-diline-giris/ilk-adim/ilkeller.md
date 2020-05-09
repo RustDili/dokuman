@@ -46,7 +46,7 @@ fn main() {
 | i64       | -9223372036854775808                     | 9223372036854775807                     |
 | i128      | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
 
-**Min ve Max değerleri;** min değerler için -(2ⁿ⁻¹) ve max değerler için 2ⁿ⁻¹-1 formüllerine dayanmaktadır. Türün min değerlerini öğrenmek için `min_value()`, max değerlerini öğrenmek içinse `max_value()` işlevleri kullanılır.
+💡 **Min ve Max değerleri;** min değerler için **-(2ⁿ⁻¹)** ve max değerler için **2ⁿ⁻¹-1** formüllerine dayanmaktadır. Türün alt sınır değerlerini öğrenmek için `min_value()`, üst sınır değerlerini öğrenmek içinse `max_value()` işlevleri kullanılır.
 
 ```Rust
 fn main() {
@@ -65,7 +65,7 @@ fn main() {
 | u64       | 0   | 18446744073709551615                    |
 | u128      | 0   | 340282366920938463463374607431768211455 |
 
-**Min ve Max değerleri;** min değerler için 0 ve max değerler için 2n-1 formüllerine dayanmaktadır. Her tam sayı türünün min değerlerine `min_value()`, max değerlerine ise `max_value()` işlevleri aracılığıyla ulaşılır.  
+💡 **Min ve Max değerleri;** min değerler için **0** ve max değerler için **2ⁿ-1** formüllerine dayanmaktadır. Her tam sayı türünün alt sınır değerlerine `min_value()`, üst sınır değerlerine ise `max_value()` işlevleri aracılığıyla ulaşılır.  
 
 ```Rust
 fn main() {
@@ -75,6 +75,8 @@ fn main() {
 
 ### v. isize ve usize
 İşaretçi boyutunda işaretli ve işaretsiz tam sayı türlerini tutarlar. Programın derlenmekte olduğu bilgisayar mimarisinin sunduğu en yüksek bit değerine eşittirler. Varsayılan olarak bu değerler 32 bit platformlarda **32 bit**, 64 bit platformlarda da **64 bit** kabul edilir.
+
+> 🔎 [Çapraz derleme](https://github.com/rust-lang/rustup.rs#cross-compilation) ve [desteklenen katmanlar](https://forge.rust-lang.org/release/platform-support.html) hakkında daha fazla bilgi edinebilirsiniz
 
 ```Rust
 fn main() {
