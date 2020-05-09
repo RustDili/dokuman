@@ -2,7 +2,7 @@
 Girilen **n** adet parametreyi alıp, bir mantık çerçevesinde sarmalanmış kod bloğuna aktararak bir veya birden fazla sonucun üretilmesini ve çağrıldığı noktaya döndürülmesini sağlayan yapısal bloklardır.
 
 ### İsimlendirilmiş İşlevler
-- İşlevin İngilizce karşılığı function'ı simgeleyen **`fn`** anahtar sözcüğü ile bildirilirler.
+- İşlevin İngilizce karşılığı **function** kelimesinin kısaltılmış hali **`fn`** anahtar sözcüğü ile bildirilirler.
 - **Argüman** ile kullanıldığında bu argümanların veri türleri **parametre listesi**nde bildirilir.
 - İşlevlerin boş bir **[Tuple ()](https://github.com/rust-lang-tr/dokuman/blob/master/rust-programlama-diline-giris/ilk-adim/ilkeller.md#viii-%C3%A7okuzlular)** döndüreceği varsayılır. Bir işlevin sonuç döndürmesi isteniyorsa, dönüş türleri **`->`** işaretinden sonra belirtilir.
 
