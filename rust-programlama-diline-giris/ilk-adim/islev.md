@@ -57,20 +57,19 @@ fn birle_topla(a: i32) -> i32 {
 ### İsimsiz işlevler
 Kapama ya da lambda işlevler olarak bilinirler; argümanlarının veri türlerini bildirmek veya işlevden sonuç döndürmek isteğe bağlıdır.
 
-Standart biçimde tasarlanmış bir işlev aşağıdaki gibi ifade edelebilir.
+Standart biçimde tasarlanmış bir işlev aşağıdaki gibi ifade edilebilir:
 
 ```Rust
-fn get_square_value(x: i32) -> i32 { 
-  x * x	
+fn karesini_al(x: u32) -> u32 {
+    x * x
 }
-
-fn main() { 
-  let x = 2; 
-  println!("{}", get_square_value(x)); // 4 yazdırır.
+fn main() {
+    let a = 5;
+    println!("{}'nın karesi: {}", a, karesini_al(a));  
 } 
 ````
 
-Aynı örneği isimsiz işlev olarak tasarlanamak çok daha pratiktir. Böylece işlevin giriş ve çıkış türlerini bildirmek isteğe bağlı kalır.
+Aynı örneği isimsiz işlev olarak tasarlanamak çok daha pratiktir. Bu tasarımda işlevin giriş ve çıkış türlerini isteğe bağlı olarak bildirilir:
 
 ```Rust
 fn main() {
@@ -83,7 +82,7 @@ fn main() {
     println!("{}'in karesi: {}", x, karesi(x));
 }
 ````
-Giriş ve dönüş türlerini belirtmenin isteğe bağlı olduğu bu isimsiz işlevde, giriş parametreleri işleve `||` kullanılarak geçirilir ve ifade gövdesi `{};` köşeli parantezler ile sarılır.
+Giriş ve dönüş türlerini belirtmenin isteğe bağlı olduğu bu isimsiz işlevde, giriş parametreleri işleve **`||`** kullanılarak geçirilir ve ifade gövdesi **`{};`** köşeli parantezler ile sarılır.
 
 Eğer giriş ve dönüş türleri belirtilmeyen isimsiz işlev tek bir satırdan oluşuyorsa `{};` köşeli parantez kullanmak zorunlu değildir.
 
