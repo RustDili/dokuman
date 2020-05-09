@@ -138,38 +138,46 @@ println!("ys dizisi belleğin stack bölgesinde: {} byte yer kaplıyor.", mem::s
 > 🔎 Eğer eleman adetlerinin otomatik olarak arttırılabildiği bir dizi türü gerekiyorsa bunun için [**Vektörler**](https://github.com/rust-lang-tr/dokuman/blob/master/rust-programlama-diline-giris/ikinci-adim/vectors.md) tercih edilmelidir. Vektörler türleri aynı olmak kaydıyla istenilen sayıda elemanı kabul ederler.
 
 ### viii. Çokuzlular
-Aynı ya da farklı veri türlerinden oluşan elemanların sabit büyüklükteki listelerini oluşturmak için kullanılan değer topluluklarıdırlar. Her elemanı `(T1, T2, T3...Tn)` kendi türünün imzalı değeri olduğundan, işlevlerden çok sayıda değer döndürürken oldukça yararlıdır.
+Aynı ya da farklı veri türlerinden oluşan elemanların sabit büyüklükteki listelerini oluşturmak için kullanılan değer topluluklarıdırlar. Her elemanı `(T1, T2, T3...Tn)` kendi türünün imzalı değeri olduğundan, çok sayıda veya farklı türlerden oluşan koleksiyonlarla çalışırlırken oldukça faydalıdırlar.
 
 ```Rust
 fn main() {
     let a = (1, 1.5, true, 'a', "Merhaba Dünya!");
-    println!("a: {:?}", a);                       // a: (1, 1.5, true, 'a', "Merhaba Dünya!")
+    let a: (i32, f64, bool, char, &str) = (1, 1.5, false, 'a', "Merhaba Dünya!");
+    println!("a: {:?}", a);                        // a: (1, 1.5, false, 'a', "Merhaba Dünya!")
+    
+    let mut x = (1, 1.5);
+    x.0 = 2;
+    x.1 = 3.0;
+    println!("x: {:?}", x);                        // x: (2, 3.0)
     
     let b: (i32, f64) = (10, 3.5);
-    println!("b: {:?}", b);                       // b: (10, 3.5)
+    println!("b: {:?}", b);                        // b: (10, 3.5)
     
     let (c, d) = b;
-    println!("c: {:?}, d: {:?}", c, d);           // c: 10, d: 3.5
+    println!("c: {:?}, d: {:?}", c, d);            // c: 10, d: 3.5
     
     let (e, _, f, _, g) = a;
-    println!("e: {:?}, f: {}, g: {}", e, f, g);   // e: 1, f: true, g: Merhaba Dünya! _, ilgilenmediğiniz öğeleri temsile der
+    println!("e: {:?}, f: {}, g: {}", e, f, g);    // e: 1, f: true, g: Merhaba Dünya! _, ilgilenmediğiniz öğeleri temsile der
     
     let h = (0,);
-    println!("h: {:?}", h);                       // h: (0,) -> Tek elemanlı Çokuzlu
+    println!("h: {:?}", h);                        // h: (0,) -> Tek elemanlı Çokuzlu
     
     let i = (b, (20, 50), -3.2);
-    println!("i: {:?}", i);                       // i: ((10, 3.5), (20, 50), -3.2)
+    println!("i: {:?}", i);                        // i: ((10, 3.5), (20, 50), -3.2)
 }
 ````
 
-Bu türün de tıpkı diziler gibi değiştirilemeyeceği varsayılır. `mut` anahtar kelimesiyle tanımlanmaları sadece öğelerinin değiştirilebilmesini sağlar. Eleman sayılarının değiştirilmesine izin verilmez.
+⭐️ Bu tür de tıpkı diziler gibi varsayılan olarak değiştirilmez halde gelir. Bu nedenle `mut` anahtar kelimesiyle tanımlanmaları sadece  öğelerinin değiştirilebilmesini sağlar ve eleman sayılarının değiştirilmesine izin verilmez. 
+
+💡 Çokuzlu öğelerinin herhangi birini değiştirmek istediğinizde, yeni değerin önceki değer türü ile aynı olmasına dikkat etmelisiniz.
 
 ### ix. Dilimler
-Dizilere benzer ancak boyutları derleme zamanında belli değildir. Dilim `&[T];` söz dizimiyle ifade edilebilen ve iki parçadan oluşan bir nesne olarak düşünülmelidir. İfadenin ilk parçası erişilen verinin göstergesi olurken, ikinci parçası elde edilecek olan dilimin uzunluğunu gösterir.
+Dizilere benzemekle birlikte boyutları derleme zamanında belli olmayan koleksiyon türleridir. Dilimleri `&[T];` söz dizimiyle ifade edilebilen ve iki parçadan oluşan nesneler olarak düşününmemiz gerekir. Bu parçaların ilki erişilen verinin göstergesi olurken, ikincisi elde edilecek olan dilimin uzunluğunu göstermektedir. Bir diziyi veya koleksiyon türünü kopyalayarak kullanmak yerine verilerin bir kısmına erişmek için bir görüntü/referans oluştururlar. Bu referanslar değişmez veya değişir halde olabilirler.  
 
 ```Rust
 fn main() {
-    let a: [i32; 4] = [1, 2, 3, 4]; // Referans verilecek ana dizi 
+    let a: [i32; 4] = [1, 2, 3, 4];    // Referans verilecek ana dizi 
     
     let b: &[i32] = &a;
     println!("b: {:?}", b);            // Bütün dizi dilimlenir.
