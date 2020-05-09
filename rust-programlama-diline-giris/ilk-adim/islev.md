@@ -2,9 +2,9 @@
 Girilen **n** adet parametreyi alıp, bir mantık çerçevesinde sarmalanmış kod bloğuna aktararak bir veya birden fazla sonucun üretilmesini ve çağrıldığı noktaya döndürülmesini sağlayan yapısal bloklardır.
 
 ### İsimlendirilmiş İşlevler
-- İşlevin İngilizce karşılığı function'ı simgeleyen `fn` anahtar sözcüğü ile bildirilirler.
-- Argüman ile kullanıldığında bu argümanların veri türleri parametre listesinde bildirilir.
-- İşlevlerin boş bir **Tuple ()** döndüreceği varsayılır. İşlevin sonuç döndürmesi isteniyorsa, dönüş türleri **`->`** işaretinden sonra belirtilir.
+- İşlevin İngilizce karşılığı function'ı simgeleyen **`fn`** anahtar sözcüğü ile bildirilirler.
+- **Argüman** ile kullanıldığında bu argümanların veri türleri **parametre listesi**nde bildirilir.
+- İşlevlerin boş bir **[Tuple ()](https://github.com/rust-lang-tr/dokuman/blob/master/rust-programlama-diline-giris/ilk-adim/ilkeller.md#viii-%C3%A7okuzlular)** döndüreceği varsayılır. Bir işlevin sonuç döndürmesi isteniyorsa, dönüş türleri **`->`** işaretinden sonra belirtilir.
 
 #### i. Merhaba dünya!
 
@@ -26,17 +26,17 @@ fn main() {
 }
 ````
 
-#### iii. Dönen değerler
-
+#### iii. Değer döndürmek
+01. `return` anahtar sözcüğü kullanılmayan örnek. Sadece son ifade döner:
 ```Rust
-// 01. Return anahtar sözcüğü kullanılmayan örnek. Sadece son ifade döner.
 fn birle_topla(a: i32) -> i32 { 
-  a + 1	// Son ifade bu satır olduğundan dönecek olan ifade bu satırdadır. Son satırda noktalı virgül aranmaz. 
+  a + 1	// Son ifade bu satır olduğundan, dönecek olan ifade bu satırdadır. Son satırda noktalı virgül aranmaz. 
         // Ve bu bildirimin return a + 1; ifadesine eşit olduğu anlaşılır. 
 } 
-
-// 02. Return anahtar sözcüğü kullanan örnek. 
-fn ikiyle_topla(a: i32) -> i32 { 
+````
+02. `return` anahtar sözcüğü kullanan örnek. Return ile işaretlenmiş satır değerlendirilerek döndürülür.
+```Rust
+ fn ikiyle_topla(a: i32) -> i32 { 
   return a + 2; // a+2 döndürülür. Ancak bu kötü bir uygulama olarak kabul edilir. Bu tür kullanımlar genellikle  
                 // koşullu ifadelerde yer alırlar. Diğer hallerde son ifade yöntemi tercih edilmelidir
 }
