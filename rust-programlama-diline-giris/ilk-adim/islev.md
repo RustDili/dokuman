@@ -27,18 +27,17 @@ fn main() {
 ````
 
 #### iii. Değer döndürmek
-01. `return` anahtar sözcüğü kullanılmayan örnek. Sadece son ifade döner:
+01. `return` anahtar sözcüğü kullanılmayan örnek. Sadece son ifade döner. Son satırda noktalı virgül aranmaz:
 ```Rust
 fn birle_topla(a: i32) -> i32 { 
-  a + 1	// Son ifade bu satır olduğundan, dönecek olan ifade bu satırdadır. Son satırda noktalı virgül aranmaz. 
+  a + 1	// Son ifade bu satır olduğundan, dönecek olan ifade bu satırdadır.  
         // Ve bu bildirimin return a + 1; ifadesine eşit olduğu anlaşılır. 
 } 
 ````
-02. `return` anahtar sözcüğü kullanan örnek. Return ile işaretlenmiş satır değerlendirilerek döndürülür.
+02. `return` anahtar sözcüğü kullanan örnek. Döndürülecek olan satır `return` anahtar kelimesiyle işaretlendirildiğinden bu satırdaki ifade işlenerek döndürülür.
 ```Rust
  fn ikiyle_topla(a: i32) -> i32 { 
-  return a + 2; // a+2 döndürülür. Ancak bu kötü bir uygulama olarak kabul edilir. Bu tür kullanımlar genellikle  
-                // koşullu ifadelerde yer alırlar. Diğer hallerde son ifade yöntemi tercih edilmelidir
+  return a + 2; // a+2 döndürülür. 
 }
 ````
 
