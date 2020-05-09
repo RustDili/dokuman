@@ -54,10 +54,10 @@ fn birle_topla(a: i32) -> i32 {
   let e = d(5); // 7
 ````
 
-### İsimsiz işlevler
+### İsimsiz işlevler (Kapamalar)
 Kapama ya da lambda işlevler olarak bilinirler; argümanlarının veri türlerini bildirmek veya işlevden sonuç döndürmek isteğe bağlıdır.
 
-Standart biçimde tasarlanmış bir işlev aşağıdaki gibi ifade edilebilir:
+Standart biçimde tasarlanmış isimlendirilmiş bir işlev aşağıdaki gibi ifade edilebilir:
 
 ```Rust
 fn karesini_al(x: u32) -> u32 {
@@ -69,6 +69,7 @@ fn main() {
 } 
 ````
 
+#### i. Giriş ve dönüş türleri bildirilerek 
 Aynı örneği isimsiz işlev olarak tasarlanamak çok daha pratiktir. Bu tasarımda işlevin giriş ve çıkış türlerini isteğe bağlı olarak bildirilir:
 
 ```Rust
@@ -84,14 +85,40 @@ fn main() {
 ````
 Giriş ve dönüş türlerini belirtmenin isteğe bağlı olduğu bu isimsiz işlevde, giriş parametreleri işleve **`||`** kullanılarak geçirilir ve ifade gövdesi **`{};`** köşeli parantezler ile sarılır.
 
+#### ii. Giriş ve dönüş türü bildirmeden 
 Eğer giriş ve dönüş türleri belirtilmeyen isimsiz işlev tek bir satırdan oluşuyorsa `{};` köşeli parantez kullanmak zorunlu değildir.
 
 ```Rust
 fn main() {
-    let a = 3;
-    let b = 5;
+    let x = 2;
+    let karesi = |i| i * i; // bir satırdan oluşan isimsiz 
+                            //işlevlerde { } isteğe bağlı
+    println!("karesi: {}", karesi(x)); // karesi: 4
+}
+````
+
+#### iii. Oluşturup ve çağırırken tür bildirimli
+İsimsiz işlevleri tür bildirimi ile oluşturup çağırabilirsiniz. Ancak hem oluştururken hem de çağırırken süslü parantezler **`{ }`** zorunludur. 
+
+```Rust
+fn main() {
+    let x = 3;
     
-    let carp = |a, b| a * b;
-    println!("a: {} ve b: {} çarpımı: {}'dır.", a, b, carp(a, b));
+    // oluştururken ve çağırırken { } zorunludur.
+    let x_in_karesi = |i: u32| -> u32 { i * i}(x);
+    println!("x'in karesi: {}", x_in_karesi); // x'in karesi: 9
+}
+````
+
+#### iv. Tür bildirimsiz oluşturup çağırma
+Bu tarz isimsiz işlevlerde sadece dönüş türünü bildirmek zorunludur.
+
+```Rust
+fn main() {
+    let x = 4;
+    
+    // ⭐️ Dönüş türü zorunludur
+    let karesi = |i| -> i32 { i * i}(x); 
+    println!("karesi: {}", karesi); // karesi: 16
 }
 ````
