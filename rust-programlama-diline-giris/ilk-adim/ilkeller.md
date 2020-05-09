@@ -46,7 +46,7 @@ fn main() {
 | i64       | -9223372036854775808                     | 9223372036854775807                     |
 | i128      | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
 
-**Min ve Max değerleri;** min değerler için -(2n-1) ve max değerler için 2n-1-1 formüllerine dayanmaktadır. Türün min değerlerini öğrenmek için `min_value()`, max değerlerini öğrenmek içinse `max_value()` işlevleri kullanılır.
+**Min ve Max değerleri;** min değerler için -(2ⁿ⁻¹) ve max değerler için 2ⁿ⁻¹-1 formüllerine dayanmaktadır. Türün min değerlerini öğrenmek için `min_value()`, max değerlerini öğrenmek içinse `max_value()` işlevleri kullanılır.
 
 ```Rust
 fn main() {
