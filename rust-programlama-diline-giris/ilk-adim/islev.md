@@ -96,7 +96,7 @@ fn main() {
 }
 ````
 
-#### iii. Oluşturup ve çağırırken tür bildirimli
+#### iii. Oluşturup çağırırken tür bildirimli
 İsimsiz işlevleri tür bildirimi ile oluşturup çağırabilirsiniz. Ancak hem oluştururken hem de çağırırken süslü parantezler **`{ }`** zorunludur. 
 
 ```Rust
