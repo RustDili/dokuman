@@ -87,7 +87,8 @@ fn main() {
 
 ### vi. f32 ve f64
 32 ve 64 bit boyutlarında ondalık basamaklı sayıları tutabilen türlerdir. Rust, kayan noktalı sayılar aritmetiğini ifade ederken **IEEE** standartlarına uyar. Bu nedenle `f32` türü, diğer dillerdeki tek duyarlıklı float türüne benzerken, `f64` çift duyarlıklı double türüne benzer.
-Hedeflenen donanım çift hassasiyeti desteklemiyor; yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Aksi belirtilmedikçe Rust, tam sayılar için `i32`, kayan noktalı sayılar için `f64` türlerinin kullanılacağını varsayar. Her ne kadar derleme anında türler çıkarsanıyor olsalar da, eğer varsayılan türler haricinde bir tür kullanılmak isteniyorsa, bu türün açıkça bildirilmesi gerekir.
+Hedeflenen donanım çift hassasiyeti desteklemiyorsa yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Rust' ta aksi belirtilmedikçe tamsayılar için `i32`, kayan noktalı sayılar için `f64` türlerinin kullanılacağını varsıyılır. 
+Her ne kadar derleme anında türler çıkarsanıyor olsalar da, eğer varsayılan türler haricinde bir tür kullanılmak isteniyorsa, bu türün açıkça bildirilmesi gerekir.
 
 ```Rust
 fn main() {
@@ -106,7 +107,13 @@ Tür ve uzunluk bilgileri derleme zamanında bilinmesi gerektiğinden `[T; size]
 
 ```Rust
 let a = [1, 2, 3];                                // a[0] = 1, a[1] = 2, a[2] = 3 
-let mut b = [5, 10, 15];                          // Elemanları değişebilen dizi 
+let mut b = [1, 2, 3];                            // Elemanları değişebilen dizi
+b[0] = 2;
+b[1] = 4;
+b[2] = 6;
+
+println!("{:?}", b);                              // [2, 4, 6]; 
+
 let c: [i32; 0] = [];                             // [Tür tanımı; öğesiz] -> [] / boş bir dizi
 let d: [i32; 3] = [1, 2, 3];                      // Türü ve eleman sayısı bildirilmiş dizi 
 let e = ["değer"; 3];                             // ["değer", "değer", "değer"]; 
@@ -126,8 +133,9 @@ println!("Dizi elemanları: {:?}", ab);            // [-2, -2, -2, -2, -2];
 println!("ys dizisi belleğin stack bölgesinde: {} byte yer kaplıyor.", mem::size_of_val(&ys));
 ````
 
-Diziler varsayılan olarak değişmez kabul edildiklerinden, tanımlandıktan sonra eleman adetleri ve türleri değiştirilemez. Tanımlandıkları sırada aldıkları mut anahtar sözcüğü ile sadece eleman değerleri değiştirebilir.
-Eğer eleman adetlerinin otomatik olarak arttırılabildiği bir dizi türü gerekiyorsa bunun için **Vektör**ler tercih edilmelidir. Vektörler türleri aynı olmak kaydıyla istenilen sayıda elemanı kabul ederler.
+💡 Diziler varsayılan olarak değişmez kabul edildiklerinden, tanımlandıktan sonra eleman adetleri ve türleri değiştirilemez. Tanımlandıkları sırada aldıkları mut anahtar sözcüğü ile sadece eleman değerleri değiştirebilir.
+
+> 🔎 Eğer eleman adetlerinin otomatik olarak arttırılabildiği bir dizi türü gerekiyorsa bunun için [**Vektörler**](https://github.com/rust-lang-tr/dokuman/blob/master/rust-programlama-diline-giris/ikinci-adim/vectors.md) tercih edilmelidir. Vektörler türleri aynı olmak kaydıyla istenilen sayıda elemanı kabul ederler.
 
 ### viii. Çokuzlular
 Aynı ya da farklı veri türlerinden oluşan elemanların sabit büyüklükteki listelerini oluşturmak için kullanılan değer topluluklarıdırlar. Her elemanı `(T1, T2, T3...Tn)` kendi türünün imzalı değeri olduğundan, işlevlerden çok sayıda değer döndürürken oldukça yararlıdır.
