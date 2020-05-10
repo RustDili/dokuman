@@ -1,6 +1,6 @@
-# Operatörler
-#### i. Aritmetik operatörler
-**`+`, `-`, `/`, `%`** sembolleriyle gösterilirler. Ek olarak **`+`** operatörü dizi ve string birleştirme işlemlerinde kullanılır.
+# İşleçler
+#### i. Aritmetik işleçler
+**`+`, `-`, `/`, `%`** sembolleriyle gösterilirler. Ek olarak **`+`** işleci, dizi ve string birleştirme işlemlerinde kullanılır.
 
 ```Rust
 let a = 5; 
@@ -12,7 +12,7 @@ let f = a % 2;      // 1
 let g = 5.0 / 2.0;  //2.5
 ````
 
-#### ii. Karşılaştırma operatörleri
+#### ii. Karşılaştırma işleçleri
 **`==`, `!=`, `<`, `>`, `<=`, `>=`** sembolleriyle gösterilirler.
 
 ```Rust
@@ -24,13 +24,15 @@ let e = a < b;            //true
 let f = a > b;            //false 
 let g = a <= a;           //true 
 let h = a >= a;           //false 
+
+// 🔎
 let i = true > false;     //true 
 let j = 'a' > 'A';        //true
 
 println!("c: {:?}", c);   // false
 ````
 
-#### iii. Mantıksal operatörler
+#### iii. Mantıksal işleçler
 **`!`, `&&`, `||`** sembolleriyle gösterilirler.
 
 ```Rust
@@ -40,7 +42,9 @@ let c = !a;       //false
 let d = a && b;   //false 
 let e = a || b;   //true
 ````
-Tamsayılar için `two’s complements` gösteriminde **`!`** operatörü bitleri ters çevirir.
+
+🔎Tamsayılar için `two’s complements` gösteriminde **`!`** işleci bitleri ters çevirir.
+
 ```Rust
 let a = !-2;    //1 
 let b = !-1;    //0 
@@ -48,7 +52,7 @@ let c = !0;     //-1
 let d = !1;     //-2
 ````
 
-#### iv. Bit işlem operatörleri
+#### iv. Bit işlem işleçleri
 **`&`, `|`, `^`, `<<`, `>>`** sembolleriyle gösterilirler.
 
 ```Rust
@@ -62,8 +66,8 @@ let f = a << b;   //4 (a’nın sonuna b’nin değeri kadar 0 sayısı eklenir 
 let g = a >> b;   //0 (a’nın sonundan b değeri kadar bit çıkartılır a -> o̶1̶ -> 0)
 ````
 
-#### v. Atama ve bileşik atama operatörleri
-Atama **`=`** operatörü değer ya da işlevlere isim atamak için kullanılır. Bileşik atama operatörleriyse; artimetik veya bit işlem operatörlerinin atama operatörüyle birleşmesinden oluşur ve: **`+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`** sembolleriyle gösterilirler.
+#### v. Atama ve bileşik atama işleçleri
+Atama **`=`** işleci bir değere veya işleve isim atamak için kullanılır. Bileşik atama işleçleriyse; artimetik veya bit işlem işleçlerinin atama operatörüyle birleşmesinden oluşur ve: **`+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`, `<<=`, `>>=`** sembolleriyle gösterilirler.
 
 ```Rust
 let mut a = 2; 
@@ -98,7 +102,7 @@ a >>= 2;
 println!("a <<= 2: {:?}", a);     //101̶0̶ -> 10 -> 2
 ````
 
-#### vi. Tür dönüşüm operatörü
+#### vi. Tür dönüşüm işleci
 Tür dönüşüm işlemleri **`as`** anahtar kelimesi kullanılarak gerçekleştirilir.
 
 ```Rust
@@ -106,5 +110,5 @@ let a = 15;
 let b = (a as f64) / 2.0; // 7.5
 ````
 
-#### vii. Borçlanma ve dereference operatörü
-Bir değişmez ya da değişkenin mülkiyetini ödünç almak için kullanılan **`&`** ve **`mut&`** operatörleri borçlanma operatörü olarak bilinirler. Dereference işlemleri için **`*`** oparatörü kullanılır.
+#### vii. Borçlanma ve dereference işleci
+Bir değişmez ya da değişkenin mülkiyetini ödünç almak için kullanılan **`&`** ve **`mut&`** işleçleri borçlanma işleçleri olarak bilinirler. Dereference işlemleri için **`*`** işleci kullanılır.
