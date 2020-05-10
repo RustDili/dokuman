@@ -124,7 +124,7 @@ fn main() {
 // a:4, b:6, c:-3
 ````
 
-> 🔎 Örnekte yer alan `floor()`, `ceil()`, `round` metod açıklamaları ve daha fazlası için [bağlantıyı](https://doc.rust-lang.org/std/primitive.f32.html) ziyaret edebilirsiniz.
+> 🔎 Örnekte yer alan `floor()`, `ceil()`, `round()` metod açıklamaları ve daha fazlası için [bağlantıyı](https://doc.rust-lang.org/std/primitive.f32.html) ziyaret edebilirsiniz.
 
 ### vii. Diziler
 Aynı veri türündeki öğelerin sabit boyutlu listesini tutarlar. Köşeli parantez içinde tanımlanırlar ve bellekte bitişik olarak depolanırlar. 
