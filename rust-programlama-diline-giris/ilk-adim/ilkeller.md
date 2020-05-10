@@ -5,21 +5,35 @@ Rust çok sayıda basit veri türüne erişim sağlar.
 **bool:** yalnızca `true` ya da `false` olabilecek bir değeri temsil eden mantıksal veri türüdür. 
 
 ```Rust
-let x = true;         // Tür çıkarsamalı kısa bildirim 
-let y: bool = false;  // Açık tür bildirimi
+fn main() {
+    let a: bool = true;         // Tür bildirimli 
+    let b = false;              // Tür çıkarsamalı kısa bildirim şekli
+    
+    println!("{}, {}", a, b);   // true, false
+}
 ````
 
-Bir tamsayı türüne dönüştürüldüğünde `true` için **1** `false` için **0** atandığı görülür. `!`, `&` , `|` operatörleri aracılığıyla  BitAnd, BitOr, Not vb. gibi çeşitli özelliklerin uygulanmasını sağlar. Uygulamada TRUE, FALSE, 1, 0 gibi olası karşılık değerleri kullanılmaz.
+Bir tamsayı türüne dönüştürüldüğünde `true` için **1** `false` için **0** atandığı görülür. 
+
+```Rust
+   let x = a as u8;
+   let y = b as u8;
+   println!("Tamsayı true : {}, tamsayı false: {}", x, y);
+   // Tamsayı true : 1, tamsayı false: 0
+
+````    
+Bit operatörleri aracılığıyla `BitAnd` **`&`**, `BitOr` **`|`**, `Not` **`!`**  vb. gibi çeşitli özelliklerin uygulanmasını sağlar.
+⭐️ Uygulamada TRUE, FALSE, 1, 0 gibi olası karşılık değerleri kullanılmaz.
 
 ```Rust
 fn main() {
-   let bugun_hava_yagmurlu = true;
-   
-   if bugun_hava_yagmurlu {
-       println!("Dışarıya çıkıyorsan şemsiye almalısın.");
-   } else {
-       println!("Kahve içerek güneşlenmek için ne güzel bir gün.");
-   }
+    let hava_yagmurlu: bool = true;
+    
+    if hava_yagmurlu == true {
+        println!("Dışarıya çıkarken şemsiyeni unutma");
+    } else {
+        println!("Güneşlenerek kahve içmek için harika bir gün");
+    }
 }
 ````
 
