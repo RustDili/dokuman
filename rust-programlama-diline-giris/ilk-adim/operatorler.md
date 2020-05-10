@@ -111,4 +111,26 @@ let b = (a as f64) / 2.0; // 7.5
 ````
 
 #### vii. Borçlanma ve dereference işleci
-Bir değişmez ya da değişkenin mülkiyetini ödünç almak için kullanılan **`&`** ve **`mut&`** işleçleri borçlanma işleçleri olarak bilinirler. Dereference işlemleri için **`*`** işleci kullanılır.
+[Yaşam süresi](https://github.com/rust-lang-tr/dokuman/blob/master/mulkiyet-kavrami/yasam-suresi.md) boyunca, bir değişmez ya da değişkenin [mülkiyetini](https://github.com/rust-lang-tr/dokuman/blob/master/mulkiyet-kavrami/mulkiyet.md) ödünç almak için kullanılan **`&`** ve **`mut&`** işleçleri [borçlanma](https://github.com/rust-lang-tr/dokuman/blob/master/mulkiyet-kavrami/borclanma.md) işleçleri olarak bilinirler. Dereference işlemleri için **`*`** işleci kullanılır.
+### Sonraki konuya geçmeden önce...
+Aşağıda örnekte her ikisi de `&str` türünden seçilmiş değişkenler `String` türüne dönmüştürülmektedir. 
+```Rust
+fn main() {
+    let (s1, s2) = ("Bir", " şeyler");   // ikisi de &str
+    
+    // Aşağıdaki her örnekte "Bir şeyler" Dizgesi oluşturulmaktadır.
+    
+    let  d = String::from(s1) + s2;     // String + &str
+    println!("d: {}", d);               // d: Bir şeyler
+    
+    let mut s = String::from(s1);       // String
+    s.push_str(s2);                     // + &str
+    println!("s: {}", s);               // s: Bir şeyler
+    
+    let x = format!("{}{}", s1, s2);    // &str/String + &str/String
+    println!("x: {}", x);               // x: Bir şeyler
+    
+    let y = [s1, s2].concat();          // &str ya da String Dizi
+    println!("y: {}", y);               // y: Bir şeyler
+}
+````
