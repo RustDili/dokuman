@@ -36,6 +36,7 @@ fn main() {
         println!("Güneşlenerek kahve içmek için harika bir gün");
     }
 }
+// Dışarıya çıkarken şemsiyeni unutma
 ````
 
 ### ii. Char
@@ -46,12 +47,13 @@ fn main() {
     let a = '😎'; 
     let b = '♫';
     let c = '@';
-    println!("a: {}, b: {}, c: {}", a, b, c);
+    println!("a: {}, b: {}, c: {}", a, b, c); 
 }
+// a:😎, b:♫, c:@
 ````
 
 ### iii. i8, i16, i32, i64, i128
-8, 16, 32, 64, 128 bit sabit boyutlu ve `(+/-)` işaretli tam sayı değerlerini tutarlar.
+8, 16, 32, 64, 128 bit sabit boyutlu ve **`(+/-)`** işaretli tam sayı değerlerini tutarlar.
 
 | VERİ TÜRÜ | MIN                                      | MAX                                     |
 | --------- | ---------------------------------------- | --------------------------------------- |
@@ -61,16 +63,17 @@ fn main() {
 | i64       | -9223372036854775808                     | 9223372036854775807                     |
 | i128      | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727 |
 
-💡 **Min ve Max değerleri;** min değerler için **-(2ⁿ⁻¹)** ve max değerler için **2ⁿ⁻¹-1** formüllerine dayanmaktadır. Türün alt sınır değerlerini öğrenmek için `min_value()`, üst sınır değerlerini öğrenmek içinse `max_value()` işlevleri kullanılır.
+💡 **Alt sınır ve üst sınır değerleri;** alt sınır değerler için **-(2ⁿ⁻¹)** ve üst sınır değerler için **2ⁿ⁻¹-1** formüllerine dayanmaktadır. Türün alt sınır değerlerini öğrenmek için `min_value()`, üst sınır değerlerini öğrenmek içinse `max_value()` işlevleri kullanılır.
 
 ```Rust
 fn main() {
-    println!("i16 min değeri: {} ve max değeri: {}", i16::min_value(), i16::max_value());
+    println!("i16 alt sınır değeri: {} ve üst sınır değeri: {}", i16::min_value(), i16::max_value());
 }
+// u8 alt sınır değeri:0, u8 üst sınır değeri: 255
 ````
 
 ### iv. u8, u16, u32, u64, u128
-8, 16, 32, 64, 128 bit sabit boyutlu ve `(0/+)` işaretli tam sayı değerlerini tutarlar.
+8, 16, 32, 64, 128 bit sabit boyutlu ve **`(0/+)`** işaretli tam sayı değerlerini tutarlar.
 
 | VERİ TÜRÜ | MIN | MAX                                     |
 | --------- | --- | --------------------------------------- |
@@ -80,12 +83,13 @@ fn main() {
 | u64       | 0   | 18446744073709551615                    |
 | u128      | 0   | 340282366920938463463374607431768211455 |
 
-💡 **Min ve Max değerleri;** min değerler için **0** ve max değerler için **2ⁿ-1** formüllerine dayanmaktadır. Her tam sayı türünün alt sınır değerlerine `min_value()`, üst sınır değerlerine ise `max_value()` işlevleri aracılığıyla ulaşılır.  
+💡 **Alt sınır ve üst sınır değerleri;** alt sınır değerler için **0** ve üst sınır değerler için **2ⁿ-1** formüllerine dayanmaktadır. Her tam sayı türünün alt sınır değerlerine `min_value()`, üst sınır değerlerine ise `max_value()` işlevleri aracılığıyla ulaşılır.  
 
 ```Rust
 fn main() {
-    println!("u32 min değeri: {} ve max değeri: {}", u32::min_value(), u32::max_value());
+    println!("u32 alt sınır değeri: {} ve üst sınır değeri: {}", u32::min_value(), u32::max_value());
 }
+// u32 alt sınır değeri: 0 ve üst sınır değeri: 4294967295
 ````
 
 ### v. isize ve usize
@@ -95,15 +99,17 @@ fn main() {
 
 ```Rust
 fn main() {
-    println!("isize max değeri: {} usize max değeri: {}", 
+    println!("isize alt sınır değeri: {} usize üst sınır değeri: {}", 
             isize::max_value(), usize::max_value());
 }
+// isize alt sınır değeri: -9223372036854775808 ve isize üst sınır değeri: 9223372036854775807
 ````
 
 ### vi. f32 ve f64
 32 ve 64 bit boyutlarında ondalık basamaklı sayıları tutabilen türlerdir. Rust, kayan noktalı sayılar aritmetiğini ifade ederken **IEEE** standartlarına uyar. Bu nedenle `f32` türü, diğer dillerdeki tek duyarlıklı float türüne benzerken, `f64` çift duyarlıklı double türüne benzer.
-Hedeflenen donanım çift hassasiyeti desteklemiyorsa yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Rust' ta aksi belirtilmedikçe tamsayılar için `i32`, kayan noktalı sayılar için `f64` türlerinin kullanılacağını varsıyılır. 
-Her ne kadar derleme anında türler çıkarsanıyor olsalar da, eğer varsayılan türler haricinde bir tür kullanılmak isteniyorsa, bu türün açıkça bildirilmesi gerekir.
+Hedeflenen donanım çift hassasiyeti desteklemiyorsa yahut tek hassasiyetli türün çift hassasiyetli türden daha hızlı olabileceği durumlarda `f32`, diğer durumlarda daima `f64` kullanılması tavsiye edilir. Rust' ta aksi belirtilmedikçe tamsayılar için `i32`, kayan noktalı sayılar için `f64` türlerinin kullanılacağını varsayılır. 
+
+⭐️ Her ne kadar derleme anında türler çıkarsanıyor olsalar da, eğer varsayılan türler haricinde bir tür kullanılmak isteniyorsa, bu türün açıkça bildirilmesi gerekir.
 
 ```Rust
 fn main() {
@@ -114,6 +120,8 @@ fn main() {
     println!("a: {}, b: {}, c: {}", a, b, c);
     println!("a: {}, b: {}, c: {}", a.floor(), b.ceil(), c.round());
 }
+// a:4.7, b:5.2, c:-3.3
+// a:4, b:6, c:-3
 ````
 
 ### vii. Diziler
