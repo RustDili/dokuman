@@ -23,6 +23,7 @@ Bir tamsayı türüne dönüştürüldüğünde `true` için **1** `false` için
 
 ````    
 Bit operatörleri aracılığıyla `BitAnd` **`&`**, `BitOr` **`|`**, `Not` **`!`**  vb. gibi çeşitli özelliklerin uygulanmasını sağlar.
+
 ⭐️ Uygulamada TRUE, FALSE, 1, 0 gibi olası karşılık değerleri kullanılmaz.
 
 ```Rust
