@@ -14,7 +14,7 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 * [Değişken bağlamı, sabit ve statik öğeler](ilk-adim/baglam-sabit-statik.md)
 * [İşlevler](ilk-adim/islev.md)
 * [Basit veri türleri](ilk-adim/ilkeller.md)
-* [Operatörler](ilk-adim/operatorler.md)
+* [İşleçler](ilk-adim/operatorler.md)
 * [Kontrol akışı](ilk-adim/kontrol-akisi.md)
 ## Sonraki Aşama
 * [Vektörler](ikinci-adim/vectors.md)
