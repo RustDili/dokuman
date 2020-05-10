@@ -257,6 +257,36 @@ fn main() {
     let dunya = &dizgi[8..15];
     println!("Dizginin son parçası: {}", dunya);
 }
+// Dizginin ilk parçası: Merhaba
+// Dizginin son parçası: dünya!
 ````
 ⭐️ Hafızanın herhangi bir yerinde saklanan ve boyutu belirsiz bir UTF-8 kod noktası koleksiyonunu tutan statik ve değişmez olarak tahsis edilmiş bir dizgi parçasıdır. Dizgiler ödünç verilirken **`&str`** şeklinde kullanılırlar.
 
+## Sonraki konuya geçmeden önce...
+- Değişken tanımlarında yapılan tür bildirimlerinin dışında, tamsayılar için veri türü doğrudan sonek olarak değere eklenebilir. Bunun yanında, uzun sayıların okunabilirliğini artırmak amacıyla basamaklar arasında **`_`** karakterini bölücü olarak kullanabiliriz. Bölücünün kullanımı esnek olup istenilen basamakların arası tıpku bu sayıda olduğu gibi `10000_0000` istenildiği şekilde bölünebilir.
+
+```Rust
+fn main() {
+    // Bu tanım `let a: i18 = 5;` ifadesine eşittir
+    let a = 5i18;
+    
+    // Bu tanım `let b: i32 = 100000000;` ifadesine eşittir
+    let b = 100_000_000; 
+}
+````
+- Dizge olarak Türkçeleştirdiğimiz [`String`](https://doc.rust-lang.org/std/string/struct.String.html), kendisine belleğin heap adlı bölgesinde yer ayrılan bir türdür. Bu nedenle dizgilerin  boyutları genişlemeye müsait olup UTF-8 standartlarında oldukları garanti edilir. Genellikle bir dizginin mülkiyetine ihtiyaç duyulduğunda dizginin kendisi, bir dizgiyi ödünç almak gerektiğinde ise `&str` ile dizginin referansı kullanılır.
+
+- Bir [String](https://doc.rust-lang.org/std/string/struct.String.html) türü, `&str` türünden, [`to_string()`](https://doc.rust-lang.org/std/string/trait.ToString.html) veya [`String::from()`](https://doc.rust-lang.org/std/string/struct.String.html#method.from) metodları kullanılarak oluşturulabilir. Benzer şekilde bir `String` türü de [`as_str()`](https://doc.rust-lang.org/std/string/struct.String.html#method.as_str) metodu yardımıyla, `&str` türüne dönüştürülebilir.
+
+```Rust
+fn main() {
+    let d: &str = "Merhaba";    // &str
+    let s = d.to_string();      // şimdi String
+    
+    let dd = s.as_str();        // &str
+    let e = String::from(dd);    // yine String
+    
+    println!("d:{}, s:{}, dd:{}, e:{}", d, s, dd, e);
+}
+// d:Merhaba, s:Merhaba, dd:Merhaba, e:Merhaba
+````
