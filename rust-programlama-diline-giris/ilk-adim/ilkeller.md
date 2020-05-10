@@ -198,7 +198,7 @@ fn main() {
 💡 Çokuzlu öğelerinin herhangi birini değiştirmek istediğinizde, yeni değerin önceki değer türü ile aynı olmasına dikkat etmelisiniz.
 
 ### ix. Dilimler
-Dizilere benzemekle birlikte boyutları derleme zamanında belli olmayan koleksiyon türleridir. Dilimleri `&[T];` söz dizimiyle ifade edilebilen ve iki parçadan oluşan nesneler olarak düşününmemiz gerekir. Bu parçaların ilki erişilen verinin göstergesi olurken, ikincisi elde edilecek olan dilimin uzunluğunu göstermektedir. Bir diziyi veya koleksiyon türünü kopyalayarak kullanmak yerine verilerin bir kısmına erişmek için bir görüntü/referans oluştururlar. Bu referanslar değişmez veya değişir halde olabilirler.  
+Dizilere benzemekle birlikte boyutları derleme zamanında belli olmayan koleksiyon türleridir. Dilimleri **`&[T];`** söz dizimiyle ifade edilebilen ve iki parçadan oluşan nesneler olarak düşününmemiz gerekir. Bu parçaların ilki erişilen verinin göstergesi olurken, ikincisi elde edilecek olan dilimin uzunluğunu göstermektedir. Bir diziyi veya koleksiyon türünü kopyalayarak kullanmak yerine verilerin bir kısmına erişmek için bir görüntü/referans oluştururlar. Bu referanslar değişmez veya değişir halde olabilirler.  
 
 ```Rust
 fn main() {
@@ -235,11 +235,14 @@ fn main() {
     let dil: [i32; 5] = [1, 2, 3, 4, 5];
     dilimle(&dil);
     
-    let dilim: &[i32] = &dil;
+    let dilim: &[i32] = &dizi[0..4];
     dilimle(&dilim);
     
     dilimle(&dil[1..3]);
 }
+// İlk elemanı 0 olan 5 elemanlı dilim
+// İlk elemanı 0 olan 4 elemanlı dilim
+// İlk elemanı 1 olan 3 elemanlı dilim
 ````
 
 ### x. Str
