@@ -39,7 +39,7 @@ fn main() {
 ````
 
 ### ii. Char
-**char:** `'a'`, `'@'`,  `'~'` gibi unicode desteği sağlanarak her biri 4 byte yani 32 bit'e sığan ve tek bir harf karakterini temsil eden türlerdir tek tırnak gösterimiyle temsil edilirler.
+**char:** `'a'`, `'@'`,  `'~'` gibi unicode desteğinde, her biri 4 byte yani 32 bit'e sığan ve tek bir harf karakterini temsil eden türlerdir. Tek tırnak işareti arasında ifade edilirler.
 
 ```Rust
 fn main() {
