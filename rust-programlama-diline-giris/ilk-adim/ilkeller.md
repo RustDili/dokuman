@@ -246,7 +246,7 @@ fn main() {
 ````
 
 ### x. Str
-Unicode dizgilerinin bir parçasını UTF-8 formatında tutan boyutu olmayan dilimlerdir. Dizgi dilimleri olarak adlandırılırlar. Genellikle bir dizgiyi ödünç almak için `&str` şeklinde kullanılırlar.
+Unicode dizgilerinin bir parçasını UTF-8 formatında tutan boyutu olmayan dilimlerdir. 
 
 ```Rust
 fn main() {
@@ -258,3 +258,5 @@ fn main() {
     println!("Dizginin son parçası: {}", dunya);
 }
 ````
+⭐️ Hafızanın herhangi bir yerinde saklanan ve boyutu belirsiz bir UTF-8 kod noktası koleksiyonunu tutan statik ve değişmez olarak tahsis edilmiş bir dizgi parçasıdır. Dizgiler ödünç verilirken **`&str`** şeklinde kullanılırlar.
+
