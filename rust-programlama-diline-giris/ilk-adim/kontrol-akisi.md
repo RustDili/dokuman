@@ -67,7 +67,7 @@ fn main() {
 // Elimizde 15  numnardadan küçük beden var mı: true
 ````
 ## match
-Kontrol akışını desen eşleştirmesi yoluyla yapar.
+Kontrol akışını desen eşleştirmesi yoluyla yapar:
 
 ```Rust
 fn main() {
@@ -82,8 +82,9 @@ fn main() {
     };
     println!("Müşterinin tercihi: {}", beden_olcusu);
 }
+// Müşterinin tercihi: L
 ````
-Eşleştirmede kullanılan alt çizgi **`_`** bir değeri yok saymak için kullanılır. Her şeyle eşleşen ancak bir değişkene bağlanmayan bu operatör, desen ile eşleştirme yapılırken tıpkı switch düzeneğinde olduğu gibi bir çeşit varsayılan durum oluşturmak amacıyla son karşılaştırma ifadesinde kullanılır.
+Eşleştirmede kullanılan alt çizgi **`_`** bir değeri yok saymak için kullanılır. Her şeyle eşleşen ancak bir değişkene bağlanmayan bu işleç, desen ile eşleştirme yapılırken bir çeşit varsayılan durum oluşturmak amacıyla son karşılaştırma ifadesinde kullanılır.
 
 ```Rust
 fn main() {
@@ -91,28 +92,30 @@ fn main() {
     
     let secim = match paket_turu {
         true => "Tam paket seçildi",
-        false => "Kısıtlı pakette kalındı"
+        false => "Kısıtlı paket",
     };
     println!("Müşterinin tercihi: {}", secim);
 }
+// Müşterinin tercihi: Kısıtlı paket
 ````
 
-Bu karşılaştırma işlemi boolean değer kontrolüne dayandığından, sadece olası iki durum karşılaştırılıyor. Bu nedenle **`_`** oparatörünün temsil ettiği varsayılan durum rahatlıkla atlanabilir.
+Üstteki eşleştirme `boolean` değer kontrolüne dayandığından, sadece olası iki durum karşılaştırılıyor. Bu nedenle **`_`** işlecinin temsil ettiği varsayılan duruma gerek duyulmaz.
 
 ```Rust
 fn main() {
     let alinin_notu: u8 = 30;
     let mertin_notu: u8 = 25;
     
-    let degerlendirme = match (alinin_notu, mertin_notu) {
+    let karne = match (alinin_notu, mertin_notu) {
         (50, 50) => "Her ikisi de başarılı",
         (50, _) => "Ali oldukça başarılı",
         (_, 50) => "Mert oldukça başarılı",
         (x, y) if x > 25 && y > 25 => "İkisi de fena değil",
         (_, _) => "Daha sıkı çalışmaları gerek!"
     };
-    println!("Değerlendirme sonucu: {}", degerlendirme);
+    println!("Değerlendirme sonucu: {}", karne);
 }
+// Değerlendirme sonucu: Daha sıkı çalışmaları gerek
 ````
 ## while
 Bildirilen koşul sağlandığı sürece döngünün devam etmesini sağlayan anahtar kelimedir. Döngüye girilmeden önce koşul çalıştırılır ve eğer koşul doğru olarak değerlendirilirse döngü içinde yer alan ifadeler işletilir, aksi durumda döngüden çıkılır.
