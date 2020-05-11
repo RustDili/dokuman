@@ -123,7 +123,7 @@ fn main() {
     }
 }
 ````
-Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme operatörleri Rust'ta bulunmaz. Yerine  arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır.
+Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme operatörleri Rust'ta bulunmaz. Yerine  arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır. Aşağıdaki örnekte `break` ve `continue` anahtar kelimelerinin kullanılışı örneklenmektedir.
 
 ```Rust
 fn main() {
