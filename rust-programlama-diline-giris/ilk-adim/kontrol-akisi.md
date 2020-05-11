@@ -33,14 +33,14 @@ fn main() {
     println!("Müşterinin tercihi: {}", beden_aciklamasi);
 }
 ````
-Bir ifade olarak kullanıldığında dönüş değerlerinin her blokta `text, text` veya `bool, bool` gibi aynı türden olması beklenir. Yukarıdaki örnekler aşağıdaki gibi de optimize edilebilirlerdi.
+Bir ifade olarak kullanıldığında dönüş değerlerinin her blokta `text, text` veya `bool, bool` gibi aynı türden olması beklenir. Yukarıdaki örnekler aşağıdaki gibi iyileştirilebilirler.
 
 ```Rust
 fn main() {
     let beden = 7;
     
     let beden_aciklamasi = if beden < 5 {
-        "Küçük boy" // sonlandırma için ; gerekli değildir.
+        "Küçük boy" // ⭐️ sonlandırma için ; gerekli değildir.
     } else if beden < 10 {
         "Orta boy"
     } else {
@@ -48,13 +48,21 @@ fn main() {
     };
     
     println!("Müşterinin tercihi: {}", beden_aciklamasi);
-
+}
+````
+xxxxx
+```Rust
+fn main() {
+    let beden = 7;
+    
     let depo_kontrol = if beden < 15 { true } else { false };
     println!("Elimizde var mı?: {}", depo_kontrol);
 }
 ````
 
-#### ii. Match
+⭐️  If-else if-else akışında eğer dönüş türü bir ifadeyse, her kontrol bloğunda döndürülen deönüş türü aynı olmak zorundadır.
+
+#### ii. match
 Kontrol akışını desen eşleştirmesi yoluyla yapar.
 
 ```Rust
