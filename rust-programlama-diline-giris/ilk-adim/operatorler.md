@@ -113,7 +113,7 @@ let b = (a as f64) / 2.0; // 7.5
 #### vii. Borçlanma ve dereference işleci
 [Yaşam süresi](https://github.com/rust-lang-tr/dokuman/blob/master/mulkiyet-kavrami/yasam-suresi.md) boyunca, bir değişmez ya da değişkenin [mülkiyetini](https://github.com/rust-lang-tr/dokuman/blob/master/mulkiyet-kavrami/mulkiyet.md) ödünç almak için kullanılan **`&`** ve **`mut&`** işleçleri [borçlanma](https://github.com/rust-lang-tr/dokuman/blob/master/mulkiyet-kavrami/borclanma.md) işleçleri olarak bilinirler. Dereference işlemleri için **`*`** işleci kullanılır.
 ### Sonraki konuya geçmeden önce...
-Aşağıda örnekte her ikisi de `&str` türünden seçilmiş değişkenler `String` türüne dönmüştürülmektedir. 
+- Aşağıda örnekte her ikisi de `&str` türünden seçilmiş değişkenler `String` türüne dönmüştürülmektedir. 
 ```Rust
 fn main() {
     let (s1, s2) = ("Bir", " şeyler");   // ikisi de &str
@@ -134,3 +134,4 @@ fn main() {
     println!("y: {}", y);               // y: Bir şeyler
 }
 ````
+-💡 İşlem sonuçlarının kayan noktalı sayı türünden değişkenlerde depolanabilmesi için, işlecin her iki tarafındaki değer türlerinin sonucu depolanacak değişken türünde olması gerekmektiği hatırlanmalıdır.
