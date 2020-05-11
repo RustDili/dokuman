@@ -14,8 +14,9 @@ fn main() {
         println!("Büyük boy"); 
     }
 }
+// Orta boy
 ````
-If koşulu bir programın akışını kontrol etmeyi sağlayan en yaygın yapılardandır. Yukarıda en basit haliyle yer alan kod aşağıdaki gibi de yazılabilirdi:
+`if` koşulu bir programın akışını kontrol etmeyi sağlayan en yaygın yapılardandır. Yukarıda en basit haliyle yer alan kod aşağıdaki gibi de yazılabilir:
 
 ```Rust
 fn main() {
@@ -32,8 +33,10 @@ fn main() {
 
     println!("Müşterinin tercihi: {}", beden_aciklamasi);
 }
+// Müşterinin tercihi: Orta boy
 ````
-Bir ifade olarak kullanıldığında dönüş değerlerinin her blokta `text, text` veya `bool, bool` gibi aynı türden olması beklenir. Yukarıdaki örnekler aşağıdaki gibi iyileştirilebilirler:
+⭐️  If-else if-else akışında eğer dönüş türü bir ifadeyse, her kontrol bloğunda döndürülen dönüş türünün `text, text` veya `bool, bool` gibi aynı türden olması beklenir. 
+Yukarıdaki örnekler aşağıdaki gibi iyileştirilebilirler:
 
 ```Rust
 fn main() {
@@ -45,25 +48,24 @@ fn main() {
         "Orta boy"
     } else {
         "Büyük boy"
-    };
+    }; // kapsamdan çıkıldığında 
     
     println!("Müşterinin tercihi: {}", beden_aciklamasi);
 }
+// Müşterinin tercihi: Orta boy
 ````
-
-İfade dönüş değerinin değişkende depolanması: 
+Yukarıdaki örnekte ifadenin dönüş değeri bir değişkende depolandığından tüm koşullar denetlenip kapsamdan çıkılana kadar noktalı virgülün 
+kulanılmasına gerek yoktur. Aşağıda ise aynı ifade tek satırda birleştirilmektedir:
 
 ```Rust
 fn main() {
     let beden = 7;
     
     let depo_kontrol = if beden < 15 { true } else { false };
-    println!("Elimizde var mı?: {}", depo_kontrol);
+    println!("Elimizde 15 numaradan küçük beden var mı: {}", depo_kontrol);
 }
+// Elimizde 15  numnardadan küçük beden var mı: true
 ````
-
-⭐️  If-else if-else akışında eğer dönüş türü bir ifadeyse, her kontrol bloğunda döndürülen deönüş türü aynı olmak zorundadır.
-
 ## match
 Kontrol akışını desen eşleştirmesi yoluyla yapar.
 
