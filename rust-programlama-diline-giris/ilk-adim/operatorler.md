@@ -134,4 +134,4 @@ fn main() {
     println!("y: {}", y);               // y: Bir şeyler
 }
 ````
-💡 İşlem sonuçlarının kayan noktalı sayı türünden değişkenlerde depolanabilmesi için, işlecin her iki tarafındaki değer türlerinin sonucu depolanacak değişken türünde olması gerekmektiği hatırlanmalıdır.
+💡 İşlem sonuçlarının kayan noktalı sayı türünden değişkenlerde depolanabilmesi için, işlecin her iki tarafındaki değer türlerinin sonucu depolanacak değişken türünde olması gerektiğini unutmayın.
