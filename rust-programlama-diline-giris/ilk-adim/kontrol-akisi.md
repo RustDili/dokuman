@@ -1,7 +1,7 @@
 # Kontrol akışı
 Bir koşulun doğru olup olmadığına bağlı olarak bazı kodların çalıştırılmasına karar vermek ya da bir koşul doğru olduğu sürece bazı kodları tekrar tekrar çalıştırmak çoğu programlama dilinin olmazsa olmazıdır. 
 
-#### i. If - else if - else
+## If - else if - else
 ```Rust
 fn main() {
     let olcu = 7; 
@@ -15,7 +15,7 @@ fn main() {
     }
 }
 ````
-If koşulu bir programın akışını kontrol etmeyi sağlayan en yaygın yapılardandır. Yukarıda en basit haliyle yer alan kod aşağıdaki gibi de yazılabilirdi.
+If koşulu bir programın akışını kontrol etmeyi sağlayan en yaygın yapılardandır. Yukarıda en basit haliyle yer alan kod aşağıdaki gibi de yazılabilirdi:
 
 ```Rust
 fn main() {
@@ -33,7 +33,7 @@ fn main() {
     println!("Müşterinin tercihi: {}", beden_aciklamasi);
 }
 ````
-Bir ifade olarak kullanıldığında dönüş değerlerinin her blokta `text, text` veya `bool, bool` gibi aynı türden olması beklenir. Yukarıdaki örnekler aşağıdaki gibi iyileştirilebilirler.
+Bir ifade olarak kullanıldığında dönüş değerlerinin her blokta `text, text` veya `bool, bool` gibi aynı türden olması beklenir. Yukarıdaki örnekler aşağıdaki gibi iyileştirilebilirler:
 
 ```Rust
 fn main() {
@@ -50,7 +50,9 @@ fn main() {
     println!("Müşterinin tercihi: {}", beden_aciklamasi);
 }
 ````
-xxxxx
+
+İfade dönüş değerinin değişkende depolanması: 
+
 ```Rust
 fn main() {
     let beden = 7;
@@ -62,7 +64,7 @@ fn main() {
 
 ⭐️  If-else if-else akışında eğer dönüş türü bir ifadeyse, her kontrol bloğunda döndürülen deönüş türü aynı olmak zorundadır.
 
-#### ii. match
+## match
 Kontrol akışını desen eşleştirmesi yoluyla yapar.
 
 ```Rust
@@ -110,7 +112,7 @@ fn main() {
     println!("Değerlendirme sonucu: {}", degerlendirme);
 }
 ````
-#### iii. While
+## while
 Bildirilen koşul sağlandığı sürece döngünün devam etmesini sağlayan anahtar kelimedir. Döngüye girilmeden önce koşul çalıştırılır ve eğer koşul doğru olarak değerlendirilirse döngü içinde yer alan ifadeler işletilir, aksi durumda döngüden çıkılır.
 
 ```Rust
@@ -123,7 +125,8 @@ fn main() {
     }
 }
 ````
-Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme operatörleri Rust'ta bulunmaz. Yerine  arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır. Aşağıdaki örnekte `break` ve `continue` anahtar kelimelerinin kullanılışı örneklenmektedir.
+Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme operatörleri Rust'ta bulunmaz. Yerine  arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır. 
+Aşağıda ise `break` ve `continue` anahtar kelimelerinin kullanılışı örneklenmektedir.
 
 ```Rust
 fn main() {
@@ -144,7 +147,7 @@ fn main() {
     }
 }
 ````
-#### iv. 'Outer_while
+#### Outer break
 ```Rust
 fn main() {
     let mut birinci = 1;
@@ -162,7 +165,7 @@ fn main() {
     }
 }
 ````
-#### v. Loop
+## loop
 Rust'ta desteklenen en basit döngü türü olup `break` anahtar sözcüğü ile kesilmediği ya da programdan çıkılmadığı sürece sonsuza dek çalıştırılır.
 
 ```Rust
@@ -185,7 +188,7 @@ fn main() {
 }
 ````
 
-#### vi. 'Outer_loop
+#### Outer break
 ```Rust
 fn main() {
     let mut birinci = 1;
@@ -207,7 +210,7 @@ fn main() {
 }
 ````
 
-#### vii. For
+## for
 Bu anaktar sözcük **`for-in`** döngülerinde kullanılır ve **`in`** anahtar sözcüğü ile işaret edilen aralık tüketilene kadar yinelenir.
 ```Rust
 fn main() {
@@ -249,7 +252,7 @@ fn main() {
 }
 ````
 
-#### viii. 'Outer_for
+#### Outer break
 ```Rust
 fn main() {
     'outer_for: for birinci in 1..6 {
