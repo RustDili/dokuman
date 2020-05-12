@@ -23,7 +23,7 @@ println!("v: {:?}", v);
 ````
 
 ## Veri türleriyle oluşturmak
-Türü `i32` ve elemanları `.push()` metoduyla daha sonra eklenecek olan boş bir vektör aşağıdaki gibi iki farklı şekilde bildirilir:
+Türü `i32` ve elemanları `.push()` metoduyla daha sonra eklenecek olan boş bir vektör aşağıda gösterildiği gibi iki farklı şekilde bildirilir:
 
 ```Rust
 let mut vnew: Vec<u8> = Vec::new();  // []
