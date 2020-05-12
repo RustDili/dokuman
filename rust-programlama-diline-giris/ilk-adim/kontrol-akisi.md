@@ -192,7 +192,7 @@ fn main() {
             degisen += 1;
             continue;
         } else if degisen == 4 {
-            println!("Bu değere ulaşıldığında çıkılıyor: {}", degisen);
+            println!("{} Değerine ulaşıldı, döngüden çıkılıyor!", degisen);
             break;
         }
         
@@ -200,6 +200,11 @@ fn main() {
         degisen += 1;
     }
 }
+// Atlanan değer: 0
+// Anlık değer: 1
+// Anlık değer: 2
+// Anlık değer: 3
+// 4 Değerine ulaşıldı, döngüden çıkılıyor!
 ````
 
 #### Outer break
@@ -222,6 +227,13 @@ fn main() {
         birinci += 1;
     }
 }
+// Anlık değer: [1][1]
+// Anlık değer: [1][2]
+// Anlık değer: [1][3]
+// Anlık değer: [1][4]
+// Anlık değer: [1][5]
+// Anlık değer: [2][1]
+// Anlık değer: [2][2]
 ````
 
 ## for
