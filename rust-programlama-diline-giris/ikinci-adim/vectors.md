@@ -17,7 +17,7 @@ Boş vektörün içinde saklanacak tür derleyici tarafından bilinemeyeceğinde
 
 ```Rust
 let mut v = Vec::new();
-v.push(1); // varsayılan i32
+v.push(1); // varsayılan tür i32 olarak çıkarsanı
 v.push(2);
 println!("v: {:?}", v);
 ````
