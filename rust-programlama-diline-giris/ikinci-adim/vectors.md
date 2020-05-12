@@ -109,7 +109,7 @@ fn main () {
 }
 ````
 
-Dizilerde olduğu gibi beş öğeden oluşan bir vektörün altıncı elemanına index yoluyla erişmeye çalışmak, programın panikleyerek çökmesine neden olur. Ancak aralığın dışında kalan bir öğeye `.get()` işlevi kullanarak erişmeye çalışmak daha kullanıcı dostu olan `Option` varyantı `None` sonucunun döndürülmesini sağlar.
+Dizilerde olduğu gibi beş öğeden oluşan bir vektörün altıncı elemanına dizin numarası yoluyla erişmeye çalışmak, programın panikleyerek çökmesine neden olur. Ancak aralığın dışında kalan bir öğeye `.get()` metodu kullanarak erişmeye çalışmak daha kullanıcı dostu olan `Option` varyantı `None` sonucunun döndürülmesini sağlar.
 
 ```Rust
 // Olmayan öğeye index yoluyla erişmek 
@@ -159,23 +159,22 @@ fn main () {
 }
 ````
 ## Vektörün yaşam süresi 
-Bir vektör yaşam süresi tanımlandığı kapsam boyuncadır. Kapsam dışına gelindiğinde vektörün yaşamı sona erer ve onun için ayrılan hafıza kaynakları boşaltılarak sisteme iade edilir. 
+Bir vektörün yaşam süresi tanımlandığı kapsam boyunca devam eder. Kapsam dışına gelindiğinde vektörün yaşamı sona ereceğinden onun için ayrılan hafıza kaynakları boşaltılarak sisteme iade edilir: 
 
 ```Rust
 fn main () {
- 
-   {
+    {
         let  v = vec![1, 2, 3];
         println!("v: {:?}", v); // v: [1, 2, 3]
         // işlemler
         
-   } //<- v bu noktada kapsam dışına çıkar ve kaynakları serbest bırakılır 
- 
+   } //<- v bu noktada kapsam dışına çıkar ve kaynaklar serbest bırakılır 
 }
 ````
 
 ## Kapasite ayırmak
-Bir vektörün uzunluğuna `.len()`, kapasitesine ise `capacity()` işlevleri yardımıyla erişilir. Ayrılan kapasitenin aşılması durumunda, kapasite miktarının iki katı bellek yeniden tahsis edilerek vektör kapasitesine eklenir. 
+Bir vektörün uzunluğuna `.len()`, kapasitesine ise `capacity()` metodlarıyla erişilir. Ayrılan kapasitenin aşılması durumunda, kapasite miktarının iki katı bellek otomatik olarak yeniden tahsis edilerek vektör kapasitesine eklenir:
+
 ```Rust
 fn main () {
     // Uzunluğu: 0, Kapasitesi: 10 olan bir vektör
@@ -190,13 +189,13 @@ fn main () {
     // vektör kapasitesinin üstüne çıkıldığında 
     v.push(11);
     println!("Uzunluğu: {:?}, Kapasitesi : {:?}", v.len(), v.capacity()); // Uzunluğu: 11, Kapasitesi : 20
-   
 }
 ````
-Örnekte de görüleceği gibi kapasitesi 10 olan bir vektöre 11. öğe eklendiğinde kapasitesi otomatik olarak iki kat arttırılır.
+
+⭐️ Örnekte de görüleceği gibi kapasitesi 10 olan bir vektöre 11. öğe eklendiğinde kapasitesi otomatik olarak iki kat arttırılır.
 
 ## Yineleme yoluyla değerlere erişmek
-Vektörün tuttuğu her bir öğeyi bir kerede ve sırayla elde etmek için döngülerden yararlanılır. 
+Vektörün tuttuğu her bir öğeye sırayla erişebilmek için döngülerden yararlanılır: 
 
 ```Rust
 fn main () {
@@ -209,10 +208,9 @@ fn main () {
 }
 ````
 
-Vektörün elemanları üzerinde değişiklik yapmak için `*` operatöründen yararlanılır.
-
 ## Enum türünden faydalanmak
-Bazı durumlarda farklı türden öğelere sahip bir liste üzerinde çalışmak gerekebilir. Vektörler aynı tür elemanları depolayabildiklerinden bu gibi durumlarda enum türünden yararlanılır. 
+Bazı durumlarda farklı türden öğelere sahip bir liste üzerinde çalışmak gerekebilir. Vektörler aynı türden elemanları depolayabildiklerinden bu gibi durumlarda `enum` türünü kullanmak yararlıdır:
+
 ```Rust
 #[derive(Debug)]
 
@@ -220,7 +218,7 @@ enum Tablo {
         No(i32),
         Hacim(f64),
         Bilgi(String),
-    }
+}
     
 fn main () {
     
@@ -232,5 +230,24 @@ fn main () {
     println!("satir: {:?}", satir);  
     // ya da index numarası ile 
     // println!("satir: {:?}", satir[1]);
+}
+````
+
+## Sonraki konuya geçmeden önce...
+⭐️ Temelde bir vektör 3 şeyi temsil eder:
+- Verilere bir işaretçi
+- Sahip olunan eleman sayısı, yani `.len()` metoduyla öğrendiğimiz boyutu 
+- Gelecekte depolanabilecek öğeler için ayrılan alan miktarı yani `.capacity()` metodyla eriştiğimiz vektör kapasitesi.
+
+Bir vektörün eriştiği boyut kapasitesini aştığında, sahip olduğu kapasite otomatik olarak artırılacağından öğeleri de yeniden tahsis edilecektir. Bu sürecin yavaş olma ihtimaline karşı mümkün olduğunca `Vec::with_capacity()` metodu kullanılmalıdır.
+
+> 💡 String veri türü UTF-8 olarak kodlanmış bir vektör olmasına rağmen tam da bu kodlama nedeniyle dizin numaraları kullanılarak karakterlerine erişilemez:
+
+```Rust
+fn main () {
+    let st: String = String::from("Merhaba");
+    println!("{:?}", st[0]);
+    // error[E0277]: the type `std::string::String` 
+    // cannot be indexed by `{integer}`
 }
 ````
