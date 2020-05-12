@@ -171,6 +171,13 @@ fn main() {
             birinci += 1;
     }
 }
+// Anlık değerler: [1][1]
+// Anlık değerler: [1][2]
+// Anlık değerler: [1][3]
+// Anlık değerler: [1][4]
+// Anlık değerler: [1][5]
+// Anlık değerler: [2][1]
+// Anlık değerler: [2][2]
 ````
 ## loop
 Rust'ta desteklenen en basit döngü türü olup `break` anahtar sözcüğü ile kesilmediği ya da programdan çıkılmadığı sürece sonsuza dek çalıştırılır.
