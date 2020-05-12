@@ -6,7 +6,7 @@ Diziler aynı türden oluşan verileri liste halinde bir arada tutan sabit uzunl
 💯 Vektörler boyutları dinamik olarak değişebilen veri türleri olduklarından, öğelerine ait değerler, `heap` üzerinde kendisi için  özel olarak ayrılmış dinamik bir alanda tutulurlar.
 
 ## Boş bir vektör oluşturmak
-Boş bir vektörü oluşturmak için türün `new()` metodunu ya da `vec!` makrosu kullanılır:
+Boş bir vektörü oluşturmak için türün `new()` metodu ya da `vec!` makrosu kullanılır:
 
 ```Rust
   let v: Vec<i32> = Vec::new()  //1. new() işlevi yardımıyla 
