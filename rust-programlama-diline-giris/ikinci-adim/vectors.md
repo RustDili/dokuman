@@ -137,18 +137,17 @@ fn main () {
 Aynı şekilde bir vektörün son elemanı `.pop()` işlevi kullanılarak çıkartılır. 
 ```Rust
 fn main () {
- 
    let mut v = vec!['C','a', 'l', 'ı', 'ş'];
    println!("v: {:?}", v);
    
    v.pop();
    v.pop();
-   println!("v: {:?}", v);
-   
+   println!("v: {:?}", v);  // v: ['C', 'a', 'l']
 }
 ````
 
-Bir vektöre öğe eklemek ya da vektörden eleman çıkartabilmek için o vektörün öğelerinin `mut` anahtar sözcüğüyle değişebilir olarak tanımlanmış olması gerekmektedir. 
+Bir vektöre öğe eklemek ya da vektörden eleman çıkartabilmek için o vektörün öğelerinin `mut` anahtar sözcüğüyle değişebilir olarak tanımlanmış olması gerekmektedir:
+
 ```Rust
 fn main () {
  
