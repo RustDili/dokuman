@@ -77,7 +77,7 @@ fn main () {
 }
 ````
 
-## Vektör öğelerine erişmek
+## Vektör öğelerine erişmek ve değiştirmek
 Bir vektörün öğelerine dizin numarası ya da `.get()` işlevi yardımıyla erişilir: 
 
 ```Rust
