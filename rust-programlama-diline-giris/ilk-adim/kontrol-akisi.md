@@ -84,7 +84,7 @@ fn main() {
 }
 // Müşterinin tercihi: L
 ````
-Eşleştirmede kullanılan alt çizgi **`_`** bir değeri yok saymak için kullanılır. Her şeyle eşleşen ancak bir değişkene bağlanmayan bu işleç, desen ile eşleştirme yapılırken bir çeşit varsayılan durum oluşturmak amacıyla son karşılaştırma ifadesinde kullanılır.
+Eşleştirmede kullanılan alt çizgi **`_`** bir değeri yok saymak için kullanılır. Her şeyle eşleşen ancak bir değişkene bağlanmayan bu işleç, desen ile eşleştirme yapılırken bir çeşit varsayılan durum oluşturmak amacıyla son karşılaştırma ifadesinde kullanılır:
 
 ```Rust
 fn main() {
@@ -99,7 +99,7 @@ fn main() {
 // Müşterinin tercihi: Kısıtlı paket
 ````
 
-Üstteki eşleştirme `boolean` değer kontrolüne dayandığından, sadece olası iki durum karşılaştırılıyor. Bu nedenle **`_`** işlecinin temsil ettiği varsayılan duruma gerek duyulmaz.
+Üstteki eşleştirme `boolean` değer kontrolüne dayandığından, sadece olası iki durum karşılaştırılıyor. Bu nedenle **`_`** işlecinin temsil ettiği varsayılan duruma gerek duyulmaz:
 
 ```Rust
 fn main() {
@@ -118,7 +118,7 @@ fn main() {
 // Değerlendirme sonucu: Daha sıkı çalışmaları gerek
 ````
 ## while
-Bildirilen koşul sağlandığı sürece döngünün devam etmesini sağlayan anahtar kelimedir. Döngüye girilmeden önce koşul çalıştırılır ve eğer koşul doğru olarak değerlendirilirse döngü içinde yer alan ifadeler işletilir, aksi durumda döngüden çıkılır.
+Bildirilen koşul sağlandığı sürece döngünün devam etmesini sağlayan anahtar kelimedir. Döngüye girilmeden önce koşul çalıştırılır ve eğer koşul doğru olarak değerlendirilirse döngü içinde yer alan ifadeler işletilir, aksi durumda döngüden çıkılır:
 
 ```Rust
 fn main() {
@@ -132,7 +132,7 @@ fn main() {
 // 1 2 3 4 5 6 7 8 9 10 
 ````
 Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme işleçleri Rust'ta bulunmaz. Yerine arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır. 
-Aşağıda ise `break` ve `continue` anahtar kelimelerinin kullanılışı örneklenmektedir.
+Aşağıda ise `break` ve `continue` anahtar kelimelerinin kullanılışı örneklenmektedir:
 
 ```Rust
 fn main() {
@@ -180,7 +180,7 @@ fn main() {
 // Anlık değerler: [2][2]
 ````
 ## loop
-Rust'ta desteklenen en basit döngü türü olup `break` anahtar sözcüğü ile kesilmediği ya da programdan çıkılmadığı sürece sonsuza dek çalıştırılır.
+Rust'ta desteklenen en basit döngü türü olup `break` anahtar sözcüğü ile kesilmediği ya da programdan çıkılmadığı sürece sonsuza dek çalıştırılır:
 
 ```Rust
 fn main() {
@@ -237,56 +237,93 @@ fn main() {
 ````
 
 ## for
-Bu anaktar sözcük **`for-in`** döngülerinde kullanılır ve **`in`** anahtar sözcüğü ile işaret edilen aralık tüketilene kadar yinelenir.
-```Rust
-fn main() {
-    for don in 0..10 {
-        println!("Anlık değer: {}", don);
-    }
-}
-````
-Örnekte yer alan `for sayac in 0..10` ifadesi, diğer programlama dillerinde kullanılan for `a = 0; a < 10; a++` ifadesine benzer. Döngü beklendiği gibi `0` ile başlar ve aralığın son değerine ulaştığında durur. Döngünün `break` ve `continue` anahtar sözcükleriyle yönlendirilmeleri aşağıda örneklenmiştir.
+Bu anahtar kelime genellikle **`for-in`** söz dizimi şeklinde koleksiyon öğeleri üzerinde işlem yapmak için kullanılır. Ve döngü **`in`** anahtar sözcüğü ile işaret edilen aralık tüketilene kadar yinelenir:
 
 ```Rust
 fn main() {
-    for don in 0..6 {
-        if don == 2 {
-            println!("Atlanan değer: {}", don);
-            continue;
-        } else if don == 4 {
-            println!("Bu değere ulaşıldığında döngüden çıkılıyor: {}", don);
-            break;
-        }
-        println!("Anlık değer: {}", don);
+    for i in 0..10 {
+        print!("{} ", i);
     }
 }
+// 0 1 2 3 4 5 6 7 8 9 
 ````
+Örnekte yer alan `for i in 0..10` ifadesi, diğer programlama dillerinde kullanılan for `a = 0; a < 10; a++` ifadesine benzer. Döngü beklendiği gibi `0` ile başlar ve aralığın son değerine ulaştığında durur. Akışın `break` ve `continue` anahtar sözcükleriyle yönlendirilmeleri aşağıda örneklenmiştir:
 
-Diziler ve vektörleri for döngüsü ile işlemek oldukça kolaydır.
 ```Rust
 fn main() {
-    let ekip: [&str; 4] = ["Zafer", "Meral", "Hüseyin", "Selda"];
-    
-    for e in 0..ekip.len() {
-        println!("Ekip üye numarası: {:?}", [e]);
-    }
-    
-    // Ekip üyelerini görelim
-    for kisi in ekip.iter() {
-        println!("Ekip üyesi: {:?}", kisi);
-    }
+   for i in 0..=9 {
+       if i == 2 {
+           println!("Atlanan değer: {}", i);
+           continue;
+       } else if i == 4 {
+           println!("{} Geldiği için döngüden çıkılıyor!", i);
+           break;
+       }
+       println!("Anlık değer: {}", i);
+   }
 }
+// Anlık değer: 0
+// Anlık değer: 1
+// Atlanan değer: 2
+// Anlık değer: 3
+// 4 Geldiği için döngüden çıkılıyor!
+````
+
+Diziler ve vektörler gibi kullanışlı koleksiyonları `for` döngüsü ile işlemek oldukça kolaydır:
+```Rust
+fn main() {
+   let ekip: [&str; 4] = ["Zafer", "Meral", "Hüseyin", "Selda"];
+   
+   for e in 0..ekip.len() {
+       println!("Ekip üye numarası: {} ", e);
+   }
+   
+   for kisi in ekip.iter() {
+       println!("Ekip üyesi: {} ", kisi);
+   }
+}
+// Ekip üye numarası: 0 
+// Ekip üye numarası: 1 
+// Ekip üye numarası: 2 
+// Ekip üye numarası: 3 
+// Ekip üyesi: Zafer 
+// Ekip üyesi: Meral 
+// Ekip üyesi: Hüseyin 
+// Ekip üyesi: Selda 
+````
+
+Yukarıdaki örneği aşağıdaki gibi kısaltarak yazabiliriz:
+
+```Rust
+fn main() {
+   let ekip: [&str; 4] = ["Zafer", "Meral", "Hüseyin", "Selda"];
+   
+   for (no, uye) in ekip.iter().enumerate() {
+       println!("No: {}, Üye: {}", no, uye);
+   }
+}
+// No: 0, Üye: Zafer
+// No: 1, Üye: Meral
+// No: 2, Üye: Hüseyin
+// No: 3, Üye: Selda
 ````
 
 #### Outer break
 ```Rust
 fn main() {
-    'outer_for: for birinci in 1..6 {
-        'inner_for: for ikinci in 1..6 {
-            println!("Anlık değer: [{}][{}]", birinci, ikinci);
+    'harici_dongu: for i in 1..6 {
+        'dahili_dongu: for k in 1..6 {
+            println!("Anlık değer: [{}][{}]", i, k);
             
-            if birinci == 2 && ikinci == 2 { break 'outer_for; }
+            if i == 2 && k == 2 {break 'harici_dongu;}
         }
-    }
+    } 
 }
+// Anlık değer: [1][1]
+// Anlık değer: [1][2]
+// Anlık değer: [1][3]
+// Anlık değer: [1][4]
+// Anlık değer: [1][5]
+// Anlık değer: [2][1]
+// Anlık değer: [2][2]
 ````
