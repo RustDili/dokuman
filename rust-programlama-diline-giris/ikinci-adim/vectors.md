@@ -78,7 +78,19 @@ fn main () {
 ````
 
 ## Vektör öğelerine erişmek ve değiştirmek
-Bir vektörün öğelerine dizin numarası ya da `.get()` işlevi yardımıyla erişilir: 
+Bir vektörün öğelerine dizin numarası ya da `.get()` işlevi yardımıyla erişilir. Bir vektörün öeğelerine dizin numarası kullanarak erişmek için: 
+
+```Rust
+fn main() {
+    let mut v = vec![5i32,4,3,2,1]; // Tür çıkarımı ilk elemandan i32
+    println!("{:?} ", v);   // [5, 4, 3, 2, 1] 
+    v[0] = 1;
+    v[1] = 2;
+    println!("{:?} ", v);   // [1, 2, 3, 2, 1] 
+}
+````
+
+Her iki yöntemi biraz daha gelişmiş bir örnek üzerinden yineleyelim:
 
 ```Rust
 fn main () {
