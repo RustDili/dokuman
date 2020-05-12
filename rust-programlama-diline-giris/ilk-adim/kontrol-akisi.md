@@ -125,12 +125,13 @@ fn main() {
     let mut deger = 1;
     
     while deger <= 10 {
-        println!("Anlık değer: {}", deger);
+        print!("{} ", deger);
         deger += 1;
     }
 }
+// 1 2 3 4 5 6 7 8 9 10 
 ````
-Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme operatörleri Rust'ta bulunmaz. Yerine  arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır. 
+Diğer programlama dillerinden alışkın olduğumuz **`++`** arttırma ve **`--`** eksiltme işleçleri Rust'ta bulunmaz. Yerine arttırma ya da eksiltme işlemleri için bileşik atama oparatörleri kullanılır. 
 Aşağıda ise `break` ve `continue` anahtar kelimelerinin kullanılışı örneklenmektedir.
 
 ```Rust
@@ -143,7 +144,7 @@ fn main() {
             degisen += 1;
             continue;
         } else if degisen == 6 {
-            println!("Bu değere ulaştığında döngüden çık: {}", degisen);
+            println!("{} Geldiği için döngüden çıkılıyor", degisen);
             break;
         }
         
@@ -151,6 +152,7 @@ fn main() {
         degisen += 1;
     }
 }
+// 6 Geldiği için döngüden çıkılıyor
 ````
 #### Outer break
 ```Rust
