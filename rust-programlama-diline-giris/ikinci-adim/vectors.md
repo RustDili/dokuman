@@ -125,11 +125,11 @@ Bir vektöre yeni öğe eklemek için `.pop()` işlevinden yararlanılır. Öğe
 
 ```Rust
 fn main () {
-   let mut v = vec!['C','a', 'l', 'ı'];
+   let mut v = vec!['C','a', 'l', 'ı']; // v: ['C', 'a', 'l', 'ı']
    println!("v: {:?}", v);
    
    v.push('ş');
-   println!("v: {:?}", v);
+   println!("v: {:?}", v);              // v: ['C', 'a', 'l', 'ı', 'ş']
 }
 ````
 
