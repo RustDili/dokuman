@@ -3,7 +3,7 @@ Diziler aynı türden oluşan verileri liste halinde bir arada tutan sabit uzunl
 
 ⭐️ Vektörler `Vec<T>` söz dizimiyle ifade edilen jenerik türlerdir. Söz diziminde yer alan `T` depolanacak veri türünü temsil eder. Örneğin `i32` türünde bir vektör basitçe `Vec<i32>` olarak ifade edilir. 
 
-💯 Vektörler boyutları dinamik olarak değişebilen veri türleri olduklarından, öğelerine ait değerler, `heap` üzerinde kendisi için  özel olarak ayrılmış dinamik bir alanda tutulurlar.
+💯 Vektörler boyutları dinamik olarak değişebilen veri türleri olduklarından, öğelerine ait değerler, belleğin `heap` adlı bölümünde kendisi için  özel olarak ayrılmış dinamik bir alanda tutulurlar.
 
 ## Boş bir vektör oluşturmak
 Boş bir vektörü oluşturmak için türün `new()` metodu ya da `vec!` makrosu kullanılır:
