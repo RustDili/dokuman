@@ -96,7 +96,7 @@ println!("Destructure siyah = {}, {}, {}", k, y, m);    // Destructure siyah = 0
 ````
 
 ### Birim yapıları
-Herhangi bir üyeye sahip olmayan bu yapı türü boş bir çokuzluya benzer. Sıfır baytlık boyuta sahip olduklarından genellikle marker olarak veya Jenerik türler oluştururken faydalıdırlar. İçlerinde veri bulundurmadıklarından uygulamalara özellikler eklemek için de tercih edilirler.
+Herhangi bir üyeye sahip olmayan bu yapı türü boş bir çokuzluya benzer. Sıfır baytlık boyuta sahip olduklarından genellikle marker olarak veya Jenerik türler oluştururken faydalıdırlar. İçlerinde saklanacak veri bulundurmadıklarından genellikle uygulamalara özellikler eklemek için de tercih edilirler.
 ```Rust
 struct Mesafe;
 
