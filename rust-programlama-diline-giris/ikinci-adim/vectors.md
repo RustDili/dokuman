@@ -173,7 +173,7 @@ fn main () {
 ````
 
 ## Kapasite ayırmak
-Bir vektörün uzunluğuna `.len()`, kapasitesine ise `capacity()` metodlarıyla erişilir. Ayrılan kapasitenin aşılması durumunda, kapasite miktarının iki katı bellek otomatik olarak yeniden tahsis edilerek vektör kapasitesine eklenir:
+Bir vektörün uzunluğuna `.len()`, kapasitesine ise `capacity()` metodlarıyla erişilir. Ayrılan kapasitenin aşılması durumunda, kapasite miktarının iki katı bellek otomatik olarak yeniden tahsis edilerek vektör boyutuna eklenir:
 
 ```Rust
 fn main () {
