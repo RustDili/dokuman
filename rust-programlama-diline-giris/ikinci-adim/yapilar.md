@@ -16,6 +16,8 @@ Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kul
 
 ⭐️ Rust'ın nesne yönelimli programlama yaklaşımında öznitelikler ve metodlar yapılara ve özelliklere -`traits`- ayrı ayrı yerleştirilir. Yapılar yalnızca öznitelikler içerirken, özelliklerde ise yalnızca metodlar bulunabilir. Bunlar birbirlerine `impls` adını verdiğimiz uygulamalar ile bağlanır.
 
+>💡 Daha karmaşık örneklere, [Uygulamalar ve Özellikler](ikinci-adim/impl-and-traits.md), [Yaşam süreleri](#) ve [Modüller](#) bölümlerinden ulaşabilirsiniz.
+
 ## C benzeri kurallı yapılar
 En yaygın kullanılan yapı türlerindendir. Parantez içine alınmış listelere, araları virgülle ayrılmış bir veya daha fazla `isim:deger` çiftlerine sahiptirler. Metodları bulunmayan sınıflara benzerler, veri alanları isimlendirilmiş olduğundan üyelerine `nesne.isim` şeklinde erişilebilirler. 
 
