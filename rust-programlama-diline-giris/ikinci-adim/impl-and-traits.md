@@ -1,0 +1,1 @@
+# Uygulamalar ve Özellikler
