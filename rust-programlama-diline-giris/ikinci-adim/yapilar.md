@@ -1,10 +1,20 @@
 # Yapılar
 Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kullanıcı tanımlı özel türlerdir. Yapılar tanımlanırken seçilecek isimler geleneksel olarak `PascalCase` şeklinde tercih edilirler. Rust'ta `struct` anahtar kelimesi kullanılarak tanımlanabilecek üç değişik yapı biçimi vardır.
-- **C benzeri kurallı yapılar**
-- **Çokuzlu yapıları**
-- **Birim yapıları**
+1. **C benzeri kurallı yapılar**
+    - Virgülle ayrılmış bir veya daha fazla *alan:değer* çiftleri
+    - Süslü parantez ile sarmalanmış öğe listesi
+    - Nesne yönelimli progralmala dillerindeki sınıflarla benzerlik
+    - İsimlendirilmiş alanlardan oluştuklarından, nokta gösterimi ile erişim
+2. **Çokuzlu yapıları**
+    - Virgülle ayrılmış bir veya daha fazla değer
+    - Çokuzlu koleksiyonl<arı gibi parantez ile sarmalanmış öğe listesi
+    - İsimlendirilmiş çokuzlu şeklinde kullanım kolaylığı
+3. **Birim yapıları**
+    - Hiç bir üyesi bulunmuyor
+    - Boş bir çokuzluda **`()`** olduğu gibi yeni bir tür tanımlar
+    - Nadiren tercih edilse de, jenerik türlerde oldukça kullanışlıdır.
 
-### Kurallı yapılar
+## C benzeri kurallı yapılar
 En yaygın kullanılan yapı türlerindendir. Parantez içine alınmış listelere, araları virgülle ayrılmış bir veya daha fazla `isim:deger` çiftlerine sahiptirler. Metodları bulunmayan sınıflara benzerler, veri alanları isimlendirilmiş olduğundan üyelerine `nesne.isim` şeklinde erişilebilirler. 
 
 ```Rust
@@ -78,7 +88,7 @@ let Renk {kizil: k, yesil: y, mavi: m} = koyu_mavi;
 println!("Destructure Koyu mavi = ({}, {}, {})", k, y, m);  // Destructure Koyu mavi = (25, 25, 112)
 ````
 
-### Çokuzlu yapıları
+## Çokuzlu yapıları
 Normal yapılara benzemekle beraber isimlendirilmiş alanlar yerine `struct Tuple(u32, String);` söz diziminde olduğu gibi üyelerinin türleri bildirilir. Çokuzlular gibi kullanılan bu türün üyelerine 0' dan başlayan index değerleri ile ulaşılır. 
 ```Rust
 struct Renk(u8, u8, u8);
@@ -95,7 +105,7 @@ let Renk(k, y, m) = siyah;
 println!("Destructure siyah = {}, {}, {}", k, y, m);    // Destructure siyah = 0, 0, 0
 ````
 
-### Birim yapıları
+## Birim yapıları
 Herhangi bir üyeye sahip olmayan bu yapı türü boş bir çokuzluya benzer. Sıfır baytlık boyuta sahip olduklarından genellikle marker olarak veya Jenerik türler oluştururken faydalıdırlar. İçlerinde saklanacak veri bulundurmadıklarından genellikle uygulamalara özellikler eklemek için de tercih edilirler.
 ```Rust
 struct Mesafe;
