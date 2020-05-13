@@ -1,6 +1,6 @@
 # Yapılar
 Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kullanıcı tanımlı özel türlerdir. Yapılar tanımlanırken seçilecek isimler geleneksel olarak `PascalCase` şeklinde tercih edilirler. Rust'ta `struct` anahtar kelimesi kullanılarak tanımlanabilecek üç değişik yapı biçimi vardır.
-- **Kurallı yapılar**
+- **C benzeri kurallı yapılar**
 - **Çokuzlu yapıları**
 - **Birim yapıları**
 
