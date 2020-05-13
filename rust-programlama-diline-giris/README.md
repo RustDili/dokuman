@@ -21,7 +21,7 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 * [Yapılar](ikinci-adim/yapilar.md)
 * [Enum](ikinci-adim/enum.md)
 * [Jenerikler](ikinci-adim/jenerikler.md)
-* [Uygulama ve özellikler](ikinci-adim/impl-and-traits.md)
+* [Uygulamalar ve Özellikler](ikinci-adim/impl-and-traits.md)
 ## Zor Bölüm 
 ## Başlayalım
 ## Hata Yönetimi
