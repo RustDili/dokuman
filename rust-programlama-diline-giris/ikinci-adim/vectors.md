@@ -234,7 +234,7 @@ fn main () {
 ````
 
 ## Sonraki konuya geçmeden önce...
-⭐️ Temelde bir vektör 3 şeyi temsil eder:
+⭐️ Bir vektör temelde 3 şeyi temsil eder:
 - Verilere bir işaretçi
 - Sahip olunan eleman sayısı, yani `.len()` metoduyla öğrendiğimiz boyutu 
 - Gelecekte depolanabilecek öğeler için ayrılan alan miktarı yani `.capacity()` metodyla eriştiğimiz vektör kapasitesi.
