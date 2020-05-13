@@ -7,7 +7,7 @@ Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kul
     - İsimlendirilmiş alanlardan oluştuklarından, nokta gösterimi ile erişim
 2. **Çokuzlu yapıları**
     - Virgülle ayrılmış bir veya daha fazla değer
-    - Çokuzlu koleksiyonl<arı gibi parantez ile sarmalanmış öğe listesi
+    - Çokuzlu koleksiyonları gibi parantez ile sarmalanmış öğe listesi
     - İsimlendirilmiş çokuzlu şeklinde kullanım kolaylığı
 3. **Birim yapıları**
     - Hiç bir üyesi bulunmuyor
