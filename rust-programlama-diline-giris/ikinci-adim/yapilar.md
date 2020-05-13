@@ -63,6 +63,7 @@ struct Renk {
 fn main() {
     // Yapı örneği 
     let siyah = Renk {kizil: 0, yesil: 0, mavi: 0};
+    // nokta gösterimi kullanarak yapı alanlarına erişmek
     println!("Siyah = ({}, {}, {})", siyah.kizil, siyah.yesil, siyah.mavi);  // Siyah = (0, 0, 0)
 }
 ````
@@ -72,6 +73,7 @@ Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken 
 ```Rust
 // Yapı örneği
 let mut ornek = Renk {kizil: 0, yesil: 0, mavi: 255};
+// Sadece örneğin içeriği değişir
 ornek.mavi = 238;
 println!("Örnek = ({}, {}, {})", ornek.kizil, ornek.yesil, ornek.mavi);  // Örnek = (0, 0, 238)
 ````
@@ -83,7 +85,7 @@ let mavi = Renk {mavi:255, ..ornek};
 println!("Mavi = ({}, {}, {})", mavi.kizil, mavi.yesil, mavi.mavi);  // Mavi = (0, 0, 255) 
 ````
 
-Yapı örnekleri let ile bağlanarak destructure edelebilirler. Bu yapıldığında üyelere takma isimlerle erişmek mümkün olur:
+Yapı örnekleri `let` ile bağlanarak destructure edelebilirler. Bu yapıldığında üyelere takma isimlerle erişmek mümkün olur:
 
 ```Rust
 let Renk {kizil: k, yesil: y, mavi: m} = mavi;
