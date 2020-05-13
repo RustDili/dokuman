@@ -10,9 +10,9 @@ Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kul
     - Çokuzlu koleksiyonları gibi parantez ile sarmalanmış öğe listesi
     - İsimlendirilmiş çokuzlu şeklinde kullanım kolaylığı
 3. **Birim yapıları**
-    - Hiç bir üyesi bulunmuyor
-    - Boş bir çokuzluda **`()`** olduğu gibi yeni bir tür tanımlar
-    - Nadiren tercih edilse de, jenerik türlerde oldukça kullanışlıdır.
+    - Hiç bir üyeye sahip değil
+    - Boş bir çokuzluya benzer biçimde**`()`** yeni tür tanımlama
+    - Nadiren tercih edilse de, jenerik türlerde oldukça kullanışlı
 
 ## C benzeri kurallı yapılar
 En yaygın kullanılan yapı türlerindendir. Parantez içine alınmış listelere, araları virgülle ayrılmış bir veya daha fazla `isim:deger` çiftlerine sahiptirler. Metodları bulunmayan sınıflara benzerler, veri alanları isimlendirilmiş olduğundan üyelerine `nesne.isim` şeklinde erişilebilirler. 
