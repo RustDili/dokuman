@@ -3,7 +3,7 @@ Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kul
 1. **C benzeri kurallı yapılar**
     - Virgülle ayrılmış bir veya daha fazla *alan:değer* çiftleri
     - Süslü parantez ile sarmalanmış öğe listesi
-    - Nesne yönelimli progralmala dillerindeki sınıflarla benzerlik
+    - Nesne yönelimli programlama dillerindeki sınıflarla benzerlik
     - İsimlendirilmiş alanlardan oluştuklarından, nokta gösterimi ile erişim
 2. **Çokuzlu yapıları**
     - Virgülle ayrılmış bir veya daha fazla değer
@@ -13,6 +13,8 @@ Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kul
     - Hiç bir üyeye sahip değil
     - Boş bir çokuzluya benzer biçimde**`()`** yeni tür tanımlama
     - Nadiren tercih edilse de, jenerik türlerde oldukça kullanışlı
+
+⭐️ Rust'ın nesne yönelimli programlama yaklaşımında öznitelikler ve metodlar yapılara ve özelliklere -`traits`- ayrı ayrı yerleştirilir. Yapılar yalnızca öznitelikler içerirken, özelliklerde ise yalnızca metodlar bulunabilir. Bunlar birbirlerine `impls` adını verdiğimiz uygulamalar ile bağlanır.
 
 ## C benzeri kurallı yapılar
 En yaygın kullanılan yapı türlerindendir. Parantez içine alınmış listelere, araları virgülle ayrılmış bir veya daha fazla `isim:deger` çiftlerine sahiptirler. Metodları bulunmayan sınıflara benzerler, veri alanları isimlendirilmiş olduğundan üyelerine `nesne.isim` şeklinde erişilebilirler. 
