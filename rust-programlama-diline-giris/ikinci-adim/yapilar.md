@@ -23,9 +23,19 @@ En yaygın kullanılan yapı türlerindendir. Parantez içine alınmış listele
 
 ```Rust
 struct Yapi {
-    alan1: f32,
-    alan2: String,
-    pub alan3: bool
+    kesirli : f32,
+    dizge   : String,
+    boolean : bool,
+}
+
+fn main() {
+    let ornek = Yapi {
+        kesirli : 7.05,
+        dizge   : String::from("Merhaba!"),
+        boolean : false,
+    };
+    
+    print!("{}, {}, {}", ornek.kesirli, ornek.dizge, ornek.boolean);
 }
 ````
 
