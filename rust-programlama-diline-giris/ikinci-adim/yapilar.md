@@ -11,7 +11,7 @@ Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kul
     - İsimlendirilmiş çokuzlu şeklinde kullanım kolaylığı
 3. **Birim yapıları**
     - Hiç bir üyeye sahip değil
-    - Boş bir çokuzluya benzer biçimde**`()`** yeni tür tanımlama
+    - Boş bir çokuzluya benzer biçimde **`()`** yeni tür tanımlama
     - Nadiren tercih edilse de, jenerik türlerde oldukça kullanışlı
 
 ⭐️ Rust'ın nesne yönelimli programlama yaklaşımında öznitelikler ve metodlar yapılara ve özelliklere -`traits`- ayrı ayrı yerleştirilir. Yapılar yalnızca öznitelikler içerirken, özelliklerde ise yalnızca metodlar bulunabilir. Bunlar birbirlerine `impls` adını verdiğimiz uygulamalar ile bağlanır.
