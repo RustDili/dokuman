@@ -159,34 +159,54 @@ işlev yoluyla oluşturulan örnekler destructure edilebildiğinden, üyelerine 
 ````
 
 ## Çokuzlu yapıları
-Normal yapılara benzemekle beraber isimlendirilmiş alanlar yerine `struct Tuple(u32, String);` söz diziminde olduğu gibi üyelerinin türleri bildirilir. Çokuzlular gibi kullanılan bu türün üyelerine 0' dan başlayan index değerleri ile ulaşılır.
+Normal yapılara benzemekle beraber isimlendirilmiş alanlar yerine `struct Tuple(u32, String);` söz diziminde olduğu gibi üyelerinin türleri bildirilir. Çokuzlular gibi kullanılan bu türün üyelerine `0`' dan başlayan dizin değerleri ile ulaşılır.
 
 ⭐️ Çokuzlu yapılarında yalnızca bir öğe bulunduğunda, buna newtype örneği denir ve bu örnek yeni bir tür oluşturmaya yardımcı olur:
 
 ```Rust
-struct Renk(u8, u8, u8);
+sstruct Renk(u8, u8, u8);
 struct Mesafe(i32);
 
 fn main() {
-    // Bir örnek oluşturma
+    // Renk türünün bir örneğini oluşturalım
     let siyah = Renk(0, 0, 0);
-    println!("Siyah = {}, {}, {}", siyah.0, siyah.1, siyah.2);  // Siyah = 0, 0, 0
+    println!("Siyah: ({}, {}, {})", siyah.0, siyah.1, siyah.2);
     
-    // Newtype pattern ile tür örneğini almak
-    let uzaklik = Mesafe(20);
-    println!("Uzaklık: {}", uzaklik.0);
+    // destructure edilirken dizin numaralarına takma isim verilir  
+    let Renk(a, b, c) = siyah;
+    println!("Siyah: ({}, {}, {})", a, b, c);
     
-    // Örneğin `let` ile bağlanarak destructure edilmesi
-    let Mesafe(hedef) = uzaklik;
-    println!("Hedef: {} mesafede", hedef);
+    // Atama yoluyla örnek oluşturmak
+    let mut mavi = siyah;
+    
+    // örneğin bir öğesini değiştirmek
+    mavi.0 = 50;
+    println!("Mavi: ({:?}, {:?}, {:?})", mavi.0, mavi.1, mavi.2);
+    
+    // üyeleri değiştirilebilir şekilde destruct etmek
+    let Renk(mut x, mut y, mut z) = mavi;
+    x = 25;
+    y = 25;
+    z = 112;
+    println!("Mavi: ({}, {}, {})", x, y, z);
+    // Mavi: (25, 25, 112)
+    
+    // Newtype pattern ile Mesafe türünün örneği alalım
+    let uzaklik = Mesafe(10);
+    println!("{}", uzaklik.0);  // 10
+    
+    // destruct etmek
+    let Mesafe(a) = uzaklik;
+    println!("{}", a);          // 10
 }
 ````
 
 Kurallı yapılarda olduğu gibi çokuzlu yapılarının da örnekleri `let` ile bağlanarak destructure edelebilirler. Bu tercih edildiğinde üyelerine dizin numarası yerine takma isimler kullanarak erişmek mümkün olur:
 
 ```Rust
-let Renk(k, y, m) = siyah;
-println!("Destructure siyah = {}, {}, {}", k, y, m);    // Destructure siyah = 0, 0, 0
+    let Renk(k, y, m) = siyah;
+    println!("Destructure siyah = {}, {}, {}", k, y, m);    
+    // Destructure siyah = 0, 0, 0
 ````
 
 ## Birim yapıları
