@@ -106,6 +106,12 @@ Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken 
     ornek.mavi = 238;
     println!("Mavi = ({}, {}, {})", ornek.kirmizi, ornek.yesil, ornek.mavi);
     // Mavi = (0, 0, 238)
+    
+    // destructure edilirken takma isimlerde mutable olarak işaretlenmelidir 
+    let Renk {kirmizi: mut k, yesil: mut y, mavi: mut m} = ornek;
+    m = 200;
+    println!("Mavi = ({}, {}, {})", k, y, m);
+    // Mavi = (0, 0, 200)
 ````
 
 Bir yapı örneğinin üyeleri `{..kopyalanacak_ornek}` şeklinde başka bir örnekten kopyalanabilir. Kopyalama yapılırken yeni üyenin bazı üyelerine değer verilebilir. Bu durumda değer ataması yapılmayan üyeler örneklenen kopyanın üye değerlerini edinirler:
