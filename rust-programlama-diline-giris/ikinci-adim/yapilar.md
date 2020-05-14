@@ -29,7 +29,7 @@ struct Yapi {
 }
 
 fn main() {
-    let ornek = Yapi {
+    let ornek   = Yapi {
         kesirli : 7.05,
         dizge   : String::from("Merhaba!"),
         boolean : false,
