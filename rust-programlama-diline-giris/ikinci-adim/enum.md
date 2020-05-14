@@ -1,5 +1,5 @@
 # Enum
-Farklı varyantların nümeratik sırayla bir araya getirildiği ve olası değerlerlerinin tuttulduğu bir türdür.
+⭐️ Farklı varyantların nümeratik sırayla bir araya getirildiği ve olası değerlerlerinin tuttulduğu bir türdür:
 
 ```Rust
 #[derive(Debug)]
@@ -13,15 +13,27 @@ enum Gunler {
     Pazar,
 }
 ````
-Örneğimizdeki `Gunler` bir enumdur ve süslü parantezler içinde yer alan Pazartesi, Sali, Carsamba, Persembe, Cuma, Cumartesi, Pazar günleri ise **bu enum’un varyantlarıdır.**
-Enum’ a ait varyantlara `Gunler::Pazartesi` gösterimiyle erişilir.  
+
+Örneğimizdeki `Gunler` bir `enum`dur ve süslü parantezler içinde yer alan Pazartesi, Sali, Carsamba, Persembe, Cuma, Cumartesi, Pazar günleri ise **bu enum’un varyantlarıdır.**
+
+⭐️ Bir `enum`’un sahip olduğu varyantlara **`::`** gösterimi, yani `Gunler::Pazartesi` şeklindeki söz dizimiyle erişilir:  
+
 ```Rust
 fn main() {
     let gun = Gunler::Sali;
-    println!("Günlerden bir gun: {:?}", gun);  // Günlerden bir gun: Sali
+    println!("Günlerden bir gun: {:?}", gun); 
 }
+// Günlerden bir gun: Sali
 ````
-Enum varyantları; verisiz, çokuzlularda olduğu gibi isimlendirilmemiş verilerle veya yapılarda olduğu gibi adlandırılmış verilerden oluşabilir. 
+
+⭐️ Bir `enum` türünün varyantları:
+  
+  - Verisiz olarak yani birim varyant,
+  - İsimsiz sıralı veriler halinde, yani çokuzlu varyantı şeklinde,
+  - İsimlendirilmiş varyantlar, yani yapı alanlarına benzer biçimde
+
+verilerden oluşabilir. 
+
 ```Rust
 enum Denetim {
     Basarili,                               // Birim vryant
