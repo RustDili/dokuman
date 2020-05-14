@@ -43,22 +43,31 @@ fn main() {
 C tipi olarak da adlandırılabilen bu yapıların içinde tanımlanan her alanın bir adı ve türü vardır. Bu alanlara `yapi_ornegi.alan_adi` söz dizimi kullanılarak erişilir. Tanımları tür için genel bir şablon gibi olduğundan elemanlarını belirtirken herhangi bir sıraya uyulmasına gerek yoktur: 
 
 ```Rust
-struct Uye {
-    adi: String,
-    eposta: String,
-    yasi: u64,
-    aktif: bool,
+struct Uye  {
+    no      :   u64,
+    adi     :   String,
+    eposta  :   String,
+    yasi    :   u8,
+    aktif   :   bool,
 }
 
-fn main () {
-    // Yapı örneği 
-    let uye1 = Uye {
-        eposta: String::from("kullanici@github.com"),
-        adi: String::from("rust-lang-tr"),
-        aktif: true,
-        yasi: 33
+fn main ()  {
+    // Yapinin örneğini almak
+    let ali =   Uye {
+        no      : 1,
+        adi     : String::from("Ahmet"),
+        eposta  : String::from("abc@xyz.com"),
+        yasi    : 37,
+        aktif   : true,
     };
-    println!("Üye adı: {},", uye1.adi)
+    
+    println!("no: {}, eposta: {}", ali.no, ali.eposta);
+    // no: 1, eposta: abc@xyz.com
+
+    // destructure edelim
+    let Uye {no: no, adi: ad, eposta: ep, yasi: ys, aktif: ak} = ali;
+    println!("No: {}, Adi: {}, eposta: {}, Yaşı: {}, Aktif: {}", no ,ad, ep, ys, ak);
+    // No: 1, Adi: Ahmet, eposta: abc@xyz.com, Yaşı: 37, Aktif: true
 }
 ````
 
