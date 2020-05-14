@@ -133,19 +133,29 @@ Yapı örnekleri `let` ile bağlanarak destructure edelebilirler. Bu yapıldığ
 İşlevler üzerinden yapı alanlarına erişilerek bir örneği elde edilebilir:
 
 ```Rust
-fn koyu_mavi_yap() -> Renk {
-    Renk {kizil: 25, yesil: 25, mavi:112}
+struct Renk {
+    kirmizi : u8,
+    yesil   : u8,
+    mavi    : u8,
 }
-
-let koyu_mavi = koyu_mavi_yap();
-println!("Koyu mavi = ({}, {}, {})", koyu_mavi.kizil, koyu_mavi.yesil, koyu_mavi.mavi); // Koyu mavi = (25, 25, 112)
+fn lacivert_yap() -> Renk {
+    Renk {kirmizi: 25, yesil: 25, mavi: 112}
+}
+fn main()   {
+    let lacivert = lacivert_yap();
+    println!("Lacivert ({}, {}, {})", 
+        lacivert.kirmizi, lacivert.yesil, lacivert.mavi
+    );
+    // Lacivert (25, 25, 112)
+}
 ````
 
-işlev yoluyla oluşturulan örnekler de destructure edilebildiğinden örneğin  üyelerine takma isimlerle erişmek mümkün olur:
+işlev yoluyla oluşturulan örnekler destructure edilebildiğinden, üyelerine takma isimlerle erişmek mümkün olur:
 
 ```Rust
-let Renk {kizil: k, yesil: y, mavi: m} = koyu_mavi;
-println!("Destructure Koyu mavi = ({}, {}, {})", k, y, m);  // Destructure Koyu mavi = (25, 25, 112)
+    let Renk {kirmizi: k, yesil: y, mavi: m} = lacivert;
+    println!("Lacivert ({}, {}, {})",k, y, m);
+    // Lacivert (25, 25, 112)
 ````
 
 ## Çokuzlu yapıları
