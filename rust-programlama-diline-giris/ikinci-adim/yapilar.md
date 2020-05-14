@@ -98,7 +98,7 @@ fn main()   {
 }
 ````
 
-Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken hale getirmek için `mut` anahtar kelimesi kullanılır. Ancak `mut` anahtar kelimesinin kullanılması sadece örneğin değişmesine neden olur, yapının alanları düzeyinde değişkenlik sağlanmaz:
+Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken hale getirmek için `mut` anahtar kelimesi kullanılır. Ancak `mut` anahtar kelimesinin kullanılması sadece örneğin değişmesine neden olur, yapı alanları düzeyinde değişkenlik sağlanmaz:
 
 ```Rust
 // Yapı örneği
