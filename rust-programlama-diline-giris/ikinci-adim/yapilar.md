@@ -75,16 +75,26 @@ Yapı örnekleri alanlarına değer atanarak oluşturulur ve bu alanların tuttu
 
 ```Rust
 struct Renk {
-    kizil: u8,
-    yesil: u8,
-    mavi: u8,
+    kirmizi : u8,
+    yesil   : u8,
+    mavi    : u8,
 }
 
-fn main() {
-    // Yapı örneği 
-    let siyah = Renk {kizil: 0, yesil: 0, mavi: 0};
-    // nokta gösterimi kullanarak yapı alanlarına erişmek
-    println!("Siyah = ({}, {}, {})", siyah.kizil, siyah.yesil, siyah.mavi);  // Siyah = (0, 0, 0)
+fn main()   {
+    // Yapının siyah adlı örneği
+    let siyah = Renk {
+        kirmizi :   0,
+        yesil   :   0,
+        mavi    :   0,
+    };
+    // Nokta gösterimi kullanarak yapı alanlarına erişmek
+    println!("Siyah = ({}, {}, {})", siyah.kirmizi, siyah.yesil, siyah.mavi);
+    // Siyah = (0, 0, 0)
+    
+    // destructure edilişi
+    let Renk {kirmizi: k, yesil:y, mavi:m} = siyah;
+    println!("Siyah = ({}, {}, {})", k, y, m);
+    // Siyah = (0, 0, 0)
 }
 ````
 
