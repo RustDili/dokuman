@@ -101,11 +101,11 @@ fn main()   {
 Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken hale getirmek için `mut` anahtar kelimesi kullanılır. Ancak `mut` anahtar kelimesinin kullanılması sadece örneğin değişmesine neden olur, yapı alanları düzeyinde değişkenlik sağlamaz:
 
 ```Rust
-// Yapı örneği
-let mut ornek = Renk {kizil: 0, yesil: 0, mavi: 255};
-// Sadece örneğin içeriği değişir
-ornek.mavi = 238;
-println!("Örnek = ({}, {}, {})", ornek.kizil, ornek.yesil, ornek.mavi);  // Örnek = (0, 0, 238)
+    let mut ornek = Renk {kirmizi: 0, yesil: 0, mavi: 255};
+    // Bu değişiklik  sadece örneğin tuttuğu veriyi değiştirir
+    ornek.mavi = 238;
+    println!("Mavi = ({}, {}, {})", ornek.kirmizi, ornek.yesil, ornek.mavi);
+    // Mavi = (0, 0, 238)
 ````
 
 Bir yapı örneğinin üyeleri `{..kopyalanacak_ornek}` şeklinde başka bir örnekten kopyalanabilir. Kopyalama yapılırken yeni üyenin bazı üyelerine değer verilebilir. Bu durumda değer ataması yapılmayan üyeler örneklenen kopyanın üye değerlerini edinirler:
