@@ -37,6 +37,7 @@ fn main() {
     
     print!("{}, {}, {}", ornek.kesirli, ornek.dizge, ornek.boolean);
 }
+// 7.05, Merhaba!, false
 ````
 
 C tipi olarak da adlandırılabilen bu yapıların içinde tanımlanan her alanın bir adı ve türü vardır. Bu alanlara `yapi_ornegi.alan_adi` söz dizimi kullanılarak erişilir. Tanımları tür için genel bir şablon gibi olduğundan elemanlarını belirtirken herhangi bir sıraya uyulmasına gerek yoktur: 
