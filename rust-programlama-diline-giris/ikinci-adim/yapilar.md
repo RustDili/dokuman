@@ -6,7 +6,7 @@ Birbiriyle ilgili özellikleri bileşik veri tipi halinde bir araya getiren, kul
     - Nesne yönelimli programlama dillerindeki sınıflarla benzerlik
     - İsimlendirilmiş alanlardan oluştuklarından, nokta gösterimi ile erişim
 2. **Çokuzlu yapıları**
-    - Virgülle ayrılmış bir veya daha fazla değer
+    - Virgülle ayrılmış bir veya daha fazla eleman
     - Çokuzlu koleksiyonları gibi parantez ile sarmalanmış öğe listesi
     - İsimlendirilmiş çokuzlu şeklinde kullanım kolaylığı
 3. **Birim yapıları**
