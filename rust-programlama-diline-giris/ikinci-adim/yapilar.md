@@ -104,28 +104,30 @@ Yapılar varsayılan olarak değişmez kabul edilirler. Bir yapıyı değişken 
     let mut ornek = Renk {kirmizi: 0, yesil: 0, mavi: 255};
     // Bu değişiklik  sadece örneğin tuttuğu veriyi değiştirir
     ornek.mavi = 238;
-    println!("Mavi = ({}, {}, {})", ornek.kirmizi, ornek.yesil, ornek.mavi);
-    // Mavi = (0, 0, 238)
+    println!("Örnek = ({}, {}, {})", ornek.kirmizi, ornek.yesil, ornek.mavi);
+    // Örnek = (0, 0, 238)
     
     // destructure edilirken takma isimlerde mutable olarak işaretlenmelidir 
     let Renk {kirmizi: mut k, yesil: mut y, mavi: mut m} = ornek;
     m = 200;
-    println!("Mavi = ({}, {}, {})", k, y, m);
-    // Mavi = (0, 0, 200)
+    println!("Örnek = ({}, {}, {})", k, y, m);
+    // Örnek = (0, 0, 200)
 ````
 
 Bir yapı örneğinin üyeleri `{..kopyalanacak_ornek}` şeklinde başka bir örnekten kopyalanabilir. Kopyalama yapılırken yeni üyenin bazı üyelerine değer verilebilir. Bu durumda değer ataması yapılmayan üyeler örneklenen kopyanın üye değerlerini edinirler:
 
 ```Rust
-let mavi = Renk {mavi:255, ..ornek};
-println!("Mavi = ({}, {}, {})", mavi.kizil, mavi.yesil, mavi.mavi);  // Mavi = (0, 0, 255) 
+    let mavi = Renk {mavi: 255, ..siyah};
+    println!("Mavi = ({}, {}, {})", mavi.kirmizi, mavi.yesil, mavi.mavi);
+    // Mavi = (0, 0, 255)
 ````
 
 Yapı örnekleri `let` ile bağlanarak destructure edelebilirler. Bu yapıldığında üyelere takma isimlerle erişmek mümkün olur:
 
 ```Rust
-let Renk {kizil: k, yesil: y, mavi: m} = mavi;
-println!("Destructure mavi = ({}, {}, {})", k, y, m); // Destructure mavi = (0, 0, 255)
+    let Renk {kirmizi: k, yesil: y, mavi: m} = mavi;
+    println!("Mavi = ({}, {}, {})", k, y, m);
+    // Mavi = (0, 0, 255)
 ````
 
 İşlevler üzerinden yapı alanlarına erişilerek bir örneği elde edilebilir:
