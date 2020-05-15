@@ -137,8 +137,18 @@ enum Option<T> {
     Some(T),
     None,
 }
+
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
 ````
 
+> ⭐️ Yukarıda bulunan `Option` ve `Result` türleri, Rust standart kitaplığında yer alan, önceden tanımlanmış genellenmiş özel türlerdir.
+
+    - Bir **`Optional` değer** in içeriği ya doludur bu durum **`Some`** ile ifade edilir, ya da dolu değildir ki bu durumda **`None`** döndürülür.
+    - Bir **`Result`** ise ya başarılıdır ve **`Ok`** değerini, ya da başarısızdır ve **`Err`** içeriğini döndürür.  
+    
 İsteğe bağlı bir `Some` değerine sahip olan `Option<T>`, soyut kavramları ifade etmekte oldukça yararlıdır. İsteğe bağlı değerin türü ne olursa olsun, `Option<T>` genel bir türü ifade ettiğinden bu soyutlama pekçok veri türüyle kullanılır:
 
 ```Rust
