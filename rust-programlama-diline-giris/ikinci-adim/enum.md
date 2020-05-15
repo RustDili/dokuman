@@ -68,3 +68,7 @@ fn main() {
     // Hata mesajı Bağlantı hatası!
 }
 ````
+## Sonraki konuya geçmeden önce...
+Aşağıda `ènum` türünün daha iyi anlaşılabilmesi için üzerinde oynayabileceğiniz birkaç örnek yer almaktadır. Bu örneklerden ilki oldukça basit hazırlanmış ve bir oyun karakterinin gideceği dört ana yönün hangisi seçildiyse onu ekranqa yazdıran [Dort yone gidiş örneği](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=77961c70cdc86bb7f8d65a5707dfd036)'dir.
+
+Diğer örnekte ise haftanın günlerini varyantlarında tutan ve eklenilen özellik yardımıyla [tatil günlerini iş günlerinden ayıran](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f7df6f69b2b3158b4d9c445cf94c74cc) bir  `enum` türüne yer verilmektedir.
