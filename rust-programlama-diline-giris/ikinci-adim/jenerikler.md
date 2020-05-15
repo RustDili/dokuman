@@ -1,40 +1,58 @@
 # Genellemeler
 
-> 📖 Bir veri türü yahut bir işlev tanımlanırken bunların farklı türlerle de çalışmasını isteriz. Rust' ta bunu **genellemeler** ile yapabiliriz. Farklı veri türleri için kullanılmak üzere tasarlanmış ve tek noktada toplanmış olan bir program parçası aynı işi diğer türler için de yapacak olan kodun tekrar tekrar yazılmasını önler. Farklı veri türleri için  genelleştirilmiş olan algoritmanın, her veri türü için tekrar üretilmesi gerekmeyeceğinden, programın kod tasarımı sadeleşmiş geliştirme hızı da artmış olur. 
+> 📖 Bir veri türü yahut bir işlev tanımlanırken bunların farklı türlerle de çalışmasını isteriz. Rust' ta bunu **genellemeler** ile yapabiliriz. Farklı veri türleri için kullanılmak üzere tasarlanmış ve tek noktada toplanmış olan bir program parçası aynı işi diğer türler için de yapacak olan kodun tekrar tekrar yazılmasını önler. Farklı veri türleri için  genelleştirilmiş olan algoritmanın, her veri türü için tekrar üretilmesi gerekmeyeceğinden, programın kod tasarımı sadeleşmiş, geliştirme hızı da artmış olur. 
 
-💭 Genelleme kavramında özel bir veri örn: `(x: u8)` türü bildirmek yerine türün yerine geçebilen örn: `(x: T )` gibi genel bir belirteç kullanılır. Ancak genel türün derleyici tarafından anlaşılabilmesi için `<T>` şeklinde tanımlanarak bildirilmesi gerekmektedir.
+💭 Genelleme kavramında özel bir veri türünü `(x: u8)` şeklinde bildirmek yerine türün yerine geçebilen `(x: T )` şeklinde genel bir belirteç kullanılır. Ancak genel türün derleyici tarafından anlaşılabilmesi için `<T>` şeklinde tanımlanarak bildirilmesi gerekmektedir.
 
 ### Genellenmiş işlevler
 Aynı işlevin farklı türlerle kullanılabiliyor olması kodun gereksizce uzamasını önleyerek daha esnek olmasını sağlar:
 
 ```Rust
+use core::fmt::Debug;
+
 fn her_ture_uygun<T>(x: T) { 
-    // x T türünde bir parametredir. T ise jenerik türdür yani farklı türleri için genelleştirilmiştir.  
+    // x T türünde bir parametredir. 
+    // T ise genellenmiş bir türdür yani işleve farklı
+    // türleri argüman olarak iletebilirsiniz.
 } 
 
-fn ayni_turden_iki_tane<T>(x: T, y: T) { 
-    // Her ikisi de aynı türden parametre bekler 
-} 
+fn ayni_turden_iki_tane<T: Debug>(x: T, y: T) {
+    // Her ikisi de aynı türden parametre alır
+    println!("{:?}, {:?}", x, y);
+}
 
-fn farkli_turden_iki_tane<T, U>(x: T, y: U) {  
-    // Farklı türde parametreler.
+fn farkli_turden_iki_tane<T: Debug, U: Debug>(x: T, y: U) {
+    // Farklı türden parametreler alırlar
+    println!("{:?}, {:?}", x, y);
+}
+
+fn main() {
+    let arr: u8 = 3;
+    her_ture_uygun(arr);                // 3
+    
+    let (x, y) = (5, 10);
+    ayni_turden_iki_tane(x, y);         // 5, 10
+    
+    let f = (3.0, false);
+    farkli_turden_iki_tane(f.0, f.1);   // 3.0, false
 }
 ````
 
 Bir verinin hangi tür olduğunu öğrenebilmek için `std::any` kütüphanesinden yararlanabiliriz:
 
 ```Rust
-fn her_ture_uygun<T>(_: T) { 
-    // x T türündedir. T ise jenerik türdür yani farklı türleri için genelleştirilmiştir.  
-    println!("Bu veri {} türündedir", std::any::type_name::<T>());
-} 
+fn her_ture_uygun<T>(_: T)  {
+    // x parametresi Genelleştirilmiş T türündedir.
+    println!("{} türünde veri", std::any::type_name::<T>());
+}
 
 fn main() {
-    
-    let bir_tur = 6;
-    //let bir_tur = 65u8;
-    // let bir_tur = String::from("Merhaba");
-    her_ture_uygun(bir_tur);
+    let a: u8 = 10;
+    her_ture_uygun(a);          // u8 türünde veri
+    her_ture_uygun(65i32);      // i32 türünde veri
+    her_ture_uygun(2.0_f32);    // f32 türünde veri
+    her_ture_uygun(0_isize);    // isize türünde veri
+    her_ture_uygun([1,2,3]);    // [i32; 3] türünde veri
 }
 ````
 
