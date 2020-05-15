@@ -144,7 +144,7 @@ enum Result<T, E> {
 }
 ````
 
-> ⭐️ Yukarıda bulunan `Option` ve `Result` türleri, Rust standart kitaplığında yer alan, önceden tanımlanmış genellenmiş özel türlerdir.
+> ⭐️ Yukarıda bulunan [`Option`](https://doc.rust-lang.org/std/option/index.html) ve [`Result`](https://doc.rust-lang.org/std/result/index.html) türleri, Rust standart kitaplığında yer alan, önceden tanımlanmış genellenmiş özel türlerdir.
 
    - Bir **`Optional` değer** in içeriği ya doludur bu durum **`Some`** ile ifade edilir, ya da dolu değildir ki bu durumda **`None`** döndürülür.
    - Bir **`Result`** ise ya başarılıdır ve **`Ok`** değerini, ya da başarısızdır ve **`Err`** içeriğini döndürür.  
@@ -226,3 +226,7 @@ fn main() {
 ````
 
 📖  `Option` türü, değer bulunmama olasılığını ifade etmek için Rust’un tür sistemini kullanmanın bir yoludur. `Result` ise hata olaslığını ifade eder.
+
+>🔎 `Option` ve `Result` türleriyle ilgili birçok yararlı metod uygulanmıştır. Daha fazla bilgi Rust belgelerinin [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html) ve [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) başlıklarında bulunabilir.
+
+⭐️ Ayrıca, `Option` ve `Result` türlerine ilişkin daha fazla pratik örneğe Rust belgelerinde yer alan [Hata İşleme](https://doc.rust-lang.org/book/first-edition/error-handling.html) bölümünden ulaşabilirsiniz.
