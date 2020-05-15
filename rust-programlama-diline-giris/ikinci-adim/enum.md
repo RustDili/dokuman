@@ -29,11 +29,11 @@ fn main() {
 
 ⭐️ Bir `enum` türünün varyantları:
   
-  - Verisiz olarak yani *(Birim varyant)*,
-  - İsimsiz sıralı veriler halinde, yani çokuzlu varyantı şeklinde *(Çokuzlu varyant)*,
+  - Verisiz olarak yani *(Birim varyant)* şeklinde,
+  - İsimsiz sıralı veriler halinde, yani çokuzlu varyantı şeklinde *(Çokuzlu varyant)* verilerden,
   - İsimlendirilmiş varyantlar, yani yapı alanlarına benzer biçimde *(Yapısal varyant)*
 
-verilerden oluşabilir. 
+oluşabilir. 
 
 ```Rust
 enum Denetim {
