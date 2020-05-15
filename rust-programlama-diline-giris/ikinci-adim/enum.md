@@ -36,28 +36,35 @@ fn main() {
 oluşabilir. 
 
 ```Rust
+#[derive(Debug)]
+
 enum Denetim {
-    Basarili,                               // Birim varyant
-    Dikkat{kategori: i32, mesaj: String},   // Yapısal varyant
-    Hata(String)                            // Çokuzlu varyant
+    Basarili,                               // Birim Varyantlı
+    Dikkat {kategori: i32, mesaj: String }, // Yapısal Varyantlı
+    Hata(String),                           // Çokuzlu Varyabtlı
 }
 
 fn denetim_mesaji_yazdir(dm: Denetim) {
-    
     match dm {
-        Denetim::Basarili => println!("Form sorunsuzca gönderildi"),
-        Denetim::Dikkat{kategori, mesaj} => println!("Dikkat: {} - {}", kategori, mesaj),
-        Denetim::Hata(msj) => println!("Hata oluştu: {}", msj)
-    }
+        Denetim::Basarili                   => println!("Form sorunsuzca gönderildi"),
+        Denetim::Dikkat{kategori, mesaj}    => 
+            println!("Uyarı: {}, {}", kategori, mesaj),
+        Denetim::Hata(msj)                  => println!("Hata mesajı {}", msj),
+    };
 }
+    
 fn main() {
-    let mut form_durumu = Denetim::Basarili;
-    denetim_mesaji_yazdir(form_durumu);
+    let mut form_kontrol = Denetim::Basarili;
+    denetim_mesaji_yazdir(form_kontrol);
+    // Form sorunsuzca gönderildi
     
-    form_durumu = Denetim::Dikkat {kategori: 2, mesaj: String::from("O alan doldurulacak!")};
-    denetim_mesaji_yazdir(form_durumu);
+    form_kontrol = Denetim::Dikkat { 
+        kategori: 2, mesaj: String::from("O alan doldurulacak!")};
+    denetim_mesaji_yazdir(form_kontrol);
+    // Uyarı: 2, O alan doldurulacak!
     
-    form_durumu = Denetim::Hata(String::from("Bağlantı hatası!"));
-    denetim_mesaji_yazdir(form_durumu);
+    form_kontrol = Denetim::Hata(String::from("Bağlantı hatası!"));
+    denetim_mesaji_yazdir(form_kontrol);
+    // Hata mesajı Bağlantı hatası!
 }
 ````
