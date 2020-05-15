@@ -67,10 +67,10 @@ struct Nokta<T> {
 
 fn main() {
     let tamsayi = Nokta{x: 5, y: 10};
-    let kesirli = Nokta{x: 3.5, y: 9.2};
+    println!("Nokta: ({}, {})", tamsayi.x, tamsayi.y);  // Nokta: (5, 10)
     
-    println!("Tam sayı için koord: {} - {}", tamsayi.x, tamsayi.y); // Tam sayı için koord: 5 - 10
-    println!("Kesirli için koord: {} - {}", kesirli.x, kesirli.y);  // Kesirli için koord: 3.5 - 9.2
+    let kesirli = Nokta{x: 3.2, y: 2.5};
+    println!("Nokta: ({}, {})", kesirli.x, kesirli.y);  // Nokta: (3.2, 2.5)
 }
 ````
 Genellenmiş işlevlerde olduğu gibi; yapı tanımında bildirilen tür parametresi `<T>`' nin bir kez kullanılması, yapının tüm alanlarının aynı türden oluşacağını gösterir. `let tamsayi = Nokta{x: 5, y: 10.7};` şeklinde oluşturulan bir yapı örneği bu programın hata üretmesine sebep olacaktır. 
@@ -84,13 +84,14 @@ struct Nokta<T, U> {
 }
 
 fn main() {
-    let tamsayi = Nokta{x: 5, y: 10};
-    let kesirli = Nokta{x: 3.5, y: 9.2};
-    let karisik = Nokta{x: 7, y: 3.2};
+    let tamsayi = Nokta{x: 1, y: 7};
+    println!("Nokta: ({}, {})", tamsayi.x, tamsayi.y);  // Nokta: (2, 7)
     
-    println!("Tam sayı için koord: {} - {}", tamsayi.x, tamsayi.y); // Tam sayı için koord: 5 - 10
-    println!("Kesirli için koord: {} - {}", kesirli.x, kesirli.y);  // Kesirli için koord: 3.5 - 9.2
-    println!("Karisik için koord: {} - {}", karisik.x, karisik.y);  // Karisik için koord: 7 - 3.2
+    let kesirli = Nokta{x: 3.0, y: 9.5};
+    println!("Nokta: ({}, {})", kesirli.x, kesirli.y);  // Nokta: (3.0, 9.5)
+    
+    let karisik = Nokta{x: 6, y: 3.1};
+    println!("Nokta: ({}, {})", karisik.x, karisik.y);  // Nokta: (6, 3.1)
 }
 ````
 
@@ -109,24 +110,23 @@ impl<T, U> Nokta<T, U> {
             y,
         }
     }
-    
-    fn degistir<V, W>(self, oteki: Nokta<V, W>) -> Nokta<T, W> {
+    fn degistir<V, W>(self, oteki: Nokta<V, W>) -> Nokta< T, W> {
         Nokta {
             x: self.x,
             y: oteki.y,
         }
     }
-} 
+}
 
 fn main() {
-    let tamsayi = Nokta::yeni(5, 7);
-    println!("{} - {}", tamsayi.x, tamsayi.y);
+    let tamsayi = Nokta::yeni(5,7);
+    println!("Nokta: ({}, {})", tamsayi.x, tamsayi.y);  // Nokta: (5, 7)
     
-    let dizge   = Nokta::yeni("Merhaba", 'p');
-    println!("{} - {}", dizge.x, dizge.y);
+    let dizge = Nokta::yeni("Merhaba!", 'p');
+    println!("Nokta: ({}, {})", dizge.x, dizge.y);      // Nokta: (Merhaba!, p)
     
-    let donustur   = tamsayi.degistir(dizge);
-    println!("{} - {}", donustur.x, donustur.y);
+    let donustur = tamsayi.degistir(dizge);
+    println!("Nokta: ({}, {})", donustur.x, donustur.y);// Nokta: (5, p)
 }
 ````
 ### Genellenmiş enum
