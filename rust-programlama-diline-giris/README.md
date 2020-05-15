@@ -19,8 +19,8 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 ## Sonraki Aşama
 * [Vektörler](ikinci-adim/vectors.md)
 * [Yapılar](ikinci-adim/yapilar.md)
-* [Enum](ikinci-adim/enum.md)
-* [Jenerikler](ikinci-adim/jenerikler.md)
+* [Enum türü](ikinci-adim/enum.md)
+* [Genellemeler](ikinci-adim/jenerikler.md)
 * [Uygulamalar ve Özellikler](ikinci-adim/impl-and-traits.md)
 ## Zor Bölüm 
 ## Başlayalım
