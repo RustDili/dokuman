@@ -19,11 +19,12 @@ enum Gunler {
 ⭐️ Bir `enum`’un sahip olduğu varyantlara **`::`** gösterimi, yani `Gunler::Pazartesi` şeklindeki söz dizimiyle erişilir:  
 
 ```Rust
+
 fn main() {
-    let gun = Gunler::Sali;
-    println!("Günlerden bir gun: {:?}", gun); 
+    let haftanin_ilk_is_gunu = Gunler::Pazartesi;
+    print!("Haftanın ilk iş günü {:?}'dir.", haftanin_ilk_is_gunu);
 }
-// Günlerden bir gun: Sali
+// Haftanın ilk iş günü Pazartesi'dir.
 ````
 
 ⭐️ Bir `enum` türünün varyantları:
