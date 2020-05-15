@@ -130,7 +130,7 @@ fn main() {
 }
 ````
 ### Genellenmiş enum
-Yapılarda olduğu gibi genellenmiş veri türlerini varyantlarında tutabilen `enum` türlerinden de yararlanabiliriz. Rust standart kitaplığında daha önceden tanımlanmış özel türlerden `Option<T>` ve `Result<T>` türleri bu konuya oldukça iyi birer örnektir:
+Yapılarda olduğu gibi, genellenmiş veri türlerini varyantlarında tutabilen `enum` türlerinden de yararlanabiliriz. Rust standart kitaplığında daha önceden tanımlanmış özel türlerden `Option<T>` ve `Result<T>` türleri bu konuya oldukça iyi birer örnektir:
 
 ```Rust
 enum Option<T> {
@@ -142,15 +142,15 @@ enum Option<T> {
 İsteğe bağlı bir `Some` değerine sahip olan `Option<T>`, soyut kavramları ifade etmekte oldukça yararlıdır. İsteğe bağlı değerin türü ne olursa olsun, `Option<T>` genel bir türü ifade ettiğinden bu soyutlama pekçok veri türüyle kullanılır:
 
 ```Rust
-fn uye_numarasini_getir(kullanici: &str) -> Option<usize> {
-    // Eğer, üye Numarası sistemde mevcutsa uyeNo’yu buna ayarla
-    return Some(uyeNo);
-    // else
+fn uye_numarasini_getir(uye_adi: &str) -> Option<usize> {
+    // Sistemde üye numarası mevcutsa uye_no'yu buna ayarla
+    return Some(uye_no);
+    // değilse
     None
 }
 ````
 
-Yukarıdaki işlevde dönüş türü `usize` olarak değil `Option<usize>` olarak ayarlanmıştır. Bu ayarlamayla işlevden `uyeNo` yerine `Some(uyeNo)` döndürülür. Böylece kullanıcıya ait tanıtıcı numara sistemde kayıtlıysa `Some(uyeNo)` bu değere ayarlanarak işlevden döndürülecek, değilse dönüş türü `None` olarak ayarlanacaktır:
+Yukarıdaki işlevde dönüş türü `usize` olarak değil `Option<usize>` olarak ayarlanmıştır. Bu ayarlamayla işlevden `uye_no` yerine `Some(uye_no)` döndürülür. Böylece kullanıcıya ait tanıtıcı numara sistemde kayıtlıysa `Some(uye_no)` bu değere ayarlanarak işlevden döndürülecek, değilse dönüş türü `None` olarak ayarlanacaktır:
 
 ```Rust
 struct Gorev {
@@ -162,6 +162,14 @@ struct Gorev {
 Görev adlı yapıda ise görev için herhangi bir görevli atanmamış olduğundan `gorevli:Kisi` yerine `Option<Kisi>` seçeneği kullanılmaktadır. İşlevlerden geri dönüş değeri olarak `Option<T>` kullanıldığında, dönüş değerinin çağrı esnasında yakalanabilmesi için desen eşleştirmesi kullanılır. 
 
 ```Rust
+fn uye_numarasini_getir(uye_adi: &str) -> Option<usize> {
+    // Sistemde üye numarası mevcutsa uye_no'yu buna ayarla
+    let uye_no = 3;
+    return Some(uye_no);
+    // değilse
+    None
+}
+
 fn main() {
    let uye_adi = "isimsiz";
    
@@ -170,6 +178,7 @@ fn main() {
        Some(i) => println!("Üye numarası: {}", i)
    }
 }
+// Üye numarası: 3
 ````
 
 Duruma göre ya başarılı `Ok` ya da başarısız `Err` değer döndüren Result<T, E> ise iki genel türden oluşur: 
