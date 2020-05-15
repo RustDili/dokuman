@@ -225,4 +225,4 @@ fn main() {
 }
 ````
 
-`Option` türü, değer bulunmama olasılığını ifade etmek için Rust’un tür sistemini kullanmanın bir yoludur. `Result` olaığını ifade eder.
+📖  `Option` türü, değer bulunmama olasılığını ifade etmek için Rust’un tür sistemini kullanmanın bir yoludur. `Result` ise hata olaslığını ifade eder.
