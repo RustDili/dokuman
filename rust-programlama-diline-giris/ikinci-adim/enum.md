@@ -1,4 +1,4 @@
-# Enum
+# Enum türü
 ⭐️ Farklı varyantların nümeratik sırayla bir araya getirildiği ve olası değerlerlerinin tuttulduğu bir türdür:
 
 ```Rust
