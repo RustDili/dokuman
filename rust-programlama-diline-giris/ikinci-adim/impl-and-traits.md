@@ -140,3 +140,44 @@ trait Isci {
         fn ek_vergi(&self) -> f64;
     }
 ````
+
+## Özellik nesneleri
+🔎 Rust statik dağıtımı desteklediği gibi, **özellik nesneleri** adı verilen bir mekanizma aracılığıyla dinamik dağıtımı da destekler. 
+
+>🅆  [Dinamik dağıtım](https://en.wikipedia.org/wiki/Dynamic_dispatch) çalışma zamanında hangi polimorfik işlemin *(metod veya işlev)* uygulanacağını seçme işlemidir.
+
+```Rust
+trait SesUret {
+    fn ses_al(&self) -> String;
+}
+
+struct Cat {
+    ses: String,
+}
+    impl SesUret for Cat {
+        fn ses_al(&self) -> String {
+            self.ses.clone()
+        }
+    }
+
+struct Bell {
+    ses: String,
+}
+    impl SesUret for Bell {
+        fn ses_al(&self) -> String {
+            self.ses.clone()
+        }
+    }
+
+fn ses_ver<T: SesUret>(t: &T) {
+    println!("{}", t.ses_al());
+}
+
+fn main() {
+    let kedi_sesi = Cat { ses: "Miyawww".to_string() }; 
+    let kapi_sesi = Bell{ ses: "Ding Dong". to_string() };
+    
+    ses_ver(&kedi_sesi);    // Miyawww
+    ses_ver(&kapi_sesi);    // Ding Dong
+}
+````
