@@ -75,7 +75,7 @@ trait Foo {
 - Değer heap üzerinde depolanan değişebilir bir referans türündeyse `&mut self` ile yapılan **değişebilir bir başvuru** temsil edilir.
 
 ## İlişkili işlevlere sahip uygulamalar
-Birçok programlama dili statik işlevleri destekler. Bunlar kullanılabildiğinde bir nesne oluşturulmaksızın doğrudan sınıf içinden çağrılabilirler. Rust'ta bu şekilde kullanılan işlevlere **ilişkili İşlevler** denir. Bu statik işlevler bir yapı içinden çağrılırken `Kisi::new(“Ali Veli”);` söz ifadesinde olduğu gibi `::işlev()` şeklindeki söz dizi uygulanır.
+Birçok programlama dili statik işlevleri destekler. Bunlar kullanılabildiğinde bir nesne oluşturulmaksızın doğrudan sınıf içinden çağrılabilirler. Rust'ta bu şekilde kullanılan işlevlere **ilişkili İşlevler** denir. Bu statik işlevler bir yapı içinden çağrılırken `Kisi::new(“Ali Veli”);` söz ifadesinde olduğu gibi `::işlev()` şeklindeki söz dizi uygulanır:
 
 ```Rust
 struct Oyuncu {
@@ -109,3 +109,34 @@ fn main() {
 🔎 Aynı örnekte bulunan, `yeni()` ve `tam_adi()` metodlarını iki ifade olarak ayrı ayrı kullanmak yerine,  `nesne_ornegi.nokta_ekle(2).nokta_sayisi_bul();` gibi metod zinciri şeklinde ifade edebiliriz.
 
 ## Özellik ve genelleme
+Genellenecek özelliğin adı `From<T>` söz dizimine uygun şekilde, işlev genellemelerind eolduğu gibi belirteçten önce yazılır:
+
+```Rust
+trait From<T> {
+    fn from(T) -> Self;
+}
+    impl From<u8> for u16 {
+        // işlemler...
+    }
+    impl From<u8> for u32 {
+        // işlemler...
+    }
+````
+
+## Özellikler ve Kalıtım
+Özelliklerin şablonik yapıları diğer özellikler tarafından da miras alınarak kullanılabilir. 
+
+```Rust
+trait Isci {
+    fn tam_adi(&self) -> String;
+}
+    // Bu özelliği kalıtım yoluyla miras alan diğer özellikler
+    trait Sigortali : Isci {  // sadece İsci Özelliğini miras alır
+        fn is_tanimi(&self) -> String;
+    }
+    
+    // GocmenIsci ise hem Isci'den hem de Gocmen'den miras alır  
+    trait GocmenIsci : Gocmen + Isci { 
+        fn ek_vergi(&self) -> f64;
+    }
+````
