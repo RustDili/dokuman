@@ -22,7 +22,10 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 * [Enum türü](ikinci-adim/enum.md)
 * [Genellemeler](ikinci-adim/jenerikler.md)
 * [Uygulamalar ve Özellikler](ikinci-adim/impl-and-traits.md)
-## Zor Bölüm 
+## Üçüncü Adım
+* [Mülkiyet](ucuncu-adim/ownership.md)
+* [Borçlanma](ucuncu-adim/borrowing.md)
+* [Yaşam süreleri](ucuncu-adim/lifetimes.md)
 ## Başlayalım
 ## Hata Yönetimi
 
