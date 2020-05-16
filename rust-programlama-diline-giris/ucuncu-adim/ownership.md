@@ -1,1 +1,1 @@
-# Mülkiyet
+# Mülkiyet ve sahiplik kavramı
