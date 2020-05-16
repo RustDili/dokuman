@@ -1,0 +1,1 @@
+# Yaşam süreleri
