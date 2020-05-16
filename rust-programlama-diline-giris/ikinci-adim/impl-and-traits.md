@@ -74,4 +74,38 @@ trait Foo {
 - Değer heap üzerinde depolanan değişmez bir referans ise `&self` ile yapılan **değişmez bir başvuru**,
 - Değer heap üzerinde depolanan değişebilir bir referans türündeyse `&mut self` ile yapılan **değişebilir bir başvuru** temsil edilir.
 
+## İlişkili işlevlere sahip uygulamalar
+Birçok programlama dili statik işlevleri destekler. Bunlar kullanılabildiğinde bir nesne oluşturulmaksızın doğrudan sınıf içinden çağrılabilirler. Rust'ta bu şekilde kullanılan işlevlere **ilişkili İşlevler** denir. Bu statik işlevler bir yapı içinden çağrılırken `Kisi::new(“Ali Veli”);` söz ifadesinde olduğu gibi `::işlev()` şeklindeki söz dizi uygulanır.
 
+```Rust
+struct Oyuncu {
+    ilk_adi : String,
+    son_adi : String,
+}
+
+impl Oyuncu {
+    fn yeni(ilk_adi: String, son_adi: String) -> Oyuncu {
+        Oyuncu {
+            ilk_adi : ilk_adi,
+            son_adi : son_adi,
+        }
+    }
+    fn tam_adi(&self) -> String {
+        format!("{} {}", self.ilk_adi, self.son_adi)
+    }
+}
+
+fn main() {
+    let figuran = Oyuncu::yeni( String::from("Serkan"),
+                        "Ortaç".to_string()).tam_adi();
+    
+    println!("Figuran: {}", figuran);
+    // Figuran: Serkan Ortaç
+}
+````
+
+⭐️ Örnekteki `yeni()` metodu için `::` gösterimi, `tam_adi()` metodu için de **`.`** gösteriminin kullanıldığına dikkat edin.  
+
+🔎 Aynı örnekte bulunan, `yeni()` ve `tam_adi()` metodlarını iki ifade olarak ayrı ayrı kullanmak yerine,  `nesne_ornegi.nokta_ekle(2).nokta_sayisi_bul();` gibi metod zinciri şeklinde ifade edebiliriz.
+
+## Özellik ve genelleme
