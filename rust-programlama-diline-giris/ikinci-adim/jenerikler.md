@@ -229,4 +229,4 @@ fn main() {
 
 >🔎 `Option` ve `Result` türleriyle ilgili birçok yararlı metod uygulanmıştır. Daha fazla bilgi Rust belgelerinin [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html) ve [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html) başlıklarında bulunabilir.
 
-⭐️ Ayrıca, `Option` ve `Result` türlerine ilişkin daha fazla pratik örneğe Rust belgelerinde yer alan [Hata İşleme](https://doc.rust-lang.org/book/first-edition/error-handling.html) bölümünden ulaşabilirsiniz.
+⭐️ Ayrıca, `Option` ve `Result` türlerine ilişkin daha fazla pratik örneğe Rust belgelerinde yer alan [Hata İşleme](https://doc.rust-lang.org/book/ch09-00-error-handling.html) bölümünden ulaşabilirsiniz.
