@@ -16,7 +16,7 @@ struct Oyuncu {
 
 impl Oyuncu {
     fn tam_adi(&self) -> String {
-        return format!("{} {}", self.ilk_adi, self.son_adi);
+        format!("{} {}", self.ilk_adi, self.son_adi)
     }
 }
 
@@ -30,3 +30,48 @@ fn main() {
 ````
 
 ⭐️ Her uygulamanın kendi türü ile aynı sandığın içinde yer almasına dikkat edin.
+
+## Varsayılan metodu bulunmayan uygulama ve özellikler
+```Rust
+struct Oyuncu {
+    ilk_adi : String,
+    son_adi : String,
+}
+
+trait TamAdi {
+    fn tam_adi(&self) -> String;
+}
+
+impl TamAdi for Oyuncu {
+    fn tam_adi(&self) -> String {
+        format!("{} {}", self.ilk_adi, self.son_adi)
+    }
+}
+
+fn main() {
+    let yan_rol = Oyuncu {ilk_adi: String::from("Selin"),
+                            son_adi: "Tekman".to_string() };
+    
+    println!("Yan rol oyuncusu: {}", yan_rol.tam_adi());
+    // Yan rol oyuncusu: Selin Tekman
+}
+````
+
+🔎 Özellikler, işlevler dışında diğer türler hatta sabitleri de içerebilir.
+
+## Varsayılan metoda sahip uygulama ve özellikler
+```Rust
+trait Foo {
+    fn bar(&self);
+    fn baz(&self) {
+        println!("Baz işlevi çağrıldı!");
+    }
+}
+````
+
+⭐️ Yukarıdaki örnekten de anlaşılacağı gibi metotlar özel bir ilk parametre olan `self` yani türün kendisine sahiptirler. Bu parametre duruma göre `self`, `&self` ya da `&mut self` şeklinde olabilir. 
+- Değer belleğin stack bölümünde depolanıyorsa `self` ile **değişkenin mülkiyeti** dahil kendisi, 
+- Değer heap üzerinde depolanan değişmez bir referans ise `&self` ile yapılan **değişmez bir başvuru**,
+- Değer heap üzerinde depolanan değişebilir bir referans türündeyse `&mut self` ile yapılan **değişebilir bir başvuru** temsil edilir.
+
+
