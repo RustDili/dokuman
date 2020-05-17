@@ -1,4 +1,4 @@
-# Sahiplik ve mülkiyet kavramı
+# Sahiplik ve Mülkiyet kavramı
 Aşağıdaki örneklerde, `a`'nın değerini `b`'ye atamaya çalışıyoruz. Her iki kod bloğu da hemen hemen aynı kodlardan oluşuyor gibi görünse de ayrı veri türleriyle işlem yapılmaktadır. İlk kod bloğu hatasız derlenip çalıştırılabiliyorken, ikinci kod bloğu mülkiyet sorunu yüzünden hata üretip çalışmayacaktır.
 
 Değerleri belleğin `stack` adlı bölgesinde depolanan değişkenlerle yapılan bir işlem:
@@ -27,7 +27,7 @@ fn main() {
 > [Mülkiyet](https://github.com/nikomatsakis/rust-tutorials-keynote/blob/master/Ownership%20and%20Borrowing.pdf)
 Bir şeye sahip olma eylemi, durumu veya hakkı olarak dilimize çevrilebilir.
 
-## Kopyalanan ve taşınan türler
+## Kopyalanan ve Taşınan türler
 ⭐️ Bir değerle bağlanmış değişkeni, başka bir değişkene bağlarken yahut bir işleve referans kullanmadan geçirilirken bu veriler:
 
 1. **Kopya türlerdir**, çünkü:
