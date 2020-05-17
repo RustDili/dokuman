@@ -24,9 +24,9 @@ Yaşam süreleri ek açıklamaları **derleme zamanında** denetlenir. Hafıza i
 ## Kullanım
 Yaşam süreleri bir **kesme `'`** işareti ile gösterilir ve kurallara göre adlandırılırken küçük harf kullanılır. Bu kullanım genellikle `'a` ile başlar ve **çok sayıda yaşam süresi** belirtilmesi gerektiğinde sırasıyla **alfabenin diğer harfleri** kullanılır. 
 
-Referansları kullanılırken, aşağıdaki başlıklar altında incelenmiş konulara dikkat edilmesi gereklidir.
+Referansları kullanılırken, aşağıdaki başlıklarda gösterilen kurallara riayet edilmelidir.
 
-### 01. İşlevlerde bildirim
+### 01. İşlevlerle
   * Referanslı giriş ve çıkış parametreleri kullanıldığında **`&`** işaretinden sonra parametrelerin yaşam süreleri bildirilmelidir.
   Örneğin: `..(x: &'a str)` , `..(x: &'a mut str)`
   * Genelleştirilen işlevlerde yaşam sürelerinin genellenen türler için olduğu, işlev adından sonra bildirilmelidir.
@@ -59,7 +59,7 @@ fn bir_islev<'a>(x: &'a str, y: &'a str) -> &'a str {...}
 fn bir_islev<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {...} 
 ````
 
-### 02. Yapı veya Enum Türlerinde Bildirim
+### 02. Yapı veya Enum Türleriyle
   * Referanslı elemanların yaşam süreleri **`&`** işaretinden hemen sonra bildirilmelidir.
   * `struct` veya `enum` adından sonra, verilen yaşam sürelerinin genellenen türler olduğunu bildirmek zorunludur.
   
@@ -83,4 +83,54 @@ enum Sirala<'a> {
     Varyant(&'a Type) 
 }
 ````
-### 03. Uygulama ve Özelliklerde Bildirim
+### 03. Uygulama ve Özelliklerle
+```Rust
+struct BirYapi<'a> {
+    x: &'a str
+}
+    impl<'a> BirYapi<'a> {
+        fn function<'a>(&self) -> &'a str {
+            self.x
+        }
+    }
+
+
+struct BirYapi<'a> {
+    x: &'a str,
+    y: &'a str
+}
+    impl<'a> BirYapi<'a> {
+        // impl bildiriminde <'a> bulunduğundan new için yeniden belirtmeye gerek yok.
+        fn new(x: &'a str, y: &'a str) -> BirYapi<'a> { 
+              BirYapi {
+              x : x,
+              y : y
+          }
+        }
+    }
+
+
+// 🔎
+impl<'a> Trait<'a> for Type
+impl<'a> Trait for Type<'a>
+````
+
+### 04. Genellenen Türlerle
+```rust
+// 🔎
+fn bir_islev<F>(f: F) where for<'a> F: FnOnce(&'a Type)
+struct BirYapi<F> where for<'a> F: FnOnce(&'a Type) { x: F }
+enum Siralama<F> where for<'a> F: FnOnce(&'a Type) { Variant(F) }
+impl<F> BirYapi<F> where for<'a> F: FnOnce(&'a Type) { fn x(&self) -> &F { &self.x } }
+```
+
+## Yaşam süresi seçimi
+Daha önce de belirttiğim gibi, **ortak kalıpları** daha ergonomik hale getirmek için Rust, yaşam sürelerinin **kaldırılmasını/atlanmasını** sağlar. Bu işleme **Yaşam süresi seçimi** adı verilir.
+
+💡 Rust Şu an için yalnızca `fn` tanımlarında *Yaşam süresi seçimlerini* desteklemektedir. bununla birlikte gelecekte, `impl` başlıkları da desteklenecektir.
+
+`fn` tanımlarının yaşam süresi ek açıklamaları **Parametre listesinde** aşağıdakilerin her ikisi bulunuyorsa derleyici tarafından seçilebilir.
+  
+  * Yalnızca bir giriş parametresi referans ile iletiliyorsa
+  * Parametre `&self` ya da `&mut self` referansı taşıyorsa
+
