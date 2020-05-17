@@ -16,3 +16,21 @@ Gerçek hayattaki uygulamalarda çoğu zaman, bir değerle bağlanmış değişk
    * Bir veri parçası, **tek bir kullanıcı tarafından ödünç alınabilir ve değiştirilebilir**, ancak bu durumda o verilere başkaları erişemez ve kullanamaz.
    
 ## Borçlanma Kuralları
+Borçlanmanın oldukça önemli kuralları bulunmaktadır:
+
+1. Bir veri parçası belli bir anda; ya paylaşılan ya da değişken borçlanma şeklinde ödünç alınabilir. Ancak **ikisi de aynı anda olamaz.**
+
+2. Borçlanma **hem kopyalanan hem de taşınan türleri** kapsar.
+
+2. **Canlılık** kavramı **↴**
+
+```Rust
+fn main() {
+    let mut a = vec![1,2,3];
+    let b = &mut a; // 'a' nın değişken borçlanması &mut burada başlar
+                    // :
+                    // :
+    // Bazı kodlar  // :
+    // Bazı kodlar  // :
+}                   // &mut değişken borçlanma burada sona erer.
+````
