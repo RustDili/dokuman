@@ -27,10 +27,42 @@ Borçlanmanın oldukça önemli kuralları bulunmaktadır:
 ```Rust
 fn main() {
     let mut a = vec![1,2,3];
-    let b = &mut a; // 'a' nın değişken borçlanması &mut burada başlar
+    let b = &mut a; // 'a' nın değişken borçlanması yani `&mut` burada başlar
                     // :
                     // :
     // Bazı kodlar  // :
     // Bazı kodlar  // :
 }                   // &mut değişken borçlanma burada sona erer.
 ````
+
+```Rust
+fn main() {
+    let mut a = vec![1,2,3];
+    let b = &mut a;         // 'a' nın değişken borçlanması &mut burada başlar
+    // Bazı kodlar          // :
+    
+    println!("{:?}", a);    // paylaşılan borç olarak verilen 'a'ya erişmeye
+                            // çalışmak derleyicinin hata vermesine neden olur.
+}                           // &mut değişken borçlanma burada sona erer.
+````
+
+```Rust
+fn main() {
+    let mut a = vec![1,2,3];
+    
+    {
+        let b = &mut a;     // 'a' nın değişken borçlanması &mut burada başlar
+        // Bazı kodlar      // :
+    }                       // &mut değişken borçlanma burada sona erer.
+    
+    println!("{:?}", a);    // burada 'a' nın paylaşılan borçlanmasına izin verilir
+}
+````
+
+Yukarıdaki bahsi geçen **paylaşılan ve değişken borçlanmaların** nasıl kullanılacağını aşağıdaki örneklerde inceleyelim.
+
+### Paylaşılan Borçlanma Örnekleri
+
+
+
+### Değişken Borçlanma Örnekleri
