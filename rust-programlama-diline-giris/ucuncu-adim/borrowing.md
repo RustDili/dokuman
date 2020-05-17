@@ -88,3 +88,43 @@ fn main() {
 ````
 
 ### Değişken Borçlanma Örnekleri
+Örnek 1:
+```Rust
+fn main() {
+    let mut a = [1, 2, 3];
+    let b = &mut a;
+    b[0] = 4;
+    println!("{:?}", b);
+}
+// [4, 2, 3]
+````
+
+Örnek 2:
+```Rust
+fn main() {
+    let mut a = [1, 2, 3];
+    {
+        let b = &mut a;
+        b[0] = 4;
+    }
+    
+    println!("a:{:?}", a);
+}
+// [4, 2, 3]
+````
+
+Örnek 3:
+```Rust
+fn ilk_ogeyi_degistir_ve_getir(a: &mut Vec<i32>) -> i32 {
+    a[0] = 4;
+    a[0]
+}
+
+fn main() {
+    let mut a = vec![1, 2, 3];
+    let b = ilk_ogeyi_degistir_ve_getir(&mut a);
+    
+    println!("a:{:?}, b:{:?}", a, b);
+}
+// a:[4, 2, 3], b:4
+````
