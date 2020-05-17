@@ -62,7 +62,29 @@ fn main() {
 Yukarıdaki bahsi geçen **paylaşılan ve değişken borçlanmaların** nasıl kullanılacağını aşağıdaki örneklerde inceleyelim.
 
 ### Paylaşılan Borçlanma Örnekleri
+Örnek 1:
+```Rust
+fn main() {
+    let a: [u8; 3] = [1,2,3];
+    let b = &a;
+    
+    println!("a: {:?}, b[0]: {}", a, b[0]);
+}
+// a: [1, 2, 3], b[0]: 1
+````
+Örnek 2:
+```Rust
+fn ilk_ogeyi_getir(a: &Vec<u8>) -> u8 {
+    a[0]
+}
 
-
+fn main() {
+    let a: Vec<u8> = vec![1,2,3];
+    let b = ilk_ogeyi_getir(&a);
+    
+    println!("a: {:?}, b: {:?}", a, b);
+}
+// a: [1, 2, 3], b: 1
+````
 
 ### Değişken Borçlanma Örnekleri
