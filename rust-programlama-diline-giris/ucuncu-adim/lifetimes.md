@@ -22,3 +22,12 @@ Yaşam süreleri ek açıklamaları **derleme zamanında** denetlenir. Hafıza i
 > * Rust, kapsam dışına çıkmak üzere olan verilerin bellek ayırma çağrılarını değerlendirerek bu kaynağa daha fazla başvuru yapılmasını engeller.
 
 ## Kullanım
+Yaşam süreleri bir **kesme `'`** işareti ile gösterilir ve kurallara göre adlandırılırken küçük harf kullanılır. Bu kullanım genellikle `'a` ile başlar ve **çok sayıda yaşam süresi** belirtilmesi gerektiğinde sırasıyla **alfabenin diğer harfleri** kullanılır. 
+
+Referansları kullanılırken, aşağıdaki başlıklar altında incelenmiş konulara dikkat edilmesi gereklidir.
+
+### 01. İşlevlerde bildirim
+  * Referanslı giriş ve çıkış parametreleri kullanıldığında **`&`** işaretinden sonra parametrelerin yaşam süreleri bildirilmelidir.
+  Örneğin: `..(x: &'a str)` , `..(x: &'a mut str)`
+  * Genelleştirilen işlevlerde yaşam sürelerinin genellenen türler için olduğu, işlev adından sonra bildirilmelidir.
+  Örneğin: `fn foo<'a>(..)` , `fn foo<'a, 'b>(..)`
