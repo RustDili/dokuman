@@ -28,3 +28,20 @@ fn main() {
 Bir şeye sahip olma eylemi, durumu veya hakkı olarak dilimize çevrilebilir.
 
 ## Kopyalanan ve taşınan türler
+⭐️ Bir değerle bağlanmış değişkeni, başka bir değişkene bağlarken yahut bir işleve referans kullanmadan geçirilirken bu veriler:
+
+1. **Kopya türlerdir**, çünkü:
+   * Bağlı kaynaklar **kopyalanır ve atanır** veya işleve iletilir.
+   * Orijinal bağlamın mülkiyet durumu **"kopyalandı" durumuna** ayarlanmıştır.
+   * **Çoğunlukla ilkel türlerdir.**
+
+2. **Taşınan türlerdir**, çünkü:
+   * Bağlı kaynaklar yeni değişken bağlamına **taşındığından** artık **orijinal değişken bağlamına erişilemez.**
+   * Orijinal bağlamın mülkiyet statüsü **"taşındı" durumuna** ayarlanmıştır.
+   * İlkel türler değildirler.
+
+> 🔎 Bir türün işlevselliği, kendisine uygulanan özellikler tarafından değerlendirilir. Rust'ta değişken bağlamalarının *"taşıma semantiği"* özelliğine sahip olduğu varsayılır. Bununla birlikte eğer bir tür [**`core::marker::Copy trait`**](https://doc.rust-lang.org/core/marker/trait.Copy.html) özelliğini uyguluyorsa *"kopyalama semantiği"* özelliğine sahiptir.
+
+💡 Dolayısıyla, ikinci örnekte yer alan, **Vec nesnesinin mülkiyeti `b`'ye taşındığından, `a`’nın o kaynaktaki mülkiyeti sona ermiş ve kaynağa erişimi sonlanmıştır.**
+
+🔎 Sahiplik ve Mülkiyet kavramları hakkında derlediğimiz kaynaklara [bu bağlantı üzerinden](https://github.com/rust-lang-tr/dokuman/tree/master/mulkiyet-kavrami) erişebilirsiniz: 
