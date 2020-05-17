@@ -30,4 +30,57 @@ Referansları kullanılırken, aşağıdaki başlıklar altında incelenmiş kon
   * Referanslı giriş ve çıkış parametreleri kullanıldığında **`&`** işaretinden sonra parametrelerin yaşam süreleri bildirilmelidir.
   Örneğin: `..(x: &'a str)` , `..(x: &'a mut str)`
   * Genelleştirilen işlevlerde yaşam sürelerinin genellenen türler için olduğu, işlev adından sonra bildirilmelidir.
-  Örneğin: `fn foo<'a>(..)` , `fn foo<'a, 'b>(..)`
+    Örneğin: `fn foo<'a>(..)` , `fn foo<'a, 'b>(..)`
+
+```Rust
+// Giriş parametresi yok, referans döndürür
+fn bir_islev<'a>() -> &'a str   {...}
+
+// // Bir giriş parametresi
+fn bir_islev<'a>(x: &'a str)    {...}
+
+// Bir giriş bir çıkış parametresi var
+// Her ikisi de aynı yaşam süresine sahip 
+// En azından giriş var olduğu sürece ÇIKIŞ devam etmelidir
+fn bir_islev<'a>(x: 'a &str) -> &'a str {...}
+
+// Çok sayıda giriş parametresinde sadece 
+// bir giriş ve çıkış aynı yaşam süresini paylaşır 
+// En azından y girişi olduğu sürece ÇIKIŞ var olmalı ve yaşamalıdır.
+fn bir_islev<'a>(x: i32, y: &'a str) -> &'a str {...}
+
+// Çoklu girişlerde her biri için belirtilmişse
+// hem giriş hem çıkış aynı yaşam süresini kullanır. 
+// En azından x ve y girişi olduğu sürece ÇIKIŞ var olmalı ve yaşamalıdır. 
+fn bir_islev<'a>(x: &'a str, y: &'a str) -> &'a str {...} 
+
+// Bu tür çoklu girişlerde girişlerin farklı yaşam süreleri olabilir 🔎
+// En azından x olduğu sürece ÇIKIŞ var olmalı ve yaşamalıdır. 
+fn bir_islev<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {...} 
+````
+
+### 02. Yapı veya Enum Türlerinde Bildirim
+  * Referanslı elemanların yaşam süreleri **`&`** işaretinden hemen sonra bildirilmelidir.
+  * `struct` veya `enum` adından sonra, verilen yaşam sürelerinin genellenen türler olduğunu bildirmek zorunludur.
+  
+```Rust
+// Tek öğe 
+// x'in verisi yaşamını BirYapıdan çıkılana kadar sürdürmelidir.
+struct BirYapi<'a> { 
+    x: &'a str 
+} 
+
+// Çok sayıda öğe 
+// x ve y’nin verisi yaşamını BirYapi çıkılana kadar sürdürmelidir. 
+struct BirYapi<'a> { 
+    x: &'a str, 
+    y: &'a str 
+} 
+
+// Bir varyantlı enum türü 
+// varyanta ait veri yaşamını Enum’dan çıkılana kadar sürdürmelidir. 
+enum Sirala<'a> { 
+    Varyant(&'a Type) 
+}
+````
+### 03. Uygulama ve Özelliklerde Bildirim
