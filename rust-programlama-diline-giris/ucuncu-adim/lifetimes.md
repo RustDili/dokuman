@@ -134,3 +134,41 @@ Daha önce de belirttiğim gibi, **ortak kalıpları** daha ergonomik hale getir
   * Yalnızca bir giriş parametresi referans ile iletiliyorsa
   * Parametre `&self` ya da `&mut self` referansı taşıyorsa
 
+```Rust
+// Referans ile yalnızca bir giriş parametresi iletilir
+fn ucle_carp(x: &u64) -> u64 {
+    x * 3
+}
+
+// Yine referans ile yalnızca bir giriş parametresi iletilir
+fn secim(x: u8, y: &str) -> &str {
+    if x > 5 { y } else { "Geçersiz giriş" }
+}
+
+struct Oyuncu<'a> {
+    no: u8,
+    ad: &'a str,
+}
+    // Yaşam süresi seçimlerine şimdilik sadece fn tanımlarında
+    // izin verilmektedir. Ancak gelecekte, impl başlıkları da desteklenebilir.
+    impl<'a> Oyuncu<'a> {
+        // Referans ile yalnızca bir giriş parametresi iletilir
+        fn yeni(no: u8, ad: &str) -> Oyuncu {
+            Oyuncu {
+                no  : no,
+                ad  : ad,
+            }
+        }
+        // &self (veya &mut self) referanslı bir fn tanımı
+        fn rol(&self) -> String {
+            format!("{}: {}", self.no, self.ad)
+        }
+    }
+
+fn main() {
+    let bas_rol = Oyuncu::yeni(7, "Nedim Saban");
+    let rolu    = bas_rol.rol();
+    println!("{}", rolu);
+}
+// 7: Nedim Saban
+````
