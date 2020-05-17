@@ -23,7 +23,7 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 * [Genellemeler](ikinci-adim/jenerikler.md)
 * [Uygulamalar ve Özellikler](ikinci-adim/impl-and-traits.md)
 ## Üçüncü Adım
-* [Mülkiyet ve sahiplik kavramı](ucuncu-adim/ownership.md)
+* [Sahiplik ve mülkiyet kavramı](ucuncu-adim/ownership.md)
 * [Borçlanma](ucuncu-adim/borrowing.md)
 * [Yaşam süreleri](ucuncu-adim/lifetimes.md)
 ## Başlayalım
