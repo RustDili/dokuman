@@ -16,18 +16,29 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 * [Basit veri türleri](ilk-adim/ilkeller.md)
 * [İşleçler](ilk-adim/operatorler.md)
 * [Kontrol akışı](ilk-adim/kontrol-akisi.md)
-## Sonraki Aşama
+## İleri Aşama
 * [Vektörler](ikinci-adim/vectors.md)
 * [Yapılar](ikinci-adim/yapilar.md)
 * [Enum türü](ikinci-adim/enum.md)
 * [Genellemeler](ikinci-adim/jenerikler.md)
 * [Uygulamalar ve Özellikler](ikinci-adim/impl-and-traits.md)
-## Üçüncü Adım
+## En Büyük Adım
 * [Sahiplik ve Mülkiyet kavramı](ucuncu-adim/ownership.md)
 * [Borçlanma](ucuncu-adim/borrowing.md)
 * [Yaşam süreleri](ucuncu-adim/lifetimes.md)
-## Başlayalım
+## Başlangıç
+* [Kod organizasyonu](dorduncu-adim/code-organization.md)
+* [İslevler](dorduncu-adim/functions.md)
+* [Modüller](dorduncu-adim/modules.md)
+* [Sandıklar](dorduncu-adim/crates.md)
+* [Çalışma alanları](dorduncu-adim/workspaces.md)
+* [Use anahtar sözcüğü](dorduncu-adim/use.md)
+* [Std, Temel türler ve Ön kütüphaneler](dorduncu-adim/std-primitives-and-preludes.md)
 ## Hata Yönetimi
-
-
-  
+* [Akıllı derleyici](besinci-adim/smart-compiler.md)
+* [Panik](besinci-adim/panicking.md)
+* [Option ve Result](besinci-adim/option-and-result.md)
+* [Unwrap ve Expect](besinci-adim/unwrap-and-expect.md)
+* [Error ve None Yayılımı](besinci-adim/error-and-none-propagation.md)
+* [Birleştiriciler](besinci-adim/combinators.md)
+* [Özel hata türleri](besinci-adim/custom-error-types.md)
