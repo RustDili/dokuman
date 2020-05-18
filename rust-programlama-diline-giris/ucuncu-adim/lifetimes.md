@@ -172,3 +172,29 @@ fn main() {
 }
 // 7: Nedim Saban
 ````
+
+> 💡 `fn` tanımlarının Yaşam süresi seçim sürecinde,
+>
+> * Referansla iletilen her parametrenin belirli bir yaşam süresi ek açıklaması vardır.
+> Örn: `..(x: &str, y: &str)` → `..<'a, 'b>(x: &'a str, y: &'b str)`
+> * Parametre listesinin referans ile iletilen sadece bir parametresi bulunuyorsa, bu parametre ömrü, o işlevin dönüş değerlerinde elenen tüm yaşam sürelerine atanır.
+> Örn: `..(x: i32, y: &str) -> &str` → `..<'a>(x: i32, y: &'a str) -> &'a str`
+> * Referansla iletilen birden fazla parametre olsa dahi, bunlardan birinde `&self` veya `&mut self` eki bulunuyorsa, o `self` ömrü elenen tüm çıktı yaşam sürelerine atanır.
+> Örn: `impl Impl{ fn function(&self, x: &str) -> &str {} }` → `impl<'a> Impl<'a>{ fn function(&'a self, x: &'b str) -> &'a str {} }`
+> * Diğer tüm durumlar için yaşam süresi ek açıklamalarını elle yazarak belirtmemiz gerekir.
+
+## `'static` Yaşam Süresi Bildirimi
+`'static` Yaşam süresi bildirimi sistem tarafından **rezerve edilmiş** bir yaşam süresi bildirimidir ve **bu referans tüm program boyunca** geçerlidir. 
+Bu tür bildirimler ikili veri segmentine kaydedilirler ve bildirilen veriler asla kapsam dışına çıkmaz.
+
+```Rust
+static N: i32 = 5; // 'static ömürlü bir sabit
+
+let a = "Merhaba, dünya."; // a: &'static str
+
+
+fn index() -> &'static str { // <'static>; 'ten bahsetmeye gerek yoktur fn index ̶<̶'̶s̶t̶a̶t̶i̶c̶>̶ 
+	"Merhaba, dünya."
+````
+
+## Yaşam Süreleri İle İlgili Örnekler
