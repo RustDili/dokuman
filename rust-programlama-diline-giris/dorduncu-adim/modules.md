@@ -1,5 +1,5 @@
 ## Modüller
-## 01. Tek bir dosyada
+## 01. Tek bir dosya
 İlişkili kodlar ve veriler bir tek modülde gruplanır ve aynı dosya içinde saklanır:
 
 ```Rust
@@ -122,4 +122,154 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 */
 ````
 
-## 02. Aynı dizin, ancak farklı bir dosyada
+## 02. Aynı dizin, ancak farklı bir dosya
+// ↳ main.rs 
+mod selamla; // selamla modulünün içe aktarılması 
+
+fn main() { 
+    selamla::merhaba(); 
+} 
+
+// ↳ selamla.rs 
+// ⭐ Dosyanın kendisi bir modül olarak davranacağından
+// kodu mod bildirimi ile sarmak gereksizdir. 
+
+pub fn merhaba() { 
+    // Bu işleve dışarıdan erişilebilmesi için `pub` anahtar 
+    // kelimesi kullanılarak erişime açılması gerekmektedir. 
+    println!("Merhaba dünya!"); 
+}
+// Merhaba dünya!
+
+Eğer dosya içeriği `mod` bildirimi ile sarmalanırsa, bu dosya iç içe geçmiş modüller olarak kabul edilir:
+
+```Rust
+// ↳ main.rs
+mod soylemler;
+
+fn main() {
+    soylemler::selamla::merhaba();
+}
+
+// ↳ soylemler.rs
+pub mod selamla {
+    // Bu işleve dışarıdan erişilebilmesi için `pub` anahtar 
+    // kelimesi kullanılarak erişime açılması gerekmektedir.
+  pub fn merhaba() {
+    println!("Merhaba dünya!");
+  }
+}
+// Merhaba dünya!
+````
+
+## 03. Farklı dizin, farklı dosya
+Dizin modülünün kök dizininde bulunan `mod.rs`, dizin modülüne giriş noktasıdır. Bu dizin kökünde bulunan diğer dosyaların tümü dizin modülünün alt modülleri olarak kabul edilir:
+
+```Rust
+// ↳ main.rs
+mod selamla;
+
+fn main() {
+    selamla::merhaba();
+}
+
+// ↳ selamla/mod.rs
+
+// Bu işleve dışarıdan erişilebilmesi için `pub` anahtar 
+// kelimesi kullanılarak erişime açılması gerekmektedir.
+pub fn merhaba() {
+    println!("Merhaba dünya!");
+}
+// Merhaba dünya!
+````
+
+Yine burada da eğer dosya içeriği `mod` bildirimi ile sarmalanırsa, iç içe geçmiş modül olarak davranmaya başlar:
+
+```Rust
+// ↳ main.rs
+mod soylemler;
+
+fn main() {
+    soylemler::selamla::merhaba();
+}
+
+// ↳ soylemler/mod.rs
+pub mod selamla {
+    pub fn merhaba() {
+        println!("Merhaba dünya!");
+  }
+}
+// Merhaba dünya!
+````
+
+Dizin modülündeki diğer dosyalar `mod.rs` için alt modül görevi üstlenir:
+
+```Rust
+// ↳ main.rs
+mod soylemler;
+
+fn main() {
+  soylemler::merhaba()
+}
+
+// ↳ soylemler/mod.rs
+mod selamla;
+
+pub fn merhaba() {
+  selamla::merhaba()
+}
+
+// ↳ soylemler/selamla.rs
+pub fn merhaba() {
+  println!("Merhaba dünya!");
+}
+// Merhaba dünya!
+````
+
+⭐️ Modülün dışından bir "soylemler/selamla.rs" öğesine erişmeniz gerekiyorsa, `selamla` modülünü `pub` anahtar sözcüğünü kullanarak  genel erişime açık modül olarak içe aktarmanız gerekir.
+
+```Rust
+// ↳ main.rs
+mod soylemler;
+
+fn main() {
+    soylemle::selamla::merhaba();
+}
+
+// ↳ soylemler/mod.rs
+pub mod selamla;  // ⭐️  `mod` yerine`pub mod`
+
+// ↳ soylemler/selamla.rs
+pub fn merhaba() {
+    println!("Merhaba dünya!");
+}
+// Merhaba dünya!
+````
+
+> 🔎 Dizin modülü aracılığıyla alt dosya modülleri `main.rs` içine aktarılamayacağından `main.rs` içerisinden `mod soylemler::selamla`  gibi ifadeler kullanılamaz. Bununla birlikte gerek duyulduğunda `soylemler` dizini içindeki `selamla` dosyasında bulunan `merhaba()` işlevini, `soylemler::selamla::merhaba()` söz dizimiyle ithal edebiliriz. Bu şekilde yapılan bir ithal işleminden sonra işlev, `soylemler::merhaba()` şeklinde doğrudan kullanıma hazır olacaktır.
+
+```Rust
+// ↳ soylemler/selamla.rs
+pub fn merhaba() {
+    println!("Merhaba dünya!");
+}
+
+// ↳ soylemler/mod.rs
+pub mod selamla;
+
+// `self::selamla::merhaba` ifadesiyle 
+// soylemler içine yeniden ithal edilir
+pub use self::selamla::merhaba;
+
+// ↳ main.rs
+mod soylemler;
+
+fn main() {
+    // Artık `merhaba()` işlevi soylemler 
+    // içinden direk olarak çağırılabilir.
+    soylemler::merhaba();
+}
+// Merhaba dünya!
+````
+
+Bu yönelim program kod düzenlememizle **doğrudan uyuşmayabilecek** bir dış arabirim oluşturmamızı sağlar. Haliyle bu tür yönelimler kod karmaşasına sebep olabilir. Böyle karışıklıkların üstesinden gelebilmek için `use` anahtar sözcüğü kullanılmaktadır.
