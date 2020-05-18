@@ -1,0 +1,1 @@
+## Özel hata türleri
