@@ -198,3 +198,39 @@ fn index() -> &'static str { // <'static>; 'ten bahsetmeye gerek yoktur fn index
 ````
 
 ## Yaşam Süreleri İle İlgili Örnekler
+```Rust
+fn selamla<'a>() -> &'a str {
+    "Merhaba!"
+}
+
+fn tam_ad<'a>(onad: &'a str, sonad: &'a str) -> String {
+    format!("{} {}", onad, sonad)
+}
+
+struct Kisi<'a> {
+    onad: &'a str,
+    sonad: &'a str,
+}
+    impl<'a> Kisi<'a> {
+        // impl tanımında <'a> bulunduğundan yeniden bildirmeye gerek yok
+        fn yeni(onad: &'a str, sonad: &'a str) -> Kisi<'a> {
+            Kisi {
+                onad  : onad,
+                sonad : sonad,
+            }
+        }
+        
+        fn tam_ad(&self) -> String {
+            format!("{} {}", self.onad, self.sonad)
+        }
+    }
+
+fn main() {
+    let aktor = Kisi::yeni("Çağlar", "Çorumlu");
+    let aktor_tamad = aktor.tam_ad();
+    
+    println!("Selam ver: {}", selamla());               // Selam ver: Merhaba! 
+    println!("İsim: {}", tam_ad("Pervin", "Bağdat"));   // İsim: Pervin Bağdat
+    println!("Oyuncu: {}", aktor_tamad);                // Oyuncu: Çağlar Çorumlu
+}
+````
