@@ -1,4 +1,4 @@
-# Yaşam süreleri
+# Yaşam süresi
 Referanslarla çalışırken onları kullanmayı bırakana kadar referans verisinin canlı kaldığından emin olmalıyız. 
 
 Şöyle ki; 
@@ -7,7 +7,7 @@ Referanslarla çalışırken onları kullanmayı bırakana kadar referans verisi
   
 >🔎 Bellek yönetimi, bilgisayar belleğine uygulanan bir kaynak yönetimi şeklidir. Programlama dillerinin çoğu 1990'ların ortasına kadar, programcının kullanılmayan nesneleri tanımlamak veya serbest bırakabilmesi için talimatlar vermesini gerektiren **Elle Bellek Yönetimi**'ni kullanıyordu. 1959'da John McCarthy, bir **Otomatik Bellek Yönetimi** (AMM) şekli olan **Çöp Toplayıcı** sistemini *(GC)* icat etti. Bu sistem programlayıcıya güvenmek yerine hangi belleğin artık kullanılmayacağını belirler ve o belleği otomatik olarak serbest bırakır. **Objective-C ve Swift** dilleri de, **Otomatik Referans Sayma** (ARC) adı verilen benzer bir işilevsellik sunarlar.
 
-## Yaşam Süresi Nedir?
+## Yaşam süresi nedir?
 Rust dilinde,
 
   * Aynı anda bir kaynağın yalnızca **tek sahibi** bulunur. Bu durum **kapsam dışına çıkıldığında** biter ve kaynak bellekten kaldırılır.
@@ -59,7 +59,7 @@ fn bir_islev<'a>(x: &'a str, y: &'a str) -> &'a str {...}
 fn bir_islev<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {...} 
 ````
 
-### 02. Yapı veya Enum Türleriyle
+### 02. Yapı veya `enum` türlerle
   * Referanslı elemanların yaşam süreleri **`&`** işaretinden hemen sonra bildirilmelidir.
   * `struct` veya `enum` adından sonra, verilen yaşam sürelerinin genellenen türler olduğunu bildirmek zorunludur.
   
@@ -115,7 +115,7 @@ impl<'a> Trait<'a> for Type
 impl<'a> Trait for Type<'a>
 ````
 
-### 04. Genellenen Türlerle
+### 04. Genellenen türlerle
 ```rust
 // 🔎
 fn bir_islev<F>(f: F) where for<'a> F: FnOnce(&'a Type)
@@ -183,7 +183,7 @@ fn main() {
 > Örn: `impl Impl{ fn function(&self, x: &str) -> &str {} }` → `impl<'a> Impl<'a>{ fn function(&'a self, x: &'b str) -> &'a str {} }`
 > * Diğer tüm durumlar için yaşam süresi ek açıklamalarını elle yazarak belirtmemiz gerekir.
 
-## `'static` Yaşam Süresi Bildirimi
+## `'static` Yaşam süresi bildirimi
 `'static` Yaşam süresi bildirimi sistem tarafından **rezerve edilmiş** bir yaşam süresi bildirimidir ve **bu referans tüm program boyunca** geçerlidir. 
 Bu tür bildirimler ikili veri segmentine kaydedilirler ve bildirilen veriler asla kapsam dışına çıkmaz.
 
@@ -197,7 +197,7 @@ fn index() -> &'static str { // <'static>; 'ten bahsetmeye gerek yoktur fn index
 	"Merhaba, dünya."
 ````
 
-## Yaşam Süreleri İle İlgili Örnekler
+## Yaşam süresi örnekleri
 ```Rust
 fn selamla<'a>() -> &'a str {
     "Merhaba!"
