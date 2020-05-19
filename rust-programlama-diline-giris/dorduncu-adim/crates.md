@@ -7,7 +7,7 @@
 💡 Çalıştırılabilir ikili sandıklar yazılırken temel işlevleri `src/lib.rs` dosyasına taşıyabilir, taşınan bu temel işlevleri de programın giriş noktası olan `src/main.rs` üzerinden bir kütüphane olarak kullanabiliriz. Bu yaklaşım çalıştırılabilir sandıklar için oldukça yaygındır.
 
 ```Rust
-// # terminal yardımıyla ait oduğu dizinde bu komutları uyguladığımız düşünelim 
+// # terminal yardımıyla çalıştığınız dizinde bu komutları uyguladığımız düşünelim 
 cargo new selamla
 touch selamla/src/lib.rs
 
@@ -31,5 +31,4 @@ extern crate selamla;
 fn main() {
     selamla::merhaba();
 }
-```
 ````
