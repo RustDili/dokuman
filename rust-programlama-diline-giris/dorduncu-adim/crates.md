@@ -22,7 +22,7 @@ selamla
 
 // 01. selamla/src/lib.rs
 pub fn merhaba() {
-    println!("Merhaba Kuzay Yarım küre!");
+    println!("Merhaba mars!");
 }
 
 // 02. selamla/src/main.rs
@@ -31,4 +31,5 @@ extern crate selamla;
 fn main() {
     selamla::merhaba();
 }
+// Merhaba mars!
 ````
