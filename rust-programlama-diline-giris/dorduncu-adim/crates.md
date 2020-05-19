@@ -229,6 +229,10 @@ Creates.io üzerine sandık yükleyebilmek için:
   - Eğer istiyorsanız `cargo package` adımını atlyabilirsiniz. Çünkü `cargo publish` alt komutu sandığınızın paketlenmiş bir kopyasını bulamadığı takdirde otomatik olarak paketleyip yayınlayacaktır.
   
 Artık yükleyip yayınlamış olduğumuz `test_sandigi_merhaba_dunya` adlı sandığımız arandığında:
-Paket olarak: 📦 [https://**crates.io/crates**/test_sandigi_merhaba_dunya](https://crates.io/crates/test_sandigi_merhaba_dunya)
-Belge olarak: 📑 [https://**docs.rs**/test_sandigi_merhaba_dunya](https://docs.rs/test_sandigi_merhaba_dunya)
-Alanlarında rahatlıkla bulunabilir.
+
+ - Paket olarak: 📦 [https://**crates.io/crates**/test_sandigi_merhaba_dunya](https://crates.io/crates/test_sandigi_merhaba_dunya)
+ - Belge olarak: 📑 [https://**docs.rs**/test_sandigi_merhaba_dunya](https://docs.rs/test_sandigi_merhaba_dunya)
+
+alanlarında rahatlıkla bulunabilir.
+
+
