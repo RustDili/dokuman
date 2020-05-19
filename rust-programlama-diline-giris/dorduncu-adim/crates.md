@@ -63,3 +63,36 @@ mod tests {           // Her bir test birimi için ayrı ayrı
 
 > [📖](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) İsimlerinde "bunun-gibi" kısa çizgiyi ayraç olarak kullanan bir sandık ithal edildiğinde, bu ayraç geçerli bir Rust dili tanımlayıcısı olmadığından ithal edilen sandık adındaki kısa çizgiler, "bunun_gibi" alt çizgi ile yer değiştirecektir.
 
+`lib.rs` dosyası birden fazla dosyayla bağlantı kurabilir:
+
+```rust
+// # terminal yardımıyla çalıştığımız dizinde bu komutları uyguladığımızı düşünelim 
+cargo new soylem
+touch soylem/src/lib.rs
+touch soylem/src/selamla.rs
+
+// # Oluşturulan klasör yapısı şuna benzeyecektir 
+soylem
+ ├── Cargo.toml
+ └── src
+    ├── selamla.rs
+    ├── lib.rs
+    └── main.rs
+   
+// # Aşağıdaki dosyaları şu şekilde değiştirdiğimizi düşünelim
+
+// 01. soylem/src/selamla.rs
+pub fn merhaba() {
+    println!("Merhaba dünya!");
+}
+
+// 02. soylem/src/main.rs
+extern crate soylem;
+
+fn main() {
+    soylem::selamla::merhaba();
+}
+
+// 03. soylem/src/lib.rs
+pub mod greetings; // ⭐️ `selamla` modülü genele açık bir modül olarak ithal edilir
+```
