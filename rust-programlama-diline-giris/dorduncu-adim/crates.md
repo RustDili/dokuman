@@ -33,3 +33,30 @@ fn main() {
 }
 // Merhaba mars!
 ````
+
+> 💯 Daha önce de belirttiim gibi karmaşıklığı azaltabilmek için burada verdiğim örnekleri olabildiğince basit tutmaya çalışıyorum yararlanıyoruz. Ancak kodun test edilebilir olabilmesi için `selamla/src/lib.rs` dosyasındaki kodları şu şekilde yazmamamız gerekiyor:
+
+```Rust
+// selamla/src/lib.rs
+pub fn merhaba() -> String {
+  //! Burası `Merhaba dünya!` dizgesini döndürür 
+  ("Merhaba dünya!").to_string()
+}
+
+// 01. `merhaba()` işlevi için test 
+#[test]               // İşlevin bir test işlevi olduğunu belirten öznitelik
+fn test_merhaba() {
+  assert_eq!(merhaba(), "Merhaba dünya!");
+}
+
+// 02. `merhaba()`işlev testi için Idiomatic yol 
+#[cfg(test)]          // Sadece test aşamasında derlenir
+mod tests {           // Her bir test birimi için ayrı ayrı 
+  use super::merhaba; // `merhaba()` işlevini kök olarak ithal eder 
+  
+    #[test]
+    fn test_merhaba() {
+        assert_eq!(merhaba(), "Merhaba dünya!");
+    }
+}
+```
