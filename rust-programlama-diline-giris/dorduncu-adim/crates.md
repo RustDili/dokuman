@@ -167,7 +167,7 @@ Başka bir yol da kodunuzu crates.io'ya yüklemek ve gerektiğinde bağımlılı
 🚧 öncelikle basit bir "Merhaba dünya" **sandığı oluşturalım** ve onu [crates.io](http://crates.io/)'ya yükleyelim.
 
 ```Rust
-// # Terminalden çalıştırılaım, 
+// # Terminalden çalıştıralım, 
 cargo new test_sandigi_merhaba_dunya --lib
 
 // # Aşağıdaki gibi bir dizin yapısı oluşacaktır.
@@ -235,4 +235,37 @@ Artık yükleyip yayınlamış olduğumuz `test_sandigi_merhaba_dunya` adlı san
 
 alanlarında rahatlıkla bulunabilir.
 
+> 💯 creates.io *read.me* dosyalarını da destekliyor ancak bu desteği sağlayabilmek için Cargo.toml dosyasında `readme="README.md"` alanını etkinleştirmek zorundayız.
 
+🏗️ Haydi şimdi de, bunu sandığı oluşturduğumuz yeni bir paket ile **nasıl kullanabileceğimizi** inceleyelim.
+
+```rust
+// # Terminalden yeni bir selamla projesi başlatalım, 
+cargo new selamla
+
+// # Aşağıdakine benzer bir dizin yapısı oluşacaktır.
+selamla
+ ├── Cargo.toml
+ └── src
+    └── main.rs
+
+// # Dosyaların aşağıdaki gibi olduğunu varsayalım
+
+// 01. selamla/Cargo.toml
+[package]
+name = "selamla"
+version = "0.1.0"
+authors = ["Sizin Adınız Soyadınız"]
+
+[dependencies]
+test_sandigi_merhaba_dunya = "0.1.0"
+
+// 02. selamla/src/main.rs
+extern crate test_sandigi_merhaba_dunya;
+
+fn main() {
+    println!("{}", test_sandigi_merhaba_dunya::selam());
+}
+```
+
+Cargo, varsayılan olarak [crates.io](https://crates.io/)'ya bağımlılık gösterir. Bu nednele, **`Cargo.toml`**'a yalnızca sandık adını ve sürüm numarasının eklenmesi gerekir. Programın bağımlılıklarını çekerek çalıştırılabilmesi için önce bu verilerin sunulması ve ardından `cargo build` komutunun çalıştırılması gereklidir.
