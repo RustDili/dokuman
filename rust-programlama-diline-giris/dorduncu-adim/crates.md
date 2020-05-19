@@ -60,3 +60,6 @@ mod tests {           // Her bir test birimi için ayrı ayrı
     }
 }
 ```
+
+> [📖](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) İsimlerinde "bunun-gibi" kısa çizgiyi ayraç olarak kullanan bir sandık ithal edildiğinde, bu ayraç geçerli bir Rust dili tanımlayıcısı olmadığından ithal edilen sandık adındaki kısa çizgiler, "bunun_gibi" alt çizgi ile yer değiştirecektir.
+
