@@ -34,7 +34,7 @@ fn main() {
 // Merhaba mars!
 ````
 
-> 💯 Daha önce de belirttiim gibi karmaşıklığı azaltabilmek için burada verdiğim örnekleri olabildiğince basit tutmaya çalışıyorum yararlanıyoruz. Ancak kodun test edilebilir olabilmesi için `selamla/src/lib.rs` dosyasındaki kodları şu şekilde yazmamamız gerekiyor:
+> 💯 Daha önce de belirttiim gibi karmaşıklığı azaltabilmek için burada verdiğim örnekleri olabildiğince basit tutmaya çalışıyorum yararlanıyoruz. Ancak kodun test edilebilir olabilmesi için `selamla/src/lib.rs` dosyasındaki kodları şu şekilde yazmamamız gerekir:
 
 ```Rust
 // selamla/src/lib.rs
@@ -61,7 +61,7 @@ mod tests {           // Her bir test birimi için ayrı ayrı
 }
 ```
 
-> [📖](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) İsimlerinde "bunun-gibi" kısa çizgiyi ayraç olarak kullanan bir sandık ithal edildiğinde, bu ayraç geçerli bir Rust dili tanımlayıcısı olmadığından ithal edilen sandık adındaki kısa çizgiler, "bunun_gibi" alt çizgi ile yer değiştirecektir.
+> [📖](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) İsimlerinde "bunun-gibi" kısa çizgiyi ayraç olarak kullanan bir sandık ithal edildiğinde, bu ayraç geçerli bir Rust dili tanımlayıcısı olmadığından, ithal edilen sandık adındaki kısa çizgiler, "bunun_gibi" alt çizgi ile yer değiştirecektir.
 
 `lib.rs` dosyası birden fazla dosyayla bağlantı kurabilir:
 
