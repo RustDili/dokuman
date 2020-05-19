@@ -268,4 +268,4 @@ fn main() {
 }
 ```
 
-Cargo, varsayılan olarak [crates.io](https://crates.io/)'ya bağımlılık gösterir. Bu nednele, **`Cargo.toml`**'a yalnızca sandık adını ve sürüm numarasının eklenmesi gerekir. Programın bağımlılıklarını çekerek çalıştırılabilmesi için önce bu verilerin sunulması ve ardından `cargo build` komutunun çalıştırılması gereklidir.
+Cargo, varsayılan olarak [crates.io](https://crates.io/)'ya bağımlılık gösterir. Bu nedenle, **`Cargo.toml`**'a yalnızca sandık adını ve sürüm numarasının eklenmesi gerekir. Programın bağımlılıklarını çekerek çalıştırılabilmesi için önce bu verilerin sağlanması ondan sonra  `cargo build` komutunun çalıştırılması gereklidir.
