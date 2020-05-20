@@ -39,6 +39,6 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 * [Panik](besinci-adim/panicking.md)
 * [Option ve Result](besinci-adim/option-and-result.md)
 * [Unwrap ve Expect](besinci-adim/unwrap-and-expect.md)
-* [Error ve None Yayılımı](besinci-adim/error-and-none-propagation.md)
+* [Error ve None yayılımı](besinci-adim/error-and-none-propagation.md)
 * [Birleştiriciler](besinci-adim/combinators.md)
 * [Özel hata türleri](besinci-adim/custom-error-types.md)
