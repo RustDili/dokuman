@@ -114,3 +114,25 @@ fn main() {
 💡 `use` anahtar kelimesi bildirimleri, bir modül veya sandığın tüm öğelerini içe aktarmak yerine, yalnızca kapsamda belirttiğimiz öğe veya içeriğini içe aktarır. Bu kullanım sayesinde programın verimliliği de artmış olur.
 
 ## 03. Yeniden ihraç
+Bir başka özel durum ise `pub use` bildirimidir. Yeni bir modül oluştururken bu modüle, başka bir modülden öğeler aktarabilirsiniz. Bu yapıldığında artık bu öğelere direkt olarak kendi modülünüz üzerinden erişebilirsiniz. Bu işleme **Yeniden ihraç** adı verilir:
+
+```rust
+// ↳ main.rs
+mod soylem;
+
+fn main() {
+    soylem::merhaba(); // Direkt eşleşme yok
+}
+
+// ↳ soylem/mod.rs
+pub mod selamla;
+
+pub use self::selamla::merhaba; // `selamla::merhaba` 'yı soylem için yeniden ihraç etmek
+
+// ↳ soylem/selamla.rs
+pub fn merhaba() {
+  println!("Merhaba dünya!");
+}
+```
+
+Bu şablon büyük kütüphanelerde oldukça yaygın kullanılır. Bu tarz bir kullanım, kütüphanenin iç yapısındaki karmaşıklığı kullanıcılardan gizlemeye yardımcı olur. Böylelikle bu kütüphaneler kullanılırken tüm dizin haritasının bilinmesi gerekmez.
