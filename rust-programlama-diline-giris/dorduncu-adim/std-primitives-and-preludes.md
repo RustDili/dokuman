@@ -92,7 +92,7 @@ intrinsics
 raw 
 ````
 
-> 🔎 [Rust’un kaynak kodları](https://github.com/rust-lang/rust)nı incelerken, [src dizini](https://github.com/rust-lang/rust/tree/master/src)nin bir **çalışma alanı** olduğunu görebilirsiniz. Çok sayıda kütüphane sandığına sahip olmasına rağmen, [kök Cargo.toml](https://github.com/rust-lang/rust/blob/master/src/Cargo.toml) dosyasını incelediğinizde, temel sandıkların [rustc](https://github.com/rust-lang/rust/tree/master/src/rustc) *(derleyici)* ve [libstd](https://github.com/rust-lang/rust/tree/master/src/libstd) *(std)* olduğunu rahatlıkla fark edersiniz. **Std modülleri**nin çoğunun orijinal konumu `src/libcore`'dur. Bu modüllerin `use pub` kullanımı yoluyla yeniden dışa aktarılmış olduğunu `Libstd/lib.rs` dosyasından görebilirsiniz.
+> 🔎 [Rust’un kaynak kodları](https://github.com/rust-lang/rust)nı incelediğinizde, [src dizini](https://github.com/rust-lang/rust/tree/master/src)nin bir **çalışma alanı** olduğunu görebilirsiniz. Çok sayıda kütüphane sandığına sahip olmasına rağmen, [kök Cargo.toml](https://github.com/rust-lang/rust/blob/master/src/Cargo.toml) dosyasını incelediğinizde, temel sandıkların [rustc](https://github.com/rust-lang/rust/tree/master/src/rustc) *(derleyici)* ve [libstd](https://github.com/rust-lang/rust/tree/master/src/libstd) *(std)* olduğunu rahatlıkla fark edersiniz. **Std modülleri**nin çoğunun orijinal konumu `src/libcore`'dur. Bu modüllerin `use pub` kullanımı yoluyla yeniden dışa aktarılmış olduğunu `Libstd/lib.rs` dosyasından görebilirsiniz.
 
 **Oldukça önemli `std` modüllerinden birkaçı** aşağıda sıralanmıştır.
 - `std::io` - Çekirdek **I/O** işlevselliği
