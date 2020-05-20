@@ -48,6 +48,7 @@ struct Renk {
 fn main() {
     let sari = Renk {r: 255, g: 255, d: 0,}; 
     // `b` yerine yanlışlıkla `d` girilmiş
+    // hata açıklamas 8. satırdaki önerinin isabatine bakın:-)
     
     println!("Sarı: rgb: ({},{},{})", sari.r, sari.g, sari.b);
 }
