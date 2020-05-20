@@ -109,7 +109,7 @@ fn main() {
 }
 ````
 
-> Dilin standart kütüphanesi olan `std`yi kullanırken `extern crate std;` ifadesinin kullanılması gerekli değildir. Bu konu hakkında daha fazla bilgiyi "Standart Kütüphane" bölümünde işleyeceğiz.
+> Dilin standart kütüphanesi olan `std`yi kullanırken `extern crate std;` ifadesinin kullanılması gerekli değildir. Bu konu hakkında daha fazla bilgiyi [Standart Kütüphane](std-primitives-and-preludes.md) bölümünde işleyeceğiz.
 
 💡 `use` anahtar kelimesi bildirimleri, bir modül veya sandığın tüm öğelerini içe aktarmak yerine, yalnızca kapsamda belirttiğimiz öğe veya içeriğini içe aktarır. Bu kullanım sayesinde programın verimliliği de artmış olur.
 
