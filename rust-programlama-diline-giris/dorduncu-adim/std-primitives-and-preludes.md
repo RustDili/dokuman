@@ -107,4 +107,39 @@ raw
 
 > 💯 Daha fazla detay için [Rust Standard Kütüphane Belgeleri](https://doc.rust-lang.org/std/)ni inceleyebilirsiniz.
 
-## Ön kütüphaneler
+## Ön yükleme kütüphaneleri
+Rust'ın `std` kütüphanesi pekçok modül içermesine rağmen her Rust programı bunların tamamını yüklemez. Bunun yerine bir rust programının başlangıçta ihtiyaç duyabileceği genel şeyler yüklenir. Buna **[preludes](https://doc.rust-lang.org/std/prelude/)** yani ön yükleme kütüphanesi adı verilir. Ön yükleme kütüphanesinde varsayılan olarak sadece aşağıdakiler bulunur:
+
+```rust
+// Yeniden ihraç edilen çekirdek operatörleri 
+pub use marker::{Copy, Send, Sized, Sync};
+pub use ops::{Drop, Fn, FnMut, FnOnce};
+
+// Tekrar ihraç edilen işlevler 
+pub use mem::drop;
+
+// Tekrar ihraç edilen türler ve özellikler 
+pub use boxed::Box;
+pub use borrow::ToOwned;
+pub use clone::Clone;
+pub use cmp::{PartialEq, PartialOrd, Eq, Ord};
+pub use convert::{AsRef, AsMut, Into, From};
+pub use default::Default;
+pub use iter::{Iterator, Extend, IntoIterator};
+pub use iter::{DoubleEndedIterator, ExactSizeIterator};
+pub use option::Option::{self, Some, None};
+pub use result::Result::{self, Ok, Err};
+pub use slice::SliceConcatExt;
+pub use string::{String, ToString};
+pub use vec::Vec;
+````
+
+> Ön yükleme kütüphaneleri [`libstd/lib.rs`](https://github.com/rust-lang/rust/blob/master/src/libstd/lib.rs#L353) üzerine açıkça aktarılmıştır ve bunların tüm listesi [`libstd/prelude/v1.rs`](https://github.com/rust-lang/rust/blob/master/src/libstd/prelude/v1.rs) üzerinde yer almaktadır.
+
+⭐️ Yani teknik olarak Rust:
+- `extern crate std;` :  ile **her sandığın sandık kökünü**
+- `use std::prelude::v1::*;` : ile **her modülü** otomatik olarak eklediğinden her defasında bu ön yükleme kütüphanelerinin yeniden ithal edilmesine gerek duyulmaz.
+
+Ön yükleme kütüphanesi yaklaşımı, Rust kütüphanelerinde oldukça yaygın görülür. Örneğin [`std::io`](https://github.com/rust-lang/rust/blob/master/src/libstd/io/prelude.rs) gibi `std` sandığında bulunan bazı modüllerin ve [`Diesel`](https://github.com/diesel-rs/diesel/blob/master/diesel/src/lib.rs#L324) gibi birçok kütüphanenin bile başlangıçta kulandıkları `prelude` modülleri bulunur.
+
+⭐️ Çünkü bu ön yükleme kütüphaneleri, o sandığın kullanımı esnasında gerekli olan tüm önemli bileşenlerin alınabileceği tek bir noktayı temsil ederler ve programcı tarafından özellikle ithal edilmedikçe otomatik olarak yüklenmezler. Her Rust programında otomatik olarak yüklenen ön kütüphane sadece `std::prelude` ön yükleme kütüphanesidir.
