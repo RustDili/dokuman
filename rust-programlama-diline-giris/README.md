@@ -33,7 +33,7 @@ Bu döküman oluşturulurken **Dumindu Madunuwan**'ın [Learning Rust](https://g
 * [Sandıklar](dorduncu-adim/crates.md)
 * [Çalışma alanları](dorduncu-adim/workspaces.md)
 * [Use anahtar sözcüğü](dorduncu-adim/use.md)
-* [Std, Temel türler ve Ön kütüphaneler](dorduncu-adim/std-primitives-and-preludes.md)
+* [Std, Temel türler ve Ön yükleme kütüphanesi](dorduncu-adim/std-primitives-and-preludes.md)
 ## Hata Yönetimi
 * [Akıllı derleyici](besinci-adim/smart-compiler.md)
 * [Panik](besinci-adim/panicking.md)
