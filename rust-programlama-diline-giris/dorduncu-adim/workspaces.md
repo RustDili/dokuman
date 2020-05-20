@@ -72,4 +72,4 @@ fn main() {
 
 💡 Linux ve Mac'te çalışıyorsanız Subshells (Parantezler arasına yerleştirilen komut listesi) kullanarak tüm sandıklarda çalışma dizinini değiştirmeden `cargo` komutlarını çalıştırabilirsiniz. Örneğin, `selamla` dizininde bulunuyorsanız, `(cd examples/hello && cargo run)` şeklinde bir komut çalıştırsanız bile çalışma dizininiz hala `selamla` olarak kalacakmaya devam edecektir.
 
-> 🔎 Çalışma alanları ile ilgili yararlı örneklere [rust-lang/rust kaynak dizini](https://github.com/rust-lang/rust/tree/master/src) üzerinden ılaşabilirsiniz.
+> 🔎 Çalışma alanları ile ilgili yararlı örneklere [rust-lang/rust src dizini](https://github.com/rust-lang/rust/tree/master/src) üzerinden ulaşabilirsiniz.
