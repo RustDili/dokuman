@@ -1,8 +1,8 @@
 ## `Use` anahtar sözcüğü
 Şimdi `use` anahtar sözcüğünün temel kullanımlarını görelim.
 
-## 01. Öğe ithalinin tam yolunu belirtmek
-Temelde `use` anahtar sözcüğü, bir öğeye erişimin tam yolunu yeni bir isim ile ilişkilendirmek için kullanılır. Böylelikle kullanıcı o öğeye her erişiminde elemanın tam yolunu belirtmek zorunda kalmamış olur. İlk örneğimiz `use` anahtar sözcüğünü kullanmayan öğe erişimini gösterir:
+## 01. Öğe erişiminin tam yolunu belirtmek
+Temelde `use` anahtar sözcüğü, bir öğenin tam yolunu kullanabilmek için öğeye takma isim vermek amacıyla kullanılır. Böylelikle kullanıcı öğeye her erişimde elemanın tam yolunu belirtmek zorunda kalmamış olur. İlk örneğimiz `use` anahtar sözcüğünü kullanmayan öğe erişimini gösterir:
 
 ```Rust
 // `use` anahtar sözcüğü kullanılmadan
@@ -49,4 +49,68 @@ fn main() {
 }
 ```
 
-## 02. Öğeleri kapsama almak
+## 02. Öğeleri kapsam içine almak
+`Use` anahtar kelimesinin bir diğer yaygın kullanımı da, öğeleri kapsam içine almaktır. Bu biraz da tam yolu kullanmak için takma ad oluşturmaya benzer.
+
+```rust
+fn merhaba() -> String {
+  "Merhaba dünya!".to_string()
+}
+
+#[cfg(test)]
+mod tests {
+  use super::merhaba; // `hello()` işlevini kampsam içine ithal eder
+    
+  #[test]
+  fn test_merhaba() {
+    // Yukarıda `use` kullanmak yerine `super::merhaba()` ifadesini de kullanabilirdik. 
+    assert_eq!("Merhaba dünya!", merhaba()); 
+  }
+}
+````
+
+> 💡 Varsayılan olarak `use` bildirimleri sandık köklerinin mutlak yolunu kullanacak şekilde tasarlanmıştır. Fakat `self` veya `super` 	bildirimleri o mutlak yolu modüle göre yeniden ayarlar.
+
+`Use` anahtar sözcüğü [Rust standart kütüphanesi](https://github.com/rust-lang/rust/tree/master/src/libstd) olan `std` dahil olmak üzere diğer sandık bileşenlerini içe aktarmak amacıyla da kullanılır. 
+
+### 01. Öğeleri ithal ederken
+```Rust
+use std::fs::File;
+
+fn main() {
+    File::create("bos.txt").expect("Dosya oluşturulamadı!");
+}
+````
+
+### 02. Modül ve öğeleri ithal ederken
+```Rust
+std::fs::{self, File} // `use std::fs; use std::fs::File;` bildiriminin daha pratiği
+
+fn main() {
+    fs::create_dir("bir_dizin").expect("Dizin oluşturulamadı!");
+    File::create("bir_dizin/cos.txt").expect("Dosya oluşturulamadı!");
+}
+````
+
+### 03. Çok sayıda öğeyi ithal ederken
+
+```Rust
+use std::fs::File;
+use std::io::{BufReader, BufRead}; // `use std::io::BufReader; use std::io::BufRead;` 
+                                   // bildiriminin daha pratiği
+
+fn main() {
+    let file = File::open("src/merhaba.txt").expect("dosya bulunamadı");
+    let buf_reader = BufReader::new(file);
+
+    for line in buf_reader.lines() {
+        println!("{}", line.unwrap());
+    }
+}
+````
+
+> Dilin standart kütüphanesi olan `std`yi kullanırken `extern crate std;` ifadesinin kullanılması gerekli değildir. Bu konu hakkında daha fazla bilgiyi "Standart Kütüphane" bölümünde işleyeceğiz.
+
+💡 `use` anahtar kelimesi bildirimleri, bir modül veya sandığın tüm öğelerini içe aktarmak yerine, yalnızca kapsamda belirttiğimiz öğe veya içeriğini içe aktarır. Bu kullanım sayesinde programın verimliliği de artmış olur.
+
+## 03. Yeniden ihraç
