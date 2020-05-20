@@ -143,4 +143,78 @@ fn main() {
 // code: Bu seviye: 22 için karşılık belirlenmedi', src/main.rs:8:20
 ````
 ## `assert!()`, `assert_eq!()`, `assert_ne!()` makroları
+Bunlar genellikle test önerileriyle kullanılan standart makrolardır.
+  - `assert!()` bir boolean ifadesinin doğru olacağını garanti eder. İfade yanlışsa panik üretilir:
 
+```Rust
+fn main() {
+    let f:bool = false;
+    
+    assert!(f)
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'assertion failed: f', src/main.rs:4:5
+````
+
+  - `assert_eq!()` son eki *equal* anlamındadır. Kendisine verilen aynı türden iki ifadenin eşit olacağını garanti eder. İfadeler eşit değilse panik üretilir.
+
+```Rust
+fn main() {
+    let a: u8 = 10;
+    let b: u8 = 20;
+    
+    assert_eq!(a, b);
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'assertion failed: `(left == right)`
+````
+
+  - `assert_ne!()` son eki *not equal* anlamındadır. Kendisine verilen iki ifadenin eşit olmadığını garanti eder. İfadeler eşitse panik üretilir. 
+
+```Rust
+fn main() {
+    let a: u64 = 10;
+    let b: u64 = 10;
+    
+    assert_ne!(a, b);
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'assertion failed: `(left != right)`
+````
+
+> ⭐ Hem `assert_eq! ()` hem de `assert_ne! ()` ile kullanılan ifadeler aynı veri türünü döndürmelidir.
+
+Tıpkı diğer makrolarda olduğu gibi bu makrolar için de özel hata mesajları ayarlayabiliriz. İlk örneğimizde `assert_eq!()` için özel bir mesaj ayarlayalım:
+
+```Rust
+fn main() {
+    let a: u64 = 10;
+    let b: u64 = 20;
+    
+    assert_eq!(a, b, "a ve b birbirine eşit olmalıdır!");
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'assertion failed: `(left == right)`
+// left: `10`,
+// right: `20`: a ve b birbirine eşit olmalıdır!', src/main.rs:5:5
+````
+
+Diğer örneğimiz ise `assert_eq!()` makrosunun hata ayıklama verileriyle kullanımını gösterir:
+
+```Rust
+fn main() {
+    let a: u16 = 10;
+    let b: u16 = 20;
+    
+    let c: u16 = 40; 
+    
+    assert_eq!(a+b, c, "a:{} + b: {}", a, b);
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'assertion failed: `(left == right)`
+// left: `30`,
+// right: `40`: a:10 + b: 20', src/main.rs:7:5
+````
+
+## debug_assert!(), debug_assert_eq!(), debug_assert_ne!() makroları
+🔎 Yukarıda örneklerini verdiğimiz `assert` makrolarına benzerler. Ancak bu ifadeler varsayılan olarak yalnızca optimize edilmemiş derlemelerde etkinleştirilir. Derleyiciye `-C debug-assertions` ifadesini iletmediğimiz sürece, bu `debug_assert` makrolarının hepsi  sürüm derlemelerinde atlanır.
