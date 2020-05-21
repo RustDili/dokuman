@@ -210,3 +210,92 @@ fn main() {
 ````
 
 ## `map_or()` ve `map_or_else()` metodları
+Daha önce işlediğimiz ` unwrap_or()` ve `unwrap_or_else()` metodlarının işlevselliğini hatırladığınızı sanıyorum. Bu metodlar onların birer benzeridir. Ancak `map_or()` ve `map_or_else()` metodları, `Some` ve `Ok` değerlerine bir kapatma uygulayarak işlenilen değeri `T` türü içinde döndürür. 
+
+  - **`map_or():`** Yalnızca `Option` türlerini destekler `Result` türünü desteklemez. Kapama işlevini `Some` içindeki değerlere uygulayarak kapamadan iletilen çıktıyı döndürür. `None` türleri içinse belirlenmiş varsayılan bir değer döndürülür.
+  
+```Rust
+fn main() {
+    const VARSAYILAN_D: i8 = 1;
+    
+    let s = Some(10);
+    let n: Option<i8> = None;
+    let kapama = |v: i8| v + 2;
+    
+    assert_eq!(s.map_or(VARSAYILAN_D, kapama), 12);
+    assert_eq!(n.map_or(VARSAYILAN_D, kapama), VARSAYILAN_D);
+}
+````
+
+  - **`map_or_else():`** Hem `Option` hem `Result` türlerini destekler. `Map_or()` metoduna benzemekle beraber, ilk parametre için varsayılan değer yerine başka bir kapama işlevin sunulması gerekir.
+  
+⭐ N türü hiçbir değer içermediğinden `Option` türleri söz konusu olduğunda kapama işlevine girdi olarak bir şey iletmeye gerek yoktur. Bununla birlikte `Err` türlerinde bir parça bilgi içerdiğinden, bu metodun `Result` türleriyle kullanımında kapama işlevi tarafından girdi olarak okunabilmesi gereklidir. 
+
+```rust
+// nightly sürümünde bulunan kararsız kütüphane 
+// özelliğinin etkinleştirilmesi 
+
+#![feature(result_map_or_else)] 
+fn main() {
+    let s = Some(10);
+    let n: Option<i8> = None;
+
+    // `None` bir değer içermediğinden kapamaya giriş olarak iletmeye gerek yok
+    let fn_kapama = |v: i8| v + 2;
+    let fn_varsay = || 1;
+
+    assert_eq!(s.map_or_else(fn_varsay, fn_kapama), 12);
+    assert_eq!(n.map_or_else(fn_varsay, fn_kapama), 1);
+
+    let o = Ok(10);
+    let e = Err(5);
+    // `Err` ise bir parça veri içerdiğinden varsayılan kapama 
+    // kapama işlevi tarafından giriş olarak okunabilmelidir
+    let fn_result_icin_varsay = |v: i8| v + 1; 
+
+    assert_eq!(o.map_or_else(fn_result_icin_varsay, fn_kapama), 12);
+    assert_eq!(e.map_or_else(fn_result_icin_varsay, fn_kapama), 6);
+}
+````
+
+## `ok_or()` ve `ok_or_else()` metodları
+Daha önce de belirtildiği gibi `ok_or()` ve `ok_or_else()` metodları `Option` türünü `Result` türüne dönüştürür. Başka bir ifadeyle `Some` türü `Ok` türüne, `None` türü de `Err` türüne dönüştürülür.
+
+  - **`ok_or():`** Varsayılan bir `Err` mesajı bağımsız değişken olarak iletilmelidir. 
+  
+```rust
+fn main() {
+    const ERR_VARSAY: &str = "Hata mesajı";
+
+    let s = Some("abcde");
+    let n: Option<&str> = None;
+
+    let o: Result<&str, &str> = Ok("abcde");
+    let e: Result<&str, &str> = Err(ERR_VARSAY);
+
+    assert_eq!(s.ok_or(ERR_VARSAY), o); // Some(T) -> Ok(T)
+    assert_eq!(n.ok_or(ERR_VARSAY), e); // None -> Err(varsayılan)
+}
+````
+
+  - **`ok_or_else()`:** `ok_or()` metoduna benzer. Argüman olarak bir kapama geçirilmelidir. 
+
+```rust
+fn main() {
+    let s = Some("abcde");
+    let n: Option<&str> = None;
+    let fn_hata_iletisi = || "Hata mesajı";
+
+    let o: Result<&str, &str> = Ok("abcde");
+    let e: Result<&str, &str> = Err("Hata mesajı");
+
+    assert_eq!(s.ok_or_else(fn_hata_iletisi), o); // Some(T) -> Ok(T)
+    assert_eq!(n.ok_or_else(fn_hata_iletisi), e); // None -> Err(varsayılan)
+}
+````
+
+## `as_ref()` ve `and as_mut()` metodları
+🔎 Daha önce belirtildiği gibi bu metodlar bir `T` türünü, referans ya da değişebilir referans olarak ödünç almak amacıyla kullanılır.
+
+  - **`as_ref()`:** `Option<T>` türünü `Option<&T>` türüne, ve `Result<T, E>` türünü `Result<&T, &E>` türüne dönüştürür.
+  - **`as_mut()`:** `Option<T>` türünü `Option<&mut T>` türüne, ve `Result<T, E>` türünü `Result<&mut T, &mut E>` türüne dönüştürür. 
