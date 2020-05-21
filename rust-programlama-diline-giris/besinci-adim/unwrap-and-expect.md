@@ -137,4 +137,98 @@ fn main() {
 // thread 'main' panicked at 'Hata mesajı beklentisi: "Bir mesaj"', src/main.rs:4:5
 ````
 
-## `Result` türleri için `unwrap_err()` ve `wait_err()` metodları
+## `Result` türleri için `unwrap_err()` ve `expect_err()` metodları
+Bu metodlar `unwrap()` ve `except()` metodlarının tersine çalışırlar. Program süreci `Err` yerine `Ok` değeriyle panikler ve her ikisi de hata mesajlarında `Ok` değerini bulundurur. 
+
+💡 Nu metodlar genellikle test işlemlerinde kullanılırlar.
+
+### 1. İlk örneğimiz `Ok` için `unwrap_err()` metodu kullanımı
+```Rust
+fn main() {
+    let o: Result<i8, &str> = Ok(8);
+    
+    o.unwrap_err();
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'called `Result::unwrap_err()` 
+// on an `Ok` value: 8', src/main.rs:4:5
+````
+
+### 2. Sonraki örneğimiz `Ok` için `expect_err()` metodu kullanımı
+```Rust
+fn main() {
+    let o: Result<i8, &str> = Ok(11);
+    
+    o.expect_err("Ok değeri alınamıyor");
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'Ok değeri alınamıyor: 11', src/main.rs:4:5
+````
+## `unwrap_or()`, `unwrap_or_default()` ve `unwrap_or_else()` metodları
+> 💡 Bu işlevler `unwrap()` işlevine benzemekle birlikte `Option` türünden `Some` değerini ya da `Result` türünden `Ok` değerini içerdikleri sürece bir sonraki adıma ilerlerler. Ancak içeriğin `None` veya `Err` olması durumunda farklı davranırlar. 
+
+  - **`unwrap_or()`:** `None` veya `Err` içeriğiyle `unwrap_or()` metoduna iletilen bir değer sonraki adıma ilerletilir. Ancak iletilen değerin veri türü iletilen `Some` veya `Ok` değeriyle eşleşmek zorundadır:
+  
+```Rust
+fn main() {
+    let v1 = 8;
+    let v2 = 16;
+    
+    let some_v1 = Some(8);
+    let none_n  = None;
+    
+    assert_eq!(some_v1.unwrap_or(v2), v1);  // Some(v1) unwrap_or v2 = v1 
+    assert_eq!(none_n.unwrap_or(v2), v2);   // None unwrap_or v2 = v2 
+    
+    let o_v1: Result<i8, &str> = Ok(8);
+    let e: Result<i8, &str> = Err("Hata");
+
+    assert_eq!(o_v1.unwrap_or(v2), v1);     // Ok(v1) unwrap_or v2 = v1
+    assert_eq!(e.unwrap_or(v2), v2);        // Err unwrap_or v2 = v2
+}  
+````
+  - **`unwrap_or_default()`:** `Some` veya `Ok` türünün varsayılan değeri `None` veya `Err` aracılığıyla iletiliyorsa bu değerler `unwrap_or_default()` metodu yardımıyla bir sonraki adıma ilerletilirler. 
+
+```Rust
+fn main() {
+    let v = 8;
+    let v_default = 0;
+
+    let s_v: Option<i8> = Some(8);
+    let n: Option<i8> = None;
+
+    assert_eq!(s_v.unwrap_or_default(), v);       // Some(v) unwrap_or_default = v
+    assert_eq!(n.unwrap_or_default(), v_default); 
+    // None unwrap_or_default = `v`nin varsayılan değeri
+
+    let o_v: Result<i8, &str> = Ok(8);
+    let e: Result<i8, &str> = Err("Hata");
+
+    assert_eq!(o_v.unwrap_or_default(), v);       // Ok(v) unwrap_or_default = v
+    assert_eq!(e.unwrap_or_default(), v_default); 
+    // Err unwrap_or_default = `v`nin varsayılan değeri
+}  
+````
+
+  - **`unwrap_or_else()`:** Metodu `unwrap_or()` metoduna benzer. Ancak bunun tek farkı kendisine bir değer geçirmek yerine `Some` veya `Ok` ile aynı veri türünde değer döndürebilen bir isimsiz işlev iletebilmemizdir.
+
+```Rust
+fn main() {
+    let v1 = 8;
+    let v2 = 16;
+
+    let s_v1 = Some(8);
+    let n = None;
+    let fn_v2_for_option = || 16;
+
+    assert_eq!(s_v1.unwrap_or_else(fn_v2_for_option), v1); // Some(v1) unwrap_or_else fn_v2 = v1
+    assert_eq!(n.unwrap_or_else(fn_v2_for_option), v2);    // None unwrap_or_else fn_v2 = v2
+
+    let o_v1: Result<i8, &str> = Ok(8);
+    let e: Result<i8, &str> = Err("error");
+    let fn_v2_for_result = |_| 16;
+
+    assert_eq!(o_v1.unwrap_or_else(fn_v2_for_result), v1); // Ok(v1) unwrap_or_else fn_v2 = v1
+    assert_eq!(e.unwrap_or_else(fn_v2_for_result), v2);    // Err unwrap_or_else fn_v2 = v2
+}  
+````
