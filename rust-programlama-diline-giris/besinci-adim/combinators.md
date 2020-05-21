@@ -140,3 +140,73 @@ fn main() {
 ````
 
 ## `filter()` metodu
+> 💡 `filter()` metodları programlama dillerinde genellikle, dizi veya yineleyicilerin bir kapama veya işlev yardımıyla filtrelenerek yeni bir dizi veya yineleyici oluşturulması işlerinde kullanılır. Ek olarak Rust bir yineleyicinin, başka bir yineleyiciye dönüştürülebilmesi için, bir kapama işevi aracılığıyla dönüştürülmek istenilen yineleyicinin her bir elemanına uygulanabilecek [yineleyici adaptörü olarak kullanılabilen bir `filter()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter) metodu sağlar. Yalnız burada `Option()` türleriyle kullanılabilen bir `filter ()` işlevselliğinden bahsettiğimizi anımsatmam yerinde olur.
+
+Eğer  bir kapama işlevine tek bir `Some` değeri iletilirse ve bu işlevden `true` döndürülürse aynı türden bir `Some` döndürülmüş olur. Fakat kapama işlevine `None` değeri iletiliyor ve işlevden `false` döndürülüyorsa bu durumda bir `None` geriye döndürülür. Kapama işlevleri `Some` içinde bulunan değeri bağımsız değişken olarak kullanırlar. Rust'ta halen `filter()` desteği sadece `Option` türleri için kullanılabilmektedir.
+
+```rust
+fn main() {
+    let s1 = Some(3);
+    let s2 = Some(6);
+    let n = None;
+
+    let fn_cift_mi = |x: &i8| x % 2 == 0;
+
+    assert_eq!(s1.filter(fn_cift_mi), n);  // Some(3) -> 3 çift değil -> None
+    assert_eq!(s2.filter(fn_cift_mi), s2); // Some(6) -> 6 çift -> Some(6)
+    assert_eq!(n.filter(fn_cift_mi), n);   // None -> değer taşımıyor -> None
+}
+````
+
+## `map()` ve `map_err()` metodları
+
+>💡 Bunlar programlama dillerinde genellikle, dizi veya yineleyicilerle kullanılan ve **bir kapama işlevinin koleksiyonun her bir elemanına ayrı ayrı uygulanmasını** sağlayan metodlardır. Ek olarak Rust bir yineleyicinin her bir öğesini başka bir yineleyiciye dönüştürebilmek maksadıyla kapama olarak uygulanabilen **bir yineleyici adaptörü olan `map()`** metodunu sunar. Elbette ki burada da `Option` ve `Result` türleri ile kullanılabilen bir `map()` işlevselliğinden bahsettiğimizi hatırlatmak zorundayım.
+
+  - **`map()`:** `T` türlerini bir kapama uygulayarak dönüştürür. `Some` veya `Ok` bloklarının veri türü, kapamanın dönüş türüne göre değiştirilebilir. Başka bir ifadeyle `Option<T>` türü `Option<U>` türüne ya da `Result<T, E>` türü `Result<U, E>` türüne dönüştürülebilir.
+
+⭐ `map()` metodlarıyla sadece `Some` ve `OK` değerlerinin değişebileceğini `Err` içindeki değerlerin etkinmeyeceğini hatırlamanız gerekir. Bir `Option` varyantı olan `None` türünün ise zaten hiçbir değeri içermeyeceğini zaten biliyorsunuz.
+
+```rust
+fn main() {
+    let s1 = Some("abcde");
+    let s2 = Some(5);
+
+    let n1: Option<&str> = None;
+    let n2: Option<usize> = None;
+
+    let o1: Result<&str, &str> = Ok("abcde");
+    let o2: Result<usize, &str> = Ok(5);
+    
+    let e1: Result<&str, &str> = Err("abcde");
+    let e2: Result<usize, &str> = Err("abcde");
+    
+    let fn_karakter_adedi = |s: &str| s.chars().count();
+
+    assert_eq!(s1.map(fn_karakter_adedi), s2); // Some1 map = Some2
+    assert_eq!(n1.map(fn_karakter_adedi), n2); // None1 map = None2
+
+    assert_eq!(o1.map(fn_karakter_adedi), o2); // Ok1 map = Ok2
+    assert_eq!(e1.map(fn_karakter_adedi), e2); // Err1 map = Err2
+}
+````
+  - **`map_err()`:** `Ressult` türleri için kullanılır. Kapama işlevinin dönüş türüne göre `Err` bloklarının veri türü değiştirilebilir. Başka bir ifadeyle `Result<T, E>` türü `Result<T, F>` türüne dönüştürülebilir.
+
+⭐ `map_err()` metodu ile yalnızca `Err` değerlerinin değiştirilebileceğini `Ok` içeriğinin bundan etkilenmeyeceğini unutmayınız.
+
+```rust
+fn main() {
+    let o1: Result<&str, &str> = Ok("abcde");
+    let o2: Result<&str, isize> = Ok("abcde");
+
+    let e1: Result<&str, &str> = Err("404");
+    let e2: Result<&str, isize> = Err(404);
+    
+     //str den isize türüne dönüşür
+    let fn_karakter_adedi = |s: &str| -> isize { s.parse().unwrap() };
+
+    assert_eq!(o1.map_err(fn_karakter_adedi), o2); // Ok1 map = Ok2
+    assert_eq!(e1.map_err(fn_karakter_adedi), e2); // Err1 map = Err2
+}
+````
+
+## `map_or()` ve `map_or_else()` metodları
