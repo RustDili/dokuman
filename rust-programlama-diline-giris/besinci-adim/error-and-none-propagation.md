@@ -108,4 +108,4 @@ fn main() -> std::io::Result<()> {
 // yazdıracaktır.
 ````
 
->💯 Eğer `std::fs::File::open ()` metodunun üretebileceği tüm hataları öğrenmek istiyorsanız, `std::fs::OpenOptions` kütüphanesinde bulunan [hata listesini](https://doc.rust-lang.org/std/fs/struct.OpenOptions.html#errors) kontrol edebilirsiniz.
+>💯 Eğer `std::fs::File::open()` metodunun üretebileceği tüm hataları öğrenmek istiyorsanız, `std::fs::OpenOptions` kütüphanesinde bulunan [hata listesini](https://doc.rust-lang.org/std/fs/struct.OpenOptions.html#errors) kontrol edebilirsiniz.
