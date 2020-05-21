@@ -125,7 +125,7 @@ fn main() {
 
 ````
 
-### Benzer şekilde `Result` varyantı `Err` için hata mesajı beklentimizi oluşturalım 
+### 2. Benzer şekilde `Result` varyantı `Err` için hata mesajı beklentimizi oluşturalım 
 
 ```Rust
 fn main() {
