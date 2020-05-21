@@ -110,3 +110,31 @@ fn main() {
 ⭐ Dikkat ederseniz, `unwrap()` metodunu kullandığınızda verilen hata mesajlarında paniğin gerçekleştiği satır numaraları tam olarak gösterilmemektedir.
 
 ## `expect()` metodu
+Kelime anlamını **beklenti** olarak değerlendirebileceğimiz bu metod `expect()` işlevine benzemekle birlikte farkı, panik için ayarlanabilen özel bir iletiye sahip olmasıdır.
+
+### 1. İlk olarak `Option` varyantı `None` için hata mesajı beklentimizi örnekleyelim
+
+```Rust
+fn main() {
+    let b: Option<i8> = None;
+    
+    b.expect("Boş değer döndürüldü");
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'Boş değer döndürüldü', src/main.rs:4:5
+
+````
+
+### Benzer şekilde `Result` varyantı `Err` için hata mesajı beklentimizi oluşturalım 
+
+```Rust
+fn main() {
+    let e: Result<i8, &str> = Err("Bir mesaj");
+    
+    e.expect("Hata mesajı beklentisi");
+}
+// ---------- Derleme zamanı hatası --------
+// thread 'main' panicked at 'Hata mesajı beklentisi: "Bir mesaj"', src/main.rs:4:5
+````
+
+## `Result` türleri için `unwrap_err()` ve `wait_err()` metodları
