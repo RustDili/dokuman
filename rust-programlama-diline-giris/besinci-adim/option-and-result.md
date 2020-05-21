@@ -100,3 +100,62 @@ fn main() {
 🔎 Bunların haricinde `Option` türleri Rust' taki **nullable işaretçilerle** de kullanılır. Fakat Rust’ ta **null işaretçiler olmadığından** işaretçi türleri geçerli bir konuma işaret etmelidir. O nedenle eğer bir işaretçinin nullable **boş olma olasılığı** bulunuyorsa `Option<Box<T>>` şeklinde bir ifade kullanılır.
 
 ## `Result` türünün temel kullanımları
+Bir işlev hata üretebilecek durumdaysa, **geçerli çıkışın veri türü ve hatanın veri türünü kapsayan** bir `Result` türü kullanmamız gerekir. Örneğin geçerli çıktının veri türü `u64` ve üretilebilecek hata türünün `String` olduğu bir işlevin dönüş türü `Result<u64, String>` şeklinde olmak zorundadır.
+
+```Rust
+fn hatali_bir_islev() -> Result<u64, String> {
+    
+    //Eğer hata oluşacaksa
+    return Err("Hata mesajı".to_string());
+    
+    // Diğer halde geçerli bir çıktı döndürülür
+    Ok(255)
+}
+````
+
+💭 Bildiğiniz gibi, ilgili dönüş türlerini `(Ok/Err)` eşleştirme yoluyla yakalayabilmek için örüntü eşlemeyi kullanabiliriz. Bu eşleştirmede kullanabileceğimiz ortam değişkenlerini elde etmemizi sağlayan `var()` metodunu `std::env` kütüphanesi üzerinden çağırabiliriz. Bu işlevin esprisi kendisine hatalı bir ortam değişkeni iletilir veya programın çalışması sırasında ortam değişken değerleri çıkarsanamıyorsa hataya üretmesidir. Bu nedenle bu metod `Result<String, varError>` şeklinde bir Result türü döndürür.
+
+```Rust
+use std::env;
+
+fn main() {
+    let anahtar = "HOME";
+    
+    match env::var(anahtar) {
+        Ok(deger)   => println!("{}", deger), // Playgroud çıktısı "/playground"
+        Err(e)      => println!("{}", e),
+        // Var olmayan bir ortam değişkeni iletildiyse veya ortam değişkenlerine
+        // ulaşılamıyorsa "environment variable not found", hatası döndürülür 
+    }
+}
+````
+
+## `is_some()`, `is_none()`, `is_ok()`, `is_err()` metodları
+Eşleme yani `match` ifadeleri dışında Rust, dönüş türülerini tanımlaya yarayan `is_some()`, `is_none()`, `is_ok()` ve `is_err()` gibi metodlara da sahiptir.
+
+```Rust
+fn main() {
+    let dizge: Option<&str> = Some("Merhaba dünya!");
+    assert_eq!(dizge.is_some(), true);
+    assert_eq!(dizge.is_none(), false);
+
+    let sonuc: Result<i8, &str> = Ok(10);
+    assert_eq!(sonuc.is_ok(), true);
+    assert_eq!(sonuc.is_err(), false);
+}
+````
+## Result rürleri için `ok()` ve `err()` metodları
+Ek olarak Rust `Result` türleri için kullanılmaya uygun `ok()` ve `err()` metodlarını da sunar. Bu metodlar `Result` türlerinin `Ok<T>` ve `Err<E>` çıktılarını genellenmiş bir `Option` türüne dönüştürürler.
+
+```rust
+fn main() {
+    let o: Result<i8, &str> = Ok(8);
+    let e: Result<i8, &str> = Err("Hata mesajımız!");
+    
+    assert_eq!(o.ok(), Some(8)); // Ok(v) ok = Some(v)
+    assert_eq!(e.ok(), None);    // Err(v) ok = None
+    
+    assert_eq!(o.err(), None);            // Ok(v) err = None
+    assert_eq!(e.err(), Some("Hata mesajımız!")); // Err(v) err = Some(v)
+}
+```
