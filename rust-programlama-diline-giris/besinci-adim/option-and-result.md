@@ -144,7 +144,7 @@ fn main() {
     assert_eq!(sonuc.is_err(), false);
 }
 ````
-## Result rürleri için `ok()` ve `err()` metodları
+## Result türleri için `ok()` ve `err()` metodları
 Ek olarak Rust `Result` türleri için kullanılmaya uygun `ok()` ve `err()` metodlarını da sunar. Bu metodlar `Result` türlerinin `Ok<T>` ve `Err<E>` çıktılarını genellenmiş bir `Option` türüne dönüştürürler.
 
 ```rust
