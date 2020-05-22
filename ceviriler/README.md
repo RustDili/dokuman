@@ -1,7 +1,7 @@
 
-# Çevrilen Bölümler
+# Çevirisi tamamlanan bölümler
 
-# Rust' a Göre Düşünmek 
+# Rust'a Göre Düşünmek 
 
 * [13.İşlevsel dil özellikleri: Yineleyiciler ve kapamalar](ch13-00-functional-features.md)
   * [13.1. Kapamalar: Ortam değişkenlerini yakalayabilen isimsiz işlevler](ch13-01-closures.md)
