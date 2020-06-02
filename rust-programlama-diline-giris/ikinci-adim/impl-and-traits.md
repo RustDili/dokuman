@@ -75,7 +75,7 @@ trait Foo {
 - Değer heap üzerinde depolanan değişebilir bir referans türündeyse `&mut self` ile yapılan **değişebilir bir başvuru** temsil edilir.
 
 ## İlişkili işlevlere sahip uygulamalar
-Birçok programlama dili statik işlevleri destekler. Bunlar kullanılabildiğinde bir nesne oluşturulmaksızın doğrudan sınıf içinden çağrılabilirler. Rust'ta bu şekilde kullanılan işlevlere **ilişkili İşlevler** denir. Bu statik işlevler bir yapı içinden çağrılırken `Kisi::new(“Ali Veli”);` söz ifadesinde olduğu gibi `::işlev()` şeklindeki söz dizi uygulanır:
+Birçok programlama dili statik işlevleri destekler. Bunlar kullanılabildiğinde bir nesne oluşturulmaksızın doğrudan sınıf içinden çağrılabilirler. Rust'ta bu şekilde kullanılan işlevlere **ilişkili İşlevler** denir. Bu statik işlevler bir yapı içinden çağrılırken `Kisi::new(“Ali Veli”);` söz ifadesinde olduğu gibi `::işlev()` şeklindeki söz dizimi uygulanır:
 
 ```Rust
 struct Oyuncu {
