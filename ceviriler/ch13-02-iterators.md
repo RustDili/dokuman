@@ -17,12 +17,14 @@ Aşağıdaki örnekte, yineleyicinin oluşturulması ile `for` döngüsünde kul
 
 Dosya adı: src/main.rs
 ```Rust
-let v1 = vec![1, 2, 3];
-
-let v1_iter = v1.iter();
-
-for val in v1_iter {
-    println!("Okunan: {}", val);
+fn main() {
+    let v1 = vec![1, 2, 3, 4, 5];
+    
+    let iter = v1.iter();
+    
+    for i in iter {
+        println!("Okunan: {}", i);
+    }
 }
 ````
 [Örnek 13-14:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=329f8b44fc0e94dccaca707c0ca98574) Bir `for` döngüsünde yineleyici kullanmak
