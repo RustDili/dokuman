@@ -1,7 +1,7 @@
 ## Yineleyiciler ile bir dizi öğeyi işlemek
-Yineleyici kalıbı, bazı işlemleri bir dizi öğe üzerinde sırayla gerçekleştirmenizi sağlarken, her bir öğe üzerinde yineleme yapmak ve işlediği dizinin ne zaman biteceğini belirleyen mantıktan sorumludur. Yineleyicileri kullandığınızda bu mantığı kendi başınıza yeniden uygulamak zorunda kalmazsınız.
+Bir koleksiyonun tüm elemanları tükenene kadar her bir elemanı üzerinde sırasıyla belirli işlemleri gerçekleştirmekten yineleyiciler sorumludurlar. Yineleyici kullandığınızda bütün bu işlemlerin her birini tekrar tekrar gerçekleştirmek zorunda kalmazsınız.
 
-Rust'ta yineleyiciler tembeldir, bu da demektir ki; yineleyiciler kendilerini tüketen yöntemler çağırılana kadar programlarınızı etkilemezler. Örneğin aşağıdaki kod; `Vec<T>` üzerinde tanımlanan `iter` yöntemini çağırarak `v1` vektöründeki öğeler üzerinde bir yineleyici oluşturur. Bu kod tek başına anlamlı bir şey gerçekleştirmez.
+Rust'ta yineleyiciler tembel olduklarından, kendilerini tüketen yöntemler çağırılana kadar programlarınızı etkilemezler. Örneğin aşağıdaki kod; `Vec<T>` üzerinde tanımlanan `iter` yöntemini çağırarak `v1` vektöründeki öğeler üzerinde bir yineleyici oluşturur. Bu kod tek başına anlamlı bir şey gerçekleştirmez.
 
 Dosya adı: src/main.rs
 ```Rust
