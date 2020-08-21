@@ -22,7 +22,7 @@ let v1 = vec![1, 2, 3];
 let v1_iter = v1.iter();
 
 for val in v1_iter {
-    println!("Got: {}", val);
+    println!("Okunan: {}", val);
 }
 ````
 [Örnek 13-14:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=329f8b44fc0e94dccaca707c0ca98574) Bir `for` döngüsünde yineleyici kullanmak
