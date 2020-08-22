@@ -196,7 +196,7 @@ Dosya adı: src/main.rs
         num 
     };
 ````
-Örnek 13-7: Kapama parametre ve dönüş değerlerine isteğe bağlı tür ek açıklamalarını eklemek.
+[Örnek 13-7:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=13304627dc405036a7d43cbf3c56c9a0) Kapama parametre ve dönüş değerlerine isteğe bağlı tür ek açıklamalarını eklemek.
 
 Tür ek açıklamaları eklenildiğinde, kapama sözdizimi işlev sözdizimine benzemeye başlıyor. Aşağıda, parametresine 1 ekleyen bir işlev tanımı ile aynı davranışa sahip bir kapama sözdiziminin dikey karşılaştırması yer almaktadır. İlgili parçaları hizalamak için bazı alanlar ekledik. Bu örnekleme; boru kullanımı ve isteğe bağlı sözdizimi haricinde, kapama sözdizimi ile işlev söz diziminin birbirlerine nasıl benzediğini göstermektedir:
 
