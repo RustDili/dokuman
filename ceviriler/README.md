@@ -1,5 +1,16 @@
+# Rust Programlama Dili Kitap Çevirisi
 
-# Çevirisi tamamlanan bölümler
+Rust Programlama Dili kitabının Türkçe çevirisi [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) adresindeki aslına uygun olarak ve Rust topluluk standartlarına uymaya özen gösterilerek yapılmaktadır.
+
+Çevirisi tamamlanan bölümler bu dizinde ve çevrim-içi sunumunun yer aldığı [https://rustdili.github.io/](https://rustdili.github.io/) üzerinde eş zamanlı olarak yansıtılacaktır. 
+
+* Bu dizine yansıtılacak olan kod örneklerinin çalışan sürümleri tıpkı bu örnekte olduğu gibi: [Oyun Alanı](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b9feaef7d951bd0c68a15ba3368d3faf) üzerinde, 
+* Çevrimi-içi sitesinde bulunan kod örnekleri ise kitabın aslında olduğu gibi olduğu yerde ve çalıştırılır biçimde sunulmaktadır.
+
+RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE) ve [Apache 2.0](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE) ile Lisanslanmış olup **Özel** bir çalışmanın ürünü olduğundan **Ticari bir amaçla basılıp kopyalanamaz ve dağıtılamaz.**
+
+
+## Çevirisi tamamlanan bölümler
 
 # Rust'a Göre Düşünmek 
 
