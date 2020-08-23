@@ -15,6 +15,10 @@ RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](h
 
 ## Çevirisi tamamlanan bölümler
 
+# Başlarken
+
+* [Mülkiyeti Anlamak](ch04-00-understanding-ownership.md)
+
 # Rust'a Göre Düşünmek 
 
 * [13.İşlevsel Dil Özellikleri: Yineleyiciler ve Kapamalar](ch13-00-functional-features.md)
