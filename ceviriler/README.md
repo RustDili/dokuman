@@ -17,10 +17,10 @@
    * [14.5. Özel Komutlarla Cargo Olanaklarını Genişletme](ch14-05-extending-cargo.md)
 
 * [16. Korkusuz Eşzamanlılık](ch16-00-concurrency.md)
-  * [16.1. Eşzamanlı Kod Çalıştırmak İçin İşlikleri ](ch16-01-threads.md)
-  * [16.2. Mesajlaşma yöntemiyle iş parçaları arasında veri aktarımı sağlamak](ch16-02-message-passing.md)
+  * [16.1. Eşzamanlı Kod Çalıştırmak İçin İşlikleri Kullanmak](ch16-01-threads.md)
+  * [16.2. İşlikler Arasında Veri Aktarmak Amacıyla Mesajlaşma](ch16-02-message-passing.md)
   * [16.3. Durum paylaşımlı eş zamanlılık](ch16-03-shared-state.md)
-  * [16.4. Sync ve Send özellikleri ile genişletilebilir eş zamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
+  * [16.4. `Sync` ve `Send` Özellikleri ile Genişletilebilir Eşzamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
   
 # İleri Seviye Konular  
 * Ekler
