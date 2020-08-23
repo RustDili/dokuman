@@ -8,7 +8,7 @@ Rust dili ile ilgili Türkçe dökümanları bu depoda bulabilirsiniz. Mevcut d�
 - Çatalladığınız depoyu bilgisayarınıza indirin (clone).
 - İndirdiğiniz depo üzerinde gerekli düzenleme veya eklemeleri yapın.
 - Bilgisayarınızdaki düzenlemeleri github hesabınıza gönderin (push).
-- Github hesabınzdaki değişikliklerin rust-tr deposuna aktarılması için alma isteği (pull request) oluşturun.
+- Github hesabınzdaki değişikliklerin RustDili deposuna aktarılması için alma isteği (pull request) oluşturun.
 
 ## Katkıda bulunurken nelere dikkat etmeliyim
 
@@ -22,3 +22,6 @@ Rust dili ile ilgili Türkçe dökümanları bu depoda bulabilirsiniz. Mevcut d�
  [Rust'ın Mülkiyet Kavramı - Derleme](https://github.com/rust-lang-tr/dokuman/tree/master/mulkiyet-kavrami)
  
  [Rust Programlama Dili - Resmi kitap çevirisi](https://github.com/rust-lang-tr/dokuman/tree/master/ceviriler)
+ 
+ # Çevrim-içi Kitaplar
+ ## [Rust Programlama Dili](https://rustdili.github.io/)
