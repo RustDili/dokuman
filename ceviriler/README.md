@@ -10,6 +10,9 @@ Rust Programlama Dili kitabının Türkçe çevirisi [The Rust Programming Langu
 RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE) ve [Apache 2.0](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE) ile Lisanslanmış olup **Özel** bir çalışmanın ürünü olduğundan **Ticari bir amaçla basılıp kopyalanamaz ve dağıtılamaz.**
 
 
+## [Çevrim-içi Takip Et](https://rustdili.github.io/)
+
+
 ## Çevirisi tamamlanan bölümler
 
 # Rust'a Göre Düşünmek 
