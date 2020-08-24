@@ -469,7 +469,9 @@ Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kull
 
 Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
 
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
+
+```console
 $ cargo run
    Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
 error[E0434]: can't capture dynamic environment in a fn item
@@ -504,7 +506,9 @@ Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kull
 
 Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
 
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
+
+```console
 $ cargo run
    Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
 error[E0434]: can't capture dynamic environment in a fn item
@@ -539,7 +543,9 @@ Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kull
 
 Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
 
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
+
+```console
 $ cargo run
    Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
 error[E0434]: can't capture dynamic environment in a fn item
@@ -574,7 +580,9 @@ Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kull
 
 Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
 
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
+
+```console
 $ cargo run
    Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
 error[E0434]: can't capture dynamic environment in a fn item
