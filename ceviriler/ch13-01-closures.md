@@ -202,7 +202,7 @@ Dosya adı: src/main.rs
 
 Tür ek açıklamaları eklenildiğinde, kapama sözdizimi işlev sözdizimine benzemeye başlıyor. Aşağıda, parametresine 1 değeri ekleyen bir işlev tanımı ile aynı davranışa sahip bir kapama sözdiziminin dikey karşılaştırması yer almaktadır. İlgili parçaları hizalamak için bazı alanlar ekledik. Bu örnekleme; boru kullanımı ve isteğe bağlı sözdizimi haricinde, kapama sözdizimi ile işlev söz diziminin birbirlerine nasıl benzediğini göstermektedir:
 
-``rust
+```rust
 fn  add_one_v1   (x: u32) -> u32 { x + 1 }
 let add_one_v2 = |x: u32| -> u32 { x + 1 };
 let add_one_v3 = |x|             { x + 1 };
