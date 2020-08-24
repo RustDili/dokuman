@@ -19,7 +19,7 @@ fn simulated_expensive_calculation(intensity: u32) -> u32 {
     thread::sleep(Duration::from_secs(2));
     intensity
 }
-```
+````
 [Örnek 13-1:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5bb573085bf90614924400ec1f19d4a7) İki saniyelik ayakta durma egzersizinde kullanılan ve çalışması iki saniye süren `simulated_expensive_calculation` işlevi
 
 Bu programın bir sonraki önemli adımı ise, egzersiz uygulamasının bölümlerini içeren `main` işlevidir. Bu işlevdeyse kullanıcı bir egzersiz planı istediğinde uygulamanın çağıracağı kod yer alır. Çünkü uygulamanın ön ucuyla etkileşim, kapamaların kullanımıyla ilgili olmadığından, programımıza girdileri temsil eden değerleri kodlayacak ve ardından çıktıları yazdıracağız.
@@ -42,7 +42,7 @@ fn main() {
         simulated_random_number 
     ); 
 }
-```
+````
 [Örnek 13-2:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5518c05b80586b24998afa51ea34e405) Kullanıcı girişi ve rastgele sayı oluşturmayı simüle etmek için kodlanmış değerlerden oluşan `main` işlevi
 
 Sadeliği koruyabilmek amacıyla `simulated_user_specified_value` değişkenini 10, `simulated_random_number` değişkenini 7 değerleriyle sabit biçimde kodladık. Oysa gerçek bir programda, yoğunluk numarasını uygulamanın ön ucundan alır ve 2. Bölüm' deki tahmin oyunu örneğinde yaptığımız gibi `rand` sandığını rastgele bir sayı üretmek için kullanmaya çalışırdık. Örneğimizdeki `main` işlevi simüle giriş değerlerini kullanarak `create_workout` işlevini çağırmaktadır.
@@ -72,7 +72,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } 
     }
 }
-```
+````
 [Örnek 13-3:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5518c05b80586b24998afa51ea34e405) Girdi ve çağrılarına göre egzersiz planları yazdıran `simulated_expensive_calculation` işlevi
 
 Örnek13-3'teki kod, yavaş hesaplama yapan işleve çok sayıda başvuruda bulunur. İlk `if` bloğu `simulated_expensive_calculation` işlevini iki defa çağırırken, `else` bloğunun içindeki birinci `if` bloğu ise başvuruda bulunmaz. Oysa bir sonraki `else` bloğunda `simulated_expensive_calculation` işlevine yeniden çağrıda bulunulur.  
@@ -115,7 +115,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } 
     } 
 }
-```
+````
 [Örnek 13-4:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d80d33ae3726d2eb7328006f67523fc7) `simulated_expensive_calculation` çağrılarını tek bir yere çıkarmak ve sonucunu `expensive_result` değişkenine kaydetmek
 
 Bu değişiklik, `simulated_expensive_calculation` çağrılarını birleştirerek işlevi gereksiz yere iki kez çağıran ilk `if` bloğunun sorununu çözecektir. Fakat ne yazık ki, bu defa da sonuç değerini hiç kullanmayan iç `if` bloğu da dahil, her durumda sonucu beklemek zorunda kalıyoruz. 
@@ -132,7 +132,7 @@ Dosya adı: src/main.rs
         thread::sleep(Duration::from_secs(2)); 
         num 
     };
-```
+````
 [Örnek 13-5:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=941f75b48e57d6b8dc2ce16fecea9a19) Bir kapama işlevinin `expensive_closure` değişkeninde saklanması
 
 Kapama tanımı `expensive_closure` değişkenine atanabilmesi için atama operatöründen sonra gerçekleştirilir. Bir kapamanın tanımlanmasına içinde kapama parametrelerinin yer alacağı bir çift dikey boru `(|)` ile başlanır. Bu sözdizimi, Smalltalk ve Ruby'deki kapama tanımlarına benzediğinden dolayı seçilmiştir. Örneğimizdeki kapama, `num` adında yalnızca bir parametreye sahip olduğundan `|num|` biçiminde ifade edilir: Eğer kullanmamız gereken çok sayıda parametremiz olsaydı, bu parametreleri yine çift boru içine `|param1, param2|` şeklinde virgüllerle ayırırarak kullanmamız gerekecekti.
@@ -174,7 +174,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } 
     } 
 }
-```
+````
 [Örnek 13-6:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=941f75b48e57d6b8dc2ce16fecea9a19) Tanımladığımız `expensive_closure` kapamasını çağırmak.
 
 Şimdi, pahalı hesaplama işlevi sadece tek bir yerde çağrılıyor ve bu kodu, sadece gerçekten sonuçlara ihtiyacımız olan yerde işletmiş oluyoruz. 
@@ -197,7 +197,7 @@ Dosya adı: src/main.rs
         thread::sleep(Duration::from_secs(2)); 
         num 
     };
-```
+````
 [Örnek 13-7:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=13304627dc405036a7d43cbf3c56c9a0) Kapama parametre ve dönüş değerlerine isteğe bağlı tür ek açıklamalarını eklemek.
 
 Tür ek açıklamaları eklenildiğinde, kapama sözdizimi işlev sözdizimine benzemeye başlıyor. Aşağıda, parametresine 1 değeri ekleyen bir işlev tanımı ile aynı davranışa sahip bir kapama sözdiziminin dikey karşılaştırması yer almaktadır. İlgili parçaları hizalamak için bazı alanlar ekledik. Bu örnekleme; boru kullanımı ve isteğe bağlı sözdizimi haricinde, kapama sözdizimi ile işlev söz diziminin birbirlerine nasıl benzediğini göstermektedir:
@@ -207,7 +207,7 @@ fn  add_one_v1   (x: u32) -> u32 { x + 1 }
 let add_one_v2 = |x: u32| -> u32 { x + 1 };
 let add_one_v3 = |x|             { x + 1 };
 let add_one_v4 = |x|               x + 1  ;
-```
+````
 
 Örneğin ilk satırında bir işlev tanımı, ikinci satırında giriş ve dönüş türleri açıklanan bir kapama tanımı yer almaktadır. Üçüncü satırda, tür açıklamaları kapama tanımından kaldırılırken, dördüncü satırda  isteğe bağlı olan parantezler dahi kaldırılmıştır. Hatırlayacağınız gibi bir kapama işlevi tanımlanırken, kapama gövdesi yalnızca bir ifadeden oluştuğunda süslü parantezler kullanılmamaktaydı. Yukarıda sunduğumuz kapama ifadelerinin her biri, çağrıldığında aynı davranışı üretecek geçerli tanımlamalardır.
 
@@ -218,12 +218,12 @@ Dosya adı: src/main.rs
 let example_closure = |x| x; 
 let s = example_closure(String::from("hello")); 
 let n = example_closure(5);
-```
+````
 Örnek 13-8: Girdi ve çıktı değerlerinin, iki farklı tür üzerinden çıkarsanması beklenen bir kapama örneği
 
 Derleyici bize şu hatayı verir:
 
-```console
+```Binary
 error[E0308]: mismatched types
  --> src/main.rs
   |
@@ -233,7 +233,7 @@ error[E0308]: mismatched types
   |
   = note: expected type `std::string::String`
              found type `{integer}`
-```
+````
 Kapama işlevimiz olan `example_closure` dizgi değeri ile çağrıldığında, derleyici `x` parametresi ve dönüş türünü dizgi olarak algılar. Algılanan bu türler daha sonra `example_closure` içindeki kapamaya kilitlenir ve aynı kapama ile farklı bir tür kullanmaya çalışıldığında bir *uyumsuz tür* hatası ile karşılaşılır.
 
 ### Jenerik parametreler ve `Fn` özelliklerini kullanarak kapamaları hafızaya almak
@@ -257,7 +257,7 @@ struct Cacher<T>
     calculation: T,
     value: Option<u32>,
 }
-```
+````
 Örnek 13-9: Bir `calculation` ve opsiyonel sonuç değerinden oluşan kapamayı tutan `Cacher` adlı yapının tanımlanması
 
 `Cacher` yapısı, `T` türünde jenerik bir hesaplama alanına sahiptir. `T` üzerindeki özellik sınırları, bunun `Fn` özelliğini kullanmakta olan bir kapama olduğunu belirtir. Yapının `calculation` adlı hesaplama alanında saklamak istediğimiz tüm kapamaların `u32` türünden bir parametresi *(Fn'den sonra parantez içinde belirtilir)* bulunmalı ve bu kapamadan bir `u32` türünde *(-> işaretinden sonra belirtilir)* değer döndürülmelidir.
@@ -292,7 +292,7 @@ impl<T> Cacher<T>
         }
     }
 }
-```
+````
 Örnek 13-10: `Cacher` yapısının önbellek mantığı
 
 Bu yapıyı çağıracak olan kodun alanlardaki değerleri doğrudan değiştirmesini tercih etmek yerine, sadece yapı alanlarının değerleriyle ilgilenmesini istediğimizden bu alanları dışarıdan erişime kapatarak özelleştiriyoruz. 
@@ -334,7 +334,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         }
     }
 }
-```
+````
 [Örnek 13-11:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b9feaef7d951bd0c68a15ba3368d3faf) Önbellek mantığını soyutlamak için `generate_workout` işlevinde Cacher yapısını kullanmak.
 
 Böylelikle kapamayı doğrudan bir değişkene kaydetmek yerine, bu kapamayı tutması için yeni bir `Cacher` örneğini kaydediyoruz. Bu noktadan itibaren sonuca ihtiyacımız olan her yerde, `Cacher` yapısının bir örneğini oluşturup, `value` metodunu çağırırarak tembelce hesaplanan sonuca ulaşırız. Ayrıca pahalı hesaplama sonucunu döndüren `expensive_result` işlevi en fazla bir kez çağırılacağından `value` yöntemini çağırmak tercihimize kalmıştır.
@@ -357,13 +357,13 @@ fn call_with_different_values() {
 
     assert_eq!(v2, 2);
 }
-```
+````
 
 Bu testte, kendisine iletilen değeri döndüren bir kapamayla yeni bir `Cacher` örneği oluşturulmaktadır. Örneğin `value` metodunu `arg` parametre değeri olarak önce 1, ardından 2 vererek çağırdığımızda; `arg` 2 değeriyle yaptığımız çağrının 2 değerini döndürmesini bekleriz.
 
 Oysa bu testi örnek 13-9 veya 13-10’daki `Cacher` uygulaması ile gerçekleştirdiğimizde program `assert_eq!`' de başarız olacak ve şu hata mesajını döndürecektir:
 
-```console
+```Binary
 $ cargo test
    Compiling cacher v0.1.0 (file:///projects/cacher)
     Finished test [unoptimized + debuginfo] target(s) in 0.72s
@@ -387,7 +387,7 @@ failures:
 test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
 
 error: test failed, to rerun pass '--lib'
-```
+````
 
 Buradaki sorun, başlangıçta `c.value`'yu 1 ile çağırdığımızda, Catcher örneğinin `Some(1)` değerini `self.value` içine kaydetmesinden kaynaklanmaktadır. Bu noktadan sonra, value yöntemine hangi değeri iletirsek iletelim, her zaman başlangıçta verdiğimiz 1 değerini döndürecektir.
 
@@ -412,7 +412,7 @@ fn main() {
 
     assert!(equal_to_x(y));
 }
-```
+````
 Örnek 13-12: Tanımlandığı kapsam içindeki bir değişkene başvuran kapama örneği
 
 urada `x` değişkeni, `equal_to_x` kapama parametrelerinden biri olmamasına rağmen, `equal_to_x` kapamasının, kendisiyle aynı kapsamda tanımlanan `x` değişkenini kullanmasına izin verilmektedir.
@@ -431,12 +431,12 @@ fn main() {
 
     assert!(equal_to_x(y));
 }
-```
+````
 
 Alacağımız hata aşağıdaki gibidir:
 
 
-```console
+```Binary
 
 $ cargo run
    Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
@@ -455,7 +455,7 @@ error: could not compile `equal-to-x`.
 
 To learn more, run the command again with --verbose.
 
-```
+````
 
 Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
 
@@ -489,11 +489,11 @@ fn main() {
     assert!(equal_to_x(y));
 }
 
-```
+````
 
 Aldığımız hata aşağıdaki gibidir:
 
-```console
+```Binary
 $ cargo run
    Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
 error[E0382]: borrow of moved value: `x`
@@ -517,7 +517,7 @@ error: could not compile `equal-to-x'.
 
 To learn more, run the command again with --verbose.
  
-```
+````
 
 Kapama tanımlanırken `move` anahtar sözcüğü eklediğimizden `x` değeri kapamaya taşınır. Artık `x`'in mülkiyeti kapamaya ait olduğundan `main` işlevindeki `println!` ifadesinde `x`'i kullanılmasına izin verilmez. Sorunun giderilmesi için `println!` ifadesinin kaldırılması yeterli olacaktır.
 
