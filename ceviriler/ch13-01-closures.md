@@ -243,9 +243,9 @@ Neyse ki bizim için başka bir çözüm yolu daha var. Kapamayı tutacak bir ya
 
 Kapama tutabilen yapıların tanımlanabilmesi için, kapama işlevinin giriş ve dönüş türlerinin bildirilmesi gereklidir. Çünkü yapılar oluşturulurken sahip oldukları alanlar isimlendirildiklerinde türlerinin de bildirilmesi gerekmektedir. Her kapama örneğinin kendine özgü isimsiz türü olacağından, iki kapama aynı imzaya sahip olsalar bile, farklı türlerde oldukları kabul edilmektedir. Kapamaları kullanan **yapı**, **enum** veya **işlev parametreleri**ni tanımlarken Bölüm 10'da tartıştığımız **jenerikler ve özellik sınırlarını** da kullanabiliyoruz.
 
-`Fn` özellikleriyse standart kütüphane tarafından sağlanmaktadır ve tüm kapama işlevleri; `Fn`, `FnMut` veya `FnOnce` özelliklerinden en az birini uygular. Bu özelliklerin arasındaki farkları [Kapanışlar ile Ortamı Yakalamak](https://github.com/rust-lang/book/blob/master/src/ch13-01-closures.md#capturing-the-environment-with-closures) bölümünde tartışacağız; bu örnek için, `Fn` özelliğini kullanmamızda sakınca yok.
+`Fn` özellikleriyse standart kütüphane tarafından sağlanmaktadır ve tüm kapama işlevleri; `Fn`, `FnMut` veya `FnOnce` özelliklerinden en az birini uygular. Bu özelliklerin arasındaki farkları ["Kapamalar ile ortam bilgilerini elde etmek"](#kapamalar-ile-ortam-bilgilerini-elde-etmek)<!-- ignore --> bölümünde tartışacağız; bu örnek için, `Fn` özelliğini kullanmamızda sakınca yok.
 
-Parametrelerin türlerini temsil etmek ve kapamaların bu özellik sınırıyla eşleşmesi gereken değerleri döndürmek için `Fn` özelliğine bağlı türler ekliyoruz. Bu durumda, kapamamızın `u32` türünde bir parametresi olduğundan ve bir `u32` türü döndüreceğinden belirttiğimiz özellik sınırı `Fn (u32) -> u32` olacaktır.
+Parametrelerin türlerini temsil etmek ve kapamaların bu özellik sınırıyla eşleşmesi gereken değerleri döndürmek için `Fn` özelliğine bağlı türler ekliyoruz. Bu durumda, kapama işlevinin `u32` türünde bir parametresi olacak ve bir `u32` türü döndüreceğinden belirttiğimiz özellik sınırı `Fn (u32) -> u32` olacaktır.
 
 Örnek 13-9, bir kapama ve opsiyonel sonuç değeri tutan `Cacher` yapısının tanımını gösterir.
 
@@ -373,7 +373,7 @@ Buradaki sorun, başlangıçta `c.value`'yu 1 ile çağırdığımızda, Catcher
 
 Bu uygulamadaki ikinci sorun ise yalnızca `u32` türünde parametre alması ve `u32` türünde değer döndüren kapamaları kabul etmesidir. Örneğin, bir dizgi dilimi alan ve `usize` değerleri döndürem kapama sonuçlarını önbelleğe almak isteyebiliriz. Bu sorunu gidermek ve `Cacher` işlevinin esnekliğini artırmak için jenerik parametreler eklemeyi deneyin.
 
-### Kapamalar ile ortam bilgilerini elde etmek
+### <a name="kapamalar-ile-ortam-bilgilerini-elde-etmek"></a>Kapamalar ile ortam bilgilerini elde etmek
 Egzersiz planı oluşturan örneğimizde, kapamaları sadece satır içi isimsiz işlevler olarak kullandık. Bununla birlikte kapamalar, işlevlerin sahip olmadığı ek bir yeteneğe sahiplerdir: ortam bilgilerini yakalayabilir ve tanımlandıkları kapsamdan değişkenlere erişebilirler.
 
 Örnek 13-12'de, tanımlandığı kapsamda bulunan `x` değişkenini `equal_to_x` adlı değişkene depolayarak kullanan bir kapama örneği sunulmaktadır.
