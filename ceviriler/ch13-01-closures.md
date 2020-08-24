@@ -250,27 +250,27 @@ Parametrelerin türlerini temsil etmek ve kapamaların bu özellik sınırıyla 
 Örnek 13-9, bir kapama ve opsiyonel sonuç değeri tutan `Cacher` yapısının tanımını gösterir.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 struct Cacher<T>
     where T: Fn(u32) -> u32
 {
     calculation: T,
     value: Option<u32>,
 }
-````
+```
 Örnek 13-9: Bir `calculation` ve opsiyonel sonuç değerinden oluşan kapamayı tutan `Cacher` adlı yapının tanımlanması
 
-`Cacher` yapısı, `T` türünde jenerik bir hesaplama alanına sahiptir. `T` üzerindeki özellik sınırları, bunun `Fn` özelliğini kullanmakta olan bir kapatma olduğunu belirtir. Yapının `calculation` adlı hesaplama alanında saklamak istediğimiz tüm kapamaların `u32` türünden bir parametresi *(Fn'den sonra parantez içinde belirtilir)* bulunmalı ve bu kapamadan bir `u32` türünde *(-> işaretinden sonra belirtilir)* değer döndürülmelidir.
+`Cacher` yapısı, `T` türünde jenerik bir hesaplama alanına sahiptir. `T` üzerindeki özellik sınırları, bunun `Fn` özelliğini kullanmakta olan bir kapama olduğunu belirtir. Yapının `calculation` adlı hesaplama alanında saklamak istediğimiz tüm kapamaların `u32` türünden bir parametresi *(Fn'den sonra parantez içinde belirtilir)* bulunmalı ve bu kapamadan bir `u32` türünde *(-> işaretinden sonra belirtilir)* değer döndürülmelidir.
 
 >Not: İşlevler Fn özelliklerinin üçünü de uygulayabilir. Yapmak istediğimiz şey, ortamdan bir değer yakalamayı
 > gerektirmiyorsa ve Fn özelliğini uygulayan bir şeye ihtiyacımız varsa kapatma yerine işlev kullanmayı tercih edebiliriz.
 
-Yapının `value` adındaki alanı `Option<u32>` türündedir. Kapama işletilmeden önce bu alan `None` varyantını göstermektedir. Eğer `Cacher` yapısını kullanan bir program kapamanın sonucunu isterse, yapı içerisindeki kapamam işletilecek, bu defa da oluşan sonuç değeri `value` alanının `Some` varyantı içinde saklanacaktır. Eğer kapatmanın sonucu bu program tarafından yeniden talep edilirse, sonuç zaten depolanmış olduğundan kapama tekrar işletilmeyecek, bu yapının `Some` varyantında tutulan değer döndürülecektir.
+Yapının `value` adındaki alanı `Option<u32>` türündedir. Kapama işletilmeden önce bu alan `None` varyantını göstermektedir. Eğer `Cacher` yapısını kullanan bir program kapamanın sonucunu isterse, yapı içerisindeki kapama işletilecek, bu defa da oluşan sonuç değeri `value` alanının `Some` varyantı içinde saklanacaktır. Eğer kapamanın sonucu bu program tarafından yeniden talep edilirse, sonuç zaten depolanmış olduğundan kapama tekrar işletilmeyecek, bu yapının `Some` varyantında tutulan değer döndürülecektir.
 
 Az önce tanımladığımız `value` alanının mantığı örnek 13-10' da gösterilmektedir.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 impl<T> Cacher<T>
     where T: Fn(u32) -> u32
 {
@@ -278,7 +278,7 @@ impl<T> Cacher<T>
         Cacher {
             calculation,
             value: None,
-        }
+        }ir `calculation` ve
     }
 
     fn value(&mut self, arg: u32) -> u32 {
@@ -292,21 +292,21 @@ impl<T> Cacher<T>
         }
     }
 }
-````
+```
 Örnek 13-10: `Cacher` yapısının önbellek mantığı
 
-Bu yapıyı çağıracak olan kodun alanlardaki değerleri doğrudan değiştirmesini tercih etmek yerine, sadece yapı alanlarının değerleriyle ilgilenmesini istediğimizden alanlar dışarıdan erişime kapatarak özelleştiriyoruz. 
+Bu yapıyı çağıracak olan kodun alanlardaki değerleri doğrudan değiştirmesini tercih etmek yerine, sadece yapı alanlarının değerleriyle ilgilenmesini istediğimizden bu alanları dışarıdan erişime kapatarak özelleştiriyoruz. 
 
-`Cacher::new` işlevi, `Cacher` yapısıyla aynı özelliğe bağlı olarak tanımladığımız jenerik `T` parametresi alır. Daha sonra kapama işlevini henüz gerçekleştirmemiş olduğundan `calculation` alanında belirtilen kapama değerini ve `value` alanındaki `None` değerinden oluşan bir `Cacher` örneği döndürür.
+`Cacher::new` işlevi, `Cacher` yapısıyla aynı özelliğe bağlı olarak tanımladığımız jenerik `T` parametresi alır. Daha sonra kapama işlevini henüz gerçekleştirmemiş olduğundan `calculation` alanında belirtilen kapama değeri ve `value` alanındaki `None` değerinden oluşan bir `Cacher` örneği döndürür.
 
-Böylelikle kodu çağıran taraf, kapama işleminden elde edilen sonuca ihtiyaç duyduğunda, kapamayı doğrudan çağırmak yerine `value` yöntemini çağırmış olacaktır. Bu yöntem, `Some` varyantında `self.value` cinsinden sonuç değerine sahip olup olmadığımızı kontrol eder. Bu değere sahipsek kapama bir daha işletilmez ve `Some` içinde depolanmakta olan değer döndürülür.
+Böylelikle kodu çağıran taraf, kapama işleminden elde edilen sonuca ihtiyaç duyduğunda, kapamayı doğrudan çağırmak yerine `value` yöntemini çağırmış olacaktır. Bu yöntem, `Some` varyantında `self.value` türünde bir değere sahip olup olmadığımızı kontrol eder. Bu değere sahipsek kapama bir daha işletilmez ve `Some` içinde depolanmakta olan değer döndürülür.
 
 Ancak `self.value` değeri `None` olarak görünüyorsa, kod `self.calculation`'da depolanan kapamayı çağıracak, sonucu ileride kullanılmak üzere `self.value`'ye kaydedecek ve oluşan değeri çağıran tarafa döndürecektir.
 
 Aşağıdaki örnek, `Cacher` yapısını örnek 13-6'da bulunan `create_workout` işlevinde nasıl kullanabileceğimizi göstermektedir.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn generate_workout(intensity: u32, random_number: u32) {
     let mut expensive_result = Cacher::new(|num| {
         println!("yavaşça hesaplanıyor...");
@@ -334,19 +334,20 @@ fn generate_workout(intensity: u32, random_number: u32) {
         }
     }
 }
-````
-[Örnek 13-11:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b9feaef7d951bd0c68a15ba3368d3faf) Önbellek mantığını soyutlamak için generate_workout işlevinde Cacher yapısını kullanmak.
+```
+[Örnek 13-11:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b9feaef7d951bd0c68a15ba3368d3faf) Önbellek mantığını soyutlamak için `generate_workout` işlevinde Cacher yapısını kullanmak.
 
 Böylelikle kapamayı doğrudan bir değişkene kaydetmek yerine, bu kapamayı tutması için yeni bir `Cacher` örneğini kaydediyoruz. Bu noktadan itibaren sonuca ihtiyacımız olan her yerde, `Cacher` yapısının bir örneğini oluşturup, `value` metodunu çağırırarak tembelce hesaplanan sonuca ulaşırız. Ayrıca pahalı hesaplama sonucunu döndüren `expensive_result` işlevi en fazla bir kez çağırılacağından `value` yöntemini çağırmak tercihimize kalmıştır.
 
 Bu programı örnek 13-2' deki `main` işleviyle çalıştırmayı deneyin. Tüm `if` ve `else` bloklarında, `yavaşça hesaplanıyor...` çıktısının sadece bir kez ve gerektiğinde göründüğünü test edebilmeniz için `simulated_user_specified_value` ve `simulated_random_number` değişken değerlerini dilediğiniz kadar değiştirebilirsiniz. `Cacher` ön bellek yapısı, pahalı hesaplamayı ihtiyacımız kadar çağırarak `create_workout` iş mantığına rahatlıkla odaklanabilir.
 
 ### Cacher Uygulamasının Kısıtlamaları
+
 Değerleri önbelleğe almak, kodumuzun diğer bölümlerinde genellikle farklı kapamalarda kullanmak isteyebileceğimiz yararlı bir davranıştır. Bununla birlikte, `Cacher`'in mevcut uygulamasında, farklı bağlamlarda yeniden kullanılmasını zorlaştıracak iki sorun bulunmaktadır. 
 
-İlk sorun, bir `Cacher` örneğinin `value` metodunda bulunan `arg` parametresinin her zaman aynı değeri alacağı varsalır. Yani, bu `Cacher` testi başarısız olacaktır:
+İlk sorun, bir `Cacher` örneğinin `value` metodunda bulunan `arg` parametresinin her zaman aynı değeri alacağı varsayılır. Yani, bu `Cacher` testi başarısız olacaktır:
 
-```Rust
+```rust
 #[test]
 fn call_with_different_values() {
     let mut c = Cacher::new(|a| a);
@@ -356,30 +357,52 @@ fn call_with_different_values() {
 
     assert_eq!(v2, 2);
 }
-````
+```
 
 Bu testte, kendisine iletilen değeri döndüren bir kapamayla yeni bir `Cacher` örneği oluşturulmaktadır. Örneğin `value` metodunu `arg` parametre değeri olarak önce 1, ardından 2 vererek çağırdığımızda; `arg` 2 değeriyle yaptığımız çağrının 2 değerini döndürmesini bekleriz.
 
 Oysa bu testi örnek 13-9 veya 13-10’daki `Cacher` uygulaması ile gerçekleştirdiğimizde program `assert_eq!`' de başarız olacak ve şu hata mesajını döndürecektir:
 
-```Binary
-thread 'call_with_different_values' panicked at 'assertion failed: `(left == right)`
+```console
+$ cargo test
+   Compiling cacher v0.1.0 (file:///projects/cacher)
+    Finished test [unoptimized + debuginfo] target(s) in 0.72s
+     Running target/debug/deps/cacher-4116485fb32b3fff
+
+running 1 test
+test tests::call_with_different_values ... FAILED
+
+failures:
+
+---- tests::call_with_different_values stdout ----
+thread 'main' panicked at 'assertion failed: `(left == right)`
   left: `1`,
- right: `2`', src/main.rs
-````
+ right: `2`', src/lib.rs:43:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
+
+
+failures:
+    tests::call_with_different_values
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+
+error: test failed, to rerun pass '--lib'
+```
+
 Buradaki sorun, başlangıçta `c.value`'yu 1 ile çağırdığımızda, Catcher örneğinin `Some(1)` değerini `self.value` içine kaydetmesinden kaynaklanmaktadır. Bu noktadan sonra, value yöntemine hangi değeri iletirsek iletelim, her zaman başlangıçta verdiğimiz 1 değerini döndürecektir.
 
 `Cacher`'ı tek bir değer yerine bir eşleme tablosu tutacak şekilde değiştirmeyi deneyin. `value` metoduna geçirilecek `arg` değerleri eşleme tablosunun anahtarlarını oluşturacak şekilde verildiğinde, eşleme tablosunun değerlerinde de kapama çağrılarının sonuçları tutulmuş olacaktır. Böylece `self.value` öğesinin doğrudan `Some` veya `None` değeri olup olmadığını kontrol etmek yerine, `value` işlevi eşleme tablosunun anahtarlarında `arg` öğesini arayacak bulduğu anda değerini döndürecektir. Eğer `arg` öğesi tabloda yoksa, `Cacher` tarafından kapama çağırılacak ve oluşan değer, `arg` değeriyle ilişkili eşleme tablosuna kaydedecektir.
 
-Bu uygulamadaki ikinci sorun ise yalnızca `u32` türünde parametre alması ve `u32` türünde değer döndüren kapamaları kabul etmesidir. Örneğin, bir dizgi dilimi alan ve `usize` değerleri döndürem kapama sonuçlarını önbelleğe almak isteyebiliriz. Bu sorunu gidermek ve `Cacher` işlevinin esnekliğini artırmak için jenerik parametreler eklemeyi deneyin.
+Bu uygulamadaki ikinci sorun ise yalnızca `u32` türünde parametre alması ve `u32` türünde değer döndüren kapamaları kabul etmesidir. Örneğin, bir dizgi dilimi alan ve `usize` değerleri döndüren kapama sonuçlarını önbelleğe almak isteyebiliriz. Bu sorunu gidermek ve `Cacher` işlevinin esnekliğini artırmak için jenerik parametreler eklemeyi deneyin.
 
 ### <a name="kapamalar-ile-ortam-bilgilerini-elde-etmek"></a>Kapamalar ile ortam bilgilerini elde etmek
+
 Egzersiz planı oluşturan örneğimizde, kapamaları sadece satır içi isimsiz işlevler olarak kullandık. Bununla birlikte kapamalar, işlevlerin sahip olmadığı ek bir yeteneğe sahiplerdir: ortam bilgilerini yakalayabilir ve tanımlandıkları kapsamdan değişkenlere erişebilirler.
 
 Örnek 13-12'de, tanımlandığı kapsamda bulunan `x` değişkenini `equal_to_x` adlı değişkene depolayarak kullanan bir kapama örneği sunulmaktadır.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn main() {
     let x = 4;
 
@@ -389,15 +412,15 @@ fn main() {
 
     assert!(equal_to_x(y));
 }
-````
+```
 Örnek 13-12: Tanımlandığı kapsam içindeki bir değişkene başvuran kapama örneği
 
-Burada `x` değişkeni, `equal_to_x` kapamasının parametrelerinden biri olmamasına rağmen, `equal_to_x` kapamasının, kendisiyle aynı kapsamda tanımlanan `x` değişkenini kullanmasına izin verilmektedir.
+Burada `x` değişkeni, `equal_to_x` kapama parametrelerinden biri olmamasına rağmen, `equal_to_x` kapamasının, kendisiyle aynı kapsamda tanımlanan `x` değişkenini kullanmasına izin verilmektedir.
 
-Oysa aynı şeyi işlevlerle yapamayız; aşağıdaki örnek kod denenmek istendiğinde derlenmeyecektir:
+Oysa aynı şeyi işlevlerle gerçekleştiremeyiz. Aşağıdaki örnek kod derlenmeyecektir:
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn main() {
     let x = 4;
 
@@ -407,35 +430,189 @@ fn main() {
 
     assert!(equal_to_x(y));
 }
-````
+```
+
 Alacağımız hata aşağıdaki gibidir:
-```Binary
-error[E0434]: can't capture dynamic environment in a fn item; use the || { ...
-} closure form instead
- --> src/main.rs
+
+```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0434]: can't capture dynamic environment in a fn item
+ --> src/main.rs:5:14
   |
-4 |     fn equal_to_x(z: i32) -> bool { z == x }
-  | 
-````
+5 |         z == x
+  |              ^
+  |
+  = help: use the `|| { ... }` closure form instead
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0434`.
+error: could not compile `equal-to-x`.
+
+To learn more, run the command again with --verbose.
+
+```
+
 Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
 
-Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklayabilmek için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
+Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
 
-Kapamalar, işlevlerin bir parametreyi alabileceği üç yolla doğrudan eşleştiği hallerde ortamlarını yakalayabilirler: **Mülkiyeti almak**, **değişirlik borçlanması** ve **değişmezklik borçlanması**. 
-* Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
-    * `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
-    * `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
-    * `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
+Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
+
+* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
+* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
+* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
 
 Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
 Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
 
 Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
 
-Bölüm 16’da eş zamanlılık hakkında konuşurken kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0434]: can't capture dynamic environment in a fn item
+ --> src/main.rs:5:14
+  |
+5 |         z == x
+  |              ^
+  |
+  = help: use the `|| { ... }` closure form instead
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0434`.
+error: could not compile `equal-to-x`.
+
+To learn more, run the command again with --verbose.
+
+```
+
+Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
+
+Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
+
+Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
+
+* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
+* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
+* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
+
+Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
+Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
+
+Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
+
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0434]: can't capture dynamic environment in a fn item
+ --> src/main.rs:5:14
+  |
+5 |         z == x
+  |              ^
+  |
+  = help: use the `|| { ... }` closure form instead
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0434`.
+error: could not compile `equal-to-x`.
+
+To learn more, run the command again with --verbose.
+
+```
+
+Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
+
+Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
+
+Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
+
+* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
+* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
+* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
+
+Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
+Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
+
+Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
+
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0434]: can't capture dynamic environment in a fn item
+ --> src/main.rs:5:14
+  |
+5 |         z == x
+  |              ^
+  |
+  = help: use the `|| { ... }` closure form instead
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0434`.
+error: could not compile `equal-to-x`.
+
+To learn more, run the command again with --verbose.
+
+```
+
+Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
+
+Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
+
+Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
+
+* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
+* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
+* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
+
+Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
+Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
+
+Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
+
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0434]: can't capture dynamic environment in a fn item
+ --> src/main.rs:5:14
+  |
+5 |         z == x
+  |              ^
+  |
+  = help: use the `|| { ... }` closure form instead
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0434`.
+error: could not compile `equal-to-x`.
+
+To learn more, run the command again with --verbose.
+
+```
+
+Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
+
+Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
+
+Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
+
+* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
+* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
+* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
+
+Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
+Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
+
+Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
+
+Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn main() {
     let x = vec![1, 2, 3];
 
@@ -447,22 +624,34 @@ fn main() {
 
     assert!(equal_to_x(y));
 }
-````
+```
+
 Aldığımız hata aşağıdaki gibidir:
 
-```Binary
-error[E0382]: use of moved value: `x`
+```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0382]: borrow of moved value: `x`
  --> src/main.rs:6:40
   |
+2 |     let x = vec![1, 2, 3];
+  |         - move occurs because `x` has type `std::vec::Vec<i32>`, which does not implement the `Copy` trait
+3 | 
 4 |     let equal_to_x = move |z| z == x;
-  |                      -------- value moved (into closure) here
-5 |
+  |                      --------      - variable moved due to use in closure
+  |                      |
+  |                      value moved into closure here
+5 | 
 6 |     println!("can't use x here: {:?}", x);
-  |                                        ^ value used here after move
-  |
-  = note: move occurs because `x` has type `std::vec::Vec<i32>`, which does not
-  implement the `Copy` trait
-````
+  |                                        ^ value borrowed here after move
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `equal-to-x`.
+
+To learn more, run the command again with --verbose.
+```
 
 Kapama tanımlanırken `move` anahtar sözcüğü eklediğimizden `x` değeri kapamaya taşınır. Artık `x`'in mülkiyeti kapamaya ait olduğundan `main` işlevindeki `println!` ifadesinde `x`'i kullanılmasına izin verilmez. Sorunun giderilmesi için `println!` ifadesinin kaldırılması yeterli olacaktır.
 
