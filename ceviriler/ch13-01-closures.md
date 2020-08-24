@@ -1,4 +1,5 @@
-## Kapamalar: Ortam değişkenlerini yakalayabilen isimsiz işlevler
+## Kapamalar: Ortam Değişkenlerini Yakalayabilen İsimsiz İşlevler
+
 Rust'un kapamaları, bir değişkene kaydedebileceğiniz veya diğer işlevlere argüman olarak iletebileceğiniz isimsiz işlevlerdir. Kapamaları tek bir yerde oluşturabilir ve daha sonra farklı bir bağlamda değerlendirmek için yeniden çağırabilirsiniz. İşlevlerin aksine kapamalar, kullanacakları değerleri tanımlandıkları kapsamdan elde edebilirler. Kapamaların sahip olduğu bu özelliklerin, kodların yeniden kullanımına ve davranışlarının özelleştirilmesine nasıl izin verdiğini göstereceğiz.
 
 ### Kapamalar ile bir davranışı soyutlamak
@@ -9,7 +10,7 @@ Bir kapamayı daha sonra işletilmek üzere saklamanın yararlı olduğu bir ör
 Bu varsayımsal algoritmayı örnek 13-1' de yer alan `simulated_expensive_calculation` işlevini çağırarak simüle edecek, ekrana `"yavaşça hesaplanıyor..."` yazdırdıktan sonra iki saniye beklecek, ardından işleve ilettiğimiz sayıyı geriye döndüreceğiz.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 use std::thread;
 use std::time::Duration;
 
@@ -18,19 +19,20 @@ fn simulated_expensive_calculation(intensity: u32) -> u32 {
     thread::sleep(Duration::from_secs(2));
     intensity
 }
-````
-[Örnek 13-1:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5bb573085bf90614924400ec1f19d4a7) İki saniyelik ayakta durma egzersizinde kullanılan ve çalışması iki saniye süren kurgusal hesaplama işlevi
+```
+[Örnek 13-1:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5bb573085bf90614924400ec1f19d4a7) İki saniyelik ayakta durma egzersizinde kullanılan ve çalışması iki saniye süren `simulated_expensive_calculation` işlevi
 
 Bu programın bir sonraki önemli adımı ise, egzersiz uygulamasının bölümlerini içeren `main` işlevidir. Bu işlevdeyse kullanıcı bir egzersiz planı istediğinde uygulamanın çağıracağı kod yer alır. Çünkü uygulamanın ön ucuyla etkileşim, kapamaların kullanımıyla ilgili olmadığından, programımıza girdileri temsil eden değerleri kodlayacak ve ardından çıktıları yazdıracağız.
 
-* İhtiyacımız olan girdiler şunlardır:
+İhtiyacımız olan girdiler şunlardır:
+
   * Kullanıcının talep ettiği egzersizin düşük ya da yüksek yoğunluklu olduğunu gösteren bir egzersiz yoğunluk numarası 
   * Farklı antreman planlarının üretilmesini sağlayan rastgele bir sayı
   
 Çıktımız ise önerilen egzersiz planı olacaktır. Örnek 13-2 bu verilerin `main` işlevinde nasıl kullanıldığı gösterilir.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn main() { 
     let simulated_user_specified_value = 10; 
     let simulated_random_number = 7; 
@@ -40,15 +42,15 @@ fn main() {
         simulated_random_number 
     ); 
 }
-````
+```
 [Örnek 13-2:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5518c05b80586b24998afa51ea34e405) Kullanıcı girişi ve rastgele sayı oluşturmayı simüle etmek için kodlanmış değerlerden oluşan `main` işlevi
 
 Sadeliği koruyabilmek amacıyla `simulated_user_specified_value` değişkenini 10, `simulated_random_number` değişkenini 7 değerleriyle sabit biçimde kodladık. Oysa gerçek bir programda, yoğunluk numarasını uygulamanın ön ucundan alır ve 2. Bölüm' deki tahmin oyunu örneğinde yaptığımız gibi `rand` sandığını rastgele bir sayı üretmek için kullanmaya çalışırdık. Örneğimizdeki `main` işlevi simüle giriş değerlerini kullanarak `create_workout` işlevini çağırmaktadır.
 
-Artık ihtiyaç duyduğumuz içeriği elde ettiğimize göre, algoritma üzerine yoğunlaşabiliriz. Örnek 13-3' te yer alan `create_workout` işlevi uygulamanın çalışma mantığını yansıtan en önemli kısmı olduğundan, örnek üzerinde çalıştığımız sürece gerçekleştireceğimiz bütün kod değişiklikleri yalnızca bu işlevi kapsayacaktır.
+Artık ihtiyaç duyduğumuz içeriği elde ettiğimize göre, algoritma üzerine yoğunlaşabiliriz. Örnek 13-3' te yer alan `generate_workout` işlevi uygulamanın çalışma mantığını yansıtan en önemli kısmı olduğundan, örnek üzerinde çalıştığımız sürece gerçekleştireceğimiz bütün kod değişiklikleri yalnızca bu işlevi kapsayacaktır.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn generate_workout(intensity: u32, random_number: u32) { 
     if intensity < 25 { 
         println!( 
@@ -70,7 +72,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } 
     }
 }
-````
+```
 [Örnek 13-3:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5518c05b80586b24998afa51ea34e405) Girdi ve çağrılarına göre egzersiz planları yazdıran `simulated_expensive_calculation` işlevi
 
 Örnek13-3'teki kod, yavaş hesaplama yapan işleve çok sayıda başvuruda bulunur. İlk `if` bloğu `simulated_expensive_calculation` işlevini iki defa çağırırken, `else` bloğunun içindeki birinci `if` bloğu ise başvuruda bulunmaz. Oysa bir sonraki `else` bloğunda `simulated_expensive_calculation` işlevine yeniden çağrıda bulunulur.  
@@ -83,11 +85,11 @@ Kullanıcının yüksek yoğunluklu bir egzersiz planı istemesi halinde; işin 
 
 Bu kod, şimdilik işverenimizin istediği şekilde çalışmaktadır. Ancak bir süre sonra, şirketimizin veri bilimi ekibinin, `simulated_expensive_calculation` işlevini çağırma yönteminde bir takım değişiklikler yapılması gerektiğine karar verdiğini varsayalım. Bu güncelleme senaryosunda değişikliklerin basit tutulabilmesi için `simulated_expensive_calculation` işlevini kendisine başka bir çağrı eklemeden, sadece bir kez çağırmak ve halihazırda kendisine yapılmakta olan gereksiz çağrıları da kesip atmak istiyoruz. Nihayetinde bu işlev maliyetli bir işlev olduğundan, gerekmedikçe çağrıda bulunmamak, gerekiyorsa da sadece bir kez çağrıda bulunmak istiyoruz. 
 
-### İşlevleri kullanarak yeniden düzenlemek
+#### İşlevleri kullanarak yeniden düzenlemek
 Egzersiz programını birçok şekilde yeniden yapılandırabiliriz. Öncelikle, örnek 13-4' te gösterildiği gibi, `simulated_expensive_calculation` işlevi için tekrarlanan çağrıyı bir değişkene çıkarmayı deneyeceğiz.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn generate_workout(intensity: u32, random_number: u32) { 
     let expensive_result = 
         simulated_expensive_calculation(intensity); 
@@ -113,7 +115,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } 
     } 
 }
-````
+```
 [Örnek 13-4:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d80d33ae3726d2eb7328006f67523fc7) `simulated_expensive_calculation` çağrılarını tek bir yere çıkarmak ve sonucunu `expensive_result` değişkenine kaydetmek
 
 Bu değişiklik, `simulated_expensive_calculation` çağrılarını birleştirerek işlevi gereksiz yere iki kez çağıran ilk `if` bloğunun sorununu çözecektir. Fakat ne yazık ki, bu defa da sonuç değerini hiç kullanmayan iç `if` bloğu da dahil, her durumda sonucu beklemek zorunda kalıyoruz. 
@@ -124,25 +126,25 @@ Oysa biz bu kodu, programımızın tek bir yerinde tanımlamak ve sadece sonuca 
 Her `if` bloğu öncesinde `simulated_expensive_calculation` işlevini çağırmak yerine, örnek 13-5'te gösterildiği gibi bir kapama tanımlayabilir ve tanımlanan kapamayı işlev çağrısının sonucunu saklamak yerine bir değişkene depolayabiliriz. Aslında `simulated_expensive_calculation`' ın tüm gövdesini burada tanıtacağımız kapama içine de taşıyabiliriz.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
     let expensive_closure = |num| { 
         println!("yavaşça hesaplanıyor..."); 
         thread::sleep(Duration::from_secs(2)); 
         num 
     };
-````
-[Örnek 13-5:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=941f75b48e57d6b8dc2ce16fecea9a19) Bir kapamanın tanımlanarak `expensive_closure` adlı değişkende saklanması
+```
+[Örnek 13-5:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=941f75b48e57d6b8dc2ce16fecea9a19) Bir kapama işlevinin `expensive_closure` değişkeninde saklanması
 
-Kapama tanımı `expensive_closure` değişkenine atanabilmesi için atama operatöründen sonra gerçekleştirilir. Bir kapamanın tanımlanmasına içinde kapama parametrelerinin yer alacağı bir çift dikey boru `(|)` ile başlanır. Bu sözdizimi, Smalltalk ve Ruby'deki kapama tanımlarına benzediğinden dolayı seçilmiştir. Örneğimizdeki kapama, `num` adında yalnızca bir parametreye sahip olduğundan `|num|` biçiminde ifade edilir: Eğer kullanmamız gereken çok sayıda parametremiz olsaydı, bu parametreleri yine çift boru içine `| param1, param2 |` şeklinde virgüllerle ayırırarak kullanmamız gerekecekti.
+Kapama tanımı `expensive_closure` değişkenine atanabilmesi için atama operatöründen sonra gerçekleştirilir. Bir kapamanın tanımlanmasına içinde kapama parametrelerinin yer alacağı bir çift dikey boru `(|)` ile başlanır. Bu sözdizimi, Smalltalk ve Ruby'deki kapama tanımlarına benzediğinden dolayı seçilmiştir. Örneğimizdeki kapama, `num` adında yalnızca bir parametreye sahip olduğundan `|num|` biçiminde ifade edilir: Eğer kullanmamız gereken çok sayıda parametremiz olsaydı, bu parametreleri yine çift boru içine `|param1, param2|` şeklinde virgüllerle ayırırarak kullanmamız gerekecekti.
 
 Parametrelerin ardından, kapama gövdesini tutan kıvrımlı parantezleri yerleştirilir. Eğer kapama gövdesi tek bir ifadeden oluşuyorsa bu parantezleri kullanmak tercihinize bırakılır. `let` ifadesinin tamamlanabilmesi için kapamanın sonunda, yani kıvrımlı parantezin bitiminde, **`;`** noktalı virgülün kullanılması şarttır. İşlev gövdelerinde olduğu gibi kapama gövdelerindeki son değerler de döndürülen değer statüsünde olduklarından *(örneğimizde num)* noktalı virgül ile sonlandırılmazlar. 
 
 `expensive_closure` adındaki bu `let` ifadesinin; isimsiz işlevin çağrılmasıyla oluşan sonuç değerini değil, **isimsiz işlev tanımını** içerdiğine dikkat edin. Kapamaları: Bir noktada çağrılacak kodu tanımlamak, bu kodu saklamak ve programın ilerleyen safhalarında kendisine yeniden başvurabilmek için kullandığımızı unutmayın. Bu aşamada çağırmak istediğimiz kod artık `expensive_closure` içinde saklanmaya başlamıştır. 
 
-Bu aşamada, tanımladığımız kapama programı çalıştırıldığında üretilen değeri kullanacak `if` bloğunun kodunu da değiştirebiliriz. Kapamaları, örnek 13-6’ da gösterilene benzer şekilde, tıpkı bir işlev çağırıyormuş gibi, kapatma tanımını tutan değişken adını verip, parantez içindede alacağı bağımsız değişkenleri belirtirek çağırabiliyoruz.
+Tanımlanan kapama işleviyle kodu yürüterek oluşan değeri elde etmek için `if` blokları arasındaki kodu değiştirebiliriz. Kapamaları, örnek 13-6’ da gösterilene benzer şekilde, tıpkı bir işlev çağırıyormuş gibi, kapama tanımını tutan değişken adını verip, parantez içindede alacağı bağımsız değişkenleri belirtirek çağırabiliyoruz.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 fn generate_workout(intensity: u32, random_number: u32) { 
     let expensive_closure = |num| { 
         println!("yavaşça hesaplanıyor..."); 
@@ -172,55 +174,56 @@ fn generate_workout(intensity: u32, random_number: u32) {
         } 
     } 
 }
-````
+```
 [Örnek 13-6:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=941f75b48e57d6b8dc2ce16fecea9a19) Tanımladığımız `expensive_closure` kapamasını çağırmak.
 
 Şimdi, pahalı hesaplama işlevi sadece tek bir yerde çağrılıyor ve bu kodu, sadece gerçekten sonuçlara ihtiyacımız olan yerde işletmiş oluyoruz. 
 
-Bununla birlikte bu defa da, ilk `if` bloğundaki kapamayı iki kez çağırarak örnek 13-3'teki sorunlardan biriyle yeniden karşılaşıyor ve bu pahalı kodu ikinci kez çağırmakla, kullanıcının uzun zaman alan iki işlem boyunca beklemesine neden oluyoruz. Bu sorunu ilk `if` bloğu kapsamında, kapamayı çağıran ve elde ettiği sonucu tutan yerel bir değişken tanımlayarak çözümleyebiliriz. Ancak kapamalar bize başka bir çözüm sağlar. Bu çözüm hakkında konuşmaya başlamadan önce, neden kapama tanımında ek açıklamalar bulunmadığından ve kapalarla ilgili bazı özelliklerden bahsedelim.
+Bununla birlikte bu defa da, ilk `if` bloğundaki kapamayı iki kez çağırmakla örnek 13-3'teki sorunlardan biriyle yeniden karşılaşıyor ve bu pahalı kodu ikinci kez çağırılmasıyla, kullanıcının uzun zaman alan iki işlem boyunca beklemesine neden oluyoruz. Bu sorunu ilk `if` bloğu kapsamında, kapamayı çağıran ve elde ettiği sonucu tutan yerel bir değişken tanımlayarak çözümleyebiliriz. Ancak kapamalar bize başka bir çözüm sağlar. Bu çözüm hakkında konuşmaya başlamadan önce, neden kapama tanımında ek açıklamalar bulunmadığından ve kapalarla ilgili bazı özelliklerden bahsedelim.
 
-### Kapamalarda tür çıkarımı ve ek açıklamalar
-Kapamalar, `fn` işlevlerinin gerektirdiği gibi parametre türlerinde veya dönüş değerlerinde açıklama eklenmesini gerektirmez. İşlevler kullanıcılara açık bir arayüzün parçaları olduklarından tür ek açıklamaları gereklidir. İşlevin ne tür değerler kullandığı veya hangi türden değerler döndürdüğünün, tüm kullanıcılar tarafından açıkça anlaşılabilmesi için, bu arayüzü katı bir şekilde tanımlamak önemlidir. Ancak kapamalar böyle açık bir arayüzde kullanılmak yerine; değişkenlerde depolanmakta, isimsiz olarak kullanılmakta ve kütüphanemizin diğer kullanıcılarına gösterilmeden değerlendirilebilmektedir.
+#### Kapamalarda tür çıkarımı ve ek açıklamalar
+Kapamalar, `fn` işlevlerinin gerektirdiği gibi parametre türlerinde veya dönüş değerlerinde açıklama girilmesine ihtiyaç duymazlar. Bununla birlikte standart işlevler, kullanıcılara açık bir arayüzün parçaları olduklarından tür ek açıklamaları gerektirirler. İşlevin ne tür değerler kullandığı veya hangi türden değerler döndürdüğünün, tüm kullanıcılar tarafından açıkça anlaşılabilmesi için, bu arayüzü katı bir şekilde tanımlamak önemlidir. Ancak kapamalar böyle açık bir arayüzde kullanılmak yerine; değişkenlerde depolanmakta, isimsiz olarak kullanılmakta ve kütüphanemizin diğer kullanıcılarına gösterilmeden değerlendirilebilmektedir.
 
-Kapamalar genellikle kısa ve herhangi bir keyfi senaryodan ziyade, sadece dar bir bağlamda geçerlidir. Bu sınırlı bağlamda derleyici, değişken türlerinin çıkarsanmasına benzer şekilde, kapama parametre ve dönüş türlerini güvenli bir şekilde çıkarsayabilmektedir.
+Bir kapama işlevi genellikle kısa ve herhangi bir keyfi senaryodan ziyade, sadece dar bir bağlamda geçerlidir. Bu sınırlı bağlamda derleyici, değişken türlerinin çıkarsanmasına benzer şekilde, kapama parametre ve dönüş türlerini güvenli bir şekilde çıkarsayabilmektedir.
 
 Programcıların bu isimsiz ve küçük işlevlerdeki türlere açıklama eklemesi, derleyicinin zaten sahip olduğu bilgilerle oldukça can sıkıcı ve büyük ölçüde gereksiz olacaktır.
 
-Değişkenlerde olduğu gibi, açıklığı ve netliği gerekli olandan daha ayrıntılı olma pahasına artırmak istiyorsak, kapamalara da tür ek açıklamaları ekleyebiliriz. Örnek 13-5'te tanımladığımız kapamanın, kullanacağı türler için ekleyeceğimiz açıklamaları örnek 13-7' deki kodda gösterilmektedir.
+Değişkenlerde olduğu gibi, açıklığı ve netliği gerekli olandan daha ayrıntılı olma pahasına artırmak istiyorsak, kapamalara da tür ek açıklamaları ekleyebiliriz. Örnek 13-5'te tanımladığımız kapama işlevinin kullanacağı türler için ekleyeceğimiz tür ek açıklamaları örnek 13-7' deki kodda gösterilmektedir.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
     let expensive_closure = |num: u32| -> u32 { 
         println!("yavaşça hesaplanıyor..."); 
         thread::sleep(Duration::from_secs(2)); 
         num 
     };
-````
+```
 [Örnek 13-7:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=13304627dc405036a7d43cbf3c56c9a0) Kapama parametre ve dönüş değerlerine isteğe bağlı tür ek açıklamalarını eklemek.
 
-Tür ek açıklamaları eklenildiğinde, kapama sözdizimi işlev sözdizimine benzemeye başlıyor. Aşağıda, parametresine 1 ekleyen bir işlev tanımı ile aynı davranışa sahip bir kapama sözdiziminin dikey karşılaştırması yer almaktadır. İlgili parçaları hizalamak için bazı alanlar ekledik. Bu örnekleme; boru kullanımı ve isteğe bağlı sözdizimi haricinde, kapama sözdizimi ile işlev söz diziminin birbirlerine nasıl benzediğini göstermektedir:
+Tür ek açıklamaları eklenildiğinde, kapama sözdizimi işlev sözdizimine benzemeye başlıyor. Aşağıda, parametresine 1 değeri ekleyen bir işlev tanımı ile aynı davranışa sahip bir kapama sözdiziminin dikey karşılaştırması yer almaktadır. İlgili parçaları hizalamak için bazı alanlar ekledik. Bu örnekleme; boru kullanımı ve isteğe bağlı sözdizimi haricinde, kapama sözdizimi ile işlev söz diziminin birbirlerine nasıl benzediğini göstermektedir:
 
-```Rust
+``rust
 fn  add_one_v1   (x: u32) -> u32 { x + 1 }
 let add_one_v2 = |x: u32| -> u32 { x + 1 };
 let add_one_v3 = |x|             { x + 1 };
 let add_one_v4 = |x|               x + 1  ;
-````
+```
 
-Örneğin ilk satırında bir işlev tanımı, ikinci satırında giriş ve dönüş türleri açıklanan bir kapama tanımı yer almaktadır. Üçüncü satırda, tür açıklamaları kapama tanımından kaldırılırken, dördüncü satırda  isteğe bağlı olan parantezleri kaldırılmıştır. Hatırlayacağınız gibi bir kapama tanımlanırken, kapatma gövdesi yalnızca bir ifadeden oluştuğunda süslü parantezler kullanılmamaktaydı. Yukarıda sunduğumuz kapama ifadelerinin her biri, çağrıldığında aynı davranışı üretecek geçerli tanımlamalardır.
+Örneğin ilk satırında bir işlev tanımı, ikinci satırında giriş ve dönüş türleri açıklanan bir kapama tanımı yer almaktadır. Üçüncü satırda, tür açıklamaları kapama tanımından kaldırılırken, dördüncü satırda  isteğe bağlı olan parantezler dahi kaldırılmıştır. Hatırlayacağınız gibi bir kapama işlevi tanımlanırken, kapama gövdesi yalnızca bir ifadeden oluştuğunda süslü parantezler kullanılmamaktaydı. Yukarıda sunduğumuz kapama ifadelerinin her biri, çağrıldığında aynı davranışı üretecek geçerli tanımlamalardır.
 
-Kapama tanımlarında, her bir parametre ve dönüş değeri için somut bir tür hesaplanır. Örnek 13-8, yalnızca parametre olarak aldığı değeri döndüren kısa bir kapama tanımını göstermektedir. Bu kapama, sadece bu örneği sunabilmek için tasarlandığında gerçek kullanımda pek yararlı değildir. Kapamayı ik kez çağırdığımızda, dizgiyi bir argüman olarak geçirmeyi başarırız, ancak u32 türü kullanan ikinci denememiz bir hata ile sonuçlanacaktır. Tanıma herhangi bir tür ek açıklaması eklenmediğine dikkat ediniz.
+Kapama tanımlarında, her bir parametre ve dönüş değeri için somut bir tür hesaplanır. Örnek 13-8, yalnızca parametre olarak aldığı değeri döndüren kısa bir kapama tanımını göstermektedir. Bu kapama, sadece bu örneği sunabilmek için tasarlandığından gerçek kullanım için uygun değildir. Kapamayı ik kez çağırdığımızda, dizgiyi bir argüman olarak geçirmeyi başarırız, ancak u32 türü kullanan ikinci denememiz bir hata ile sonuçlanacaktır. Tanıma herhangi bir tür ek açıklaması eklenmediğine dikkat ediniz.
 
 Dosya adı: src/main.rs
-```Rust
+```rust
 let example_closure = |x| x; 
 let s = example_closure(String::from("hello")); 
 let n = example_closure(5);
-````
+```
 Örnek 13-8: Girdi ve çıktı değerlerinin, iki farklı tür üzerinden çıkarsanması beklenen bir kapama örneği
 
 Derleyici bize şu hatayı verir:
-```Binary
+
+```console
 error[E0308]: mismatched types
  --> src/main.rs
   |
