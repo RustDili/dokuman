@@ -415,11 +415,12 @@ fn main() {
 ```
 Örnek 13-12: Tanımlandığı kapsam içindeki bir değişkene başvuran kapama örneği
 
-Burada `x` değişkeni, `equal_to_x` kapama parametrelerinden biri olmamasına rağmen, `equal_to_x` kapamasının, kendisiyle aynı kapsamda tanımlanan `x` değişkenini kullanmasına izin verilmektedir.
+urada `x` değişkeni, `equal_to_x` kapama parametrelerinden biri olmamasına rağmen, `equal_to_x` kapamasının, kendisiyle aynı kapsamda tanımlanan `x` değişkenini kullanmasına izin verilmektedir.
 
 Oysa aynı şeyi işlevlerle gerçekleştiremeyiz. Aşağıdaki örnek kod derlenmeyecektir:
 
 Dosya adı: src/main.rs
+
 ```rust
 fn main() {
     let x = 4;
@@ -434,7 +435,9 @@ fn main() {
 
 Alacağımız hata aşağıdaki gibidir:
 
+
 ```console
+
 $ cargo run
    Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
 error[E0434]: can't capture dynamic environment in a fn item
@@ -455,214 +458,3 @@ To learn more, run the command again with --verbose.
 ```
 
 Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
-
-Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
-
-Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
-
-* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
-* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
-* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
-
-Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
-Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
-
-Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
-
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
-
-```console
-$ cargo run
-   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
-error[E0434]: can't capture dynamic environment in a fn item
- --> src/main.rs:5:14
-  |
-5 |         z == x
-  |              ^
-  |
-  = help: use the `|| { ... }` closure form instead
-
-error: aborting due to previous error
-
-For more information about this error, try `rustc --explain E0434`.
-error: could not compile `equal-to-x`.
-
-To learn more, run the command again with --verbose.
-
-```
-
-Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
-
-Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
-
-Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
-
-* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
-* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
-* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
-
-Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
-Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
-
-Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
-
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
-
-```console
-$ cargo run
-   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
-error[E0434]: can't capture dynamic environment in a fn item
- --> src/main.rs:5:14
-  |
-5 |         z == x
-  |              ^
-  |
-  = help: use the `|| { ... }` closure form instead
-
-error: aborting due to previous error
-
-For more information about this error, try `rustc --explain E0434`.
-error: could not compile `equal-to-x`.
-
-To learn more, run the command again with --verbose.
-
-```
-
-Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
-
-Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
-
-Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
-
-* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
-* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
-* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
-
-Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
-Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
-
-Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
-
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
-
-```console
-$ cargo run
-   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
-error[E0434]: can't capture dynamic environment in a fn item
- --> src/main.rs:5:14
-  |
-5 |         z == x
-  |              ^
-  |
-  = help: use the `|| { ... }` closure form instead
-
-error: aborting due to previous error
-
-For more information about this error, try `rustc --explain E0434`.
-error: could not compile `equal-to-x`.
-
-To learn more, run the command again with --verbose.
-
-```
-
-Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
-
-Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
-
-Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
-
-* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
-* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
-* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
-
-Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
-Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
-
-Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
-
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
-
-```console
-$ cargo run
-   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
-error[E0434]: can't capture dynamic environment in a fn item
- --> src/main.rs:5:14
-  |
-5 |         z == x
-  |              ^
-  |
-  = help: use the `|| { ... }` closure form instead
-
-error: aborting due to previous error
-
-For more information about this error, try `rustc --explain E0434`.
-error: could not compile `equal-to-x`.
-
-To learn more, run the command again with --verbose.
-
-```
-
-Derleyici bize bu kodun sadece kapamalarla çalıştığını anımsatıyor!
-
-Kapamalar ortamlarından bir değer yakaladıklarında, bu değerleri kapama gövdesinde kullanmak üzere saklamak için bellek kullanmak zorundadırlar. Bu bellek kullanımı, daha yaygın kullanım örneklerinde olduğu gibi, ortamlarını yakalamayan kodların işletilmesindeki maliyetten daha fazladır. İşlevlerin ortamlarını yakalamalarına asla izin verilmediğinden, işlevlerin tanımlanması ve kullanılması böyle bir ek yüke neden olmaz.
-
-Kapamalar çevrelerindeki değerleri üç şekilde yakalayabilirler ve bunlar bir işlevin parametre alacağı üç yolla doğrudan eşleşir: Mülkiyeti üzerlerine alırken, değişebilir borçlanma ve değişmez borçlanma. Bunlar aşağıdaki sunulan üç `Fn` özelliğinde kodlanmıştır:
-
-* `FnOnce` kapama ortamı olarak bilinen, çevrelendiği kapsamdan yakaladığı değişkenleri tüketir. Kapamanın yakaladığı değişkenleri tüketebilmesi için bu değişkenlerin mülkiyetini alması ve tanımına taşıması gerekmektedir. İsmin `Once` adlı parçası, kapamanın aynı değişkenlerin mülkiyetini sadece bir kez alabileceğini gösterdiğinden, bu özellik yalnızca bir kez çağrılabilir.
-* `FnMut` Değişebilen değerleri ödünç aldığı için ortamı değiştirebilir.
-* `Fn` ortamdaki değerleri değişmez olarak ödünç alır.
-
-Bir kapama oluşturduğunuzda, Rust, kapamanın ortamdaki değerleri nasıl kullandığına bağlı olarak hangi özelliğin kullanılacağını otomatik olarak belirler. Tüm kapamalar `FnOnce`'i uygular, çünkü hepsi en az bir kez çağrılabilir. Yakalanan değişkenleri taşımayan kapamalar da `FnMut`'u uygularlar. Yakalanan değişkenlere değiştirilebilir erişim gerektirmeyen kapamalar ise `Fn`'i uygularlar. 
-Örnek 13-12'de `equal_to_x` değişkenine depolanan kapama, değişmez olarak tanımlanan `x` değişkenini, değişmez olarak ödünç alır; yani `equal_to_x` `Fn` özelliğine sahiptir, çünkü kapama gövdesinin sadece `x` değerini okuması gerekmektedir.  
-
-Kapamaları ortamlarından kullandığı değerlerin mülkiyetini almaya zorlamak istiyorsanız, parametre listesinden önce `move` anahtar sözcüğünü kullanabilirsiniz. Bu teknik, verilerin mülkiyetlerinin işlenmek üzere yeni iş parçasına aktarırken oldukça yararlıdır.
-
-Bölüm 16’da eşzamanlılık hakkında konuşurken, kapamaların taşınması hakkında daha fazla örnek vereceğiz. Ancak şimdilik, tam sayılar taşınmak yerine kopyalandıklarından, bunların yerine vektör kullanan ve tanımına `move` anahtar sözcüğü ekleyerek yeniden düzenlediğimiz kapama işlevini gösteren örnek 13-12’yi sunalım. Bu kodun henüz derlenmeyeceğini unutmayın:
-
-Dosya adı: src/main.rs
-```rust
-fn main() {
-    let x = vec![1, 2, 3];
-
-    let equal_to_x = move |z| z == x;
-
-    println!("can't use x here: {:?}", x);
-
-    let y = vec![1, 2, 3];
-
-    assert!(equal_to_x(y));
-}
-```
-
-Aldığımız hata aşağıdaki gibidir:
-
-```console
-$ cargo run
-   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
-error[E0382]: borrow of moved value: `x`
- --> src/main.rs:6:40
-  |
-2 |     let x = vec![1, 2, 3];
-  |         - move occurs because `x` has type `std::vec::Vec<i32>`, which does not implement the `Copy` trait
-3 | 
-4 |     let equal_to_x = move |z| z == x;
-  |                      --------      - variable moved due to use in closure
-  |                      |
-  |                      value moved into closure here
-5 | 
-6 |     println!("can't use x here: {:?}", x);
-  |                                        ^ value borrowed here after move
-
-error: aborting due to previous error
-
-For more information about this error, try `rustc --explain E0382`.
-error: could not compile `equal-to-x`.
-
-To learn more, run the command again with --verbose.
-```
-
-Kapama tanımlanırken `move` anahtar sözcüğü eklediğimizden `x` değeri kapamaya taşınır. Artık `x`'in mülkiyeti kapamaya ait olduğundan `main` işlevindeki `println!` ifadesinde `x`'i kullanılmasına izin verilmez. Sorunun giderilmesi için `println!` ifadesinin kaldırılması yeterli olacaktır.
-
-Nihayetinde derleyici, kapama gövdesini analiz ederek `FnMut` veya `FnOnce` özelliklerinden hangisine ihtiyacınız olup olmadığını söyleyeceğinden, özellik sınırlarından birini belirlerken, `Fn` ile başlamak çoğu zaman iyi fikirdir
-
-Ortamlarını yakalayabilen kapamaların işlev parametreleri olarak kullanılmasının yararlı olduğu durumları daha iyi gösterebilmek için bir sonraki Yineleyiciler başlığımıza geçelim.
