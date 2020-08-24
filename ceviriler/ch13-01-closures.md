@@ -521,6 +521,6 @@ To learn more, run the command again with --verbose.
 
 Kapama tanımlanırken `move` anahtar sözcüğü eklediğimizden `x` değeri kapamaya taşınır. Artık `x`'in mülkiyeti kapamaya ait olduğundan `main` işlevindeki `println!` ifadesinde `x`'i kullanılmasına izin verilmez. Sorunun giderilmesi için `println!` ifadesinin kaldırılması yeterli olacaktır.
 
-Nihayetinde derleyici, kapama gövdesini analiz ederek `FnMut` veya `FnOnce` özelliklerinden hangisine ihtiyacınız olup olmadığını söyleyeceğinden, özellik sınırlarından birini belirlerken, `Fn` ile başlamak çoğu zaman iyi fikirdir
+Nihayetinde derleyici, kapama gövdesini analiz ederek `FnMut` veya `FnOnce` özelliklerinden hangisine ihtiyacınız olup olmadığını söyleyeceğinden, özellik sınırlarından birini belirlerken, `Fn` ile başlamak çoğu zaman iyi fikirdir.
 
 Ortamlarını yakalayabilen kapamaların işlev parametreleri olarak kullanılmasının yararlı olduğu durumları daha iyi gösterebilmek için bir sonraki Yineleyiciler başlığımıza geçelim.
