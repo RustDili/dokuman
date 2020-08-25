@@ -297,3 +297,26 @@ Dosya adı: src/lib.rs
 Bu test, `counter` değişkeninde yeni bir `Counter` örneği oluşturur. Ardından `next` metodunu defalarca çağırıp bu yineleyicinin sahip olmasını istediğimiz davranışı uyguladığımızı doğrulayam 1'den 5'e kadar olan değerleri döndürür.
 
 #### Diğer `Iterator` Özellik Metodlarını Kullanmak
+
+Artık `next` metodunu tanımlayarak `Iterator` özelliğini uyguladığımıza ve hepsinin `next` metodunun işlevselliğini kullandıklarını bildiğimize göre, bundan böyle standart kitaplıkta tanımlanan tüm `Iterator` özellik metodlarının varsayılan uygulamalarını kullanabiliriz. 
+
+Örnek 13-23'teki testte de gösterildiği gibi, bir `Counter` örneği tarafından üretilen değerleri almak istediğimizi, bunları ilk değeri atladıktan sonra başka bir `Counter` örneği tarafından üretilen değerlerle eşleştirdiğimizi, her çifti birbiriyle çarptığımızı ve elde edilen değerlerin sadece 3'e bölünebilenlerini alarak birbiriyle topladığımız bir örneği düşünün:   
+
+<span class="filename">Dosya adı: src/lib.rs</span>
+
+```rust
+#[test]
+    fn using_other_iterator_trait_methods() {
+        let sum: u32 = Counter::new()
+            .zip(Counter::new().skip(1))
+            .map(|(a, b)| a * b)
+            .filter(|x| x % 3 == 0)
+            .sum();
+        assert_eq!(18, sum);
+    }
+````
+[Örnek 13-23:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=90da8313eb87b9027217336831dcb19a) `Counter` yineleyicisinde farklı `Iterator` özellik metodlarını kullanmak
+
+`zip` metodu, girdi yineleyicilerinden herhangi birisinin `None` döndürmesi halinde `None` varyantını döndüreceğinden, `zip` ifadesinin yalnızca dört çift oluşturabildiğini ve teorik olarak beşinci çift `(5, None)` olacağından, hiçbir zaman üretilmeyeceğini aklınızdan çıkarmayın.
+
+Standart kitaplık `next` metodunu çağıran diğer yöntemler için varsayılan uygulamaları sağladığından, `next` metodunun nasıl çalıştığını belirledikten sonra metod çağrılarının tamamını kullanmamız mümkündür.
