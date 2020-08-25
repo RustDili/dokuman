@@ -150,3 +150,73 @@ Dosya adı: src/main.rs
 
 ### Ortamlarını Yakalayan Kapamalar Kullanmak
 
+Artık yineleyicileri kullanıma sunduğumuza göre, bir yineleyici adaptörünü olan `filter` metodu kullanarak ortamlarını yakalayan kapamaların yaygın bir kullanımını gösterebiliriz. Bir yineleyicideki `filter` metodu, yineleyiciden aldığı her öğe karşılığında Boolean döndüren bir kapama işlevini kullanır. Kapama `true` döndürdüğünde, değer `filter` tarafından üretilen yineleyiciye dahil edilecek, `false` döndürdüğündeyse yineleyiciye dahil edilmeyecektir.
+
+Örnek 13-19'da `Shoe` adlı yapı örneklerinden oluşan koleksiyon üzerinde yineleme yapmak üzere `shoe_size` değişkenini ortamından elde eden bir kapama işleviyle `filter` metodunu birlikte kullanıyor ve sadece belirtilen boyuttaki ayakkabıları döndürüyoruz.
+
+Dosya adı: src/lib.rs
+
+```rust
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u32,
+    style: String,
+}
+
+fn shoes_in_my_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
+    shoes.into_iter().filter(|s| s.size == shoe_size).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn filters_by_size() {
+        let shoes = vec![
+            Shoe {
+                size: 10,
+                style: String::from("Spor ayakkabı"),
+            },
+            Shoe {
+                size: 13,
+                style: String::from("Sandalet"),
+            },
+            Shoe {
+                size: 10,
+                style: String::from("Bot"),
+            },
+        ];
+
+        let in_my_size = shoes_in_my_size(shoes, 10);
+
+        assert_eq!(
+            in_my_size,
+            vec![
+                Shoe {
+                    size: 10,
+                    style: String::from("Spor ayakkabı")
+                },
+                Shoe {
+                    size: 10,
+                    style: String::from("Bot")
+                },
+            ]
+        );
+    }
+}
+
+fn main() {}
+````
+
+[Örnek 13-19:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c1eb9d413086a693939c175a54a3fec2) `shoe_size` değerini ortamından yakalayan bir kapama ile `filter` metodunu birlikte kullanmak
+
+`shoes_in_my_size` işlevi, parametre olarak bir ayakkabı vektörü ve bir ayakkabı numarasının mülkiyetini alarak sadece belirtilen ölçüdeki ayakkabıları içeren bir yeni vektör döndürür.
+
+`shoes_in_my_size` işlevinin gövdesinde vektörün mülkiyetini alacak bir yineleyici oluşturmak üzere `into_iter` metodunu çağırıyor, sonra bu yineleyiciyi, kapamanın sadece `true` döndürdüğü öğelerden oluşan yeni bir yineleyiciye uyarlayamak amacıyla `filter` metodunu kullanıyoruz.
+
+Ortamdan `shoe_size` parametresini yakalayan kapama, bu değeri her bir ayakkabının numarasıyla karşılaştırarak yalnızca belirtilen ölçüdeki ayakkabıları tutar. Son olarak, `collect` çağrısı, uyarlanmış yineleyici tarafından döndürülen değerleri işlev tarafından döndürülen bir vektöre depolar.
+
+Örneğimizdeki test, `shoes_in_my_size` işlevini çağırdığımızda, yalnızca belirttiğimiz ölçülere uygun ayakkabıların döndürüldüğünü göstermektedir.
+
+### `Iterator` Özelliği ile Kendi Yineleyicilerimizi Oluşturmak
