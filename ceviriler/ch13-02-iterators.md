@@ -220,3 +220,80 @@ Ortamdan `shoe_size` parametresini yakalayan kapama, bu değeri her bir ayakkab�
 Örneğimizdeki test, `shoes_in_my_size` işlevini çağırdığımızda, yalnızca belirttiğimiz ölçülere uygun ayakkabıların döndürüldüğünü göstermektedir.
 
 ### `Iterator` Özelliği ile Kendi Yineleyicilerimizi Oluşturmak
+
+Bir vektör üzerinde `iter`, `into_iter` veya `iter_mut` metodlarını çağırarak bir yineleyici oluşturabileceğinizi gösterdik. Tıpkı bu vektör için oluşturduğumuz yineleyici gibi, standart kütüphanedeki eşleme haritaları veya diğer koleksiyon türleri için de yineleyiciler hazırlayabilir, `Iterator` özelliğini kendi türlerinize uygulayarak dilediğiniz işlemleri gefçekleştiren yineleyiciler oluşturabilirsiniz. Daha önce de belirtildiği gibi, tanımlamanız gereken tek metod `next` metodu olduğundan, bu metodu tanımladığınızda, `Iterator` özelliği tarafından sağlanan varsayılan uygulamalara sahip metodların tümünü kullanabilirsiniz!
+
+Bu bilgiyi pekiştirmek adına, sadece 1'den 5'e kadar sayacak bir yineleyici oluşturalım. Öncelikle bunun için, bazı değerleri tutan bir yapı oluşturacak, ardından bu yapıya `Iterator` özelliğini uygulayacak ve bu uygulamadaki değerler vasıtasıyla bu yapıyı bir yineleyici haline getireceğiz.
+
+
+Örnek 13-20, `Counter` yapısının tanımını ve bu yapının örneklerini oluşturmak amacıyla ilişkilendirilmiş `new()` işlevini göstermektedir:
+
+Dosya adı: src/lib.rs
+
+```rust
+struct Counter {
+    count: u32,
+}
+
+impl Counter {
+    fn new() -> Counter {
+        Counter { count: 0 }
+    }
+}
+
+fn main() {}
+````
+
+[Örnek 13-20:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1b9ac102ba21df313b03e48ca1fd2b6b) Örnek 13-20: `Counter` yapısı ve `count` alanı başlangıç değeri 0 olan yapı örnekleri başlatan `new` işlevini tanımlamak
+
+`Counter` yapısının `count` adlı bir alanı vardır. Bu alan, 1'den 5'e kadar olan yineleme sürecinde nerede olduğumuzu takip edecek `u32` türünden bir değer tuttuğundan ve `count` uygulamasının değerini yöneteceğinden özeldir. `new` işlevi ise her yeni örnek başlatıldığında, başlatılan bu örnekleri `count` alanı sayesinde daima 0 değeriyle ilklendirmeye çalışır.
+
+Daha sonra, Örnek 13-21'de gösterildiği gibi, bu yineleyici kullanıldığında üstleneceği görevleri bildiren `next` metodunun gövdesini tanımlayarak `Counter` türüne `Iterator` özelliğini uygulayacağız:
+
+Dosya adı: src/lib.rs
+
+```rust
+impl Iterator for Counter {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.count < 5 {
+            self.count += 1;
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+}
+````
+
+[Örnek 13-21:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=bd3d6be3e4520010b3681a7811ff166f) `Counter` yapısına `Iterator` özelliğini uygulamak
+
+Yineleyicimiz için ilişkili öğe türünü `u32` olarak belirleyip `type Item = u32;` şeklinde ayarladığımızdan yineleyiciden `u32` türünde değerler döndürülecektir. Bu noktada *İlişkili Türler* konusunu Bölüm 19'da ele alacağımızı hatırlatarak konuya devam ediyoruz.
+
+Yineleyicimizin mevcut duruma 1 eklemesini istediğimizden, 1'i döndürebilmesi için `count` u 0 olarak başlattık. `count` değeri 5'ten küçük olduğu sürece `next` metodu `count` değerini artırarak `Some` içine sarılmış geçerli değeri döndürecek, `count` değeri 5 olduğundaysa, yineleyicimiz `count` değerini artırmayı sona erdirerek `None` döndürmeye başlayacaktır.
+
+#### `Counter` Yineleyicisinin `next` Metodunu Kullanmak
+
+`Iterator` özelliğini uyguladığımıza göre artık elimizde bir yineleyicimiz var demektir. Tıpkı Örnek 13-15'te yaptığımız bir *vektörden oluşturulan yineleyici*de olduğu gibi, aşağıda yer alan Örnek 13-22 de, `Counter` yapısının yineleme işlevini `next` metodunu doğrudan çağırarak kullanabileceğimizi gösteren bir test bölümü içerir.
+
+Dosya adı: src/lib.rs
+
+```rust
+#[test]
+    fn calling_next_directly() {
+        let mut counter = Counter::new();
+
+        assert_eq!(counter.next(), Some(1));
+        assert_eq!(counter.next(), Some(2));
+        assert_eq!(counter.next(), Some(3));
+        assert_eq!(counter.next(), Some(4));
+        assert_eq!(counter.next(), Some(5));
+        assert_eq!(counter.next(), None);
+    }
+````
+[Örnek 13-22:](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=3441a6dcb227612dad4eb17d77cbaaef) `next` metodu uygulamasının işlevselliğini test etmek
+
+Bu test, `counter` değişkeninde yeni bir `Counter` örneği oluşturur. Ardından `next` metodunu defalarca çağırıp bu yineleyicinin sahip olmasını istediğimiz davranışı uyguladığımızı doğrulayam 1'den 5'e kadar olan değerleri döndürür.
+
+#### Diğer `Iterator` Özellik Metodlarını Kullanmak
