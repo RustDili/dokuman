@@ -8,4 +8,4 @@ ancak Cargo ile çok daha fazlasını yapılabilir. Bu bölümde, aşağıdakile
   * [crates.io](https://crates.io/)'da yer alan ikili dosyaları `cargo install` yardımıyla kurmak
   * Özel komutları kullanarak Cargo'yu genişletmek
   
-Cargo'nun yetenekleri bu bölümde ele aldığımızdan konulardan çok daha fazlasını barındırdığından tüm özellikleri değerlendirebilmek için [bu bağlantıda yer alan belgelerine](https://doc.rust-lang.org/cargo/) başvurabilirsiniz.
+Cargo'nun yetenekleri bu bölümde ele aldığımızdan konulardan çok daha fazlasını barındırdığından, tüm özellikleri değerlendirebilmek için [bu bağlantıda yer alan belgelerine](https://doc.rust-lang.org/cargo/) başvurabilirsiniz.
