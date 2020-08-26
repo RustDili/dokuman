@@ -6,7 +6,7 @@ Rust ve Cargo, yayınlanan paketleri başka geliştiricilerin kolaylıkla bulup 
 
 ### Kullanışlı Dökümantasyon Yorumları Oluşturmak
 
-Paketlerinizin doğru biçimde belgelenmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgelendirme sürecine zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğini gösterir.
+Paketlerinizin doğru biçimde belgelenmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgelendirme sürecine zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğinden oluşur.
 
 Belgeledikleri öğeden hemen önce yerleştirilen ve iki yerine `///` üç eğik çizgi ile ifade edilen belgeme yorumları metni biçimlendirmek için Markdown gösterimini destekler. Örnek 14-1, `my_crate` adlı sandıkta yer alan `add_one` işlevi için belgeleme yorumlarını göstermektedir:
 
