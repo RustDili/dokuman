@@ -4,7 +4,7 @@ Rust'ın *sürüm profilleri* kodun derleme aşamasında programcıya, çeşitli
 
 Cargo'nun iki ana profili vardır: Bunlardan `dev` seçeneği, programın `cargo build` komutuyla işletilmesi sırasında kullanılan profil, release seçeneğiyse `cargo build --release` komutuyla işletilirken kullanılan profildir. Geliştirici profili *(dev)*, geliştirme için iyileştirilen donanımlara sahipken, sürüm profili *(release)*, sürüm derlemeleri için iyileştirilen donanımlarla gelir.
 
-Bu profil adları size sürüm çıktısılarınızdan tanıdık geliyor olabilir:
+Bu profil adları size sürüm çıktılarınızdan tanıdık geliyor olabilir:
 
 ```bash
 $ cargo build
