@@ -2,7 +2,7 @@
 
 Rust'ın *sürüm profilleri* kodun derleme aşamasında programcıya, çeşitli seçenekler üzerinde daha fazla denetim izni veren, değişik yapılandırmalara sahip önceden tanımlanmış ve özelleştirilebilir profillerdir. Her profil diğerlerinden bağımsız olarak yapılandırılır.
 
-Cargo'nun iki ana profili vardır: Bunlardan `dev` seçeneği, programın `cargo build` komutuyla işletilmesi sırasında kullanılan profil, release seçeneğiyse `cargo build --release` komutuyla işletilirken kullanılan profildir. Geliştirici profili *(dev)*, geliştirme için iyileştirilen donanımlara sahipken, yayın profili *(release)*, sürüm derlemeleri için iyileştirilen donanımlarla gelir.
+Cargo'nun iki ana profili vardır: Bunlardan `dev` seçeneği, programın `cargo build` komutuyla işletilmesi sırasında kullanılan profil, release seçeneğiyse `cargo build --release` komutuyla işletilirken kullanılan profildir. Geliştirici profili *(dev)*, geliştirme için iyileştirilen donanımlara sahipken, sürüm profili *(release)*, sürüm derlemeleri için iyileştirilen donanımlarla gelir.
 
 Bu profil adları size sürüm çıktısılarınızdan tanıdık geliyor olabilir:
 
