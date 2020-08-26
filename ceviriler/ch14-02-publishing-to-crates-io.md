@@ -21,7 +21,7 @@ Dosya: src/lib.rs
 /// let deger = 5;
 /// let yanit = sandigim::bir_ekle(deger);
 ///
-/// assert_eq!("6, yanit");
+/// assert_eq!(6, yanit);
 /// ```
 
 pub fn bir_ekle(x: i32) -> i32 {
@@ -48,20 +48,25 @@ HTML belgesinde `# Örnekler` başlıklı bir bölüm oluşturabilmek için Örn
 
 Çoğu belgelendirme çalışmasında bu bölümlerin her birinin yorumlanmasına ihtiyaç duyulmaz. Bununla birlikte bu bölümler kodlarınızı çağıran tarafların bilmek isteyeceği yönleri hatırlamanız amacıyla tavsiye edilen bir kontrol listesidir.
 
-## Belgelendirme Yorumlarını Test Olarak Değerlendirmek 
-Belge yorumlarınıza örnek kod blokları eklemek, kütüphanenizin nasıl kullanılacağını göstermenize yardımcı olabilir ve bunun ek bir avantajı da `cargo test` komutunu çalıştırarak dokümanlarınızdaki kod örneklerinin test edilmesi sağlanır! Hiçbir şey test edilebilecek örnekler içeren belgelerden daha iyi olamaz. Ancak, belgelendirme yapıldıktan sonra gerçekleşen kod değişiklikleri yüzünden işe yaramayan örneklerden daha kötü bir şey de yoktur. Örnek 14-1'deki `add_one` işlevi için gerçekleştirdiğimiz belgelendirmeye `cargo test` komutu uygularsak, aşağıdaki gibi bir test sonucu göreceğiz.
+#### Test Amaçlı Belgeleme Yorumları
+
+Belgeleme yorumlarınıza örnek kod blokları eklemek, kütüphanenizin nasıl kullanılacağını göstermenize yardımcı olabileceği gibi ek bir avantaj olarak `cargo test` komutu çalıştırılarak kod örneklerinizin test edilmesine olanak sağşar. Hiçbir şey test edilebilecek örnekler içeren belgelerden daha iyi olamaz. Ancak, belgeleme sonrası gerçekleşen kod değişiklikleri yüzünden işe yaramayan örneklerden daha kötü bir şey de yoktur. Örnek 14-1'deki `bir_ekle` işlevi için oluşturduğumuz belgelere `cargo test` komutu uygularsak, aşağıdakine benzer bir test sonucu göreceğiz:
 
 ```bash
-   Doc-tests my_crate
+
+   Doc-tests sandigim
 
 running 1 test
-test src/lib.rs - add_one (line 5) ... ok
+test src/lib.rs - bir_ekle (line 5) ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-````
-İşlev veya örnekteki `assert_eq!` değerini değiştirdiğimizde örnek panikler. Bu durumdayken `cargo test` komutunu yeniden  çalıştırılırsa belge testinde örnek ve kodun birbiriyle senkronize olmadığının tespit edildiğini gözlemleriz.
 
-## İçerilen Öğelerin Yorumlanması
+````
+
+Bu aşamada işlev ya da örnek değiştirilecek olursa, örnekteki `assert_eq!` ifadesi panik üreteceğinden `cargo test` komutu tekrar çalıştırıldığında, test sürecinin örnek ve kod bölümlerinin uyumsuzluğunu fark ettiğini gözlemleyeceğiz.
+
+#### İçerilen Öğelerin Yorumlanması
+
 Bir başka belgelendirme biçimi olan `//!` ise yorum satırlarının hemen altına eklenenen öğeleri belgelemek yerine, yorumun ait olduğu, yani içerildiği öğeyi belgelendirirmek için kullanılır. Genellikle bu tarz yorum etiketlerini sandık veya modülün tamamını bir bütün olarak belgelemek amacıyla kök dosyasının içinde (kural gereği src/lib.src) ya da bir modül içerisinde kullanırız. 
 
 Örneğin `add_one` işlevini içeren `my_crate` adlı sandığın amacını açıklayan belgeler eklemek istiyorsak src/lib.rs dosyasının en başına örnek 14-2' de gösterileceği gibi  `//!` işaretini belge yorumu olarak ekleyebiliriz.
@@ -73,7 +78,17 @@ Dosya: src/lib.rs
 //! `my_crate` is a collection of utilities to make performing certain
 //! calculations more convenient.
 
-/// Adds one to the number given.
+/// Adds one to the numb   Doc-tests my_crate
+58
+​
+59
+running 1 test
+60
+test src/lib.rs - add_one (line 5) ... ok
+61
+​
+62
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered outer given.
 // --snip--
 ///
 /// # Examples
