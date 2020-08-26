@@ -8,29 +8,32 @@ Rust ve Cargo, yayınlanan paketleri başka geliştiricilerin kolaylıkla bulup 
 
 Paketlerinizin doğru biçimde belgelenmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgelendirme sürecine zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğinden oluşur.
 
-Belgeledikleri öğeden hemen önce yerleştirilen ve iki yerine `///` üç eğik çizgi ile ifade edilen belgeme yorumları metni biçimlendirmek için Markdown gösterimini destekler. Örnek 14-1, `my_crate` adlı sandıkta yer alan `add_one` işlevi için belgeleme yorumlarını göstermektedir:
+Belgeledikleri öğeden hemen önce yerleştirilen ve iki yerine `///` üç eğik çizgi ile ifade edilen belgeme yorumları metni biçimlendirmek için Markdown gösterimini destekler. Örnek 14-1, `sandigim` adlı sandıkta yer alan `bir_ekle` işlevi için belgeleme yorumlarını göstermektedir:
 
 Dosya: src/lib.rs
 ```Rust
+
 /// Kendisine iletilen sayıya bir ekler
 ///
 /// # Örnekler
 ///
 /// ```
-/// let arg = 5;
-/// let answer = my_crate::add_one(arg);
+/// let deger = 5;
+/// let yanit = sandigim::bir_ekle(deger);
 ///
-/// assert_eq!(6, answer);
+/// assert_eq!("6, yanit");
 /// ```
-pub fn add_one(x: i32) -> i32 {
+
+pub fn bir_ekle(x: i32) -> i32 {
     x + 1
 }
+
 ````
 Örnek 14-1: Bir işlevin belgelenmesi
 
-Bu örnekte, `add_one` adındaki işlevin ne yaptığını anlatıp, `Örnekler` etiketli bir bölüm başlatarak `add_one` işlevinin nasıl kullanılacağını gösteren kodları ekliyoruz. Bu adımları gerçekleştirip `cargo doc` komutunu çalıştırdığımızda bu işlenecek yorum satırlarından bir HTML belgesi oluşturabiliriz. Bu komut `rustdoc` araç setini çalıştırarak oluşturulan HTML belgelerini `target/doc` dizinine yerleştirecektir.
+Örnekteki `bir_ekle` işlevinin görevini anlatıp, `Örnekler` etiketli bir bölüm başlatarak `bir_ekle` işlevinin nasıl kullanılacağını anlatan kodları ekliyoruz. Bu işlemleri tamamladıktan sonra `cargo doc` komutunu çalıştırarak bu yorum satırlarının işlenmesiyle oluşturulan bir HTML belgesine sahip oluruz. Bu komutla oluşturulan HTML belgeleri `rustdoc` araç seti çalıştırılarak `target/doc` dizinine yerleştirilecektir.
 
-Daha da iyisi `cargo doc --open` komutu hem sandığınıza ait tüm bağımlılıkların HTML belgelerini oluşturacak, hem de oluşturduğu belgeleri web tarayıcınızda açarak kullanımınıza sunacaktır. Şimdi `add_one` işlevine giderek, Resim 14-1'de gösterilen belgeleme yorumlarının metne nasıl dönüştürüldüğünü inceleyebilirsiniz:
+Biraz daha rahatlık sağlayan `cargo doc --open` komutu ise, hem sandığınıza ait tüm bağımlılıkların HTML belgelerini oluşturacak, hem de oluşturduğu belgeleri web tarayıcınızda açarak kullanımınıza sunacaktır. Şimdi `add_one` işlevine giderek, Resim 14-1'de gösterilen belgeleme yorumlarının metne nasıl dönüştürüldüğünü inceleyebilirsiniz:
 
 ![resim trpl14-01](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-01.png)
 Şekil 14-1: `add_one` işlevinin HTML belgeleri
