@@ -28,7 +28,7 @@ opt-level = 3
 
 `Opt-level` ayarı, Rust'ın kodunuza uygulayacağı 0-3 aralığındaki optimizasyon değerini kontrol eder. Henüz geliştirme aşamasındaysanız ve kodunuzu sık sık derliyorsanız, daha fazla optimizasyon uygulamak derleme süresini uzatacağından, kodunuz yavaş çalışsa bile derleme sürenizin hızlı olmasını istersiniz. O nedenle `dev` profili için `opt-level` düzeyi varsayılanı `0` olarak atanmıştır. Oysa sürüm modunda, programınızı bir kere derleyeceğiniz ve sonrasında çok kere çalıştıracağınızdan, derleme süresi için fazla zaman ayırmayı sadece kodunuzu yayınlanmaya hazır olduğunuzda tercih edeceksiniz. Yani daha hızlı çalışan kod üretimi daha fazla zaman gerektireceğinden sürüm modunda profili düzeyi düzeyi varysayılanı `3` olarak ayarlanmıştır.
 
-Varsayılan ayarların herhangi birini projenizin *Cargo.toml* dosyasına farklı bir değer ekleyerek geçersiz kılabilirsiniz. Örneğin, `dev` profilinin optimizasyon düzeyini 1 olarak ayarlamak istiyorsanız, bu iki satırı projemizin *Cargo.toml* dosyasına ekleyebilirsiniz:
+Varsayılan ayarların herhangi birini projenizin *Cargo.toml* dosyasına farklı bir değer ekleyerek geçersiz kılabilirsiniz. Örneğin, `dev` profilinin optimizasyon düzeyini 1 olarak ayarlamak istiyorsanız, projenizin *Cargo.toml* dosyasına bu iki satırı eklemeniz yeterlidir:
 
 Dosya: Cargo.toml
 
