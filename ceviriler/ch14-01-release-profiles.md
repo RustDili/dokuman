@@ -14,7 +14,7 @@ $ cargo build --release
 ````
 Yukarıdaki derleme çıktısında gösterilen `dev` ve `release` ifadeleri, derleyicinin farklı profiller kullandığını gösterir.
 
-Eğer projenizin *Cargo.toml* dosyasında `[profil.*]` bölümü yoksa Cargo geçerli olan profillerin her biri için varsayılan ayarlara sahip demektir. Özelleştirmek istediğiniz herhangi bir profili `[profil.*]` bölüm başlığının altına ekleyerek, varsayılan ayarların alt kümelerini geçersiz kılabilirsiniz. Örneğin, `dev` ve `yayın` profilleri için `opt-level` *(tercih düzeyi)* ayarları için varsayılan değerler şunlardır:
+Eğer projenizin *Cargo.toml* dosyasında `[profil.*]` bölümü yoksa Cargo geçerli olan profillerin her biri için varsayılan ayarlara sahip demektir. Özelleştirmek istediğiniz herhangi bir profili `[profil.*]` bölüm başlığının altına ekleyerek, varsayılan ayarların alt kümelerini geçersiz kılabilirsiniz. Örneğin, `dev` ve `release` profilleri için `opt-level` *(tercih düzeyi)* ayarları için varsayılan değerler şunlardır:
 
 Dosya: Cargo.toml
 
