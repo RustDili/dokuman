@@ -32,7 +32,7 @@ Bu örnekte, `add_one` adındaki işlevin ne yaptığını anlatıp, `Örnekler`
 
 Daha da iyisi `cargo doc --open` komutu hem sandığınıza ait tüm bağımlılıkların HTML belgelerini oluşturacak, hem de oluşturduğu belgeleri web tarayıcınızda açarak kullanımınıza sunacaktır. Şimdi `add_one` işlevine giderek, Resim 14-1'de gösterilen belgeleme yorumlarının metne nasıl dönüştürüldüğünü inceleyebilirsiniz:
 
-![resim trpl14-01](https://github.com/rust-lang-tr/dokuman/blob/master/ceviriler/img/trpl14-01.png)
+![resim trpl14-01](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-01.png)
 Şekil 14-1: `add_one` işlevinin HTML belgeleri
 
 ## Yaygın Olarak Kullanılan Bölümler
