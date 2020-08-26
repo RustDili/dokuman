@@ -1,14 +1,14 @@
 ## Bir Sandığı Crates.io Üzerinde Yayınlamak
 
-Önceki bölümlerde gerçekleştirdiğimiz bazı örnek projeler çalışabilmek için [crates.io](https://crates.io/)'daki bazı paketlere bağımlı olduklarından onları projelerimize dahil etmeyi öğrenmiştik. Halbuki sizler de kendi paketlerinizi yayınlayarak kodlarınızı başkalarıyla paylaşıma açabilirsiniz. [Crates.io](https://crates.io/)'daki sandık kayıt defteri, paketlerinizin kaynak kodunu dağıtacağından, öncelikle projenizin açık kaynak kodunu barındırmak zorundadır.
+Önceki bölümlerde gerçekleştirdiğimiz bazı örnek projeler, çalışabilmek için [crates.io](https://crates.io/)'daki bazı paketlere bağımlı olduklarından, bu paketleri projelerimize dahil etmeyi öğrenmiştik. Halbuki sizler de kendi paketlerinizi yayınlayarak kodlarınızı başkalarıyla paylaşıma açabilirsiniz. [Crates.io](https://crates.io/) sitesinde bulunan sandık kayıt defteri, paketlerinizin kaynak kodunu dağıtacağından, öncelikle projenizin açık kaynak kodunu barındırmak zorundadır.
 
 Rust ve Cargo, yayınlanan paketleri başka geliştiricilerin kolaylıkla bulup kullanabilmesini sağlayan özelliklere sahiptir. Az sonra bu özelliklerin bazılarından bahsedecek ve ardından bir paketin nasıl yayınlanacağını anlatacağız.
 
 ### Kullanışlı Dökümantasyon Yorumları Oluşturmak
 
-Paketlerinizi doğru bir şekilde belgelemek, diğer kullanıcıların bunları nasıl ve ne zaman kullanacaklarını bilmelerine yardımcı olacağından, belgelendirmek için zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Rust ayrıca normal yorumların yanısıra *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgesi, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, sandığınızın nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgeleme içeriğini gösterir. 
+Paketlerinizin doğru biçimde belgelemmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgelendirme sürecine zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, sandığınızın nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğini gösterir.
 
-Belgeme yorumları iki yerine `///` üç eğik çizgi kullanır ve metni biçimlendirmek için Markdown gösterimini destekler. Bu eğik çizgileri belgeledikleri öğeden hemen önce yerleştirmeniz gerekir. Örnek 14-1, `my_crate` adlı sandıkta yer alan `add_one` işlevi için belgeleme yorumlarını göstermektedir:
+Belgeledikleri öğeden hemen önce yerleştirilen ve iki yerine `///` üç eğik çizgi ile ifade edilen belgeme yorumları metni biçimlendirmek için Markdown gösterimini destekler. Örnek 14-1, `my_crate` adlı sandıkta yer alan `add_one` işlevi için belgeleme yorumlarını göstermektedir:
 
 Dosya: src/lib.rs
 ```Rust
