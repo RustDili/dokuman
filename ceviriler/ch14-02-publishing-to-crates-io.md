@@ -1,12 +1,14 @@
-# Bir Sandığı Crates.io Üzerinde Yayınlamak
+## Bir Sandığı Crates.io Üzerinde Yayınlamak
+
 Önceki bölümlerde gerçekleştirdiğimiz bazı örnek projeler çalışabilmek için [crates.io](https://crates.io/)'daki bazı paketlere bağımlı olduklarından onları projelerimize dahil etmeyi öğrenmiştik. Halbuki sizler de kendi paketlerinizi yayınlayarak kodlarınızı başkalarıyla paylaşıma açabilirsiniz. [Crates.io](https://crates.io/)'daki sandık kayıt defteri, paketlerinizin kaynak kodunu dağıtacağından, öncelikle projenizin açık kaynak kodunu barındırmak zorundadır.
 
-Rust ve Cargo, yayınlanan paketleri başkalarının da kolaylıkla bularak ve kullanabilmesini sağlayan özelliklere sahiptir. Bu özelliklerin bazılarından az sonra bahsedecekve ardından bir paketin nasıl yayınlanacağını anlatacağız.
+Rust ve Cargo, yayınlanan paketleri başka geliştiricilerin kolaylıkla bulup kullanabilmesini sağlayan özelliklere sahiptir. Az sonra bu özelliklerin bazılarından bahsedecek ve ardından bir paketin nasıl yayınlanacağını anlatacağız.
 
-## Kullanışlı Dökümantasyon Yorumları Oluşturmak
-Paketlerinizi doğru bir şekilde belgelemek, diğer kullanıcıların bunları nasıl ve ne zaman kullanacaklarını bilmelerine yardımcı olacağından belge yazmak için harcadığınız zamana değecektir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Normal yorumların yanısıra Rust ayrıca dökümantasyon yorumları olarak bilinen ve kodlar içerisind eyapılan açıklamaları HTML belgelerine çevirmeye yarayan belirli bir yorumlama şekline de sahiptir. Bu HTML belgesi, sandığınızın nasıl uygulandığını anlatmaktan ziyade, sandığınızın nasıl kullanılacağını öğrenmek isteyen programcılara yol gösteren genel API öğelerinin Dokümantasyon yorumlarını gösterir. 
+### Kullanışlı Dökümantasyon Yorumları Oluşturmak
 
-Belge yorumları iki yerine `///` üç eğik çizgi kullanır ve metni biçimlendirmek için Markdown gösterimini destekler. Doküman yorumlarını belgeledikleri öğeden hemen önce yerleştirin. Örnek 14-1, `my_crate` adlı sandıkta yer alan `add_one` işlevi için belge yorumlarını göstermektedir:
+Paketlerinizi doğru bir şekilde belgelemek, diğer kullanıcıların bunları nasıl ve ne zaman kullanacaklarını bilmelerine yardımcı olacağından, belgelendirmek için zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Rust ayrıca normal yorumların yanısıra *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgesi, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, sandığınızın nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgeleme içeriğini gösterir. 
+
+Belgeme yorumları iki yerine `///` üç eğik çizgi kullanır ve metni biçimlendirmek için Markdown gösterimini destekler. Bu eğik çizgileri belgeledikleri öğeden hemen önce yerleştirmeniz gerekir. Örnek 14-1, `my_crate` adlı sandıkta yer alan `add_one` işlevi için belgeleme yorumlarını göstermektedir:
 
 Dosya: src/lib.rs
 ```Rust
@@ -26,11 +28,11 @@ pub fn add_one(x: i32) -> i32 {
 ````
 Örnek 14-1: Bir işlevin belgelenmesi
 
-Bu örnekte, `add_one` işlevinin ne yaptığını açıklıyoruz, Örnekler başlığıyla bir bölüm başlatarak `add_one` işlevinin nasıl kullanılacağını gösteren kodları ekliyoruz. Ardından `cargo doc` komutunu çalıştırarak bu belge yorumlarından HTML belgesi oluşturabiliriz. Bu komut `rustdoc` araç setini çalıştırarak oluşturulan HTML belgelerini `target/doc` dizinine yerleştir.
+Bu örnekte, `add_one` adındaki işlevin ne yaptığını anlatıp, `Örnekler` etiketli bir bölüm başlatarak `add_one` işlevinin nasıl kullanılacağını gösteren kodları ekliyoruz. Bu adımları gerçekleştirip `cargo doc` komutunu çalıştırdığımızda bu işlenecek yorum satırlarından bir HTML belgesi oluşturabiliriz. Bu komut `rustdoc` araç setini çalıştırarak oluşturulan HTML belgelerini `target/doc` dizinine yerleştirecektir.
 
-Daha da kolayı `cargo doc --open` komutu hem mevcut sandığınız ve onun tüm bağımlılıklarının HTML belgelerini oluşturacak hem de oluşturduğu belgelerin web tarayıcınızda açılmasını sağlayacaktır. Şimdi `add_one` işlevine giderek, Örnek 14-1'de gösterilen belge yorumlarının metne nasıl dönüştürüldüğünü izleyebilirsiniz: 
+Daha da iyisi `cargo doc --open` komutu hem sandığınıza ait tüm bağımlılıkların HTML belgelerini oluşturacak, hem de oluşturduğu belgeleri web tarayıcınızda açarak kullanımınıza sunacaktır. Şimdi `add_one` işlevine giderek, Resim 14-1'de gösterilen belgeleme yorumlarının metne nasıl dönüştürüldüğünü inceleyebilirsiniz:
 
-![resim trpl14-01](https://github.com/rust-lang-tr/dokuman/blob/master/ceviriler/trpl14-01.png)
+![resim trpl14-01](https://github.com/rust-lang-tr/dokuman/blob/master/ceviriler/img/trpl14-01.png)
 Şekil 14-1: `add_one` işlevinin HTML belgeleri
 
 ## Yaygın Olarak Kullanılan Bölümler
