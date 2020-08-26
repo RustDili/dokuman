@@ -38,13 +38,15 @@ Biraz daha rahatlık sağlayan `cargo doc --open` komutu ise, hem sandığınız
 ![resim trpl14-01](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-01.png)
 Şekil 14-1: `add_one` işlevinin HTML belgeleri
 
-## Yaygın Olarak Kullanılan Bölümler
-HTML belgesinde “Örnekler” şeklinde bir bölüm başlığı oluşturabilmek için Örnek 14-1'de `# Örnek` şeklinde işaretleme kullandık. Aşağıda ise, pek çok sandık yazarının belgelerinde yaygın olarak kullandıkları bazı bölümler verilmiştir:
-  * **Panikler:** Belgelenen işlevin panik yapabileceği senaryolar. İşlevin çağrıldığı programlarda panik oluşması istenmiyorsa, kullanıcıların işlevi çağırmadıklarından emin olunmalıdır. 
-  * **Hatalar** İşlev bir `Result` döndürürse, oluşabilecek hataların türleri ve bu hataların döndürülmesine neden olabilecek koşulların tanımlanması, işlevi çağıran tarafların farklı türdeki hataları farklı şekillerde işlemek için kod yazabilmeleri için yardımcı olabilir.
-  * **Güvenlik** İşlevin çağrılması güvenli değilse (Bölüm 19'da güvensizliği tartışacağız), işlevin neden güvensiz olduğunu açıklayan ve işlevi çağıran tarafların desteklemesini beklediği sabitleri kapsayan bir bölüm olmalıdır.
+#### Yaygın Olarak Kullanılan Bölümler
 
-Çoğu belgelendirme çalışmasında bu bölümlerin her birinin yorumlanmasına ihtiyaç duyulmaz, bununla birlikte bu bölümler size kodlarınızı çağıran tarafların bilmek isteyeceği yönlerini hatırlatmak için tavsiye edilen bir kontrol listesidir.
+HTML belgesinde `# Örnekler` başlıklı bir bölüm oluşturabilmek için Örnek 14-1'de `# Örnek` şeklinde bir Markdown başlığı sözdizimi kullandık. Pek çok sandık yazarının belgelerinde yaygın olarak kullandığı bazı bölümler ise aşağıda sıralanmaktadır:
+ 
+* **Panikler:** Belgelenen işlevin panik üretebileceği senaryolar. İşlevin çağrıldığı programlarda panik üretmesi istenmiyorsa, kullanıcıların bu senaryoların gerçekleşebileceği durumlarda işlevi çağırmadıklarından emin olunmalıdır. 
+* **Hatalar:** İşlev bir `Result` türü döndürdüğünde, oluşması muhtemel hata çeşitlerinin ve bu hataların döndürülme neden ve koşullarının tanımlanması, işlevi çağıran tarafların farklı türden hataları farklı şekillerde işlemelerini sağlayacak şekilde kod üretmelerine yardımcı olabilir.
+* **Güvenlik:** Eğer işlev çağrısı `unsafe` yani emniyetsiz bir çağrı ise (Rust'ın emniyetsiz kullanım seçeneğini Bölüm 19'da tartışacağız), işlevin güvensiz olma nedenlerini açıklayan ve çağıran tarafların desteklemesi gereken değişmezleri kapsayan bir bölüm olmalıdır.
+
+Çoğu belgelendirme çalışmasında bu bölümlerin her birinin yorumlanmasına ihtiyaç duyulmaz. Bununla birlikte bu bölümler kodlarınızı çağıran tarafların bilmek isteyeceği yönleri hatırlamanız amacıyla tavsiye edilen bir kontrol listesidir.
 
 ## Belgelendirme Yorumlarını Test Olarak Değerlendirmek 
 Belge yorumlarınıza örnek kod blokları eklemek, kütüphanenizin nasıl kullanılacağını göstermenize yardımcı olabilir ve bunun ek bir avantajı da `cargo test` komutunu çalıştırarak dokümanlarınızdaki kod örneklerinin test edilmesi sağlanır! Hiçbir şey test edilebilecek örnekler içeren belgelerden daha iyi olamaz. Ancak, belgelendirme yapıldıktan sonra gerçekleşen kod değişiklikleri yüzünden işe yaramayan örneklerden daha kötü bir şey de yoktur. Örnek 14-1'deki `add_one` işlevi için gerçekleştirdiğimiz belgelendirmeye `cargo test` komutu uygularsak, aşağıdaki gibi bir test sonucu göreceğiz.
