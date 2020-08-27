@@ -2,11 +2,11 @@
 
 Önceki bölümlerde gerçekleştirdiğimiz bazı örnek projeler, çalışabilmek için [crates.io](https://crates.io/)'daki bazı paketlere bağımlı olduklarından, bu paketleri projelerimize dahil etmeyi öğrenmiştik. Halbuki sizler de kendi paketlerinizi yayınlayarak kodlarınızı başkalarıyla paylaşabilirsiniz. [Crates.io](https://crates.io/) sitesinde bulunan sandık kayıt defteri, paketlerinizin kaynak kodunu dağıtacağından, öncelikle projenizin açık kaynak kodunu barındırmak zorundadır.
 
-Rust ve Cargo, yayınlanan paketleri başka geliştiricilerin kolaylıkla bulup kullanabilmesini sağlayan özelliklere sahiptir. Az sonra bu özelliklerin bazılarından bahsedecek ve ardından bir paketin nasıl yayınlanacağını anlatacağız.
+Rust ve Cargo, yayınlanan paketleri başka geliştiricilerin kolaylıkla bulup kullanabilmelerini sağlayan özelliklere sahiptir. Az sonra bu özelliklerin bazılarından bahsedecek ve ardından bir paketin nasıl yayınlanacağını anlatacağız.
 
 ### Kullanışlı Belgeleme Yorumları Oluşturmak
 
-Paketlerinizin doğru biçimde belgelenmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgeleme sürecine zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğinden oluşur.
+Paketlerinizin doğru biçimde belgelenmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgeleme sürecine zaman ayırmak önemlidir. Bölüm 3'te, Rust kodlarını iki eğik çizgi `//` kullanarak nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğinden oluşur.
 
 Belgeledikleri öğeden hemen önce yerleştirilen ve iki yerine `///` üç eğik çizgi ile ifade edilen belgeleme yorumları, metni biçimlendirmek için Markdown gösterimini destekler. Örnek 14-1, `sandigim` adlı sandıkta yer alan `bir_ekle` işlevi için belgeleme yorumlarını göstermektedir:
 
@@ -51,7 +51,6 @@ HTML belgesinde `# Örnekler` başlıklı bir bölüm oluşturabilmek için Örn
 #### Test Amaçlı Belgeleme Yorumları
 
 Belgeleme yorumlarınıza örnek kod blokları eklemek, kütüphanenizin nasıl kullanılacağını göstermenize yardımcı olabileceği gibi ek bir avantaj olarak `cargo test` komutu çalıştırıldığında kod örneklerinizin test edilmesine olanak sağlar. Hiçbir şey test edilebilecek örnekler içeren belgelerden daha iyi olamaz. Ancak, belgeleme sonrası gerçekleşen kod değişiklikleri yüzünden işe yaramayan örneklerden daha kötü bir şey de yoktur. Örnek 14-1'deki `bir_ekle` işlevi için oluşturduğumuz belgeleme koduna `cargo test` komutunu uyguladığımızda, aşağıdakine benzer bir test sonucu göreceğiz:
-<!-- Kontrol edilen bölüm-->
 
 ```bash
 
@@ -70,7 +69,7 @@ Bu aşamada işlev ya da örnek değiştirilecek olursa, örnekteki `assert_eq!`
 
 Bir başka belgeleme biçimi olan `//!` ise, yorum satırlarının hemen altına eklenenen öğeleri belgelemek yerine, yorumun ait olduğu, yani içerildiği öğeyi belgelemek için kullanılır. Bu tarz yorum satırlarını genellikle sandık veya modülün tamamını bir bütün olarak belgelemek amacıyla, kök dosyasının içinde (kural gereği src/lib.src) ya da bir modül içerisinde kullanırız. 
 
-Örnek 14-2'de gösterildiği gibi, eğer daha önce oluşturduğumuz ve `bir_ekle` işlevini içeren `sandigim` için, bu sandığın amacını açıklayan belgeler eklemek istiyorsak, *src/lib.rs* dosyasının en başına `//!` işaretini belge yorumu olarak eklememiz gerekir.
+Örnek 14-2'de gösterildiği gibi, eğer daha önce oluşturduğumuz ve `bir_ekle` işlevini içeren `sandigim` için, bu sandığın amacını açıklayan belgeler eklemek istiyorsak, bunları *src/lib.rs* dosyasının en başına `//!` işaretini kullanarak eklememiz gerekir.
 
 Dosya: src/lib.rs
 ```Rust
@@ -87,24 +86,24 @@ Dosya: src/lib.rs
 
 Örnek 14-2: Bir bütün olarak `Sandigim` belgeleri
 
-`//!` işaretiyle başlayan son satırın altında herhangi bir kod satırının bulunmadığına ve bir satırın boş bırakılmış olduğuna dikkat edin! Bunun sebebi, yorumları `///` yerine `//!` işaretiyle başlattığımızdan sonraki satırlarda bulunan öğeler yerine işaretin bulunduğu satırdaki öğelerin belgelenecek olmasıdır. Bu durumda bu yorumu içeren öğe, sandık kökümüz olan *src/lib.rs* dosyası olacağından bu yorumlar da sandığın tamamı için yapılan açıklamaları içerecektir.
+`//!` işaretiyle başlayan son satırın altında herhangi bir kod satırının bulunmadığına ve bir satırın boş bırakılmış olduğuna dikkat edin! Bunun sebebi, içerilen belge yorumlarını `///` yerine, `//!` işaretiyle başlattığımızdan sonraki satırlarda bulunan öğeler yerine, işaretin bulunduğu satırdaki öğelerin belgelenecek olmasıdır. Bu durumda bu yorumu içeren öğe, sandık kökümüz olan *src/lib.rs* dosyası olacağından, bu yorumlar da sandığın tamamı için yapılan açıklamaları içerecektir.
 
-Eğer `cargo doc --open` komutunu çalıştırdığımızda işaretlediğimiz bu yorum satırları Şekil 14-2'de gösterildiği gibi `sandigim` belgesinin ön sayfasında, sandıktaki genel öğeler listesinin üstünde görüntülenecektir: 
+Eğer `cargo doc --open` komutunu çalıştırırsak, işaretlemiş olduğumuz bu yorum satırları, tıpkı Şekil 14-2'de gösterildiği gibi `sandigim` belgesinin ön sayfasında, sandıktaki genel öğeler listesinin üstünde görüntülenecektir:
 
 ![resim trpl14-02](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-02.png)
 Resim 14-2: `Sandigim`'ın tamamını içeren yorumlarla oluşturulmuş HTML belgeleri
 
-Öğelerdeki belge yorumları, özellikle sandık ve modülleri tanımlamak için kullanışlıdır. Bu yorumları, paketlerinizi kullanacak olan kişilerin paket düzenini anlamalarına yardımcı olmak ve paket kapsamının genel amacını açıklamak için kullanmanız önemlidir.
+Öğelerdeki belge yorumları, özellikle sandık ve modülleri tanımlamak için kullanışlıdır. Bu yorumları, paketlerinizi kullanacak olan kişilerin paket düzeninizi anlamalarına yardımcı olmak ve paket kapsamının genel amacını açıklamak için kullanmanız önemlidir.
 
 ### Uygun Bir Genel API'yi `pub use` ile Dışa Aktarmak
 
-Bölüm 7'de, `mod` anahtar kelimesini kullanarak kodumuzu modüller halinde nasıl düzenleyeceğinizi, `pub` anahtar sözcüğüyle öğelerin nasıl genelleştirileceğini ve `use` anahtar kelimesiyle de öğelerin kapsama nasıl dahil edileceğini ele almıştık. Ancak, bir sandığın geliştirilme sürecinde sizin için anlamlı olan organizasyon yapısı, kullanıcılarınız için çok uygun olmayabilir. Sandığınızı çok katmanlı ve hiyerarşik bir yapıda düzenlediğinizde, bu hiyerarşinin alt katmanlarında tanımlanmış bir türü kullanmak isteyen kişiler, bu türe erişmekte sorun yaşayabilirler. Ayrıca bu türe `use sandigim::KullanisliBirTur;` şeklinde bir söz dizimiyle ulaşmak yerine,  `sandigim::bir_modul::baska_bir_modul::KullanisliBirTur;` şeklinde bir söz dizimiyle ulaşmak oldukça rahatsız edici olabilir. 
+Bölüm 7'de kodlarımız, `mod` anahtar kelimesini kullanarak modüller halinde nasıl düzenleyeceğinizi, `pub` anahtar sözcüğüyle öğelerin nasıl genelleştirileceğini ve `use` anahtar kelimesiyle de öğelerin kapsama nasıl dahil edileceğini incelemiştik. Ancak, bir sandığın geliştirilme sürecinde sizin için anlamlı olan organizasyon yapısı, kullanıcılarınız için çok uygun olmayabilir. Sandığınızı çok katmanlı ve hiyerarşik bir yapıda düzenlediğinizde, bu hiyerarşinin alt katmanlarında tanımlanmış bir türü kullanmak isteyen kişiler, bu türe erişmekte sorun yaşayabilirler. Hem ayrıca bir türe `use sandigim::KullanisliBirTur;` şeklinde bir söz dizimiyle ulaşmak yerine,  `sandigim::bir_modul::baska_bir_modul::KullanisliBirTur;` şeklinde bir söz dizimiyle ulaşmak oldukça rahatsız edici olabilir.
 
 Bir sandık yayınlarken herkese açık olarak tasarlanmış olan API'nizin yapısı oldukça önemlidir. Sandığınızı kullanan kişiler bu yapıya sizin kadar aşina olmadıklarından, sandığınız büyüyüp karmaşık bir *modüller hiyerarşisine* dönüştüğünde, kullanmak istedikleri API parçalarına ulaşmakta zorluk çekebilirler. 
 
-İyi haber şu ki, eğer organizasyon yapınız başkaları tarafından farklı kütüphaneler ile kullanılamayacak gibiyse, API Hiyararşisini veya tasarımını baştan başa yeniden düzenlemek yerine, `pub use` anahtar kelimesini kullanarak, bu yapının genel kullanıma uygun bir sürümünü tüm öğeleriyle birlikte yeniden ihraç edebilirsiniz. Yeniden ihraç işleminde, bir konumda bulunan genel bir öğe yerinden alınarak, başka bir yerde sanki başka bir konumda tanımlanmış gibi herkese açık hale getirilir.  
+İyi haber şu ki, eğer organizasyon yapınız başkaları tarafından farklı kütüphaneler ile kullanılamayacak gibiyse, API hiyerarşisini veya tasarımını baştan sona yeniden düzenlemek yerine, `pub use` anahtar kelimesini kullanarak, bu yapının genel kullanıma uygun bir sürümünü tüm öğeleriyle birlikte yeniden ihraç edebilirsiniz. Yeniden ihraç işleminde, bir konumda bulunan genel bir öğe yerinden alınarak, sanki başka bir yerde ve başka bir konumda tanımlanmış gibi herkese açık hale getirilir.  
 
-Örneğin, sanatsal kavramları modellemek için `sanat` adında bir kütüphane tasarladığımızı varsayalım. Örnek 14-3'te de görüleceği gibi, bu kütüphanenin içinde `BirincilRenk` ve `IkıncılRenk` olarak isimlendirilmiş iki sıralamadan *(enum)* oluşan `turler` modülü ve `karisim` adında bir işlev içeren `araclar` modülü bulunmaktadır:
+ Örnek 14-3'te de görüleceği gibi, sanatsal kavramları modellemek için `sanat` adında bir kütüphane tasarladığımızı varsayalım. Ve bu kütüphanenin içinde `BirincilRenk` ve `IkincilRenk` olarak isimlendirilmiş iki sıralamadan *(enum)* oluşan `turler` modülü ve `karisim` adında bir işlev içeren `araclar` modülü bulunsun:
 
 Dosya: src/lib.rs
 ```Rust
@@ -145,9 +144,9 @@ Resim 14-3, Bu sandık için`cargo doc` tarafından üretilen belgenin ön yüz�
 ![resim trpl14-03](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-03.png)
 Resim 14-3: `turler` ve `araclar` modüllerini örnekleyen `sanat` sandığının ön yüzü
 
-Belgenin ön sayfasında `BirincilRenk` ve `IkincilRenk` türleri ve `karisim` işlevinin listelenmediğine dikkat edin. Onların görüntülenebilmesi için `turler` ve `araclar` bağlantılarının açılması gerekir. 
+Belgenin ön sayfasında `BirincilRenk` ve `IkincilRenk` türleriyle `karisim` işlevinin listelenmediğine dikkat edin. Onların görüntülenebilmesi için `turler` ve `araclar` bağlantılarının açılması gerekir.
 
-Bu kütüphaneye bağımlı başka bir sandık, halihazırda tanımlanmış olan `sanat` modül yapısına ait öğeleri kendi kapsamına alabilmek için `use` ifadesini kullanmak zorundadır. Örnek 14-4, `sanat` sandığındaki `BirincilRenk` ve `karisim` öğelerini kullanan başka bir sandık örneğini gösternektedir:
+Bu kütüphaneye bağımlı olan başka bir sandığın, halihazırda tanımlanmış olan `sanat` modül yapısına ait öğeleri kendi kapsamına alabilmesi için `use` ifadesini kullanması gerekir. Örnek 14-4, `sanat` sandığındaki `BirincilRenk` ve `karisim` öğelerini kullanan başka bir sandık örneğini göstermektedir:
 
 <!-- Kaldım-->
 
