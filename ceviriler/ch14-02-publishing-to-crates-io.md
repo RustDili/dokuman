@@ -67,50 +67,31 @@ Bu aşamada işlev ya da örnek değiştirilecek olursa, örnekteki `assert_eq!`
 
 #### İçerilen Öğelerin Yorumlanması
 
-Bir başka belgelendirme biçimi olan `//!` ise yorum satırlarının hemen altına eklenenen öğeleri belgelemek yerine, yorumun ait olduğu, yani içerildiği öğeyi belgelendirirmek için kullanılır. Genellikle bu tarz yorum etiketlerini sandık veya modülün tamamını bir bütün olarak belgelemek amacıyla kök dosyasının içinde (kural gereği src/lib.src) ya da bir modül içerisinde kullanırız. 
+Bir başka belgeleme biçimi olan `//!` ise, yorum satırlarının hemen altına eklenenen öğeleri belgelemek yerine, yorumun ait olduğu, yani içerildiği öğeyi belgelemek için kullanılır. Bu tarz yorum satırlarını genellikle sandık veya modülün tamamını bir bütün olarak belgelemek amacıyla, kök dosyasının içinde (kural gereği src/lib.src) ya da bir modül içerisinde kullanırız. 
 
-Örneğin `add_one` işlevini içeren `my_crate` adlı sandığın amacını açıklayan belgeler eklemek istiyorsak src/lib.rs dosyasının en başına örnek 14-2' de gösterileceği gibi  `//!` işaretini belge yorumu olarak ekleyebiliriz.
+Örnek 14-2'de gösterildiği gibi, eğer daha önce oluşturduğumuz ve `bir_ekle` işlevini içeren `sandigim` için, bu sandığın amacını açıklayan belgeler eklemek istiyorsak, *src/lib.rs* dosyasının en başına `//!` işaretini belge yorumu olarak eklememiz gerekir.
 
 Dosya: src/lib.rs
 ```Rust
-//! # My Crate
+
+//! # Sandigim
 //!
-//! `my_crate` is a collection of utilities to make performing certain
-//! calculations more convenient.
+//! `Sandigim`, bazı hesaplamaların daha kolay yapılmasını
+//! sağlayan araçlar koleksiyonudur.
 
-/// Adds one to the numb   Doc-tests my_crate
-58
-​
-59
-running 1 test
-60
-test src/lib.rs - add_one (line 5) ... ok
-61
-​
-62
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered outer given.
+/// Kendisine iletilen rakama 1 ekler
 // --snip--
-///
-/// # Examples
-///
-/// ```
-/// let arg = 5;
-/// let answer = my_crate::add_one(arg);
-///
-/// assert_eq!(6, answer);
-/// ```
-pub fn add_one(x: i32) -> i32 {
-    x + 1
-}
+
 ````
-Örnek 14-2: Bir bütün olarak `my_crate` sandığı belgeleri
 
-Dikkat ederseniz `//!` işaretiyle başlayan son satırdan sonra herhangi bir kod bulunmuyor. Bunun nedeni yorum satırını `///` yerine `//!` işaretiyle başlattığımız için satırın bitiminden sonra gelen satırlardaki öğeler yerine işaretin bulunduğu satırdaki öğeyi belgelenecek olmasıdır. O nedenle, bu yorumu içeren öğe, sandık kökü olan src/lib.rs dosyası olacağından bu yorum satırları tüm sandık için yapılan açıklamaları içerir. 
+Örnek 14-2: Bir bütün olarak `Sandigim` belgeleri
 
-Artık `cargo doc --open` komutu çalıştırıldığında işaretlenmiş bu satırlar aşağıda yer alan Şekil 14-2'de gösterildiği gibi `my_crate` belgesinin ön sayfasında, sandıktaki genel öğeler listesinin üstünde görüntülenir: 
+`//!` işaretiyle başlayan son satırın altında herhangi bir kod satırının bulunmadığına ve bir satırın boş bırakılmış olduğuna dikkat edin! Bunun sebebi, yorumları `///` yerine `//!` işaretiyle başlattığımızdan sonraki satırlarda bulunan öğeler yerine işaretin bulunduğu satırdaki öğelerin belgelenecek olmasıdır. Bu durumda bu yorumu içeren öğe, sandık kökümüz olan *src/lib.rs* dosyası olacağından bu yorumlar da sandığın tamamı için yapılan açıklamaları içerecektir.
 
-![Şekil 14-2](https://doc.rust-lang.org/book/img/trpl14-02.png)
-Şekil 14-2: Yorumlar dahil olmak üzere `my_crate` sandığını bir bütün olarak tanımlayan belgeler
+Eğer `cargo doc --open` komutunu çalıştırdığımızda işaretlediğimiz bu yorum satırları Şekil 14-2'de gösterildiği gibi `sandigim` belgesinin ön sayfasında, sandıktaki genel öğeler listesinin üstünde görüntülenecektir: 
+
+![resim trpl14-02](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-02.png)
+Şekil 14-2: `Sandigim`'ın tamamını içeren yorumlarla oluşturulmuş HTML belgeleri
 
 Öğeler içindeki belge yorumları, özellikle sandık ve modülleri tanımlamak için kullanışlıdır. Bu yorumları, paketlerinizi kullanacak olan kişilerin paket düzenini anlamalarına yardımcı olmak ve paket kapsamının genel amacını açıklamak için kullanın.
 
