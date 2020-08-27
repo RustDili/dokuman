@@ -50,7 +50,8 @@ HTML belgesinde `# Örnekler` başlıklı bir bölüm oluşturabilmek için Örn
 
 #### Test Amaçlı Belgeleme Yorumları
 
-Belgeleme yorumlarınıza örnek kod blokları eklemek, kütüphanenizin nasıl kullanılacağını göstermenize yardımcı olabileceği gibi ek bir avantaj olarak `cargo test` komutu çalıştırılarak kod örneklerinizin test edilmesine olanak sağşar. Hiçbir şey test edilebilecek örnekler içeren belgelerden daha iyi olamaz. Ancak, belgeleme sonrası gerçekleşen kod değişiklikleri yüzünden işe yaramayan örneklerden daha kötü bir şey de yoktur. Örnek 14-1'deki `bir_ekle` işlevi için oluşturduğumuz belgelere `cargo test` komutu uygularsak, aşağıdakine benzer bir test sonucu göreceğiz:
+Belgeleme yorumlarınıza örnek kod blokları eklemek, kütüphanenizin nasıl kullanılacağını göstermenize yardımcı olabileceği gibi ek bir avantaj olarak `cargo test` komutu çalıştırıldığında kod örneklerinizin test edilmesine olanak sağlar. Hiçbir şey test edilebilecek örnekler içeren belgelerden daha iyi olamaz. Ancak, belgeleme sonrası gerçekleşen kod değişiklikleri yüzünden işe yaramayan örneklerden daha kötü bir şey de yoktur. Örnek 14-1'deki `bir_ekle` işlevi için oluşturduğumuz belgeleme koduna `cargo test` komutunu uyguladığımızda, aşağıdakine benzer bir test sonucu göreceğiz:
+<!-- Kontrol edilen bölüm-->
 
 ```bash
 
