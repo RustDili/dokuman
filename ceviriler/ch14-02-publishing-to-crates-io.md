@@ -4,11 +4,11 @@
 
 Rust ve Cargo, yayınlanan paketleri başka geliştiricilerin kolaylıkla bulup kullanabilmesini sağlayan özelliklere sahiptir. Az sonra bu özelliklerin bazılarından bahsedecek ve ardından bir paketin nasıl yayınlanacağını anlatacağız.
 
-### Kullanışlı Dökümantasyon Yorumları Oluşturmak
+### Kullanışlı Belgeleme Yorumları Oluşturmak
 
-Paketlerinizin doğru biçimde belgelenmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgelendirme sürecine zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğinden oluşur.
+Paketlerinizin doğru biçimde belgelenmesi, bu paketlerin başka kullanıcılar tarafından nasıl ve ne zaman kullanılabileceğine ışık tutacağından, belgeleme sürecine zaman ayırmak önemlidir. Bölüm 3'te iki eğik çizgi `//` kullanarak Rust kodlarını nasıl yorumlayacağımızı tartışmıştık. Bu normal yorumların yanısıra Rust, *belgeleme yorumları* olarak bilinen ve kod içinde yapılan açıklamaları, HTML belgelerine çevirmeye yarayan özel bir yorumlama biçimine sahiptir. Bu HTML belgeleri, sandığınızın nasıl *uygulandığını* anlatmaktan ziyade, nasıl *kullanılacağını* öğrenmek isteyen programcılara yol gösteren genel API öğelerinin belgelenmiş içeriğinden oluşur.
 
-Belgeledikleri öğeden hemen önce yerleştirilen ve iki yerine `///` üç eğik çizgi ile ifade edilen belgeme yorumları metni biçimlendirmek için Markdown gösterimini destekler. Örnek 14-1, `sandigim` adlı sandıkta yer alan `bir_ekle` işlevi için belgeleme yorumlarını göstermektedir:
+Belgeledikleri öğeden hemen önce yerleştirilen ve iki yerine `///` üç eğik çizgi ile ifade edilen belgeleme yorumları, metni biçimlendirmek için Markdown gösterimini destekler. Örnek 14-1, `sandigim` adlı sandıkta yer alan `bir_ekle` işlevi için belgeleme yorumlarını göstermektedir:
 
 Dosya: src/lib.rs
 ```Rust
@@ -31,12 +31,12 @@ pub fn bir_ekle(x: i32) -> i32 {
 ````
 Örnek 14-1: Bir işlevin belgelenmesi
 
-Örnekteki `bir_ekle` işlevinin görevini anlatıp, `Örnekler` etiketli bir bölüm başlatarak `bir_ekle` işlevinin nasıl kullanılacağını anlatan kodları ekliyoruz. Bu işlemleri tamamladıktan sonra `cargo doc` komutunu çalıştırarak bu yorum satırlarının işlenmesiyle oluşturulan bir HTML belgesine sahip oluruz. Bu komutla oluşturulan HTML belgeleri `rustdoc` araç seti çalıştırılarak `target/doc` dizinine yerleştirilecektir.
+Örnekteki `bir_ekle` işlevinin görevini anlatıp, `Örnekler` etiketli bir bölüm başlatarak `bir_ekle` işlevinin nasıl kullanılacağını gösteren kodlarla başlıyoruz. Bu işlemleri tamamladıktan sonra `cargo doc` komutunu çalıştırarak bu yorum satırlarının işlenmesiyle oluşturulan bir HTML belgesine sahip oluruz. Bu komutla oluşturulan HTML belgeleri `rustdoc` araç seti çalıştırılarak `target/doc` dizinine yerleştirilecektir.
 
-Biraz daha rahatlık sağlayan `cargo doc --open` komutu ise, hem sandığınıza ait tüm bağımlılıkların HTML belgelerini oluşturacak, hem de oluşturduğu belgeleri web tarayıcınızda açarak kullanımınıza sunacaktır. Şimdi `add_one` işlevine giderek, Resim 14-1'de gösterilen belgeleme yorumlarının metne nasıl dönüştürüldüğünü inceleyebilirsiniz:
+Biraz daha rahatlık sağlayan `cargo doc --open` komutu ise, hem sandığınıza ait tüm bağımlılıkların HTML belgelerini oluşturacak, hem de oluşturduğu belgeleri web tarayıcınızda açarak kullanımınıza sunacaktır. Şimdi `bir_ekle` işlevine giderek, Resim 14-1'de gösterilen belgeleme yorumlarının metne nasıl dönüştürüldüğünü inceleyebilirsiniz:
 
 ![resim trpl14-01](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-01.png)
-Resim 14-1: `add_one` işlevinin HTML belgeleri
+Resim 14-1: `bir_ekle` işlevinin HTML belgeleri
 
 #### Yaygın Olarak Kullanılan Bölümler
 
