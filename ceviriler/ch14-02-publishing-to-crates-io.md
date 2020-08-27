@@ -36,7 +36,7 @@ pub fn bir_ekle(x: i32) -> i32 {
 Biraz daha rahatlık sağlayan `cargo doc --open` komutu ise, hem sandığınıza ait tüm bağımlılıkların HTML belgelerini oluşturacak, hem de oluşturduğu belgeleri web tarayıcınızda açarak kullanımınıza sunacaktır. Şimdi `add_one` işlevine giderek, Resim 14-1'de gösterilen belgeleme yorumlarının metne nasıl dönüştürüldüğünü inceleyebilirsiniz:
 
 ![resim trpl14-01](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-01.png)
-Şekil 14-1: `add_one` işlevinin HTML belgeleri
+Resim 14-1: `add_one` işlevinin HTML belgeleri
 
 #### Yaygın Olarak Kullanılan Bölümler
 
@@ -91,54 +91,64 @@ Dosya: src/lib.rs
 Eğer `cargo doc --open` komutunu çalıştırdığımızda işaretlediğimiz bu yorum satırları Şekil 14-2'de gösterildiği gibi `sandigim` belgesinin ön sayfasında, sandıktaki genel öğeler listesinin üstünde görüntülenecektir: 
 
 ![resim trpl14-02](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-02.png)
-Şekil 14-2: `Sandigim`'ın tamamını içeren yorumlarla oluşturulmuş HTML belgeleri
+Resim 14-2: `Sandigim`'ın tamamını içeren yorumlarla oluşturulmuş HTML belgeleri
 
-Öğeler içindeki belge yorumları, özellikle sandık ve modülleri tanımlamak için kullanışlıdır. Bu yorumları, paketlerinizi kullanacak olan kişilerin paket düzenini anlamalarına yardımcı olmak ve paket kapsamının genel amacını açıklamak için kullanın.
+Öğelerdeki belge yorumları, özellikle sandık ve modülleri tanımlamak için kullanışlıdır. Bu yorumları, paketlerinizi kullanacak olan kişilerin paket düzenini anlamalarına yardımcı olmak ve paket kapsamının genel amacını açıklamak için kullanmanız önemlidir.
 
-## [pub use](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#exporting-a-convenient-public-api-with-pub-use) Ön Ekiyle Bir API'yi Genel Kullanıma Uyarlamak
-Bölüm 7'de, `mod` anahtar kelimesini kullanarak kodumuzu modüller halinde nasıl düzenleyeceğinizi, `pub` anahtar sözcüğüyle öğelerin nasıl genelleştirileceğini ve `use` anahtar kelimesiyle de öğelerin kapsama nasıl dahil edileceğini ele almıştık. Ancak, bir sandık geliştirirken sizin için anlamlı olan yapı, kullanıcılarınız için çok uygun olmayabilir. Yapılarınızı çok katmanlı hiyerarşik bir yapıda düzenlemek isteyebilirsiniz, ancak daha sonra bu hiyerarşinin derinlerinde tanımlamış bulunduğunuz herhangi bir türü kullanmak isteyen kişiler, bu türe erişmekte sorun yaşayabilirler. Ayrıca bu türe `use my_crate::UsefulType;` şeklinde bir söz dizimiyle ulaşmak yerine `my_crate::some_module::another_module::UsefulType;` şeklinde bir söz dizimi kullanmak oldukça rahatsız edici olabilir. 
+### Uygun Bir Genel API'yi `pub use` ile Dışa Aktarmak
 
-Bir sandık yayınlarken herkese açık olarak tasarlanmış olan API'nizin yapısı oldukça önemlidir. Sandığınızı kullanan kişiler bu yapıya sizin kadar aşina olmadıklarından, sandığınız büyüyüp karmaşık bir modül hiyerarşisine dönüştüğünde, kullanmak istedikleri API parçalarına ulaşmakta zorluk çekebilirler. İyi haber şu ki, eğer yapınız başkalarının kütüphanelerinde kullanılmaya uygun değilse, API Hiyararşisini ve belki tasarımını baştan başa yeniden düzenlemek yerine, `pub use` anahtar kelimelerini kullanarak, tüm öeğeleriyle bu yapının genel kullanıma uygun bir sürümünü yeniden ihraç edebilirsiniz. Yeniden ihraç herkese açık bir öğeyi bir konumda alır ve başka bir yerde, başka bir konumda tanımlanmış gibi herkese açık hale getirir.
+Bölüm 7'de, `mod` anahtar kelimesini kullanarak kodumuzu modüller halinde nasıl düzenleyeceğinizi, `pub` anahtar sözcüğüyle öğelerin nasıl genelleştirileceğini ve `use` anahtar kelimesiyle de öğelerin kapsama nasıl dahil edileceğini ele almıştık. Ancak, bir sandığın geliştirilme sürecinde sizin için anlamlı olan organizasyon yapısı, kullanıcılarınız için çok uygun olmayabilir. Sandığınızı çok katmanlı ve hiyerarşik bir yapıda düzenlediğinizde, bu hiyerarşinin alt katmanlarında tanımlanmış bir türü kullanmak isteyen kişiler, bu türe erişmekte sorun yaşayabilirler. Ayrıca bu türe `use sandigim::KullanisliBirTur;` şeklinde bir söz dizimiyle ulaşmak yerine,  `sandigim::bir_modul::baska_bir_modul::KullanisliBirTur;` şeklinde bir söz dizimiyle ulaşmak oldukça rahatsız edici olabilir. 
 
-Örneğin, sanatsal kavramları modellemek için `art` adında bir kütüphane tasarladığımızı varsayalım. Örnek 14-3'te de görüleceği gibi; bu kütüphanenin içinde `PrimaryColor` ve `SecondaryColor` adında iki enum içeren bir `kinds` modülü ve `mix` adındaki işlevi içeren `utils` modülü bulunmaktadır:
+Bir sandık yayınlarken herkese açık olarak tasarlanmış olan API'nizin yapısı oldukça önemlidir. Sandığınızı kullanan kişiler bu yapıya sizin kadar aşina olmadıklarından, sandığınız büyüyüp karmaşık bir *modüller hiyerarşisine* dönüştüğünde, kullanmak istedikleri API parçalarına ulaşmakta zorluk çekebilirler. 
+
+İyi haber şu ki, eğer organizasyon yapınız başkaları tarafından farklı kütüphaneler ile kullanılamayacak gibiyse, API Hiyararşisini veya tasarımını baştan başa yeniden düzenlemek yerine, `pub use` anahtar kelimesini kullanarak, bu yapının genel kullanıma uygun bir sürümünü tüm öğeleriyle birlikte yeniden ihraç edebilirsiniz. Yeniden ihraç işleminde, bir konumda bulunan genel bir öğe yerinden alınarak, başka bir yerde sanki başka bir konumda tanımlanmış gibi herkese açık hale getirilir.  
+
+Örneğin, sanatsal kavramları modellemek için `sanat` adında bir kütüphane tasarladığımızı varsayalım. Örnek 14-3'te de görüleceği gibi, bu kütüphanenin içinde `BirincilRenk` ve `IkıncılRenk` olarak isimlendirilmiş iki sıralamadan *(enum)* oluşan `turler` modülü ve `karisim` adında bir işlev içeren `araclar` modülü bulunmaktadır:
 
 Dosya: src/lib.rs
 ```Rust
-//! # Art
+//! # Sanat
 //!
-//! A library for modeling artistic concepts.
+//! Sanatsal kavramları modellemek için bir kütüphane.
 
-pub mod kinds {
-    /// The primary colors according to the RYB color model.
-    pub enum PrimaryColor {
-        Red,
-        Yellow,
-        Blue,
+pub mod turler {
+    /// RYB renk modeline göre ana renkler.
+    pub enum BirincilRenk {
+        Kizil,
+        Sari,
+        Mavi,
     }
 
-    /// The secondary colors according to the RYB color model.
-    pub enum SecondaryColor {
-        Orange,
-        Green,
-        Purple,
+    /// RYB renk modeline göre ikincil renkler.
+    pub enum IkincilRenk {
+        Portakal,
+        Yesil,
+        Mor,
     }
 }
 
-pub mod utils {
-    use crate::kinds::*;
+pub mod araclar {
+    use crate::turler::*;
 
-    /// Combines two primary colors in equal amounts to create
-    /// a secondary color.
-    pub fn mix(c1: PrimaryColor, c2: PrimaryColor) -> SecondaryColor {
+    /// İkincil bir renk oluşturmak için iki ana rengi
+    /// eşit miktarda birleştirir.
+    pub fn karisim(c1: BirincilRenk, c2: IkincilRenk) -> IkincilRenk {
         // --snip--
     }
 }
 ````
-Örnek 14-3: `kinds` ve `utils` modüllerinde düzenlenmiş öğeleri içeren bir `art` kütüphanesi
-![resim 14-3](https://doc.rust-lang.org/book/img/trpl14-03.png)
-Şekil 14-3, `cargo doc` tarafından üretilen bu sandık için dokümantasyonun ön sayfasının nasıl görüneceğini göstermektedir:
+Örnek 14-3: `turler` ve `araclar` modülleri halinde düzenlenmiş öğeler içeren bir `sanat` kütüphanesi
 
-Ön sayfada `PrimaryColor` ve `SecondaryColor` türleri ve mix() işlevinin listelenmediğine dikkat edin. Onları görmek için `kind` ve `utils` bağlantılarına tıklamak gereklidir. Bu kütüphaneye bağımlı başka bir sandık, halihazırda tanımlanmış olan `art` modül yapısına ait öğeleri kendi kapsamına alabilmek için `use` ifadesini kullanmak zorunda kalacaktır. Örnek 14-4, `art` sandığındaki `PrimaryColor` ve `mix` öğelerini kullanan başka bir sandık örneğini gösterir:
+Resim 14-3, Bu sandık için`cargo doc` tarafından üretilen belgenin ön yüzünü göstermektedir:
+
+![resim trpl14-03](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-03.png)
+Resim 14-3: `turler` ve `araclar` modüllerini örnekleyen `sanat` sandığının ön yüzü
+
+Belgenin ön sayfasında `BirincilRenk` ve `IkincilRenk` türleri ve `karisim` işlevinin listelenmediğine dikkat edin. Onların görüntülenebilmesi için `turler` ve `araclar` bağlantılarının açılması gerekir. 
+
+Bu kütüphaneye bağımlı başka bir sandık, halihazırda tanımlanmış olan `sanat` modül yapısına ait öğeleri kendi kapsamına alabilmek için `use` ifadesini kullanmak zorundadır. Örnek 14-4, `sanat` sandığındaki `BirincilRenk` ve `karisim` öğelerini kullanan başka bir sandık örneğini gösternektedir:
+
+<!-- Kaldım-->
 
 Dosya: src/main.rs
 ```Rust
