@@ -132,7 +132,7 @@ pub mod araclar {
 
     /// İkincil bir renk oluşturmak için iki ana rengi
     /// eşit miktarda birleştirir.
-    pub fn karisim(c1: BirincilRenk, c2: IkincilRenk) -> IkincilRenk {
+    pub fn karisim(c1: BirincilRenk, c2: BirincilRenk) -> IkincilRenk {
         // --snip--
     }
 }
@@ -152,57 +152,62 @@ Bu kütüphaneye bağımlı olan başka bir sandığın, halihazırda tanımlanm
 
 Dosya: src/main.rs
 ```Rust
-use art::kinds::PrimaryColor;
-use art::utils::mix;
+
+use sanat::turler::BirincilRenk;
+use sanat::araclar::karisim;
 
 fn main() {
-    let red = PrimaryColor::Red;
-    let yellow = PrimaryColor::Yellow;
-    mix(red, yellow);
+    let kizil = BirincilRenk::Kizil;
+    let sari = BirincilRenk::Sari;
+    karistir(kizil, sari);
 }
+
 ````
-Örnek 14-4: İç yapısının dışa aktarılmasıyla öğeleri kullanılabilir hale gelen `art` sandığı 
+Örnek 14-4: Örnek 14-4: İç yapısı dışa aktarılan sanat sandığının öğelerini kullanan başka bir sandık 
 
-Örnek 14-4'te yer alan `art` sandığını kullanan kodun programcısı, `PrimaryColor` türünün `kinds` modülünde ve `mix()` işlevinin de  `utils` modülünde olduğunu bulabilmelidir. Sandığın modül yapısı, `art` sandığını geliştiren programcılardan çok, bu sandığı kullanan  programcılar için önemlidir. Sandığın parçalarını `kinds` ve `art` modülleri olarak düzenleyen iç yapı, bu sandığın nasıl kullanılacağını öğrenmek isteyenler için herhangi bir yararlı bilgiler içermediği gibi `art` sandığı modül yapısının yarattığı karmaşa, use ifadelerinde modül adlarını belirtmek isteyen kullanıcıların nereye bakacaklarını bilememelerine neden olacağından kullanışsız bir yapıdır. 
+Örnek 14-4'te yer alan `sanat` sandığını kullanan kodun programcısı, `BirincilRenk` türünün `turler` modülünde ve `karisim` işlevinin de  `araclar` modülünde olduğunu anlayabilmelidir. Sandığın modül yapısı, `sanat` sandığını geliştiren programcılardan çok, bu sandığı kullanan  programcılar için önemlidir. Sandığın parçalarını `turler` ve `sanat` modülleri olarak düzenleyen iç yapı, bu sandığın nasıl kullanılacağını öğrenmek isteyenler için herhangi bir yararlı bilgi içermediği gibi, `sanat` sandığı modül yapısının yarattığı karmaşa, `use` ifadelerinde modül adlarını belirtmek isteyen kullanıcıların nereye bakacaklarını karıştırmalarına neden olacağından kullanışsız bir yapıdır. 
 
-Herkesin kullanımına açık olan API'den iç düzenlemeyi kaldırıp, pub use ifadelerini kullanarak öğeleri en üst düzeyde yeniden dışa aktarabilmek için Örnek 14-3'te yer alan `art` sandığının kodlarını, Örnek 14-5'te görğleceği şekilde yeniden düzenleyebiliriz. 
+Herkesin kullanacağı bu API'nin sorunlu iç düzenlemesini `pub use` kullanarak kaldırıp, öğeleri en üst düzeyde yeniden dışa aktarabilmek için, Örnek 14-3'te yer alan `sanat` sandığının kodlarını, Örnek 14-5'te gösterildiği şekilde yeniden düzenleyebiliriz. 
 
 Dosya: src/lib.rs
 ```Rust
-//! # Art
+//! # Sanat
 //!
-//! A library for modeling artistic concepts.
+//! Sanatsal kavramları modellemek için bir kütüphane.
 
-pub use self::kinds::PrimaryColor;
-pub use self::kinds::SecondaryColor;
-pub use self::utils::mix;
+pub use self::araclar::karisim;
+pub use self::turler::BirincilRenk;
+pub use self::turler::IkincilRenk;
 
-pub mod kinds {
+pub mod turler {
     // --snip--
 }
 
-pub mod utils {
+pub mod araclar {
     // --snip--
 }
 ````
-Örnek 14-5: Öğeleri yeniden dışa aktarmak için pub use ifadeleri eklemek
+Örnek 14-5: Öğeleri yeniden dışa aktarmak için `pub use` ifadesi eklemek
 
-`cargo doc` komutunun bu sandık için oluşturduğu API belgeleri, Şekil 14-4'te görebileceğiniz gibi ön sayfada yeniden dışa aktarımları listeleyerek bağlayacak ve `PrimaryColor` ve `SecondaryColor` türlerini ve `mix` işlevini bulmayı kolaylaştıracaktır.
-![Şekil 14-4](https://doc.rust-lang.org/book/img/trpl14-04.png)
-Şekil 14-4: Yenilenen dışa aktarımı listeleyen `art` belgelendirmesinin ön sayfası
+Şekil 14-4'te görebileceğiniz gibi `cargo doc` komutunun bu sandık için oluşturduğu API belgeleri, dışa aktarımları yeniden ön sayfada listeleyerek bağlayacak, `BirincilRenk` ve `IkincilRenk` türleriyle `karisim` işlevinin bulunmasını oldukça kolaylaştıracaktır.
 
-Artk `art` sandığını kullanacak olan programcılar, ister Örnek 14-5 ve 14-6'da yenilenen daha uygun yapıyı, isterlerse hâlâ kullanılmaya uygun durumda bulunan Örnek 14-4'te ve 14-3'teki iç yapıyı inceleyip kodlarına dahil edebilirler.
+![resim trpl14-03](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-04.png)
+Resim 14-4: Yeniden dışa aktarımı örnekleyen `sanat` sandığının ön yüzü
+
+Artk `sanat` sandığını kullanmak isteyen programcılar, ister hâlâ kullanılmaya uygun durumdaki Örnek 14-3 ve Örnek 14-4'ün iç yapılarını inceleyerek kodlarına bunları dahil edebilirler, isterlerse Örnek 14-5 ve 14-6'da yenilenerek kullanıma daha uygun hale getirilen yapıyı tercih edebilirler.
 
 Dosya src/main.rs
 ```Rust
-use art::mix;
-use art::PrimaryColor;
+use sanat::karisim;
+use sanat::BirincilRenk;
 
 fn main() {
-    // --snip--
+    // --snip--    
 }
 ````
-Örnek 16-4: Yeniden dışa aktarılan `art` sandığı öğelerini kullanan bir program
+Örnek 14-6: `sanat` sandığının yeniden dışa aktarılan öğelerini kullanan bir program
+
+<!-- Kaldım -->
 
 Çok sayıda iç içe modülün olduğu durumlarda, türleri en üst düzeyde yeniden ihraç etmek pub use, sandığı kullanan kişilerin deneyiminde önemli bir fark yaratabilir.  Kullanışlı bir genel amaçlı API oluşturmak bir sanat olduğundan kullanılarınıza en uygun olabilecek tasarım için defalarca tekrar yapmanız gerekebilir. ancak `pub use` kullanımı paket iç yapınızı kullanıcılara sunulduğu halinden ayırabildiği için esneklik sağlar. sandık iç yapılarının genel kullanıma açılmış hallerinden farklı olup olmadığını anlamak için çalışmalarına dahil ettiğiniz başka sandıkları incelemeniz yararlı olacaktır. 
 
