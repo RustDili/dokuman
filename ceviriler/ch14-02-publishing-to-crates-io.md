@@ -230,7 +230,7 @@ Dosya: Cargo.toml
 ```Rust
 
 [package]
-name = "guessing_game"
+name = "tahmin_oyunu"
 
 ````
 Her ne kadar benzersiz bir ad seçmiş olsanız bile, sandığı yayınlamak için `cargo publish` komutunu çalıştırdığınızda aşağıdakine benzer bir uyarı ve hata alabilirsiniz:
@@ -252,7 +252,7 @@ Girdiğiniz açıklamalar arama sonuçlarında görüntüleneceğinden, en azın
 
 ```bash
 [package]
-name = "guessing_game"
+name = "tahmin_oyunu"
 license = "MIT"
 ````
 
@@ -265,11 +265,11 @@ Benzersiz bir isim seçtiğiniz sandığınıza; yazar adı, sürüm bilgisi, pa
 ```bash
 
 [package]
-name = "guessing_game"
+name = "name = "tahmin_oyunu""
 version = "0.1.0"
-authors = ["Your Name <you@example.com>"]
+authors = ["Rust Dili <rustdili@gmail.com>"]
 edition = "2018"
-description = "A fun game where you guess what number the computer has chosen."
+description = "Bilgisayarın seçtiği sayıyı tahmin ederken eğleneceğiniz keyifli bir oyun."
 license = "MIT OR Apache-2.0"
 
 [dependencies]
