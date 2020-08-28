@@ -13,9 +13,28 @@ RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](h
 ## [Çevrim-içi Takip Et](https://rustdili.github.io/)
 
 
-## Çevirisi tamamlanan bölümler
+# Çevirisi tamamlanan bölümler
+
+# Rust Programlama Dili
+
+* [Rust Programlama Dili](title-page.md)
+* [Önsöz](foreword.md)
+* [Giriş](ch00-00-introduction.md)
 
 # Başlarken
+* [Başlarken](ch01-00-getting-started.md)
+    * [Kurulum](ch01-01-installation.md)
+    * [Merhaba, Dünya](ch01-02-hello-world.md)
+    * [Merhaba, Cargo](ch01-03-hello-cargo.md)
+
+* [Bir Tahmin Oyunu Programlamak](ch02-00-guessing-game-tutorial.md)
+
+* [Ortak Programlama Kavramları](ch03-00-common-programming-concepts.md)
+    * [Değişkenler ve Değişkenlik](ch03-01-variables-and-mutability.md)
+    * [Veri Türleri](ch03-02-data-types.md)
+    * [İşlevler](ch03-03-how-functions-work.md)
+    * [Yorumlar](ch03-04-comments.md)
+    * [Kontrol Akışı](ch03-05-control-flow.md)
 
 * [Mülkiyeti Anlamak](ch04-00-understanding-ownership.md)
 
