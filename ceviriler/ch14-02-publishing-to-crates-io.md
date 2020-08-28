@@ -301,25 +301,26 @@ $ cargo publish
 
 Tebrikler! Artık kodunuzu Rust topluluğuyla paylaştığınıza göre, herkes sizin sandığınızı kendi projesine bağımlılık olarak kolayca ekleyebilir.
 
-### Mevcut Bir Sandığın Yeni Sürümünü Yayınlamak
+### Mevcut Sandığın Yeni Sürümünü Yayınlamak
 
-Önceden yayınlamış olduğunuz bir sandıkta tüm kullanıcıları etkileyen bir değişiklik yaptığınızda veya yeni bir sürüm yayınlamaya hazır olduğunuzda sandığınızın *Cargo.toml* dosyasının `version` bölümünü uygun şekilde değiştirerek paketinizi yeniden yayınlayabilirsiniz. Gerçekleştirdiğiniz değişikliğin türüne göre sonraki sürüm numarasına karar verebilmeniz için [Anlamsal Sürüm Oluşturma Kuralları](http://semver.org/)nı kullanabilirsiniz. Bu işlemlerin ardından `cargo publish` komutunu kullanarak yeni sürümünüzü kolaylıkla yayınlayabilirsiniz.
+Daha önce yayınladığınız bir sandık üzerinde tüm kullanıcıları etkileyebilecek değişiklikler yaptığınızda ya da sandığınızın yeni sürümünü yayınlamak istediğinizde, *Cargo.toml* dosyasında belirtilen sürüm değerini değiştirerek yeniden yayınlayabilirsiniz. Yaptığınız değişiklik türlerine bağlı olarak, sonraki sürümün numarasına karar verirken [Anlamsal Sürüm Oluşturma Kuralları](http://semver.org/) sitesini kullanabilirsiniz. Yeni sürümünüzü düzenlemelerinizi gerçekleştirdikten sonra `cargo publish` komutunu kullanarak yayınlayabilirsiniz.
 
-## Sürümleri [`cargo yank`](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#removing-versions-from-cratesio-with-cargo-yank) Komutu Kullanarak Crates.io Üzerinden Kaldırmak
-Yayımlanmış bir sandığın önceki sürümlerini kaldıramasanız dahi, yeni projelerin bu sürümleri kullanmasını ve bağımlılık olarak eklemesini engelleyebilirsiniz. Bu davranış sandık sürümünüzün bir nedenle bozulduğunda yararlıdır. Bu gibi durumlarda, Cargo `yank` adlı bir komut kullanarak o versiyonu geri çekmenizi sağlar. 
+### Sürümleri Crates.io'dan `cargo yank` Komutu Kullanarak Kaldırmak
 
-Bir sürümün geri çekilmesi -yani *yanking edilmesi*- yeni projelerin bu sürüme bağlanmasını önlerken ona bağımlı olarak tanımlanmış mevcut projelerin bu sürümü indirmeye ve bağımlı olarak kalmasına izin verir. Temel olarak `yank` yani geri çekme işlemi *Cargo.lock* dosyasına işlenmiş projelerin artık sürümü kullanmaya devam edeceğini, ama yeni bağımlılık talepleri için geri çekilmiş olan bu sürümün kullanılmasına daha fazla izin verilmeyeceği anlamına gelmektedir.
+Yayımlanmış bir sandığın önceki sürümlerini kaldıramasanız dahi, sandık sürümünüz bir nedenle bozulduğunda, yeni projelerin bu sürümleri kullanmasını ve bağımlılık olarak eklemesini engelleyebilirsiniz. Cargo'nun böyle durumlarda kullanılan `yank` komutu ilgili sürümün geri çekilmesini sağlar. 
 
-Sandığın geri çekilecek versiyonunu için sürüm bilgisi ile birlikte aşağıda gösterilene benzer biçimde `cargo yank` kodunu çalıştırmanız gerekir:
+Bir sürümün geri çekilmesi, yeni projelerin bu sürüme bağlanmasını önlerken, halihazırda kendisine bağımlı olan projelerin bu sürümü indirmesine ve bağımlı olarak çalışmaya devam etmesine izin verir. Temel olarak `yank` yani geri çekme işlemi *Cargo.lock* dosyasına işlenmiş projelerin bozulmadan kullanılmaya devam edeileceğini, ama yeni bağımlılık taleplerinde bu sürümün kullanılmasına izin verilmeyeceği anlamına gelmektedir.
+
+Geri çekilmek istenen sandık sürümü için `cargo yank` komutunun aşağıda örneğe benzer biçimde kullanılması gerekir:
 
 ```bash
 $ cargo yank --vers 1.0.1
 ````
 
-Geri çekme işlemini `cargo yank` komutuna `--undo` ekleyerek geçersiz hale getirebilir ve projelerin bu sürüme yeniden bağlanmasına izin verebilirsiniz:
+Bu geri çekme işlemini `cargo yank` komutuna `--undo` ekleyerek geçersiz hale getirebilir ve projelerin bu sürüme yeniden bağlanmasına izin verebilirsiniz:
 
 ```bash
 $ cargo yank --vers 1.0.1 --undo
 ````
 
-Geri çekme işlemi var olan kodları silmez. Örneklersek, projenize yanlışlıkla eklediğiniz bazı özel veya sır olarak kalması gereken kodları `yank` özelliğini kullanarak silmeniz mümkün olmayacağından bu sırları hemen kaldırmanız gerekir. 
+Geri çekme işlemi halihazırda var olan kodları silemez. Eğer projenize yanlışlıkla eklediğiniz bazı özel veya sır olarak kalması gereken kodlar var ve bu kodları `yank` kullanarak silmek istiyorsanız, bunu yapmanız mümkün olamayacağından, sürümünüzü yayınlamadan önce bu kodları sıfırlamanız veya kaldırmanız gerekir.
