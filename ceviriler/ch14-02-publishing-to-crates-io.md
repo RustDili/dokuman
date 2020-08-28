@@ -148,8 +148,6 @@ Belgenin ön sayfasında `BirincilRenk` ve `IkincilRenk` türleriyle `karisim` i
 
 Bu kütüphaneye bağımlı olan başka bir sandığın, halihazırda tanımlanmış olan `sanat` modül yapısına ait öğeleri kendi kapsamına alabilmesi için `use` ifadesini kullanması gerekir. Örnek 14-4, `sanat` sandığındaki `BirincilRenk` ve `karisim` öğelerini kullanan başka bir sandık örneğini göstermektedir:
 
-<!-- Kaldım-->
-
 Dosya: src/main.rs
 ```Rust
 
@@ -191,7 +189,7 @@ pub mod araclar {
 
 Şekil 14-4'te görebileceğiniz gibi `cargo doc` komutunun bu sandık için oluşturduğu API belgeleri, dışa aktarımları yeniden ön sayfada listeleyerek bağlayacak, `BirincilRenk` ve `IkincilRenk` türleriyle `karisim` işlevinin bulunmasını oldukça kolaylaştıracaktır.
 
-![resim trpl14-03](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-04.png)
+![resim trpl14-04](https://github.com/RustDili/dokuman/blob/master/ceviriler/img/trpl14-04.png)
 Resim 14-4: Yeniden dışa aktarımı örnekleyen `sanat` sandığının ön yüzü
 
 Artk `sanat` sandığını kullanmak isteyen programcılar, ister hâlâ kullanılmaya uygun durumdaki Örnek 14-3 ve Örnek 14-4'ün iç yapılarını inceleyerek kodlarına bunları dahil edebilirler, isterlerse Örnek 14-5 ve 14-6'da yenilenerek kullanıma daha uygun hale getirilen yapıyı tercih edebilirler.
@@ -207,11 +205,14 @@ fn main() {
 ````
 Örnek 14-6: `sanat` sandığının yeniden dışa aktarılan öğelerini kullanan bir program
 
-<!-- Kaldım -->
+İç içe geçmiş çok sayıda modülü, türleri `pub use` ifadesiyle en üst düzeyde yeniden dışa aktarmak, sandığı kullanacak kişilerin deneyimlerinde önemli farklar yaratabilir. 
 
-Çok sayıda iç içe modülün olduğu durumlarda, türleri en üst düzeyde yeniden ihraç etmek pub use, sandığı kullanan kişilerin deneyiminde önemli bir fark yaratabilir.  Kullanışlı bir genel amaçlı API oluşturmak bir sanat olduğundan kullanılarınıza en uygun olabilecek tasarım için defalarca tekrar yapmanız gerekebilir. ancak `pub use` kullanımı paket iç yapınızı kullanıcılara sunulduğu halinden ayırabildiği için esneklik sağlar. sandık iç yapılarının genel kullanıma açılmış hallerinden farklı olup olmadığını anlamak için çalışmalarına dahil ettiğiniz başka sandıkları incelemeniz yararlı olacaktır. 
+Kullanışlı bir genel API tasarımı oluşturmak bilimden çok sanat olarak kabul edildiğinden, kullanıcılarınız için en iyi çalışacak uygun bir düzenleme için defalarca tekrar yapmanız gerekebilir. Bununla birlikte `pub use` kullanımını seçmek, sandığınızın iç düzenlemesinde size esneklik sağlarken, bu iç düzeni kullanıcılarınıza sunduğunuz arayüzden ayırır. Kurduğunuz bazı sandıkların iç düzenlemelerinin genel API katmanlarına göre farklarını incelemek için bu sandıkların kodlarına bakmanız öğretici olacaktır.
 
-## Bir Crates.io Hesabı Oluşturma
+### Crates.io Hesabı Oluşturmak
+
+<!-- Bu bölümden sonrası gözden geçirilecek-->
+
 Herhangi bir sandığı yayınlayabilmeniz için öncelikle [crates.io](https://crates.io/) üzerinde bir hesap oluşturmanız ve bir API anahtarı almanız gereklidir. Bunun için [crates.io](https://crates.io/) adresini ziyaret ederek GitHub hesabınız ile giriş yapın. (Her ne kadar gelecekte siteye başka yöntemlerle üye olunacağı planlanmış olsa da şu an için yalnızca GitHub hesaplarımız ile giriş kabul edilmektedir.) Sisteme girişinizi yaptıktan sonra, [https://crates.io/me/](https://crates.io/me/) adresindeki hesap ayarlarınızı ziyaret ederek ve API anahtarınızı alın. Ardından, aşağıdaki gibi API anahtarınızla `cargo login` komutunu çalıştırın:
 
 ```bash
