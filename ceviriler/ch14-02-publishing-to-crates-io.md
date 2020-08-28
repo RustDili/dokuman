@@ -211,19 +211,21 @@ Kullanışlı bir genel API tasarımı oluşturmak bilimden çok sanat olarak ka
 
 ### Crates.io Hesabı Oluşturmak
 
-Herhangi bir sandığı yayınlayabilmeniz için öncelikle [crates.io](https://crates.io/) üzerinde bir hesap oluşturmanız ve bir API anahtarı almanız gereklidir. Bunun için *(Her ne kadar gelecekte siteye başka yöntemlerle üye olunması planlanmış olsa da şu an için yalnızca GitHub hesaplarımız ile giriş kabul edildiğinden)* [crates.io](https://crates.io/) adresini ziyaret ederek GitHub hesabınız ile giriş yapın. Ardından, [https://crates.io/me/](https://crates.io/me/) adresindeki hesap ayarlarınızı ziyaret ederek ve API anahtarınızı alarak, aşağıda gösterildiği gibi `cargo login` komutunu API anahtarınıı kullanarak çalıştırın:
+Herhangi bir sandığı yayınlayabilmeniz için öncelikle [crates.io](https://crates.io/) üzerinde bir hesap oluşturmanız ve bir API anahtarı almanız gerekir. Bunun için *(Her ne kadar gelecekte siteye başka yöntemlerle üye olunması planlanmış olsa da şu an için yalnızca GitHub hesaplarımız ile giriş kabul edildiğinden)* [crates.io](https://crates.io/) adresini ziyaret ederek GitHub hesabınız ile giriş yapın. Ardından, [https://crates.io/me/](https://crates.io/me/) adresindeki hesap ayarlarınızı gözden geçirerek API anahtarınızı alın. Aldığınız bu API anahtarını `cargo login` komutuna ekleyerek tıpkı aşağıda örneklendiği gibi çalıştırın:
 
 ```bash
 $ cargo login abcdefghijklmnopqrstuvwxyz012345
 ````
 
-Bu komut API anahtarınızı Cargo'ya bildirerek ve yerel olarak onu *~/.cargo/credentials* içinde depolayacaktır. Anahtarınızın *size özel* olduğunu, *gizli* kalması ve kimseyle paylaşılmaması gerektiğini unutmayın. Eğer anahtarınız herhangi bir sebeple birileriyle paylaşmak zorunda kalırsanız, eskisini derhal iptal ederek yeni bir anahtar oluşturmalısınız.
+Bu komut API anahtarınızı Cargo'ya bildirecek ve yerel olarak onu *~/.cargo/credentials* içinde depolayacaktır. Anahtarınızın *size özel* olduğunu, *gizli* kalması ve kimseyle paylaşılmaması gerektiğini unutmayın. Eğer herhangi bir sebeple anahtarınızı birileriyle paylaşmak zorunda kalırsanız, eskisini derhal iptal ederek yeni bir anahtar oluşturun.
 
 ### Yeni Oluşturulmuş Sandığa Meta Veri Eklemek
 
 Artık hesabınızı oluşturduğunuza göre, yayınlamak istediğiniz bir sandığınız olduğunu düşünebiliriz. Ancak sandığınızı yayınlamadan önce, *Cargo.toml* dosyasının `[package]` bölümüne sandığınıza ait meta veriler eklemeniz gerekir.
 
-Bir sandık üzerinde yerel olarak çalışırken onu istediğiniz gibi adlandırabilirsiniz. Ancak sandığınız yayın aşamasına geldiğinde benzersiz bir isme ihtiyacı olacak. [crates.io](https://crates.io/)'daki sandık isimlerinde öncelik ilk gelene verildiğinden, bir isim bir sandığa tahsis edildikten sonra başka bir sandığa tahsis edilemez. Başka bir ifadeyle, sandık adı bir kez alındığında aynı isimde başka bir sandık yayınlanamaz. O yüzden sandığınızı [crates.io](https://crates.io/) üzerinde yayınlanmadan, önce sandık adınızı kullanan başka bir sandık olup olmadığını araştırmalısınız. Eğer sandık adınız halihazırda başka bir sandık tarafından kullanılmakta ise, yenileyeceğiniz sandık adını, paketinizin *Cargo.toml* dosyasında bulunan `[package]` bölümüne, isim alanıyla birlikte aşağıda gösterildiği gibi girmeniz gerekir.
+Bir sandık üzerinde yerel olarak çalışırken onu istediğiniz gibi adlandırabilirsiniz. Ancak sandığınız yayın aşamasına geldiğinde benzersiz bir isme ihtiyacı olacak. [crates.io](https://crates.io/)'daki sandık isimlerinde öncelik ilk gelene verildiğinden, bir isim bir sandığa tahsis edildikten sonra başka bir sandığa tahsis edilemez. Başka bir ifadeyle, sandık adı bir kez alındığında aynı isimde başka bir sandık yayınlanamaz. O yüzden sandığınızı [crates.io](https://crates.io/) üzerinde yayınlanmadan önce, sandık adınızı kullanan başka bir sandık olup olmadığını araştırmalısınız. Eğer sandık adınız halihazırda başka bir sandık tarafından kullanılmakta ise, yenileyeceğiniz sandık adını, paketinizin *Cargo.toml* dosyasında bulunan `[package]` bölümüne, isim alanıyla birlikte aşağıda gösterildiği gibi girmeniz gerekir.
+
+<!-- Anlam bozukluklarının düzeltilmesi -->
 
 Dosya: Cargo.toml
 
