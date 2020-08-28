@@ -225,8 +225,6 @@ Artık hesabınızı oluşturduğunuza göre, yayınlamak istediğiniz bir sand�
 
 Bir sandık üzerinde yerel olarak çalışırken onu istediğiniz gibi adlandırabilirsiniz. Ancak sandığınız yayın aşamasına geldiğinde benzersiz bir isme ihtiyacı olacak. [crates.io](https://crates.io/)'daki sandık isimlerinde öncelik ilk gelene verildiğinden, bir isim bir sandığa tahsis edildikten sonra başka bir sandığa tahsis edilemez. Başka bir ifadeyle, sandık adı bir kez alındığında aynı isimde başka bir sandık yayınlanamaz. O yüzden sandığınızı [crates.io](https://crates.io/) üzerinde yayınlanmadan önce, sandık adınızı kullanan başka bir sandık olup olmadığını araştırmalısınız. Eğer sandık adınız halihazırda başka bir sandık tarafından kullanılmakta ise, yenileyeceğiniz sandık adını, paketinizin *Cargo.toml* dosyasında bulunan `[package]` bölümüne, isim alanıyla birlikte aşağıda gösterildiği gibi girmeniz gerekir.
 
-<!-- Anlam bozukluklarının düzeltilmesi -->
-
 Dosya: Cargo.toml
 
 ```Rust
@@ -250,7 +248,7 @@ error: api errors (status 200 OK): missing or empty metadata fields: description
 
 Bunun sebebi, sandığınızı kullanmak isteyecek programcılar için hazırlamanız gereken, sandığınızın neler yaptığını ve hangi koşullar altında kullanılabileceğini düzenleyen açıklama ve lisans bilgileri gibi önemli detayları atlamış olmanızdır. Bu hatayı düzeltmek için gerekli olan bilgileri paketinizin *Cargo.toml* dosyasına işlemeniz gerekir. 
 
-Girdiğiniz açıklamalar arama sonuçlarında görüntüleneceğinden, en azından bir iki cümle açıklamak eklemeniz yerinde olur. Lisans alanı içinse bir `license` tanımlayıcı değeri vermeniz gereklidir. [Linux Vakfı'nın Yazılım Paketi veri değişimi (SPDX)](http://spdx.org/licenses/), bu alan için kullanabileceğiniz tanımlayıcıları listeler. Örneğin, sandığınızı MIT Lisansı ile lisansladığınızı belirtmek için `MIT` tanımlayıcısını eklemeniz gerekir:
+Girdiğiniz açıklamalar arama sonuçlarında görüntüleneceğinden, en azından bir iki cümlelik açıklama eklemeniz yerinde olur. Lisans alanı içinse bir `license` tanımlayıcı değeri vermeniz gereklidir. [Linux Vakfı'nın Yazılım Paketi veri değişimi (SPDX)](http://spdx.org/licenses/), bu alan için kullanabileceğiniz tanımlayıcıları listeler. Örneğin, sandığınızı MIT Lisansı ile lisansladığınızı belirtmek için `MIT` tanımlayıcısını eklemeniz gerekir:
 
 ```bash
 [package]
@@ -260,7 +258,7 @@ license = "MIT"
 
 SPDX'te listelenmemiş bir lisans kullanmak istiyorsanız, söz konusu lisansın metnini bir dosyaya yerleştirmeniz, dosyayı projenize eklemeniz ve ardından `license` alanındaki tanımı `license-file` şeklinde dosya adını tanımlayacak şekilde belirtmeniz gerekmektedir.
 
-Projeniz için hangi lisansın daha uygun olacağına dair rehberlik bu kitabın kapsamı dışındadır. Rust topluluğunun pek çok üyesi projelerini, Rust'ın tercih ettiği gibi `MIT VEYA Apache-2.0` olarak çifte lisans kullanarak sunar. Bu uygulama biçimi projenizi `OR` ekiyle birden fazla lisansa sahip olacak şekilde lisans tanımlayıcısıyla ilişkilendirebileceğinizi gösterir.
+Projeniz için hangi lisansın daha uygun olacağına dair rehberlik bu kitabın kapsamı dışındadır. Rust topluluğunun pek çok üyesi projelerini, Rust'ın tercih ettiği gibi `MIT OR Apache-2.0` olarak çifte lisans kullanarak sunar. Bu uygulama biçimi projenizi `OR` ekiyle birden fazla lisansa sahip olacak şekilde lisans tanımlayıcısıyla ilişkilendirebileceğinizi gösterir.
 
 Benzersiz bir isim seçtiğiniz sandığınıza; yazar adı, sürüm bilgisi, paket açıklaması ve lisans bilgileri eklendikten sonra, yayına hazır hale gelen projenizin `Cargo.toml` dosyası aşağıdaki dosya gibi görünecektir:
 
@@ -282,9 +280,9 @@ Sandıklarınızın kolaylıkla fark edilip kullanabilmesi için değerlendirebi
 
 ### Bir sandığı Crates.io'da Yayınlamak
 
-Artık bir hesabınız, API anahtarınız, benzersiz ada sahip bir sandığınız ve bu sandığa gerekli meta verileri eklediğinize göre sandığızı yayınlamaya hazırsınız demektir. Bir sandığı yayınlamak demek, sandığınızın belirli bir sürümünü başka kullanıcılar için [crates.io](https://crates.io/) sitesine yüklemek anlamına gelmektedir. 
+Artık bir hesabınız, API anahtarınız, benzersiz ada sahip bir sandığınız olduğuna ve bu sandığa gerekli meta verileri eklediğinize göre sandığızı yayınlamaya hazırsınız demektir. Bir sandığı yayınlamak demek, sandığınızın belirli bir sürümünü başka kullanıcılar için [crates.io](https://crates.io/) sitesine yüklemek anlamına gelir. 
 
-[Crates.io](https://crates.io/)'nun asıl hedeflerinden biri yayınlanan sandıklara bağımlı tüm projelerin çalışmaya devam edebilmesi için kalıcı bir kod arşivi oluşturmaktır. Bu nedenle bir sandık yayınlandıktan sonra, yayınlanan sürümün üzerinde ekleme, düzenleme yahut silme gibi işlemler artık yapılamayacağından, sandık yayınlarken dikkatli olunması gerekir. Sürüm silme işlemine izin vermek bu hedefi imkansızlaştıracağından sürüm silmek yerine sandığın başka sürümlerinin yayınlaması yeğlenir. O nedenle bir sandığa ait sürümlerin yayın sınırı yoktur. 
+[Crates.io](https://crates.io/)'nun asıl hedeflerinden biri yayınlanan sandıklara bağımlı tüm projelerin çalışmaya devam edebilmesi için kalıcı bir kod arşivi oluşturmaktır. Bu nedenle bir sandık yayınlandıktan sonra, yayınlanan sürümün üzerinde ekleme, düzenleme yahut silme gibi işlemler artık yapılamayacağından, sandık yayınlarken dikkatli olunması gerekir. Sürüm silme işlemine izin vermek bu hedefi imkansızlaştıracağından, sürüm silmek yerine sandığın başka sürümlerinin yayınlaması yeğlenir. O nedenle bir sandığa ait sürümlerin yayın sınırı yoktur. 
 
 Şimdi `cargo publish` komutunu tekrar çalıştırdığınızda paketinizin başarıyla yayınlandığını göreceksiniz:
 
@@ -305,13 +303,13 @@ Tebrikler! Artık kodunuzu Rust topluluğuyla paylaştığınıza göre, herkes 
 
 ### Mevcut Sandığın Yeni Sürümünü Yayınlamak
 
-Daha önce yayınladığınız bir sandık üzerinde tüm kullanıcıları etkileyebilecek değişiklikler yaptığınızda ya da sandığınızın yeni sürümünü yayınlamak istediğinizde, *Cargo.toml* dosyasında belirtilen sürüm değerini değiştirerek yeniden yayınlayabilirsiniz. Yaptığınız değişiklik türlerine bağlı olarak, sonraki sürümün numarasına karar verirken [Anlamsal Sürüm Oluşturma Kuralları](http://semver.org/) sitesini kullanabilirsiniz. Yeni sürümünüzü düzenlemelerinizi gerçekleştirdikten sonra `cargo publish` komutunu kullanarak yayınlayabilirsiniz.
+Daha önce yayınladığınız bir sandık üzerinde tüm kullanıcıları etkileyebilecek değişiklikler yaptığınızda ya da sandığınızın yeni sürümünü yayınlamak istediğinizde, *Cargo.toml* dosyasında belirtilen sürüm değerini değiştirerek yeniden yayınlayabilirsiniz. Yaptığınız değişiklik türlerine bağlı olarak, sonraki sürümün numarasına karar verirken [Anlamsal Sürüm Oluşturma Kuralları](http://semver.org/) sitesini kullanabilirsiniz. Yeni sürümünüzü, düzenlemelerinizi gerçekleştirdikten sonra `cargo publish` komutunu kullanarak yayınlayabilirsiniz.
 
 ### Sürümleri Crates.io'dan `cargo yank` Komutu Kullanarak Kaldırmak
 
-Yayımlanmış bir sandığın önceki sürümlerini kaldıramasanız dahi, sandık sürümünüz bir nedenle bozulduğunda, yeni projelerin bu sürümleri kullanmasını ve bağımlılık olarak eklemesini engelleyebilirsiniz. Cargo'nun böyle durumlarda kullanılan `yank` komutu ilgili sürümün geri çekilmesini sağlar. 
+Yayımlanmış bir sandığın önceki sürümlerini kaldıramıyor olsanız bile, bir sebepten sandık sürümünüz bozulmuşsa, yeni projelerin bu sürümleri kullanmasını ve bağımlılık olarak eklemesini engelleyebilirsiniz. Cargo'nun böyle durumlarda kullanılan `yank` komutu ilgili sürümün geri çekilmesini sağlar. 
 
-Bir sürümün geri çekilmesi, yeni projelerin bu sürüme bağlanmasını önlerken, halihazırda kendisine bağımlı olan projelerin bu sürümü indirmesine ve bağımlı olarak çalışmaya devam etmesine izin verir. Temel olarak `yank` yani geri çekme işlemi *Cargo.lock* dosyasına işlenmiş projelerin bozulmadan kullanılmaya devam edeileceğini, ama yeni bağımlılık taleplerinde bu sürümün kullanılmasına izin verilmeyeceği anlamına gelmektedir.
+Bir sürümün geri çekilmesi, yeni projelerin bu sürüme bağlanmasını önlerken, halihazırda kendisine bağımlı olan projelerin bu sürümü indirmesine ve bağımlı olarak çalışmasına izin verir. Temel olarak `yank`, yani geri çekme işlemi, *Cargo.lock* dosyasına işlenmiş projelerin bozulmadan kullanılmaya devam edeileceğini,
 
 Geri çekilmek istenen sandık sürümü için `cargo yank` komutunun aşağıda örneğe benzer biçimde kullanılması gerekir:
 
@@ -325,4 +323,4 @@ Bu geri çekme işlemini `cargo yank` komutuna `--undo` ekleyerek geçersiz hale
 $ cargo yank --vers 1.0.1 --undo
 ````
 
-Geri çekme işlemi halihazırda var olan kodları silemez. Eğer projenize yanlışlıkla eklediğiniz bazı özel veya sır olarak kalması gereken kodlar var ve bu kodları `yank` kullanarak silmek istiyorsanız, bunu yapmanız mümkün olamayacağından, sürümünüzü yayınlamadan önce bu kodları sıfırlamanız veya kaldırmanız gerekir.
+Geri çekme işlemi halihazırda var olan kodları silmez. Eğer projenize yanlışlıkla eklediğiniz bazı özel veya sır olarak kalması gereken kodlar varsa ve bu kodları `yank` kullanarak silmek istiyorsanız, bunu yapmanız mümkün olamayacağından, sürümünüzü yayınlamadan önce bu kodları sıfırlamanız veya kaldırmanız gerekir.
