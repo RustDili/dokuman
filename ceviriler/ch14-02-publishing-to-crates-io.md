@@ -225,26 +225,30 @@ Artık hesabınızı oluşturduğunuza göre, yayınlamak istediğiniz bir sand�
 
 Bir sandık üzerinde yerel olarak çalışırken onu istediğiniz gibi adlandırabilirsiniz. Ancak sandığınız yayın aşamasına geldiğinde benzersiz bir isme ihtiyacı olacak. [crates.io](https://crates.io/)'daki sandık isimlerinde öncelik ilk gelene verildiğinden, bir isim bir sandığa tahsis edildikten sonra başka bir sandığa tahsis edilemez. Başka bir ifadeyle, sandık adı bir kez alındığında aynı isimde başka bir sandık yayınlanamaz. O yüzden sandığınızı [crates.io](https://crates.io/) üzerinde yayınlanmadan, önce sandık adınızı kullanan başka bir sandık olup olmadığını araştırmalısınız. Eğer sandık adınız halihazırda başka bir sandık tarafından kullanılmakta ise, yenileyeceğiniz sandık adını, paketinizin *Cargo.toml* dosyasında bulunan `[package]` bölümüne, isim alanıyla birlikte aşağıda gösterildiği gibi girmeniz gerekir.
 
-<!-- Bu bölümden sonrası gözden geçirilecek-->
-
 Dosya: Cargo.toml
+
 ```Rust
+
 [package]
 name = "guessing_game"
+
 ````
 Her ne kadar benzersiz bir ad seçmiş olsanız bile, sandığı yayınlamak için `cargo publish` komutunu çalıştırdığınızda aşağıdakine benzer bir uyarı ve hata alabilirsiniz:
 
 ```bash
+
 $ cargo publish
     Updating crates.io index
 warning: manifest has no description, license, license-file, documentation, homepage or repository.
 See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info.
 --snip--
 error: api errors (status 200 OK): missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
-````
-Bunun sebebi, sandığınızı kullanmak isteyecek programcılar için, sandığınızın neler yaptığını ve hangi koşullar altında kullanılabileceğini düzenleyen açıklama ve lisans bilgileri gibi önemli detayları atlamış olmanızdır. Bu hatayı düzeltebilmeniz için gerekli olan bilgileri paketinizin *Cargo.toml* dosyasına işlemeniz gerekir. 
 
-Girdiğiniz açıklamalar arama sonuçlarında görüntüleneceğinden en azından bir iki cümle açıklamak eklemeniz yerinde olur. Lisans alanı içinse bir `license` tanımlayıcı değeri vermeniz gereklidir. [Linux Vakfı'nın Yazılım Paketi veri değişimi (SPDX)](http://spdx.org/licenses/), bu alan için kullanabileceğiniz tanımlayıcıları listeler. Örneğin, sandığınızı MIT Lisansı ile lisansladığınızı belirtmek için `MIT` tanımlayıcısını ekleyin:
+````
+
+Bunun sebebi, sandığınızı kullanmak isteyecek programcılar için hazırlamanız gereken, sandığınızın neler yaptığını ve hangi koşullar altında kullanılabileceğini düzenleyen açıklama ve lisans bilgileri gibi önemli detayları atlamış olmanızdır. Bu hatayı düzeltmek için gerekli olan bilgileri paketinizin *Cargo.toml* dosyasına işlemeniz gerekir. 
+
+Girdiğiniz açıklamalar arama sonuçlarında görüntüleneceğinden, en azından bir iki cümle açıklamak eklemeniz yerinde olur. Lisans alanı içinse bir `license` tanımlayıcı değeri vermeniz gereklidir. [Linux Vakfı'nın Yazılım Paketi veri değişimi (SPDX)](http://spdx.org/licenses/), bu alan için kullanabileceğiniz tanımlayıcıları listeler. Örneğin, sandığınızı MIT Lisansı ile lisansladığınızı belirtmek için `MIT` tanımlayıcısını eklemeniz gerekir:
 
 ```bash
 [package]
@@ -252,13 +256,14 @@ name = "guessing_game"
 license = "MIT"
 ````
 
-SPDX'te görünmeyen bir lisans kullanmak istiyorsanız, söz konusu lisansın metnini bir dosyaya yerleştirmeniz, dosyayı projenize eklemeniz ve ardından `license` alanındaki tanımı `license-file` şeklinde dosya adını tanımlayacak şekilde belirtmeniz gerekmektedir.
+SPDX'te listelenmemiş bir lisans kullanmak istiyorsanız, söz konusu lisansın metnini bir dosyaya yerleştirmeniz, dosyayı projenize eklemeniz ve ardından `license` alanındaki tanımı `license-file` şeklinde dosya adını tanımlayacak şekilde belirtmeniz gerekmektedir.
 
-Projeniz için hangi lisansın daha uygun olacağına dair rehberlik bu kitabın kapsamı dışındadır. Rust topluluğunun pek çok üyesi Rust'ın da yapmayı seçtiği gibi projelerini `MIT VEYA Apache-2.0` olarak çifte lisans kullanarak lisanslar. Bu uygulama biçimi projenizi `OR` ekiyle birden fazla lisansa sahip olacak şekilde lisans tanımlayıcısıyla ilişkilendirebileceğinizi gösterir.
+Projeniz için hangi lisansın daha uygun olacağına dair rehberlik bu kitabın kapsamı dışındadır. Rust topluluğunun pek çok üyesi projelerini, Rust'ın tercih ettiği gibi `MIT VEYA Apache-2.0` olarak çifte lisans kullanarak sunar. Bu uygulama biçimi projenizi `OR` ekiyle birden fazla lisansa sahip olacak şekilde lisans tanımlayıcısıyla ilişkilendirebileceğinizi gösterir.
 
-`cargo new` komutunu kullanarak benzersiz bir adla oluşturduğunuz sandığınıza, yazar adı, sürüm bilgisi, paket açıklaması ve lisans tanımlayıcısını eklediğinizde, yayına hazır olan projenizin `Cargo.toml` dosyası aşağıdaki yapıya benzeyecektir:
+Benzersiz bir isim seçtiğiniz sandığınıza; yazar adı, sürüm bilgisi, paket açıklaması ve lisans bilgileri eklendikten sonra, yayına hazır hale gelen projenizin `Cargo.toml` dosyası aşağıdaki dosya gibi görünecektir:
 
 ```bash
+
 [package]
 name = "guessing_game"
 version = "0.1.0"
@@ -268,11 +273,13 @@ description = "A fun game where you guess what number the computer has chosen."
 license = "MIT OR Apache-2.0"
 
 [dependencies]
+
 ````
 
-Başkalarının sandıklarınızı daha kolay keşfedep kullanabilmesini sağlamak için kullanabileceğiniz daga fazla meta-veriye [Cargo Belgeleri](https://doc.rust-lang.org/cargo/)nden kolaylıkla ulaşabilirisiniz.
+Sandıklarınızın kolaylıkla fark edilip kullanabilmesi için değerlendirebileceğiniz meta verilere [Cargo Belgeleri](https://doc.rust-lang.org/cargo/) üzerinden kolaylıkla ulaşabilirisiniz.
 
-## Bir sandığı Crates.io'da Yayınlamak
+### Bir sandığı Crates.io'da Yayınlamak
+
 Artık bir hesap oluşturduğunuza, API anahtarınızı kaydettiğinize, sandığınız için benzersiz bir ad seçtiğinize ve gerekli meta verileri belirttiğinize göre onu yayınlamaya hazırsınız demektir. Bir sandık yayınlamak, başkalarının kullanması için crates.io'ya belirli bir sürümün yüklenmesi anlamına gelmektedir. 
 
 Bir sandık yayınlandıktan sonra, sürümün üzerine tekrar yazılamayacak, kod o yayın için silinip değiştirilemeyecek şekilde kalıcı olacağından oldukça dikkatli olmanız gereklidir. Bunun nedeni [Crates.io](https://crates.io/)'nun ana hedefi olan kalıcı bir kod arşivi oluşturmaktır. Bu hedef ve tutarlılık sayesinde [crates.io](https://crates.io/)'dan gelen sandıklara bağımlı tüm projeler zaman içerisinde sorunsuz bir şekilde derlenerek çalışmaya devam eder. Sürüm silme işlemine izin vermek bu hedefi olanaksız hale getireceğinden buna izin verilmez ancak sandık versiyonu yayınlama konusunda ise bir sınır yoktur. 
