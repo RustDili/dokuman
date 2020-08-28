@@ -265,7 +265,7 @@ Benzersiz bir isim seçtiğiniz sandığınıza; yazar adı, sürüm bilgisi, pa
 ```bash
 
 [package]
-name = "name = "tahmin_oyunu""
+name = "tahmin_oyunu""
 version = "0.1.0"
 authors = ["Rust Dili <rustdili@gmail.com>"]
 edition = "2018"
@@ -280,26 +280,29 @@ Sandıklarınızın kolaylıkla fark edilip kullanabilmesi için değerlendirebi
 
 ### Bir sandığı Crates.io'da Yayınlamak
 
-Artık bir hesap oluşturduğunuza, API anahtarınızı kaydettiğinize, sandığınız için benzersiz bir ad seçtiğinize ve gerekli meta verileri belirttiğinize göre onu yayınlamaya hazırsınız demektir. Bir sandık yayınlamak, başkalarının kullanması için crates.io'ya belirli bir sürümün yüklenmesi anlamına gelmektedir. 
+Artık bir hesabınız, API anahtarınız, benzersiz ada sahip bir sandığınız ve bu sandığa gerekli meta verileri eklediğinize göre sandığızı yayınlamaya hazırsınız demektir. Bir sandığı yayınlamak demek, sandığınızın belirli bir sürümünü başka kullanıcılar için [crates.io](https://crates.io/) sitesine yüklemek anlamına gelmektedir. 
 
-Bir sandık yayınlandıktan sonra, sürümün üzerine tekrar yazılamayacak, kod o yayın için silinip değiştirilemeyecek şekilde kalıcı olacağından oldukça dikkatli olmanız gereklidir. Bunun nedeni [Crates.io](https://crates.io/)'nun ana hedefi olan kalıcı bir kod arşivi oluşturmaktır. Bu hedef ve tutarlılık sayesinde [crates.io](https://crates.io/)'dan gelen sandıklara bağımlı tüm projeler zaman içerisinde sorunsuz bir şekilde derlenerek çalışmaya devam eder. Sürüm silme işlemine izin vermek bu hedefi olanaksız hale getireceğinden buna izin verilmez ancak sandık versiyonu yayınlama konusunda ise bir sınır yoktur. 
+[Crates.io](https://crates.io/)'nun asıl hedeflerinden biri yayınlanan sandıklara bağımlı tüm projelerin çalışmaya devam edebilmesi için kalıcı bir kod arşivi oluşturmaktır. Bu nedenle bir sandık yayınlandıktan sonra, yayınlanan sürümün üzerinde ekleme, düzenleme yahut silme gibi işlemler artık yapılamayacağından, sandık yayınlarken dikkatli olunması gerekir. Sürüm silme işlemine izin vermek bu hedefi imkansızlaştıracağından sürüm silmek yerine sandığın başka sürümlerinin yayınlaması yeğlenir. O nedenle bir sandığa ait sürümlerin yayın sınırı yoktur. 
 
 Şimdi `cargo publish` komutunu tekrar çalıştırdığınızda paketinizin başarıyla yayınlandığını göreceksiniz:
 
 ```bash
+
 $ cargo publish
     Updating crates.io index
-   Packaging guessing_game v0.1.0 (file:///projects/guessing_game)
-   Verifying guessing_game v0.1.0 (file:///projects/guessing_game)
-   Compiling guessing_game v0.1.0
-(file:///projects/guessing_game/target/package/guessing_game-0.1.0)
+   Packaging tahmin_oyunu v0.1.0 (file:///projem/tahmin_oyunu)
+   Verifying tahmin_oyunu v0.1.0 (file:///projem/tahmin_oyunu)
+   Compiling tahmin_oyunu v0.1.0
+(file:///projem/tahmin_oyunu/target/package/tahmin_oyunu-0.1.0)
     Finished dev [unoptimized + debuginfo] target(s) in 0.19s
-   Uploading guessing_game v0.1.0 (file:///projects/guessing_game)
+   Uploading tahmin_oyunu v0.1.0 (file:///projem/tahmin_oyunu)
+
 ````
 
-Tebrikler! Artık kodunuzu Rust topluluğuyla paylaştığınıza göre, herkes sandığınızı projesine bağımlılık olarak kolayca ekleyebilir.
+Tebrikler! Artık kodunuzu Rust topluluğuyla paylaştığınıza göre, herkes sizin sandığınızı kendi projesine bağımlılık olarak kolayca ekleyebilir.
 
-## Mevcut Bir Sandığın Yeni Sürümünü Yayınlamak
+### Mevcut Bir Sandığın Yeni Sürümünü Yayınlamak
+
 Önceden yayınlamış olduğunuz bir sandıkta tüm kullanıcıları etkileyen bir değişiklik yaptığınızda veya yeni bir sürüm yayınlamaya hazır olduğunuzda sandığınızın *Cargo.toml* dosyasının `version` bölümünü uygun şekilde değiştirerek paketinizi yeniden yayınlayabilirsiniz. Gerçekleştirdiğiniz değişikliğin türüne göre sonraki sürüm numarasına karar verebilmeniz için [Anlamsal Sürüm Oluşturma Kuralları](http://semver.org/)nı kullanabilirsiniz. Bu işlemlerin ardından `cargo publish` komutunu kullanarak yeni sürümünüzü kolaylıkla yayınlayabilirsiniz.
 
 ## Sürümleri [`cargo yank`](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#removing-versions-from-cratesio-with-cargo-yank) Komutu Kullanarak Crates.io Üzerinden Kaldırmak
