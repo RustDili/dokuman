@@ -211,20 +211,21 @@ Kullanışlı bir genel API tasarımı oluşturmak bilimden çok sanat olarak ka
 
 ### Crates.io Hesabı Oluşturmak
 
-<!-- Bu bölümden sonrası gözden geçirilecek-->
-
-Herhangi bir sandığı yayınlayabilmeniz için öncelikle [crates.io](https://crates.io/) üzerinde bir hesap oluşturmanız ve bir API anahtarı almanız gereklidir. Bunun için [crates.io](https://crates.io/) adresini ziyaret ederek GitHub hesabınız ile giriş yapın. (Her ne kadar gelecekte siteye başka yöntemlerle üye olunacağı planlanmış olsa da şu an için yalnızca GitHub hesaplarımız ile giriş kabul edilmektedir.) Sisteme girişinizi yaptıktan sonra, [https://crates.io/me/](https://crates.io/me/) adresindeki hesap ayarlarınızı ziyaret ederek ve API anahtarınızı alın. Ardından, aşağıdaki gibi API anahtarınızla `cargo login` komutunu çalıştırın:
+Herhangi bir sandığı yayınlayabilmeniz için öncelikle [crates.io](https://crates.io/) üzerinde bir hesap oluşturmanız ve bir API anahtarı almanız gereklidir. Bunun için *(Her ne kadar gelecekte siteye başka yöntemlerle üye olunması planlanmış olsa da şu an için yalnızca GitHub hesaplarımız ile giriş kabul edildiğinden)* [crates.io](https://crates.io/) adresini ziyaret ederek GitHub hesabınız ile giriş yapın. Ardından, [https://crates.io/me/](https://crates.io/me/) adresindeki hesap ayarlarınızı ziyaret ederek ve API anahtarınızı alarak, aşağıda gösterildiği gibi `cargo login` komutunu API anahtarınıı kullanarak çalıştırın:
 
 ```bash
 $ cargo login abcdefghijklmnopqrstuvwxyz012345
 ````
 
-Bu komut Cargo'ya API anahtarınızı bildirecek ve onu yerel olarak `~/.cargo/credentials` içinde depolayacaktır. Anahtarınızı size özel olduğunu, gizli kalması ve kimseyle paylaşılmaması gerektiğini unutmayın. Eğer anahtarınızı herhangi bir sebeple birileriyle  paylaşmışsanız, geçerli olanı deerhal iptal ederek yeni bir anahtar oluşturmalısınız.
+Bu komut API anahtarınızı Cargo'ya bildirerek ve yerel olarak onu *~/.cargo/credentials* içinde depolayacaktır. Anahtarınızın *size özel* olduğunu, *gizli* kalması ve kimseyle paylaşılmaması gerektiğini unutmayın. Eğer anahtarınız herhangi bir sebeple birileriyle paylaşmak zorunda kalırsanız, eskisini derhal iptal ederek yeni bir anahtar oluşturmalısınız.
 
-## Yeni Oluşturulmuş Sandığa Meta Veri Eklemek
-Artık hesabınızı oluşturduğunuza göre, yayınlamak istediğiniz bir sandığınızın olduğunu düşünebiliriz. Ancak sandığınızı yayına almadan hemen önce, *Cargo.toml* dosyasının `package` bölümüne sandığınıza ait meta verileri eklemeniz gerekmektedir. 
+### Yeni Oluşturulmuş Sandığa Meta Veri Eklemek
 
-Yerel olarak bir sandık üzerinde çalışırken, istediğiniz bir sandığı adlandırabilirsiniz. Ancak yayınlama aşamasına geldiğinizde sandığınızın benzersiz bir isme ihtiyacı olacak. [crates.io](https://crates.io/)'daki sandık adları sadece servise ilk alınanın o isme sahip olması üzerinden yürütüldüğünden, bir sandığa ismi bir kez tahsis edildikten sonra o isin başka bir sandığa verilemez. Başka bir ifadeyle bir sandık adı bir kez alındığında başka hiç kimse tarafından aynı isimde bir başka sandık yayınlanamaz. O nedenle sandığınızı [crates.io](https://crates.io/) üzerinde yayınlanmaya kalkışmadan önce site içinde kullanmak istediğiniz isimde başka bir sandığın olup olmadığını araştırmalısınız. Eğer tercih ettiğiniz sandık adı başka bir sandık tarafından kullanılmaktaysa, yeni seçeceğiniz sandık ismini, paketinizin *Cargo.toml* dosyasında bulunan `[package]` bölümüne isim alanı dahil aşağıda gösterildiğine benzer şekliyle düzenlemeniz gerekecektir.
+Artık hesabınızı oluşturduğunuza göre, yayınlamak istediğiniz bir sandığınız olduğunu düşünebiliriz. Ancak sandığınızı yayınlamadan önce, *Cargo.toml* dosyasının `[package]` bölümüne sandığınıza ait meta veriler eklemeniz gerekir.
+
+Bir sandık üzerinde yerel olarak çalışırken onu istediğiniz gibi adlandırabilirsiniz. Ancak sandığınız yayın aşamasına geldiğinde benzersiz bir isme ihtiyacı olacak. [crates.io](https://crates.io/)'daki sandık isimlerinde öncelik ilk gelene verildiğinden, bir isim bir sandığa tahsis edildikten sonra başka bir sandığa tahsis edilemez. Başka bir ifadeyle, sandık adı bir kez alındığında aynı isimde başka bir sandık yayınlanamaz. O yüzden sandığınızı [crates.io](https://crates.io/) üzerinde yayınlanmadan, önce sandık adınızı kullanan başka bir sandık olup olmadığını araştırmalısınız. Eğer sandık adınız halihazırda başka bir sandık tarafından kullanılmakta ise, yenileyeceğiniz sandık adını, paketinizin *Cargo.toml* dosyasında bulunan `[package]` bölümüne, isim alanıyla birlikte aşağıda gösterildiği gibi girmeniz gerekir.
+
+<!-- Bu bölümden sonrası gözden geçirilecek-->
 
 Dosya: Cargo.toml
 ```Rust
