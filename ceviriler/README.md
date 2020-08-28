@@ -41,5 +41,5 @@ RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](h
   * [16.4. `Sync` ve `Send` Özellikleri ile Genişletilebilir Eşzamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
   
 # İleri Seviye Konular  
-* Ekler
+* [Ekler](appendix-00.md)
   * [A - Anahtar Kelimeler](appendix-01-keywords.md)
