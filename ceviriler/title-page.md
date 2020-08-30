@@ -19,4 +19,4 @@ Rust dili kitabının 2018 Sürümü, Rust'u daha ergonomik ve öğrenilmesi kol
 
 Bu kitabın çevrimiçi HTML formatı [https://rustdili.github.io/](https://rustdili.github.io/) adresinde yer almaktadır. Kitabın çevrimdışı çalışan Orijinal dildeki kopyası ise, rustup ile yapılan Rust kurulumlarında mevcut olup, bu kitabı okumak için terminalinizde `rustup docs --book` komutunu çalıştırmanız yeterlidir.
 
-Bu kitabı kapaksız ve e-kitap biçiminde [No Starch Press](https://nostarch.com/rust) adresinden temin edebilirsiniz.
+Bu kitabın orijinal dilindeki sürümünü, kapaksız ve e-kitap biçiminde [No Starch Press](https://nostarch.com/rust) adresinden temin edebilirsiniz.
