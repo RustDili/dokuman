@@ -1,14 +1,14 @@
 # Rust Programlama Dili Türkçe Dökümanları
 
-Rust dili ile ilgili Türkçe dökümanları bu depoda bulabilirsiniz. Mevcut dökümanlar üzerinde düzenlemeler yaparak veya yeni döküman ekleyerek bize yardımcı olabilirsiniz.
+Rust programlama dili hakkında Türkçe üretilmiş veya yazarlarının izniyle Türkçeye çevrilmiş belge, bilgi ve öğretim araçlarını **Rust Dili** repolarında bulabilirsiniz.
 
-## Nasıl katkıda bulunabilirim
+Bu repolarda yer alan bilgi ve belgelerin okuyucu tarafından rahatlıkla anlaşılabilmesi için öneri ve görüşlerinizi bize ilgili reponun tartışma alanınlarından iletebilirsiniz. 
 
-- Öncelikle bu depoyu kendi github hesabınıza çatallayın (fork).
-- Çatalladığınız depoyu bilgisayarınıza indirin (clone).
-- İndirdiğiniz depo üzerinde gerekli düzenleme veya eklemeleri yapın.
-- Bilgisayarınızdaki düzenlemeleri github hesabınıza gönderin (push).
-- Github hesabınzdaki değişikliklerin RustDili deposuna aktarılması için alma isteği (pull request) oluşturun.
+Bu depolarda bulacağınız dökümanlar ilgili belgelerin basın yayım haklarına sahip yazar ve çevirmenlerin istekleri doğrultusunda teliflendirilmekte olup, kullanımlarınız esnasında ilgili lisans hükümlerini dikkate almanızı önemle rica ederiz.
+
+## Nasıl katkıda bulunabilirsiniz?
+
+Rust programlama dili bilgi-belge havuzuna, kendi makaleleriniz, çevirileriniz, örnek kodlarınız ve öğretici projeleriniz ile katkıda bulunabilirsiniz.
 
 ## Katkıda bulunurken nelere dikkat etmeliyim
 
@@ -21,7 +21,7 @@ Rust dili ile ilgili Türkçe dökümanları bu depoda bulabilirsiniz. Mevcut d�
  
  [Rust'ın Mülkiyet Kavramı - Derleme](https://github.com/RustDili/Rust-Mulkiyet-Kavrami)
  
- [Rust Programlama Dili - Resmi kitap çevirisi](https://github.com/rust-lang-tr/dokuman/tree/master/ceviriler)
+ [Rust Programlama Dili - Resmi kitap çevirisi](https://github.com/RustDili/dokuman/tree/master/ceviriler)
  
  # Çevrim-içi Kitaplar
  ## [Rust Programlama Dili](https://rustdili.github.io/)
