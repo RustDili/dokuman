@@ -17,7 +17,7 @@ Rust programlama dili bilgi-belge havuzuna, kendi makaleleriniz, çevirileriniz,
 - Eğer dökümanın sahibi sizseniz açıkça aksini belirtmediğiniz sürece yapmış olduğunuz tüm katkılar [MIT](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-MIT) ve [Apache 2.0](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-APACHE) lisansları olmak üzere iki lisans altında dağıtılır.
 
 ## Döküman Dizini
- [Rust'ı Öğrenmek - Dumindu Madunuwan](https://github.com/RustDili/dokuman/tree/master/rust-programlama-diline-giris)
+ [Rust'ı Öğrenmek - Dumindu Madunuwan](https://github.com/RustDili/Rust-Ogrenmek)
  
  [Rust'ın Mülkiyet Kavramı - Derleme](https://github.com/RustDili/Rust-Mulkiyet-Kavrami)
  
