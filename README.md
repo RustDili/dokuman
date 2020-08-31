@@ -1,6 +1,6 @@
 # Rust Programlama Dili Bilgi-Belge Havuzu
 
-Rust programlama dili hakkında Türkçe üretilmiş veya yazarlarının izniyle Türkçeye çevrilmiş belge, bilgi ve öğretim araçlarını **Rust Dili** repolarında bulabilirsiniz.
+Rust programlama dili hakkında Türkçe üretilmiş veya yazarlarının izniyle Türkçeye çevrilmiş belge, bilgi ve öğretim araçlarını bu sayfada yer alan bağlantıları eşliğinde  **Rust Dili** repolarında bulabilirsiniz.
 
 Bu repolarda yer alan bilgi ve belgelerin okuyucu tarafından rahatlıkla anlaşılabilmesi için öneri ve görüşlerinizi bize ilgili reponun tartışma alanınlarından iletebilirsiniz. 
 
