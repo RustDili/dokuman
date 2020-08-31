@@ -1,4 +1,4 @@
-# Rust Programlama Dili Türkçe Dökümanları
+# Rust Programlama Dili Bilgi-Belge Havuzu
 
 Rust programlama dili hakkında Türkçe üretilmiş veya yazarlarının izniyle Türkçeye çevrilmiş belge, bilgi ve öğretim araçlarını **Rust Dili** repolarında bulabilirsiniz.
 
