@@ -10,7 +10,7 @@ Bu depolarda bulacağınız dökümanlar ilgili belgelerin basın-yayım haklar�
 
 Rust programlama dili bilgi-belge havuzuna, kendi makaleleriniz, çevirileriniz, örnek kodlarınız ve öğretici projeleriniz ile katkıda bulunabilirsiniz.
 
-## Katkıda bulunurken nelere dikkat etmeliyim
+## Katkıda sağlarken nelere dikkat edilmelidir?
 
 - Katkıda bulunmanızı çok istemekle birlikte tüm katılımcılarımızdan bu bağlantıda yer alan [Rust davranış kuralları](https://www.rust-lang.org/policies/code-of-conduct)'na uymalarını bekliyoruz.
 - Eklenen dökümanların telif sorumluluğu ekleyen kişilere aittir. Eklenecek her döküman için bir yazar adı ve kaynakça, dökümanın derleme olması halinde kaynağı yönlenen bağlantılar verilmesi zorunludur.
