@@ -2,9 +2,9 @@
 
 Rust programlama dili hakkında Türkçe üretilmiş veya yazarlarının izniyle Türkçeye çevrilmiş belge, bilgi ve öğretim araçlarını bu sayfada yer alan bağlantıları eşliğinde  **Rust Dili** repolarında bulabilirsiniz.
 
-Bu repolarda yer alan bilgi ve belgelerin okuyucu tarafından rahatlıkla anlaşılabilmesi için öneri ve görüşlerinizi bize ilgili reponun tartışma alanınlarından iletebilirsiniz. 
+Bu repolarda yer alan bilgi ve belgelerin okuyucu tarafından rahatlıkla anlaşılabilmesi için öneri ve görüşlerinizi bize ilgili reponun tartışma alanları üzerinden iletebilirsiniz. 
 
-Bu depolarda bulacağınız dökümanlar ilgili belgelerin basın yayım haklarına sahip yazar ve çevirmenlerin istekleri doğrultusunda teliflendirilmekte olup, kullanımlarınız esnasında ilgili lisans hükümlerini dikkate almanızı önemle rica ederiz.
+Bu depolarda bulacağınız dökümanlar ilgili belgelerin basın-yayım haklarına sahip yazar ve çevirmenlerin istekleri doğrultusunda teliflendirilmekte olup, kullanımlarınız esnasında ilgili lisans hükümlerini dikkate almanızı önemle rica ederiz.
 
 ## Nasıl katkıda bulunabilirsiniz?
 
