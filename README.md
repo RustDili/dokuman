@@ -16,6 +16,9 @@ Rust programlama dili bilgi-belge havuzuna, kendi makaleleriniz, çevirileriniz,
 - Eklenen dökümanların telif sorumluluğu ekleyen kişilere aittir. Eklenecek her döküman için bir yazar adı ve kaynakça, dökümanın derleme olması halinde kaynağı yönlenen bağlantılar verilmesi zorunludur.
 - Eğer dökümanın sahibi sizseniz açıkça aksini belirtmediğiniz sürece yapmış olduğunuz tüm katkılar [MIT](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-MIT) ve [Apache 2.0](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-APACHE) lisansları olmak üzere iki lisans altında dağıtılır.
 
+## Öğreticiler
+[Rust Turu](https://tourofrust.com/00_tr.html)
+
 ## Döküman Dizini
  [Rust'ı Öğrenmek - Dumindu Madunuwan](https://github.com/RustDili/Rust-Ogrenmek)
  
