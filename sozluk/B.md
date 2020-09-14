@@ -1,6 +1,6 @@
 # **B**
 
-* **Byte** - `[Byte]` - 8 bitlik tür.
+* **Byte** - `[Byte]` | [bayt] - 8 bitlik tür.
 * **Big endian** - `[Büyük soncul]` - Değerin üst bitlerini oluşturan baytın bellekte önceki adreste yer aldığı işlemci mimarisi.
 * **Binary system** - `[İkili sayı sistemi]` - İki rakamdan oluşan sayı sistemi.
 * **Binding** - `[İlinti]` - Yabancı kütüphane olanaklarını Rust söz dizimiyle bildiren dosya.
