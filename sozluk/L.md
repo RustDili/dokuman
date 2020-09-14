@@ -4,6 +4,7 @@
 * **Lambda** - `[İsimsiz işlev]` - Genellikle işlevlere parametre olarak gönderilen isimsiz işlev.
 * **Lazy evaluation** - `[Tembel değerlendirme]` - İşlemlerin gerçekten gereken ana kadar geciktirilmesi.
 * **Library** - `[Kütüphane]` - Belirli bir konuda çözüm getiren tür tanımları ve işlevlerin bir araya getirilmesi
+* **Lifetime** - `[Yaşam süresi]` - Bir değişken veya nesnenin tanımlanmasından işinin bitmesine kadar geçen süre
 * **Linkage** - `[Bağlanım]` - Derlenen koddaki özgün ismi belirleyen kurallar.
 * **Linked list** - `[Bağlı liste]` - Her öğesinin bir sonraki üyeyi gösterdiği veri yapısı.
 * **Linker** - `[Bağlayıcı]` - Derleyicinin oluşturduğu program parçalarını bir araya getiren program.
