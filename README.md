@@ -16,6 +16,9 @@ Rust programlama dili bilgi-belge havuzuna, kendi makaleleriniz, çevirileriniz,
 - Eklenen dökümanların telif sorumluluğu ekleyen kişilere aittir. Eklenecek her döküman için bir yazar adı ve kaynakça, dökümanın derleme olması halinde kaynağı yönlenen bağlantılar verilmesi zorunludur.
 - Eğer dökümanın sahibi sizseniz açıkça aksini belirtmediğiniz sürece yapmış olduğunuz tüm katkılar [MIT](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-MIT) ve [Apache 2.0](https://github.com/rust-lang/rust-by-example/blob/master/LICENSE-APACHE) lisansları olmak üzere iki lisans altında dağıtılır.
 
+## Kavramlar ve Türkçe Karşılıkları Sözlüğü
+[Katkılarınızı bekleyen bu çalışma, Rust dili belge havuzu ve çevirilerindeki terimlerin Türkçe karşılıklarından oluşur. Alfabetik olarak sıraladığımız ve Türkçe karşılığının tam olarak verilemediğine inandığınız terimler için önerilerinizi bekliyoruz.](https://github.com/RustDili/dokuman/tree/master/sozluk)
+
 ## Öğreticiler
 [Rust Turu](https://tourofrust.com/00_tr.html)
 
