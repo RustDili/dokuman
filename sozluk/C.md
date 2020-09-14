@@ -13,6 +13,7 @@
 * **Code unit** - `[Kod birimi]` - UTF kodlaması kod değeri
 * **Comment** - `[Yorum Satırı]` | [Açıklama satırı] - Kodu açıklamak amacıyla program içine yazılan satır.
 * **Compiler** - `[Derleyici]` - Programlama dili kodunu bilgisayarların anladığı makine koduna çeviren program.
+* **Complex number** - `[Karmaşık sayılar]` - Hem gerçek ehm sanal bölümlerden oluşabilen sayılardır.
 * **Concurrency** - `[Eş zamanlı programlama]` - İş parçacıklarının birbirine bağımlı olarak işlemeleri
 * **Cons** - `[Sabit]` - Bir bağlam içinde değiştirilmeyen
 * **Constraint** - `[Kısıtlama]` - Uyulması gereken koşulların belirlenmesi
