@@ -10,3 +10,5 @@
 * **Array**- `[Dizi]` - Elemanları yan yana duran ve dizin numarasıyla erişilen topluluk.
 * **Assign**- `[Atama]` - Bir değişkene yeni bir değer vermek.
 * **Associative Array**- `[Eşleme Tablosu]` - Elemanlarına tam sayı olmayan dizin numaralarıyla erişilebilen veri yapısı.
+* **Asynchronous**- `[Eşzamansız]` | [Zaman uyumsuz] - Önceden bilinmeyen zaman aralıklarında gerçekleşen
+* **Atomic operation**- `[Kesintisiz işlem]` - Bir iş parçası tarafından kesintiye uğratılmaksızın çalıştırılan işlem
