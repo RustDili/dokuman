@@ -15,6 +15,7 @@
 * **Preemptive multi tasking** - `[Geçişli çoklu görev]` - Görevlerin bilinmeyen zamanlarda duraksatıldığı çoklu görev yöntemi.
 * **Private** - `[Özel erişim]` - Başkalarının erişimine kapalı olma hali
 * **Program** - `[Program]` - Bilgisayara yapacağı işleri bildiren bir dizi ifade.
+* **Procedural programming** - `[Yordamsal programlama]` - Yordamların çağrılması mantığına dayanan bir programlama çeşidi.
 * **Protected** - `[Korumalı erişim]` - Belirli ölçüde korumalı erişim
 * **Proxy** - `[Vekil]` - Başka nesne yerine kullanılan nesne
 * **Public** - `[Genel erişim]` - Başkalarının erişimine açık olma hali
