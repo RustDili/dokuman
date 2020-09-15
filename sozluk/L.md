@@ -3,6 +3,7 @@
 * **Label** - `[Etiket]` - Kod satırlarını isimlendirmek için kullanılan olanak.
 * **Lambda** - `[İsimsiz işlev]` - Genellikle işlevlere parametre olarak gönderilen isimsiz işlev.
 * **Lazy evaluation** - `[Tembel değerlendirme]` - İşlemlerin gerçekten gereken ana kadar geciktirilmesi.
+* **Let** - `[let]` - Bir değerin bağlamını ifade eden anahtar kelime
 * **Library** - `[Kütüphane]` - Belirli bir konuda çözüm getiren tür tanımları ve işlevlerin bir araya getirilmesi
 * **Lifetime** - `[Yaşam süresi]` - Bir değişken veya nesnenin tanımlanmasından işinin bitmesine kadar geçen süre
 * **Linkage** - `[Bağlanım]` - Derlenen koddaki özgün ismi belirleyen kurallar.
