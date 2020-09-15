@@ -7,4 +7,6 @@
 * **Bit** - `[Bit]` - 0 ve 1 değerlerini alabilen temel bilgi birimi.
 * **Block** - `[Blok]` - {Küme parantezleriyle gruplanmış ifadelerin tümü.}
 * **BOM, Byte order mark** - `[BOM]` - Dosyanın en başına yazılan Unicode kodlama işareti.
+* **Borrowing** - `[Borçlanma]` - Bir değerin mülkiyetinin geçici olarak devredilmesi. 
+* **Borrow checker** - `[Borç denetçisi]` - Nesne yaşam döngüsü denetiminde kullanılan ödünç alma/verme düzeneği.
 * **Boxing** - `[Kutulama]` | [boxing] - Serbestçe kullanılmasına izin verilemeyen sayısal değerin otomatik olarak dönüştürülmesi
