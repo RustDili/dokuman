@@ -7,7 +7,9 @@
 * **Signed type** - `[İşaretli tür]` - Eksi ve artı değerler alabilen tür.
 * **Slice** - `[Dilim]` - Başba bir dizinin belirli bir bölümüne erişim sağlayan yapı.
 * **Source file** - `[Kaynak dosya]` - Programcının yazdığı kodu içeren dosya.
+* **Stack** - `[Yığıt]` | [stack]- Uzunluğu bilinen verilerin saklandığı bellek bölgesi
 * **Stack unwinding** - `[Yığıt çözülmesi]` - Oluşan hata nedeniyle çerçevelerin çağrı yığıtından çıkarılmaları.
+* **Stack frame** - `[Yığıt çerçevesi]` - Belleğin `stack` bölgesine öbek halinde yerleştirilen organize veri yığını.
 * **Standart input** - `[Standart giriş]` - Program girişinin normalde okunduğu akım.
 * **Standart output** - `[Standart çıkış]` - Program çıktısının normalde gönderildiği akım.
 * **Statement** - `[Deyim]` - ifadelerin işletilmelerini ve sıralarını etkileyen program yapısı.
