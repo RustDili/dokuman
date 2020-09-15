@@ -10,4 +10,5 @@
 * **Truncate** - `[Kırpılma]` - Sayının virgülden sonrasının kaybedilmesi.
 * **Tuple** - `[Çokuzlu]` - Aynı ya da farklı türlerden oluşan değerlerin yan yana ve indeks numaralarıyla erişilecek şekilde bir araya getirilmesiyle oluşan yapı.
 * **Type conversion** - `[Tür dönüşümü]` - Bir değeri üzerinden başka tür bir değer elde etmek.
+* **Type erasure** - `[Tür dönüştürücü]` - Genel amaçlı bir türün her kullamıöında ihtiyaç duyulan türe dönüşümünü sağlayan düzenek.
 * **Type qualifier** - `[Tür nitelendirici]` - constant, statics, const_fn... 
