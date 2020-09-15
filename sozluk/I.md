@@ -2,6 +2,7 @@
 
 * **I/O** - `[I/O]` | [Giriş/çıkış] - Giriş/Çıkış işlemleri
 * **IDE** - `[Geliştirme ortamı]` - Program yazmayı kolaylaştıran program
+* **Idempotance** - `[Idempotent]` - Birden çok uygulanabilen işlem özelliği.
 * **Immutable** - `[Değişmez]` - Programın çalışması süresince kesinlikle değişmeyen.
 * **Imperative programming** - `[Emirli programlama]` - İşlemlerin deyimler halinde adım adım belirlendikleri programlama yöntemi.
 * **Implementation** - `[Uygulama]` | [Gerçekleştirme] - Öğeleri bir uygulama türüyle ilişkilendirmek.
