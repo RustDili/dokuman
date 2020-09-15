@@ -14,6 +14,7 @@
 * **Comment** - `[Yorum Satırı]` | [Açıklama satırı] - Kodu açıklamak amacıyla program içine yazılan satır.
 * **Compiler** - `[Derleyici]` - Programlama dili kodunu bilgisayarların anladığı makine koduna çeviren program.
 * **Complex number** - `[Karmaşık sayılar]` - Hem gerçek ehm sanal bölümlerden oluşabilen sayılardır.
+* **Composition over inheritance** - `[Kalıtım yerine kompozisyon]` - Rust'ta sadece arayüzler `(trait)` üzerinden kalıtıma izin verildiğinden miras olarak devralınan özelliklere bu arayüzlerin kompozisyonu aracılığıyla erişilebilir.     
 * **Concurrency** - `[Eş zamanlı programlama]` - İş parçacıklarının birbirine bağımlı olarak işlemeleri
 * **Cons** - `[Sabit]` - Bir bağlam içinde değiştirilmeyen
 * **Constraint** - `[Kısıtlama]` - Uyulması gereken koşulların belirlenmesi
@@ -28,4 +29,5 @@
 * **CPU bound** - `[Mikro işlemciye bağlı]` - Zamanının çoğunu mikro işlemciyi işleterek geçiren
 * **CPU core** - `[Mikro işlemci çekirdeği]` - Kendi başına mikro işlemci olarak kullanılabilen işlemci birimi
 * **Crash** - `[Çökme]` - Programın hata ile sonlanması
-* **CTFE, Compile Time Function Execution** - `[CTFE]` - Derlem zamanında işlev çalıştırma
+* **CTFE, Compile Time Function Execution** - `[CTFE]` - Derleme zamanında işlev çalıştırma
+* **Currying** - `[Körilemek]` - Tembel olarak değerlendirilen işlevlerin parametre sayılarını teke indirmek için kullanılan bir yöntem.
