@@ -1,6 +1,7 @@
 # **R**
 
 * **Race condition** - `[Yarış hali]` - Verinin yazılma ve okunma sırasının belirsizliği.
+* **RAII, resource acquisition is initialization** - `[RAII]` - Sonlandırma kodlarının çalışmasını garanti eden kaynak yönetim şekli.
 * **Range** - `[Aralık]` - Belirli bir biçimde erişilen bir grup eleman.
 * **Recursion** - `[Özyineleme]` - Bir işlevin doğrudan veya dolaylı olarak kendini çağırması.
 * **Reference** - `[Referans]` - Asıl nesneye onun takma adıymış gibi erişim sağlayan program yapısı.
