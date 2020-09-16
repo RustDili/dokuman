@@ -11,6 +11,7 @@
 * **Message passing** - `[Mesajlaşma]` - İş parçacıklarının birbirlerine mesaj göndermeleri.
 * **Metadatum** - `[Metaveri]` | [metadata] - Bir veri parçasını tanımlayan bilgi parçası.
 * **Meta programming** - `[Meta programlama]` | [Üst programlama yaklaşımı]- Bir programın, başka bir programı veri olarak değerlendirebilme özelliği.
+* **Method** - `[Yöntem]` | [metod]- Belirli veri türleriyle ilişkili işlevler.
 * **Mixin** - `[Katma]` - Program içine otomatik olarka kod yerleştirme.
 * **Module** - `[Modül]` - Bir program ya da kütüphanenin işlev ve tür tanımlarından oluşan bir alt birimi.
 * **Modulus** - `[Kalan]` - Bölme işleminin kalan değeri
