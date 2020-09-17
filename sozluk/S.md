@@ -14,7 +14,7 @@
 * **Standart output** - `[Standart çıkış]` - Program çıktısının normalde gönderildiği akım.
 * **Statement** - `[Deyim]` - ifadelerin işletilmelerini ve sıralarını etkileyen program yapısı.
 * **Static** - `[Statik]` - derleme zamanında belirli olan.
-* **Stream** - `[Akım]` - Nesnelerin art arda erişildiği giriş çıkış birimi.
+* **Stream** - `[Akım]` - Zaman uyumsuz olarak değer üreten olaylar dizisini temsil eder.
 * **String** - `[Dizge]` [Dizgi] - "Merhaba" gibi bir karakter dizisi.
 * **Struct** - `[Yapı]` - Başka veriler/türleri bir araya getiren veri yapısı.
 * **Subclass** - `[Alt sınıf]` - Başka sınıftan türetilen sınıf.
