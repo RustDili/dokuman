@@ -1,6 +1,7 @@
 # Cargo ve Crates.io Hakkında Daha Fazla Bilgi
+
 Şimdiye kadar kodumuzu oluşturmak, çalıştırmak ve test etmek için Cargo'nun yalnızca en temel özelliklerini kullandık, 
-ancak Cargo ile çok daha fazlasını yapılabilir. Bu bölümde, aşağıdakilerin nasıl yapılacağını göstermek amacıyla gelişmiş özelliklerinden bazılarını tartışacağız:
+ancak Cargo ile çok daha fazlası yapılabilir. Bu bölümde aşağıdaki işlemlerin nasıl yapılacağını gösterebilmek amacıyla Cargo'nun gelişmiş özelliklerinden bazılarını tartışacağız:
 
   * Sürüm profilleri aracılığıyla derlemenin özelleştirilmesi
   * Kütüphanelerin [crates.io](https://crates.io/)'da yayınlanması

@@ -7,15 +7,34 @@ Rust Programlama Dili kitabının Türkçe çevirisi [The Rust Programming Langu
 * Bu dizine yansıtılacak olan kod örneklerinin çalışan sürümleri tıpkı bu örnekte olduğu gibi: [Oyun Alanı](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b9feaef7d951bd0c68a15ba3368d3faf) üzerinde, 
 * Çevrimi-içi sitesinde bulunan kod örnekleri ise kitabın aslında olduğu gibi olduğu yerde ve çalıştırılır biçimde sunulmaktadır.
 
-RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE) ve [Apache 2.0](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE) ile Lisanslanmış olup **Özel** bir çalışmanın ürünü olduğundan **Ticari bir amaçla basılıp kopyalanamaz ve dağıtılamaz.**
+RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE), [Apache 2.0](https://github.com/RustDili/rustdili.github.io/blob/master/LICENSE) ve **Özel** bir çalışmanın ürünü olduğundan [Creative Commons Atıf-GayriTicari 4.0 Uluslararası Kamu Lisans](https://github.com/RustDili/dokuman/blob/master/ceviriler/LICENSE-CC.md) hükümleriyle Lisanslanmış olup **Ticari bir amaçla basılıp kopyalanamaz ve dağıtılamaz.**
 
 
 ## [Çevrim-içi Takip Et](https://rustdili.github.io/)
 
 
-## Çevirisi tamamlanan bölümler
+# Çevirisi tamamlanan bölümler
+
+# Rust Programlama Dili
+
+* [Rust Programlama Dili](title-page.md)
+* [Önsöz](foreword.md)
+* [Giriş](ch00-00-introduction.md)
 
 # Başlarken
+* [Başlarken](ch01-00-getting-started.md)
+    * [Kurulum](ch01-01-installation.md)
+    * [Merhaba, Dünya](ch01-02-hello-world.md)
+    * [Merhaba, Cargo](ch01-03-hello-cargo.md)
+
+* [Bir Tahmin Oyunu Programlamak](ch02-00-guessing-game-tutorial.md)
+
+* [Ortak Programlama Kavramları](ch03-00-common-programming-concepts.md)
+    * [Değişkenler ve Değişkenlik](ch03-01-variables-and-mutability.md)
+    * [Veri Türleri](ch03-02-data-types.md)
+    * [İşlevler](ch03-03-how-functions-work.md)
+    * [Yorumlar](ch03-04-comments.md)
+    * [Kontrol Akışı](ch03-05-control-flow.md)
 
 * [Mülkiyeti Anlamak](ch04-00-understanding-ownership.md)
 
@@ -41,5 +60,5 @@ RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](h
   * [16.4. `Sync` ve `Send` Özellikleri ile Genişletilebilir Eşzamanlılık](ch16-04-extensible-concurrency-sync-and-send.md)
   
 # İleri Seviye Konular  
-* Ekler
+* [Ekler](appendix-00.md)
   * [A - Anahtar Kelimeler](appendix-01-keywords.md)
