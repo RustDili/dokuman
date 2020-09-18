@@ -15,7 +15,7 @@
 * **Compiler** - `[Derleyici]` - Programlama dili kodunu bilgisayarların anladığı makine koduna çeviren program.
 * **Complex number** - `[Karmaşık sayılar]` - Hem gerçek ehm sanal bölümlerden oluşabilen sayılardır.
 * **Composition over inheritance** - `[Kalıtım yerine kompozisyon]` - Rust'ta sadece arayüzler `(trait)` üzerinden kalıtıma izin verildiğinden miras olarak devralınan özelliklere bu arayüzlerin kompozisyonu aracılığıyla erişilebilir.     
-* **Concurrency** - `[Eş zamanlı programlama]` - İş parçacıklarının birbirine bağımlı olarak işlemeleri
+* **Concurrency** - `[Eş zamanlı programlama]` - İş parçacıklarının sonuca etki etmeden bağımsız veya bağımlı olarak çalışmaları
 * **Cons** - `[Sabit]` - Bir bağlam içinde değiştirilmeyen
 * **Constraint** - `[Kısıtlama]` - Uyulması gereken koşulların belirlenmesi
 * **Construct** - `[Kurma]` - Yapı veya sınıf nesnelerini kullanılabilir duruma getirmek.
