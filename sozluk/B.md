@@ -9,4 +9,4 @@
 * **BOM, Byte order mark** - `[BOM]` - Dosyanın en başına yazılan Unicode kodlama işareti.
 * **Borrowing** - `[Borçlanma]` - Bir değerin mülkiyetinin geçici olarak devredilmesi. 
 * **Borrow checker** - `[Borç denetçisi]` - Nesne yaşam döngüsü denetiminde kullanılan ödünç alma/verme düzeneği.
-* **Boxing** - `[Kutulama]` | [boxing] - Bir değerin Stack bellek yerine Heap bellekte saklanması için kullanılan ifade.
+* **Boxing** - `[Kutulama]` | [boxing] - Bir değerin belleğin `stack `bölgesi yerine `heap` bölgesinde saklanması için kullanılan ifade.
