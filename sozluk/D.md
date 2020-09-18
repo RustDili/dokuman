@@ -18,5 +18,6 @@
 * **Diamond problem** - `[Diamond problemi]` - Nesne yönelimli programlamada çoklu kalıtım sırasında karşılaşılan çakışma sorunu.
 * **Directory** - `[Dizin]` | [klasör] - Dosyaların barındırıldığı sistematik yapı.
 * **Discriminated union** - `[Korumalı birlik]` - Yalnızca geçerli üyesine eriştiren birlik.
+* **Drop** - `[Boşaltmak]` | [düşürmek] - Bellekteki kaynaklarının boşaltılıp temizlenerek iadeye hazır hale getirilmesi?
 * **Duck typing** - `[Ördek tipleme]` - Türün yerine davranışın önemli kabul edilmesi.
 * **Dynamic** - `[Dinamik]` - Çalışma zamanında değişebilen.
