@@ -19,3 +19,4 @@
 * **Struct** - `[Yapı]` - Başka veriler/türleri bir araya getiren veri yapısı.
 * **Subclass** - `[Alt sınıf]` - Başka sınıftan türetilen sınıf.
 * **Syntax** - `[Söz dizimi]` - Bir dilin yazım kuralları
+* **Static dispatch** - `[Statik iletim]` - Çalıştırılacak metodun bulunduğu adres derleme zamanında bilindiğinden doğrudan bağlanılır. 
