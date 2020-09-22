@@ -21,3 +21,4 @@
 * **Drop** - `[Bırakmak]` | [düşürmek] - Bellekteki hücrelerin onlara işaret eden işaretçiler ile ilişkilerinin kesilmesi, böylece tekrar kullanıma açık hale gelmeleri.
 * **Duck typing** - `[Ördek tipleme]` - Türün yerine davranışın önemli kabul edilmesi.
 * **Dynamic** - `[Dinamik]` - Çalışma zamanında değişebilen.
+* **Dynamic dispatch** - `[Dinamik iletim]` - Alt yordam çağrılarının ilişkili alt yordam adreslerine dinamik olarak bağlanması.
