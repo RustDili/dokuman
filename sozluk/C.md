@@ -1,11 +1,11 @@
 # **C**
 
 * **Cache** - `[Ön bellek]` - Hızlı veri veya kod erişimi için kullanılan mikro işlemci iç belleği.
-* **Call stack** - `[Çağrı yığıtı]` - Belleğin kısa ömürlü değişkenler ve işlev çağrıları için kullanılan bölgesi.
+* **Call stack** - `[Çağrı yığıtısı]` - Belleğin kısa ömürlü değişkenler ve işlev çağrıları için kullanılan bölgesi.
 * **Capacity** - `[Kapasite]` | [Sığa] - Yeni elemanlar için önceden ayrılan yer.
 * **Character** - `[Karakter]` - 'A', '@' gibi en alt seviyedeki metin parçası. ?Harf?
 * **Character encoding** - `[Karakter kodlaması]` - Karakter kodlarının ifade edilme yöntemi
-* **Class** - `[Sınıf]` - Üzerindeki kullanılan işlevleri de tanımlayan veri yapısı. (Rust'ta Kullanılmamakla beraber bazı belgelerde karşılaşacağız.) 
+* **Class** - `[Sınıf]` - Üzerindeki kullanılan işlevleri de tanımlayan veri yapısı. (Rust'ta kullanılmamakla beraber bazı belgelerde karşılaşacağız.) 
 * **Client** - `[İstemci]` - Sunucu programın hizmetlerinden yararlanan program
 * **Closure** - `[Kapama]` - İşlemi ve işlediği kapsamı bir arada saklayan program yapısı, ?isimsiz işlev?
 * **Code page** - `[Kod tablosu]` - 127'den büyük karakter değerlerinin bir dünya dili için tanımlanmaları.
@@ -13,10 +13,10 @@
 * **Code unit** - `[Kod birimi]` - UTF kodlaması kod değeri
 * **Comment** - `[Yorum Satırı]` | [Açıklama satırı] - Kodu açıklamak amacıyla program içine yazılan satır.
 * **Compiler** - `[Derleyici]` - Programlama dili kodunu bilgisayarların anladığı makine koduna çeviren program.
-* **Complex number** - `[Karmaşık sayılar]` - Hem gerçek ehm sanal bölümlerden oluşabilen sayılardır.
+* **Complex number** - `[Karmaşık sayı]` - Hem gerçek hem sanal bölümlerden oluşabilen matematiksel kavram,sayı.
 * **Composition over inheritance** - `[Kalıtım yerine kompozisyon]` - Rust'ta sadece arayüzler `(trait)` üzerinden kalıtıma izin verildiğinden miras olarak devralınan özelliklere bu arayüzlerin kompozisyonu aracılığıyla erişilebilir.     
-* **Concurrency** - `[Eş zamanlı programlama]` - İş parçacıklarının sonuca etki etmeden bağımsız veya bağımlı olarak çalışmaları
-* **Cons** - `[Sabit]` - Bir bağlam içinde değiştirilmeyen
+* **Concurrency** - `[Eş zamanlı programlama]` - İş parçacıklarının sonuca etki etmeden bağımsız veya bağımlı olarak çalışmaları, paralellik.
+* **Const** - `[Sabit]` - Bir bağlam içinde değiştirilmeyen.
 * **Constraint** - `[Kısıtlama]` - Uyulması gereken koşulların belirlenmesi
 * **Construct** - `[Kurma]` - Yapı veya sınıf nesnelerini kullanılabilir duruma getirmek.
 * **Constructor** - `[Kurucu işlev]` - Nesneyi kuran işlev.
