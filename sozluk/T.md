@@ -7,6 +7,7 @@
 * **Ternary operator** - `[Üçlü işleç]` - İfadenin değerine göre birinci ya da ikinci değeri üreten işleç
 * **Text editor** - `[Metin düzenleyici]` - Metin yazmaya yarayan program.
 * **Thread** - `[İş parçacığı]` | [iş parçası] - İşletim sisteminin program işletme birimi ?İşlik?
+* **Trait** - `[Özellik]` - Bir yapının uygulaması gereken sözleşmeleri tanımlayan dil olanağı.
 * **Trait object** - `[Özellik nesnesi]` - Bir örneğin doğru metodlarını dinamik iletim yoluyla ve dolaylı olarak çağırmamıza izin veren, hem örneğin kendi         işaretçisini, hem örneğin işlevlerine yönelik işaretçilerin listesini tutan yapıdır.
 * **Truncate** - `[Kırpılma]` - Sayının virgülden sonrasının kaybedilmesi.
 * **Tuple** - `[Çokuzlu]` - Aynı ya da farklı türlerden oluşan değerlerin yan yana ve indeks numaralarıyla erişilecek şekilde bir araya getirilmesiyle oluşan yapı.
