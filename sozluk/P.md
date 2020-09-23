@@ -4,7 +4,7 @@
 * **Padding byte** - `[Doldurma baytı]` - Değişkenlerin hizalanması amacıyla aralarına doldurulan baytlar.
 * **Parallelization** - `[Koşut İşlemler]` | [Paralel işlemler] - Birbirinden bağımsız işlemlerin aynı anda işletilmeleri.
 * **Parameter** - `[Parametre]` - Bir işleve işini görebilmesi için sağlanan bilgi
-* **Parameterize** - `[Parametreleştirme]` - Bir şeyi parametre veya parametreler açısından açıklamak veya ifade etmek.
+* **Parameterize** - `[Parametreleştirme]` - Bir şeyi parametre veya parametreler ile açıklamak, ifade etmek.
 * **Pointer** - `[Gösterge]` - Bir değişkeni gösteren değişken
 * **Polymorphism** - `[Çok şekillilik]` - Bir türün, bir başka tür gibi davranabilme yeteneği.
 * **Post blit** - `[Kopya sonrası]` - Üyelerin kopya sonrasındaki işlemleri.
