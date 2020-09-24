@@ -11,7 +11,7 @@
 * **delegate** - `[Temsilci]` - Oluşturulduğu ortamdaki değişkenlere erişebilen isimsiz işlev.
 * **Deprecated** - `[Emekliye ayrılan]` - Halen kullanılan ama yakın gelecekte geçerliğini yitirecek olan.
 * **Deref** - `[Deref]` - Dereference işlecini uygulamak için kullanılan özellik. *Referansın işaret ettiği değeri çıkartın!* anlamını taşır.  
-* **Dereferencing** - `[Referansını almak]` | [Dereferencing] - Bir referans tarafından atıfta bulunulan verilere erişme/işleme sürecine denir.  
+* **Dereferencing** - `[Referansını almak]` | [Dereferencing] - Bir referans tarafından atıfta bulunulan verilere erişmek/işlemek.
 * **Designated initializer** - `[İsimli ilklendirici]` - Yapı üyelerinin isimle ilklendirilmeleri.
 * **Destruct** - `[Sonlandırma]` - Nesnenin kullanımdan kaldırılması sırasında yapılması gereken işlemler.
 * **Destructor** - `[Sonlandırıcı]` - Nesneyi sonlandıran işlev.
