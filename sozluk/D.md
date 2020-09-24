@@ -10,8 +10,8 @@
 * **Definition** - `[Tanım]` - Bir ismin ifade ettiği şeyi belirtmek.
 * **delegate** - `[Temsilci]` - Oluşturulduğu ortamdaki değişkenlere erişebilen isimsiz işlev.
 * **Deprecated** - `[Emekliye ayrılan]` - Halen kullanılan ama yakın gelecekte geçerliğini yitirecek olan.
-* **Deref** - `[Deref]` - Dereference işlecini uygulamak için kullanılır. Açıkça belli olmasa bile bu C dilindeki anlamı *Referansın işaret ettiği değeri çıkartın!* ile aynıdır.  
-* **Dereferencing** - `[Referansı kaldırmak]` | [Dereferencing] - `&mut` referanslarıyla birlikte kullanılan `*` işleci ile temsil edilir. Kopyalama özelliğini uygulayan bir türün kopyalanmasını sağlarken, kaynağın mülkiyetini elinde bulunduran sahibin değerini yeniden ayarlayabilmemizi sağlar.  
+* **Deref** - `[Deref]` - Dereference işlecini uygulamak için kullanılan özellik. *Referansın işaret ettiği değeri çıkartın!* anlamını taşır.  
+* **Dereferencing** - `[Referansını almak]` | [Dereferencing] - Bir referans tarafından atıfta bulunulan verilere erişme/işleme sürecine denir.  
 * **Designated initializer** - `[İsimli ilklendirici]` - Yapı üyelerinin isimle ilklendirilmeleri.
 * **Destruct** - `[Sonlandırma]` - Nesnenin kullanımdan kaldırılması sırasında yapılması gereken işlemler.
 * **Destructor** - `[Sonlandırıcı]` - Nesneyi sonlandıran işlev.
