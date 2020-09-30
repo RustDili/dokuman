@@ -18,5 +18,5 @@
 * **String** - `[Dizge]` [Dizgi] - "Merhaba" gibi bir karakter dizisi.
 * **Struct** - `[Yapı]` - Başka veriler/türleri bir araya getiren veri yapısı.
 * **Subclass** - `[Alt sınıf]` - Başka sınıftan türetilen sınıf.
-* **Syntax** - `[Söz dizimi]` - Bir dilin yazım kuralları
+* **Syntax** - `[Söz dizim]` - Doğal dillerdeki cümle kurma ilke ve kurallarıyla, bu dildeki cümlelerin esnekliğini inceleyen bilim dalıdır.
 * **Static dispatch** - `[Statik iletim]` - Çalıştırılacak metodun bulunduğu adres derleme zamanında bilindiğinden doğrudan bağlanılır. 
