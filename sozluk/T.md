@@ -11,7 +11,7 @@
 * **Trait object** - `[Özellik nesnesi]` - Bir örneğin doğru metodlarını dinamik iletim yoluyla ve dolaylı olarak çağırmamıza izin veren, hem örneğin kendi         işaretçisini, hem örneğin işlevlerine yönelik işaretçilerin listesini tutan yapıdır.
 * **Truncate** - `[Kırpılma]` - Sayının virgülden sonrasının kaybedilmesi.
 * **Tuple** - `[Çokuzlu]` - Aynı ya da farklı türlerden oluşan değerlerin yan yana ve indeks numaralarıyla erişilecek şekilde bir araya getirilmesiyle oluşan yapı.
-* **Turbofish** - `[Turbofish]` - Türden bağımsız, yani jenerik kodlamada gerektiğinde türün açıkça bildirilmesini sağlayan `::<T>` işleç.
+* **Turbofish** - `[Turbofish]` - Genellenmiş bir türün açıkça bildirilmesini sağlayan `::<T>` işleç.
 * **Type conversion** - `[Tür dönüşümü]` - Bir değeri üzerinden başka tür bir değer elde etmek.
 * **Type erasure** - `[Tür dönüştürücü]` - Genel amaçlı bir türün her kullamıöında ihtiyaç duyulan türe dönüşümünü sağlayan düzenek.
 * **Type qualifier** - `[Tür nitelendirici]` - constant, statics, const_fn... 
