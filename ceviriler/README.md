@@ -15,8 +15,6 @@ RustDili repolarında bulunan tüm dökümanlar gibi bu bu çalışma da [MIT](h
 
 # Çevirisi tamamlanan bölümler
 
-# Rust Programlama Dili
-
 * [Rust Programlama Dili](title-page.md)
 * [Önsöz](foreword.md)
 * [Giriş](ch00-00-introduction.md)
