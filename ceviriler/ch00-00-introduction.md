@@ -22,7 +22,7 @@ Bunlar ve Rust ekosistemindeki diğer araçları kullanan geliştiriciler sistem
 
 ### Öğrenciler
 
-Rust, öğrenciler ve sistem kavramları hakkında bilgi edinmek isteyenler içindir. Pek çok kişi Rust kullanarak işletim sistemleri geliştirmek gibi konuları öğrendi. Rust topluluğu oldukça misafirperver olup öğrencilerin sorularını yanıtlamaktan mutluluk duyacaktır. Rust ekipleri sistem kavramlarını bu kitaba benzer çabalar üzerinden öncelikle programlamaya yeni başlayanlar olmak üzere daha fazla kişi için erişilebilir kılmak istiyor.
+Rust, öğrenciler ve sistem kavramlarını öğrenmekle ilgilenenler için tasarlanmıştır. Pek çok kişi Rust kullanarak işletim sistemleri geliştirme gibi alanları öğrenmiştir. Rust topluluğu oldukça misafirperver olup öğrencilerin sorularını heves ve heyacanla yanıtlamaktan çekinmezler. Bu kitap gibi girişimler aracılığıyla Rust ekipleri, sistem konseptlerini mümkün olduğunca çok kişi için, özellikle de programlamaya yeni başlayanlar için erişebilir hale getirmek istiyorlar.
 
 ### Şirketler
 
