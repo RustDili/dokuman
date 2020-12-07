@@ -6,7 +6,7 @@ Rust üzerine bir giriş kitabı olan Rust Programlama Dili'ne hoş geldiniz. Ru
 
 ## Rust Kimler İçin
 
-Rust, çeşitli nedenlerle birçok insan için idealdir. En önemli gruplardan birkaçına bakalım.
+Rust, çeşitli nedenlerden dolayı pek çok insan için idealdir. Bu insanların ait olduğu önemli üretim gruplardan birkaçına bakalım.
 
 ### Geliştirici Ekipler
 
