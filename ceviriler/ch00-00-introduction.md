@@ -12,7 +12,7 @@ Rust, çeşitli nedenlerden dolayı pek çok insan için idealdir. Bu insanları
 
 Rust, sistem programlama bilgileri farklı düzeylerde olan kalabalık geliştirici ekipleri arasında işbirliğini tesis eden verimli bir araç olduğunu kanıtlıyor. Düşük seviyeli kod, pek çok dilde kapsamlı testler ve deneyimli geliştiriciler tarafından, kodun dikkatle incelenmesiyle yakalanabilen çözümü zor hatalara eğilimlidir. Rust derleyicisi, eşzamanlılık hataları dahil bu türden hatalı kodların derlenmesini reddederek adeta bir bekçi rolü oynar. Böylelikle derleyiciyi takımın bir üyesi olarak gören geliştirici ekibi, değerli zamanlarını hataları takip etmek yerine, programın mantığına odaklanarak geçirebilirler.
 
-Rust ayrıca sistem programlama dünyasına çağdaş geliştirici araçları da getiriyor:
+Rust ayrıca sistem programlama dünyasına çağdaş geliştirici araçları da sunar:
 
 * Rust ile birlikte gelen bağımlılık yöneticisi ve derleme aracı olan Cargo, Rust ekosisteminde bağımlılıkları ekleme, derleme ve yönetmeyi sancısız ve tutarlı hale getirir.
 * Rustfmt ise geliştiriciler arasında tutarlı bir kodlama tarzı oluşturur.
