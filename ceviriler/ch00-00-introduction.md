@@ -34,11 +34,65 @@ Rust, Rust programlama dili, topluluğu, geliştirici araçları ve kütüphanel
 
 ### Hız ve İstikrara Değer Verenler
 
-Biz hızdan bahsederken, hem Rust ile oluşturabileceğiniz programların hızından, hem de Rust'ın kodlama sürecinde sağladığı hızdan bahsediyoruz. Bu sebepten Rust, bir dilden hız bekleyenler içindir.
+Rust, bir dilden hız ve istikrar bekleyenler içindir.
+Aslında hız demekle, hem Rust ile oluşturabileceğiniz programların hızını, hem de Rust'ın kodlama sürecinde sağladığı hızı kastediyoruz. Rust'ın derleyici kontrolleri, yeni özellik ekleme ve kodun yeniden düzenlenmesi aşamalarında kararlılık sağlaması onu, benzer denetimlerin olmadığı, geliştiricilerin genellikle değişiklik yapmaktan kaçındıkları programlama dillerinden ayırır. Rust'ın sıfır maliyetli soyutlamarı, elle yazılmış kodlar kadar hızlı çalışan düşük seviyeli kodlara derlenirken, daha fazla üst düzey işlevsellik arayışındaki Rust, güvenle çalışan kodu hızlı çalışan bir kod haline getirmeye çalışır.
 
-Rust derleyicisinin kontrolleri özellik ekleme ve yeniden düzenleme aşamalarında kararlılık sağladığından, bu kontrollerin yapılamadığı dillerde geliştiricilerin eski ve kırılgan kodları değiştirmekten korktukları sürecin tam tersidir. Bu nedenle Rust, bir dilden istikrar bekleyenler içindir,
+Burada bahsedilen büyük ilgi gurupları dışında Rust, değişik konu ve geliştirme alanlarıyla alakalı pekçok kullanıcıya da destek olmayı umuyor. Sonuç olarak Rust'ın hedefi, geliştiricilerin onlarca yıldır verdiği ödünleri, güvenlik, üretkenlik, hız ve kullanılabilirlik sağlayarak ortadan kaldırmaktır. Rust'ın bu olanaklarını deneyerek sizin için yararlı olup olmayacağına karar verin.
 
-Sıfır maliyetli soyutlamalar için çabalayan Rust, elle yazılan kodlar kadar çabuk düşük seviyeli kodlara derlenen üst düzey özellikler için gayret ederken, güvenli çalışan kodu hızlı çalışan bir kod haline getirmeye uğraşır. Dolayısıyla Rust, hız ve istikrar bekleyenler içindir!
+## Bu Kitap Kimler İçin
 
-<!-- Çeviride kaldığım yer -->
+Bu kitap handisi olduğundan bağımsız halihazırda başka bir programlama dilinde kod yazdığınız varsayar. Kitabın içeriğini farklı programlama geçmişlerine sahip geniş bir izleyici kitlesi için erişilebilir kılmaya çalıştık. Kitapta programlamanın ne olduğu veya nasıl düşünülmesi gerektiği konusuna zaman ayırmadık. Eğer programlama konusunda yeniyseniz, işe programlamaya giriş konusunda yazılmış kitaplardan başlamanızı öneririz.
+
+## Bu Kitap Nasıl Kullanılır
+
+Genel olarak bu kitabın baştan sona doğru sırayla okunması amaçlanmıştır. Sonraki bölümler, önceki bölümlerde işlenen kavramlar üzerine inşa edilmektedir. Genellikle önceki bölümlerde etraflıca incelenmeyen konuların ayrıntılarına daha sonraki bölümlerde değinilmektedir. Bu kitapta, kavramsal ve proje olarak ayrıştırılmış iki ayrı kısım bulunmaktadır. Rust hakkındaki bilinmesi gereken konular kavramsal kısımda işlenirken, öğrenilen konuların uygulamalarını proje kısmında gerçekleştireceğiz. Kitabın 2, 12 ve 20. bölümleri proje kısmını, diğer bölümler ise kavramsal kısmını oluşturmaktadır. 
+
+Bölüm 1, Rust'ın nasıl kurulacağını, bir "Merhaba Dünya" programının nasıl yazılacağını, Rust'ın paket yöneticisi ve yapım aracı olan Cargo'nun nasıl kurulacağını anlatır. 
+
+Bölüm 2, Rust diline uygulamalı giriş olarak tasarlandığından, bu bölümde işlenen yüksek düzeydeki kavramların ayrıntılarına sonraki bölümlerde değinilecektir. Kodlarla hemen haşır neşir olmak isteyenler için bu bölüm kol ve paçaların sıvanacağı yerdir.
+
+İstiyorsanız şimdilik Rust'ın diğer programlama dillerindeki benzer özelliklerini tartıştığımız 3. Bölümü atlayarak, Rust'ın mülkiyet sistemini öğrenmek amacıyla doğrudan kitabın 4. Bölümüne atlamak isteyebilirsiniz. Bununla birlikte, bir sonraki bölüme geçmeden önce her bir özelliği etraflıca öğrenmeyi tercih eden titiz bir öğrenciyseniz, proje kısmı olan 2. Bölümü  atlayarak doğrudan 3. Bölüme geçebilir, daha sonra etraflıca öğrendiklerinizi uygulamak üzere yeniden 2. Bölüme dönebilirsiniz.
+
+Bölüm 5, yapılar ve bundan böyle metot olarak adlandıracağımız yapı işlevlerini, Bölüm 6 ise, numaralandırmalar (enums), örüntü eşleme ifadeleri (match expressions) ve if let kontrol akış yapılarını içerir. Rust'ta özel türlerinizi oluştururken yapılar ve numaralandırmalardan fazlasıyla yararlanacaksınız.
+
+Bölüm 7 ise, kodunuz ve genel uygulama programlama arayüzünü (API) düzenleyebilmek için Rust'ın modül sistemi ve görünürlük kuralları hakkında bilgi verir. 
+
+Bölüm 8, vektörler, diziler ve eşleme haritaları (hash maps) gibi standart kütüphane tarafından sağlanan yaygın veri yapılarını anlatır.
+
+Bölüm 9'da ise Rust'ın hata işleme felsefesini ve tekniklerini inceleyeceğiz.
+
+Bölüm 10, farklı türlerin tek bir türmüş gibi davranabileği kodları yazmanıza olanak sağlayan genellenmiş veri türleri (generics), özellikler ve yaşam süreleri hakkında ayrıntılı bilgiler içerir.
+
+Bölüm 11 ise, Rust'ın güvenlik garantilerine rağmen program mantığınızın doğru olup olmadığından emin olabilmeniz için gerekli olan testlerle ilgilidir.
+
+Bölüm 12'de, metni dosyalarda arayan grep komut satırı aracından bir işlev alt kümesi oluştururken, önceki bölümlerde öğrendiğimiz kavramların çoğunu kullanacağız.
+
+Bölüm 13, Rust'ın işlevsel programlama dillerinden esinlendiği özellikler olan kapamalar ve yineleyicilere odaklanıyor. 
+
+Bölüm 14'te, Cargo'yu derinlemesine inceleyecek, kendi kütüphanelerinizi başkalarıyla paylaşmanın en iyi yollarından bahsedeceğiz. 
+
+Bölüm 15, standart kütüphanenin sunduğu akıllı işaretçileri ve bu işaretçilerin işlevselliğini sağlayan özellikleri anlatır.
+
+Bölüm 16'da, eşzamanlı programlamanın çeşitli modellerini inceleyecek ve Rust'ın paralel görevleri birden çok iş parçacına hiç çekinmeden dağıtmamıza nasıl yardımcı olduğunu konuşacağız.
+
+Bölüm 17, Nesne yönelimli olarak kabul edilen belirli özellikleri ve bu özelliklerin deyimsel Rust'a nasıl dönüştürüldüğünü inceler.
+
+Bölüm 18, Rust programlarında fikirleri ifade etmenin güçlü birer yolu olan örüntüler ve örüntü eşleştirme üzerine bir başvuru kaynağıdır.
+
+Bölüm 19, Güvenli olmayan Rust kodu, makrolar, yaşam süreleri, özellikler, türler, işlevler, ve kapamalar hakkında fazladan ayrıntılar gibi bir dizi ilginç ve gelişmiş konuları içerir.
+
+Bölüm 20'de, eşzamanlı çoklu görevleri düşük seviyede bir program olarak çalıştıran web sunucusu projesini bitireceğiz.
+
+Son olarak dil hakkında başvuru niteliğinde yararlı bilgiler içeren bazı ekler aşağıda listelenmektedir.
+Ek A, Rust'ın anahtar kelimelerini içerirç
+Ek B, Rust programlama dilinin işleç ve sembollerine yer verir.
+Ek C, Standart kütüphanenin sağladığı türetilebilir özellikleri kapsar.
+Ek D, Bazı faydalı geliştirme araçlarına atıfta bulunur.
+Ek E'de ise, Rust'ın sürümlerine yer verilmektedir.
+
+Öğrenim sürenizce kitabın bazı bölümleri atlamak isterseniz, bunun kitabı yanlış okuduğunuz anlamına gelmediğini bilin ve bunu yapmaktan çekinmeyin. Herhangi bir güçlükle karşılaştığınızda önceki bölümlere dönmeniz gerekse bile size uygun olan öğrenim yolunu uygulamaktan çekinmeyin.
+
+Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği hata mesajlarının nasıl okunacağını öğrenmektir. Bu mesajlar sizi doğru koda yönlendireceğinden, pekçok hata senaryosunu içeren derlenmeyen örnekler vereceğiz. Rastgele bir örneği kopyalayıp çalıştırır ve bir hata alırsanız bunun hata gösterim örneği olup olmadığını anlamak için ilişkili metni okuduğunuzdan emin olun. Maskotumuz Ferris'i dikkatle takip ederseniz, çalışmaması gereken kodları rahatlıkla farkedebilirsiniz. 
+
+<!-- Feris Resim ve açıklamalalrında kaldım --> 
 
