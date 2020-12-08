@@ -9,3 +9,4 @@
 * **Exception** - `[Hata]` - Durdurulan işlemden fırlatılan nesne (Enum varyantına sarılı Err kullanıyoruz. Bu sadece Belge çevirilerinde)
 * **Explicit** - `[Açıkça yapılan]` - Programcının açık olarak yaptığı şey.
 * **Expression** - `[İfade]` - Programın değer oluşturan veya yan etki üreten bölümü
+* **Enumerations** - `[Numaralandırma]` - Bir koleksiyondaki tüm öğelerin eksiksiz ve sıralı olarak listelenmesi.
