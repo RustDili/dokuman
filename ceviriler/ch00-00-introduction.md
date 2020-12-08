@@ -96,3 +96,16 @@ Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği 
 
 <!-- Feris Resim ve açıklamalalrında kaldım --> 
 
+| Ferris                                                                 | Meaning                                          |
+|------------------------------------------------------------------------|--------------------------------------------------|
+| <img src="https://github.com/rust-lang/book/blob/master/src/img/ferris/does_not_compile.svg" class="ferris-explain"/>    | Bu kod derlenmez!                      |
+| <img src="https://github.com/rust-lang/book/blob/master/src/img/ferris/panics.svg" class="ferris-explain"/>              | Bu kod panik üretir!                   |
+| <img src="https://github.com/rust-lang/book/raw/master/src/img/ferris/unsafe.svg" class="ferris-explain"/>              | Bu kod bloğu güvenli olmayan kod içerir.|
+| <img src="https://github.com/rust-lang/book/raw/master/src/img/ferris/not_desired_behavior.svg" class="ferris-explain"/>| Bu kod beklenen davranışı üretmiyor. |
+
+
+Çoğu durumda, hangi kod sürümünün çalışması gerektiğine dair sizi yönlendireceğiz.
+
+## Source Code
+
+Bu kitabın oluşmasını sağlayan kaynak kodlara [GitHub](https://github.com/rust-lang/book/tree/master/src) üzerinden ulaşabilirsiniz.
