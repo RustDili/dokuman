@@ -96,7 +96,7 @@ Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği 
 
 <!-- Feris Resim ve açıklamalalrında kaldım --> 
 
-| Ferris                                                                 | Meaning                                          |
+| Ferris                                                                 | Anlamı                                          |
 |------------------------------------------------------------------------|--------------------------------------------------|
 | <img src="https://github.com/rust-lang/book/blob/master/src/img/ferris/does_not_compile.svg" class="ferris-explain"/>    | Bu kod derlenmez!                      |
 | <img src="https://github.com/rust-lang/book/blob/master/src/img/ferris/panics.svg" class="ferris-explain"/>              | Bu kod panik üretir!                   |
