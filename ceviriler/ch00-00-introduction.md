@@ -106,6 +106,6 @@ Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği 
 
 Çoğu durumda, hangi kod sürümünün çalışması gerektiğine dair sizi yönlendireceğiz.
 
-## Source Code
+## Kaynak Kodu
 
-Bu kitabın oluşmasını sağlayan kaynak kodlara [GitHub](https://github.com/rust-lang/book/tree/master/src) üzerinden ulaşabilirsiniz.
+Bu kitabın oluşmasını sağlayan kaynak kodlara [GitHub](https://github.com/RustDili/dokuman/tree/master/ceviriler) üzerinden ulaşabilirsiniz.
