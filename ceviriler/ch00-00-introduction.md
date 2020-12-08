@@ -92,7 +92,7 @@ Ek E'de ise, Rust'ın sürümlerine yer verilmektedir.
 
 Öğrenim sürenizce kitabın bazı bölümleri atlamak isterseniz, bunun kitabı yanlış okuduğunuz anlamına gelmediğini bilin ve bunu yapmaktan çekinmeyin. Herhangi bir güçlükle karşılaştığınızda önceki bölümlere dönmeniz gerekse bile size uygun olan öğrenim yolunu uygulamaktan çekinmeyin.
 
-Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği hata mesajlarının nasıl okunacağını öğrenmektir. Bu mesajlar sizi doğru koda yönlendireceğinden, pekçok hata senaryosunu içeren derlenmeyen örnekler vereceğiz. Rastgele bir örneği kopyalayıp çalıştırır ve bir hata alırsanız bunun hata gösterim örneği olup olmadığını anlamak için ilişkili metni okuduğunuzdan emin olun. Maskotumuz Ferris'i dikkatle takip ederseniz, çalışmaması gereken kodları rahatlıkla farkedebilirsiniz. 
+Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği hata mesajlarının nasıl okunacağını öğrenmektir. Bu mesajlar sizi doğru koda yönlendireceğinden, pekçok hata senaryosunu içeren derlenmeyen örnekler vereceğiz. Rastgele bir örneği kopyalayıp çalıştırır ve bir hata alırsanız bunun hata gösterim örneği olup olmadığını anlamak için ilişkili metni okuduğunuzdan emin olun. Maskotumuz Ferris'i dikkatle takip ederseniz, çalışmaması gereken kodları kolayca anlayabilirsiniz. 
 
 <!-- Feris Resim ve açıklamalalrında kaldım --> 
 
