@@ -68,6 +68,6 @@ rustc x.y.z (abcabcabc yyyy-mm-dd)
 
 ### Yerel Belgeler
 
-Rust kurulumu, çevrimdışı okuyabilmeniz için belgelerin yerel bir kopyasını da içerir. Bu yerel belgeleri tarayıcınızda okuyabilmek için terminalinizde `rustuo doc` komutunu çalıştırabilirsiniz. 
+Rust kurulumu, çevrimdışı okuyabilmeniz için belgelerin yerel bir kopyasını da içerir. Bu yerel belgeleri tarayıcınızda okuyabilmek için terminalinizde `rustup doc` komutunu çalıştırabilirsiniz. 
 
 Standart kütüphane tarafından sağlanan bir tür veya işlev hakkında bilgi almak ve nasıl kullanılacağını öğrenmek istiyorsanız uygulama programlama arabirimi (API) belgelerini inceleyebilirsiniz. 
