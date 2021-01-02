@@ -15,7 +15,7 @@ Aşağıdaki adımlar Rust derleyicisinin en son kararlı sürümünü yükleyec
 > `$` karakteri ile başlamayan satırlar genellikle önceki komutun çıktısını gösterir.
 > Buna ek olarak PowerShell'e özgü örneklerde `$` yerine `>` karakteri kullanılır.
 
-### Linux ya da macOS için `rustup` Kurulumu
+### Linux veya macOS İçin `rustup` Kurulumu
 
 Rust'ı Linux ya da macOS bir sistemde kullanacaksanız bir terminal açarak aşağıdaki komutu giriniz:
 
@@ -23,14 +23,14 @@ Rust'ı Linux ya da macOS bir sistemde kullanacaksanız bir terminal açarak aş
 $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
 
-Bu komut bir betik dosyasını indirerek Rust'ın en son kararlı sürümünü sisteminize yükleyecek olan `rustup` aracının kurulumunu başlatır. Kurulum esnasında sistem şifrenizi girmeniz istenebilir. Kurulumuz başarılı olduğu takdirde işlem sonunda aşağıdaki satır görünecektir.
+Bu komut bir betik dosyasını indirerek Rust'ın en son kararlı sürümünü sisteminize yükleyecek olan `rustup` aracının kurulumunu başlatır. Kurulum esnasında sistem şifrenizi girmeniz istenebilir. Kurulumunuz başarılı olduğu takdirde işlem sonunda aşağıdaki satır görünecektir.
 
 ```text
 Rust is installed now. Great!
 ```
 Ek olarak muhtemelen daha önceden sisteminize yüklenmiş olan bir tür bağlayıcıya da ihtiyacınız olacak. Eğer bir Rust programını derlemeye çalışırken bir bağlayıcının çalıştırılamadığını bildiren hatalar alıyorsanız bu, gerekli olan bağlayıcının sisteminizde yüklü olmadığını ve elle yüklemeniz gerektiği anlamına gelir. C derleyicileri genellikle doğru bağlayıcılarla birlikte gelir. C derleyicisinin kurulumunu öğrenmek için platformunuzun belgelerine göz atmanız gerekir. Ayrıca, bazı yaygın Rust paketleri C kodlarına bağımlı olduğundan bir C derleyicisine ihtiyaç duyacaktır. Bu nedenle şimdiden bir C derleyicisi edinmeniz yararlı olabilir.
 
-### Windows için `rustup` kurulumu
+### Windows İçin `rustup` Kurulumu
 
 Rust'ı Windows işletim sisteminize kurabilmeniz için [Windows için yükle](https://www.rust-lang.org/tools/install) adresine giderek yükleme talimatlarını uygulamanız gerekir. Kurulumun bir aşamasında Visual Studio 2013 veya sonrası için C++ derleme araçlarına da ihtiyacınız olacağını bildiren bir mesaj alacaksınız. Derleme araçlarını edinmenin en kolay yolu [Visual Studio 2019 için Derleme Araçları](https://visualstudio.microsoft.com/tr/visual-cpp-build-tools/)'nı yüklemektir. Bu yükleme esnasında yüklenecek bileşenleri seçmeniz istendiğinde "C++ Derleme Araçları"nı seçtiğinizden ve Windows 10 SDK ile ingilizce dil paketi bileşenlerinin dahil edildiğinden emin olun.
 
@@ -52,7 +52,7 @@ $ rustup self uninstall
 
 ### Sorun Giderme
 
-Rust'ın sisteminize doğru şekilde kurulup kurulmadığını kontrol etmek için terminalinizde aşağıdaki satırı çalıştırmanız yeterlidir:
+Rust'ın sisteminize doğru şekilde kurulup kurulmadığını kontrol etmek için terminalinizde aşağıdaki satırı çalıştırabilirsiniz:
 
 ```console
 $ rustc --version 
@@ -64,10 +64,10 @@ Terminalinizde Rust'ın son kararlı sürümün numarasını, kayıt değeri ve 
 rustc x.y.z (abcabcabc yyyy-mm-dd)
 ```
 
-Gördüğünüz bilgiler bu biçimdeyse Rust'ı başarıyla yüklemişsiniz demektir. Eğer Windows kullanıcısıysanız ve çıktınızı göremiyorsanız Rust'ın `%PATH%` sistem değişkeninizde olup olmadığını kontrol etmelisiniz. Bunların her biri doğru uygulanmış, yerli yerinde ve Rust halen çalışmıyorsa yardım alacağınız birkaç yer bulunmakta. Bunlardan en erişilebilir olanı [Rust'ın Discord resmi kanalı](https://discord.com/invite/rust-lang) olan #beginners kanalıdır. Orada size yardımcı olabilecek diğer Rustaceans'larla (evet kendimizi bu saçma isimle adlandırıyoruz) çevrimiçi sohbet edip sorununuza çözüm bulabilirsiniz. Diğer harika kaynaklar arasında ise [Rust Kullanıcıları Forumu](https://users.rust-lang.org/) ile [Stack Overflow](https://stackoverflow.com/questions/tagged/rust) bulunmaktadır.
+Gördüğünüz bilgiler bu biçimdeyse Rust'ı başarıyla yüklemişsiniz demektir. Eğer Windows kullanıyor ve bu çıktıyı göremiyorsanız Rust'ın `%PATH%` sistem değişkeninizde olup olmadığını kontrol etmelisiniz. Bunların her biri doğru uygulanmış, yerli yerindeyse ve Rust halen çalışmıyorsa yardım alacağınız birkaç yer var. Bunlardan en erişilebilir olanı [Rust'ın Discord resmi kanalı](https://discord.com/invite/rust-lang) olan #beginners kanalıdır. Orada size yardımcı olabilecek diğer Rustaceans'larla (evet kendimizi bu saçma isimle adlandırıyoruz) çevrimiçi sohbet edip sorununuza çözüm bulabilirsiniz. Diğer harika kaynaklar arasında ise [Rust Kullanıcıları Forumu](https://users.rust-lang.org/) ile [Stack Overflow](https://stackoverflow.com/questions/tagged/rust) bulunmaktadır.
 
 ### Yerel Belgeler
 
-Rust kurulumu, çevrimdışı okuyabilmeniz için belgelerin yerel bir kopyasını da içerir. Bu yerel belgeleri tarayıcınızda okuyabilmek için terminalinizde `rustup doc` komutunu çalıştırmanız yeterlidir. 
+Rust kurulumu, çevrim dışı okuyabilmeniz için Rust belgelerinin yerel bir kopyasını da içerir. Bu yerel belgeleri tarayıcınızda okuyabilmek için terminalinizde `rustup doc` komutunu çalıştırmanız yeterlidir.  
 
 Standart kütüphane tarafından sağlanan bir tür veya işlev hakkında bilgi almak ve nasıl kullanılacağını öğrenmek istiyorsanız uygulama programlama arabirimi (API) belgelerini inceleyebilirsiniz. 
