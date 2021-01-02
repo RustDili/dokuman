@@ -11,11 +11,11 @@ Artık Rust'ı yüklediğimize göre ilk Rust programımızı yazabiliriz. Yeni 
 
 ### Bir Proje Dizini Oluşturmak
 
-Öncelikle işe Rust kodlarımızı kaydedeceğimiz bir proje dizini oluşturarak başlayalım. Rust için kodunuzu nerede sakladığınız önemli olmamakla beraber, bu kitapta yer alan alıştırma ve projeler için ana dizininizde (linux için Home) dizininizde yeni bir proje dizini oluşturup tüm çalışmalarınızı orada depolamanızı öneririz.
+Öncelikle işe Rust kodlarımızı saklayacağımız bir proje dizini oluşturarak başlayalım. Rust için kodunuzu nerede sakladığınız önemli olmamakla beraber, bu kitapta yer alan alıştırma ve projeler için ana dizininizde (linux için Home)yeni bir *projeler* dizini oluşturup tüm çalışmalarınızı orada depolamanızı öneririz.
 
-Ana dizin üzerinde "Merhaba, dünya" projesinin saklanacağı dizi *projeler* dizinin oluşturabilmek için bir terminal penceresi açarak sırasıyla aşağıdaki komutları girin.
+Ana dizinde "Merhaba, dünya" projesinin saklanacağı *projeler* dizinin oluşturabilmek için bir terminal penceresi açarak sırasıyla aşağıdaki komutları uygulayalım.
 
-Bu komutlar Linux, macOS ve Windows üzerindeki PowerShell için çalışmaktadır:
+Linux, macOS ve Windows PowerShell için aşağıdaki komutları girin:
 
 ```console
 $ mkdir ~/projeler
@@ -35,7 +35,7 @@ Windows CMD içinse şu komutları girin:
 
 ### Bir Rust Programı Yazmak ve Çalıştırmak
 
-Artık *merhaba_dunya* dizini içinde bulunduğumuza göre, programın kaynak kodunu kaydedeceğimiz ve *main.rs* olarak adlandıracağımız yeni bir dosya oluşturabiliriz. Rust dosya adlarının birden fazla kelime içermesi durumunda alt çizgi ile ayrılması gerektiğini ve daima .rs uzantısıyla sonlandığını unutmayın. Dizin veya dosya isimlerinin bitişik olarak yazılması mümkünse de bu yaklaşımın pek önerilmediğini, *merhabadunya.rs* yerine *merhaba_dunya.rs* biçimindeki adlandırmaların tercih edildiğini aklınızda bulundurun. 
+Artık *merhaba_dunya* dizini içinde bulunduğumuza göre, programın kaynak kodunu kaydedeceğimiz ve *main.rs* olarak adlandıracağımız yeni bir dosya oluşturabiliriz. Rust'ta dosya adlarının birden fazla kelime içermesi durumunda alt çizgi ile ayrılması gerektiğini ve daima .rs uzantısıyla sonlandığını unutmayın. Dizin veya dosya isimlerinin bitişik olarak yazılması mümkünse de bu yaklaşımın pek önerilmediğini, *merhabadunya.rs* yerine *merhaba_dunya.rs* biçimindeki adlandırmaların tercih edildiğini aklınızda bulundurun. 
 
 Şimdi biraz önce oluşturduğumuz *main.rs* dosyasını açarak Örnek 1-1'de yer alan kod satırlarını dosyamıza ekleyelim:
 
@@ -49,7 +49,7 @@ fn main() {
 
 <span class="caption"> Örnek 1-1: Ekrana "Merhaba, dünya!" yazdıran bir program.</span>
 
-Dosyayı kaydedip yeniden terminal penceresine dönerek programınızı Linux veya macOS'ta derleyip çalıştırabilmek için aşağıdaki komutları girin:
+Dosyayı kaydedip yeniden terminal penceresine dönelim. Programımızı Linux veya macOS üzerinde derleyip çalıştırabilmek için aşağıdaki komutları uygulayalım:
 
 ```console
 $ rustc main.rs
@@ -57,7 +57,7 @@ $ ./main
 Merhaba, dünya!
 ```
 
-Windows kullanıyorsanız `./main` yerine `./main.exe` komutunu kullanın:
+Windows kullanıyorsanız `./main` yerine `./main.exe` komutunu kullanmanız gerekir:
 
 ```powershell
 > rustc main.rs
@@ -65,24 +65,26 @@ Windows kullanıyorsanız `./main` yerine `./main.exe` komutunu kullanın:
 Merhaba, dünya!
 ```
 
-Hangi işletim sistemini kullanıyor olursanız olun, komutları uyguladıktan sonra terminalinizde `Merhaba, dünya!` çıktısını görüyor olmalısınız. Bu çıktıyı görmüyorsanız, yardım için kurulum bölümündeki ["Sorun Giderme"](ch01-01-installation.html#troubleshooting) başlığına göz atın.
+Hangi işletim sistemini kullanıyor olursanız olun, bu komutları uyguladıktan sonra terminalinizde `Merhaba, dünya!` çıktısını görüyor olmalısınız. Bu çıktıyı görmüyorsanız, yardım için kurulum bölümündeki ["Sorun Giderme"](ch01-01-installation.html#troubleshooting) başlığına göz atın.
 
-Eğer ekranınızda `Merhaba, dünya!` yazısını görüyorsanız bu resmi olarak bir Rust porgramı yazdığınızı gösterir, tebrikler! Siz de artık bir Rust programcısısınız, aramıza hoş geldiniz!
+Eğer ekranınızda `Merhaba, dünya!` yazısı ışıldıyorsa bu resmi olarak bir Rust programı yazdığınıza işarettir, tebrikler! Siz de artık bir Rust programcısı sayılırsınız ve aramıza hoş geldiniz!
 
 ### Bir Rust Programının Anatomisi
 
-Ekrana `Merhaba, dünya!` yazdıran programınızda neler olup bittiğine daha yakından bakalım. İşte bulmacanın ilk parçası:
+Ekranımıza `Merhaba, dünya!` yazısını bastıran programda neler olup bittiğine daha yakından bakalım. Bulmacanın ilk parçası aşağıdadır:
 
 ```rust
 fn main() {
-#	println!("Merhaba, dünya!");	
+#    println!("Merhaba, dünya!");	
 
 }
 ```
 
 Bu satırlar Rust'ta `main` adındaki bir işlevi tanımlar. Ve `main` işlevi tüm çalıştırılabilir Rust programlarında işletilen ilk kod olduğundan özeldir. Bu işlevin ilk satırında, parametre almayan ve hiçbir şey döndürmeyen `main` adında bir işlevi bildirilir. Eğer bu işleve bir veya birden fazla parametre iletilmiş olsaydı, bu parametreler `()` parantezin içinde yerlerini almış olacaklardı.
 
-Eğer dikkat ederseniz işlev gövdesinin süslü parantezler `{}` içine alınmış olduğunu göreceksiniz. Rust'ta işlev gövdeleri bu süslü parantezler içine alınmak zorundadır. İşlev gövdesini saran ilk süslü parantezi, işlev bildirimiyle aynı satıra yerleştirirken arada bir boşluk bırakmak iyi bir kod yazım tekniğidir. Rust projelerinde standart kod yazım tekniğine  bağlı kalmak ve kodlarınızı belirli bir şekilde biçimlendirmek için `rustfmt` adındaki otomatik biçimlendirme aracını kullanabilirsiniz. Bu araç Rust ekibi tarafından tıpkı `rustc` gibi standart Rust dağıtımına dahil edildiğinden halihazırda bilgisayarınızda kurulu durumda olmalıdır. Daha fazla ayrıntı için çevrimiçi belgelere başvurabilirsiniz. 
+Rust'ta bu satırlar bir işlevi tanımlar. Çalıştırılabilir tüm rust programlarında bulunan `main` işlevi, programın işletilen ilk kodu olması bakımından özel bir konumdadır. İlk satır parametre almayan ve hiçbir şey döndürmeyen işlev adını `main` olarak bildirir. Elimizde işleve iletilecek parametreler olsaydı onlar da yerlerini bu `()` parantezin içine konumlandırılmakla bulmuş olacaklardı.
+
+EDikkat ederseniz işlev gövdesinin süslü parantezler `{}` içine alınmış olduğunu göreceksiniz. Rust'ta işlev gövdeleri bu süslü parantezler içine alınmak zorundadır. İşlev gövdesini saran ilk süslü parantezi, işlev bildirimiyle aynı satıra yerleştirirken arada bir boşluk bırakmak iyi bir kod yazım tekniğidir. Rust projelerinde standart kod yazım tekniğine  bağlı kalmak ve kodlarınızı belirli bir şekilde biçimlendirmek için `rustfmt` adındaki otomatik biçimlendirme aracını kullanabilirsiniz. Bu araç Rust ekibi tarafından tıpkı `rustc` gibi standart Rust dağıtımına dahil edildiğinden halihazırda bilgisayarınızda kurulu durumda olmalıdır. Daha fazla ayrıntı için çevrimiçi belgelere başvurabilirsiniz.
 
 Gövdesi süslü parantezler ile sarmalanmış olan `main` işlevinin içinde aşağıdaki kod satırı bulunur.
 
@@ -91,16 +93,17 @@ Gövdesi süslü parantezler ile sarmalanmış olan `main` işlevinin içinde a�
 	println!("Merhaba, dünya!");
 #}
 ```
-Bu küçük programdaki tüm işi yaparak metni ekrana yazdıran bu satır olmakla birlikte burada dikkat edilmesi gereken dört önemli ayrıntı yer almaktadır.
+Bu küçük programdaki tüm işi üstlenerek metni ekrana yazdıran bu satırda dikkat edilmesi gereken dört önemli ayrıntı yer almaktadır.
 
-Bunlardan birincisi ve en az dikkat edileni, Rust stili girintilerde bir sekme (tab) yerine dört boşluk (space)kullanılmasıdır.
+İlki ve en az dikkat edileni, Rust stili girintilerde bir sekme *(tab)* yerine dört boşluk *(space)* kullanılır.
 
-İkincisi `println!` ile bir Rust makrosu çağırılmaktadır. Eğer kodda Rust makrolarından yararlanmak yerine bir işlev çağrısı yapılmak istenseydi, yazdırma işlevi `!` olmadan sadece `println` şeklinde kullanılmış olacaktı. Rust makrolarını 19. bölümde ayrıntılarıyla inceleyeceğimizden şu an için `!` işaretini gördüğünüz her yerde bunun bir işlev çağrısı değil bir Rust makrosu olduğunu bilmeniz yeterlidir.
+İkincisi, `println!` bir Rust makrosu çağırır. Eğer kodda bir işlev çağrısı yapılsaydı, `println` (`!` olmadan) yazılmış olacaktı. Rust makrolarını 19. bölümde ayrıntılarıyla inceleyeceğimizden şu an için `!` işaretini gördüğünüz her yerde bunun bir işlev yerine, bir makroya yapılan çağrı olduğunu bilmeniz yeterlidir.
 
-Üçüncüsü `"Merhaba, dünya!"` olarak gördüğünüz dizgiyi `println!` makrosuna argüman olarak geçirdiğimizde bu makro sayesinde ekrana yazdırılır.
 
-Dördüncüsü ve son olarak bu satırın noktalı virgül `;` ile bittiğine dikkat edin. Satırın bununla bitirilmesi, ifadenin artık sona erdiğini ve sonraki ifadenin yeniden başlatılabileceği anlamına gelmektedir. Rust kodlarındaki satırların çoğu noktalı virgül ile sonlandırılır.
+Üçüncüsü, `"Merhaba, dünya!"` olarak gördüğünüz dizgi, `println!` makrosuna argüman olarak geçirildiğinde ekrana yazdırılır.
 
+Dördüncüsü, satırı noktalı virgül (`;`) ile bitiriyor olmamız ifadenin bittiğini ve bir sonrakinin başlayabileceğini bildirir. Rust kodlarındaki pek çok satır noktalı virgül ile sonlandırılır.
+<!-- Kaldım -->
 ### Derlemek ve Çalıştırmak Ayrı Birer Adımdır
 
 Yeni oluşturulan bir programın çalıştırılma sürecindeki adımları birlikte inceleyelim.
