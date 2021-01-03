@@ -103,20 +103,20 @@ Bu küçük programdaki tüm işi üstlenerek metni ekrana yazdıran bu satırda
 Üçüncüsü, `"Merhaba, dünya!"` olarak gördüğünüz dizgi, `println!` makrosuna argüman olarak geçirildiğinde ekrana yazdırılır.
 
 Dördüncüsü, satırı noktalı virgül (`;`) ile bitiriyor olmamız ifadenin bittiğini ve bir sonrakinin başlayabileceğini bildirir. Rust kodlarındaki pek çok satır noktalı virgül ile sonlandırılır.
-<!-- Kaldım -->
+
 ### Derlemek ve Çalıştırmak Ayrı Birer Adımdır
 
-Yeni oluşturulan bir programın çalıştırılma sürecindeki adımları birlikte inceleyelim.
+Yeni oluşturulan bir programın çalıştırılma süreci adımlarını birlikte inceleyelim.
 
-Rust programları çalıştırılmadan önce Rust derleyicisi tarafından ve rustc komutuna aşağıdaki gibi kaynak dosyası adı ileterek derlenmelidir:
+Rust programları çalıştırılmadan önce Rust derleyicisi tarafından ve `rustc` komutuna aşağıdaki gibi kaynak dosyası adı ileterek derlenmelidir:
 
 ```console
 $ rustc main.rs
 ```
 
-Eğer C veya C++ dillerine aşina iseniz, bu işlemin `gcc` veya `clang` ile oldukça benzeştiğini fark edeceksiniz. Başarıyla gerçekleşen bir derlemenin ardından Rust çalıştırılabilir ikili bir dosya üretecektir.
+Eğer C veya C++ dillerine aşina iseniz, bu işlemin `gcc` veya `clang` ile oldukça benzeştiğini fark edeceksiniz. Başarıyla gerçekleşen bir derlemenin ardından Rust çalıştırılabilir ikili (binary) bir dosya üretecektir.
 
-Bu çalıştırılabilir dosyayı, Linux, macOS veya Windows PowerShell üzerinde görüntüleyebilmek için `ls` komutunu kullanabilirsiniz. Linux ve macOS sistemlerinde aynı dizinde iki adet dosya gösterilirken, Windows'ta PowerShell veya CMD ile üç tane dosya görüntülenecektir.
+Bu çalıştırılabilir dosyaya, Linux, macOS veya Windows PowerShell sistemlerinde, dizin içindeyken terminalinize `ls` komutu girerek ulaşabilirsiniz. Linux ve macOS sistemlerinde aynı dizinde iki adet dosya gösterilirken, Windows'ta PowerShell veya CMD ile üç tane dosya görüntülenecektir.
 
 ```text
 $ ls
@@ -132,9 +132,9 @@ main.pdb
 main.rs
 ```
 
-Her iki durumdada .rs uzantılı bir kaynak kodu dosyası, windows'ta main.exe olarak ancak diğer platformlarda sadece main olarak görünen çalıştırılabilir ikili dosya, Windows için ek olarak hata ayıklama bilgilerini içeren .pdb uzantılı birer dosya gösterilecektir, 
+Her iki durumda da *.rs* uzantılı bir kaynak kodu dosyası, (windows'ta *main.exe* olarak ancak diğer platformlarda sadece *main* olarak görünen) çalıştırılabilir ikili dosya, Windows için ek olarak hata ayıklama bilgilerini içeren *.pdb* uzantılı birer dosya gösterilecektir.
 
-Bu dizinde çalıştırılabilir halde bulunan main ya da main.exe dosyasını aşağıdaki gibi çalıştırabilirsiniz:
+Bu dizinde çalıştırılabilir halde bulunan *main* ya da *main.exe* dosyasını aşağıdaki gibi kullanarak işletebilirsiniz:
 
 ```console
 $ ./main # ya da windows için .\main.exe
@@ -144,4 +144,4 @@ Eğer programınız "Merhaba, dünya!" metnini içeriyorsa bu komutu girdiğiniz
 
 Programlama tecrübeniz Ruby, Python veya JavaScript gibi dinamik dillerden oluşuyorsa bu programın ayrı adımlar halinde derleyip çalıştırılmasına alışkın olmayabilirsiniz. Ancak Rust *derlemeli bir dil*dir. Bu da bir Rust programının derlenmesiyle oluşturulan çalıştırılabilir dosyanın paylaşabilmesi ve Rust'ın kurulu olmadığı ortamlarda bile çalışması demektir. Oysa dinamik dillerden herhangi birinin kaynağını *.py, .rb veya .js* dosyası olarak biriyle paylaştığınızda bu dosyaların çalıştırılabilmesi, için o ortamda Python, Ruby ya da JavaScript uygulamalarının kurulu olması gerekmektedir.  Bununla birlikte bu dillerde de programın çalıştırılması için yalnızca tek bir komut yeterlidir. Dil tasarımlarında bulunan her şey bir uzlaşma meselesinden başka bir şey değildir.  
 
-Programları `rustc` ile derlemek basit programlar için yeterli olmakla birlikte projeniz büyüyüp geliştikçe seçenekleri yönetmek, kod paylaşımını kolaylaştırmak isteyeceksiniz. Sonraki bölümde daha gerçekçi ve karmaşık Rust programlarını yazmanıza yardımcı olacak Cargo aracını keşfedeceğiz. 
+Programları `rustc` ile derlemek basit programlar için yeterli olmakla birlikte projeniz büyüyüp geliştikçe seçenekleri yönetmek ve kod paylaşımını kolaylaştırmanın yollarını arayacaksınız. Sonraki bölümde gerçek dünyada daha sık kullanılan ve daha karmaşık Rust programları yazmanıza yardım edecek olacak Cargo aracını keşfedeceğiz. 
