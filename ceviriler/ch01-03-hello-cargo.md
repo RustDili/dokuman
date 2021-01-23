@@ -37,7 +37,7 @@ Cargo.toml dosyasını metin düzenleyicinizde açtığınızda içeriği örnek
 
 ```toml
 [package]
-name = "hello_cargo"
+name = "merhaba_cargo"
 version = "0.1.0"
 authors = ["Your Name <you@example.com>"]
 edition = "2018"
@@ -48,4 +48,73 @@ edition = "2018"
 <span class="caption"> Örnek 1-2: `cargo new` komutuyla oluşturulan Cargo.toml dosyası içeriği</span>
 
 Bu dosya, Cargo'nun yapılandırma formatı olan [TOML](https://toml.io/en/)(Tom's Obvious, Minimal Language) biçimindedir.
+
+İlk satırda bildirilen ve altındaki ifadeler tarafından oluşturulan [package] bölüm başlığı, paketin nasıl yapılandırıldığını gösterir. Paket içeriğine ayrıntı eklendikçe, farklı bölüm başlıkları da eklenecektir. 
+
+Sonraki dört satır ise programınızın Cargo tarafından derlenebilmesi için gereken: İsim, sürüm, programın yazarı ve kullanılacak Rust sürümü gibi yapılandırma bilgilerinden oluşur. Cargo isim ve e-posta gibi bilgileri ortamınzdan edineceğinden bilgileriniz eksik veya yanlış ise bu dosyayı şimdiden düzenleyerek kaydetmeniz gerekir. `Sürüm` anahtarı konusuna ise Ek E bölümünde değineceğiz.
+
+Son satırda projenizin bağımlılıklarını listelemeye yarayan [dependencies] bölümü yer alır. Rust'ta kodların paketler halinde tutulduğu yapılara `crate` yani sandık adı verilir. Bu proje için harici bir sandığa ihtiyaç duymayacak fakat 2. Bölümde gerçekleştireceğimiz ilk projede bağımlılıklar bölümünü kullanacağız.
+
+Şimdi *src/main.rs* dosyasını açalım ve inceleyelim:
+
+<span class="filename">Dosya adı: src/main.rs</span>
+
+```rust
+fn main() {
+    println!("Merhaba, dünya!");
+}
+```
+
+Cargo sizin için tıpkı Örnek 1-1'de olduğu gibi ekranınıza "Merhaba, dünya!" metnini bastıran bir program oluşturdu. Önceki projemiz ile Cargo tarafından üretilen bu proje arasındaki farklar ise, Cargonun projeyi *src* adlı dizine yerleştirmesi ve üst dizinde ise bir *Cargo.toml* dosyası yaratması olarak özetlenebilir.
+
+Cargo kaynak dosyalarının *src* dizininde bulundurulmasını bekler. Projenin ana dizin içeriği, sadece README dosyaları, lisans bilgileri, yapılandırma bilgileri ve kodunuzu ilgilendiren diğer şeyler içindir. Dolayısıyla Cargo, her şeyin kendi yerinde depolanmasını sağlayarak projelerinizin düzenlenmesine yardımcı olur.
+
+Eğer bir projeyi ilk "Merhaba, dünya!" örneğindeki gibi Cargo kullanmadan başlattıysanız, bu projeyi Cargo kullanarak olşuturulmuş haline döndürebilirsiniz. Bunun için proje kodunu *src* dizinine taşımanız ve projenin ana dizinde *Cargo.toml* dosyası oluşturmanız yeterlidir.
+
+### Bir Cargo Projesini Derleyip Çalıştırmak
+
+Şimdi "Merhaba, dünya!" programını Cargo kullanarak derleyip çalıştırdığımızda oluşan farklılıkları gözlemleyelim. Terminalinizde *merhaba_cargo* dizinine gelerek aşağıdaki komut yardımıyla projenizi oluşturun: 
+
+```console
+$ cargo build
+    Compiling merhaba_cargo v0.1.0 (/home/rustdili/projeler/merhaba_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.54s
+```
+
+Bu komut geçerli dizininiz yerine *target/debug/merhaba_cargo* (veya Windows ortamında *target\debug\merhaba_cargo.exe*) 
+konumunda çalıştırılabilir bir dosya oluşturu Bu dosyayı şu komutla çalıştırabilirsiniz:
+
+```console
+$ ./target/debug/merhaba_cargo # veya Windows ortamında .\target\debug\merhaba_cargo.exe
+Hello, world!
+```
+
+Her şey yolunda giderse terminalinizde "Hello, world!" yazısı görünecektir. Cargo uygulamasının ilk kez çalıştırılması projenizin ana dizininde *Cargo.lock* adında yeni bir dosya oluşturulmasına neden olur. Bu dosya projenizdeki bağımlılıkların tam sürümlerini takip eder. Halihazırda bu proje harici bir kasaya bağımlı olmadığından bu dosya epey boş görünecektir. Bu dosya içeriği Cargo tarafından otomatik olarak yönetildiğinden bunu elle değiştirmeniz gerekmez.
+
+Aslında *cargo build* komutu ile derleyip *./target/debug/merhaba_cargo* komutu ile çalıştırdığımız bu projeyi, `cargo run` komutu ile hem derleyip hem çalıştırabiliriz. Vereceğimiz tek bir `cargo run` komutu ile proje derlenecek ve ardından oluşturulan çalıştırılabilir dosya hemen işletilecektir.
+
+```console
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/merhaba_cargo`
+Hello, world!
+```
+
+Bu kez Cargo'nun `merhaba_cargo` programını derlediğini bildiren çıktıyı göremediğimize dikkat edin. Bunun sebebi, Cargo'nun kaynak kodun değişmediğini bilmesidir. Eğer kaynak kodunu değiştirmiş olsaydınız program Cargo tarafından yeniden derlenerek çalıştırılacak ve terminalde aşağıdaki çıktı görünecekti:
+
+```console
+$ cargo run
+   Compiling merhaba_cargo v0.1.0 (/home/dogan/projeler/merhaba_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.25s
+     Running `target/debug/merhaba_cargo`
+Merhaba Cargo!
+```
+
+Yine Cargo tarafından sağlanan ve kodunuzun çalıştırılabilir olup olmadığını denetleyen, ancak çalıştırılabilir bir dosya oluşturmayan `cargo check` adında bir komut daha vardır:
+
+```console
+$ cargo check
+    Checking merhaba_cargo v0.1.0 (/home/dogan/projeler/merhaba_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.12s
+```
 <!-- Kaldım-->
