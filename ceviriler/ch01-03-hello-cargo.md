@@ -117,4 +117,46 @@ $ cargo check
     Checking merhaba_cargo v0.1.0 (/home/dogan/projeler/merhaba_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 0.12s
 ```
-<!-- Kaldım-->
+
+Hangi durumlarda çalıştırılabilir dosya oluşturmanız gerekmez? Çoğu zaman `cargo check`, çalıştırılabilir dosya oluşturma adımını atladığı için `cargo build` işleminden daha hızlı olacaktır. Kodunuzu yazarken düzenli olarak çalışmanızın derlenip derlenmediğini kontrol etmek istiyorsanız `cargo check` komutunu kullanmanız yazım sürecinizi oldukça hızlandıracaktır. Bu sebepten birçok Rustacean, programın derlendiğindne emin olabilmek için, programlarını yazarken periyodik olarak `cargo check` ile çalıştırılabilirlik kontrolünü gerçekleştirir. En nihayetinde çalıştırılabilir dosyayı oluşturmaya hazır olduklarında `cargo build` komutunu uygularlar.
+
+Cargo hakkında şimdiye kadar öğrendiklerimizi özetleyecek olursak:
+
+* Bir projeyi derlemek için `cargo build` komutunu kullanabiliriz.
+* Bir projeyi tek bir adımla derleyip çalıştırabilmek için `cargo run` komutunu kullanabiliriz.
+* Bir projenin hatalarını ikili kod üretmeden derleyerek kontrol edebilmek için  `cargo check` komutundan yararlanabiliriz.
+* Cargo, derleme sonucunda oluşturulan çalıştırılabilir ikili dosyayı, kaynak koduyla aynı dizine koymak yerine *target/debug* dizinine kaydeder.
+
+Cargo kullanmanın ek bir avantajı da, hangi işletim sisteminde çalışıyor olursanız olun, kullanacağınız komutların aynı olmasıdır. O nedenle bundan sonra Linux, macOS veya Windows işletim sistemlerinin her biri içn ayrı ayrı özel talimatlar sağlamayacağız.  
+
+### Sürüm Amaçlı Derleme
+
+Pisayasa sürülmeye hazır hale gelen projenizi en iyileştirme olanakları ile derleyebilmek için `cargo build --release` komutundan yararlanabilirsiniz. Bu komut çalıştırılabilir dosyanızı *target/debug* dizini yerine *target/release* dizinine kaydedecektir. Fakat en iyileştirmeler, Rust kodlarının daha hızlı çalışmalarını sağlamakla birlikte, programın derlenmesi için gereken süreyi uzatır. O nedenle en iyileştirme olanaklarında: İlki, hızlı ve sık derleme işlemleri için kullanılan geliştirme profili, diğeriyse tekrar tekrar derlenmeyecek ve çalışır halini olabilecek en kısa sürede kullanıcıya teslim edebileceğiniz nihai programı oluşturan olmak üzere iki farklı profil sunulur.
+
+Eğer kodunuzun çalışma süresini ölçmek istiyorsanız, *target/release* dizininde bulunan çalıştırılabilir dosyayı `cargo build --release` komutu ile test ettiğinizden emin olun.
+
+### Konvansiyonel Cargo
+
+Basit projeler için Cargo rustc kullanımından daha kullanışı değilse de programlarınız karmaşıklaştıkça değerini kanıtlayacaktır. Birden fazla sandıktan oluşan karmaşık projelerde yapı koordinasyonu Cargo'ya devretmek oldukça faydalıdır.
+
+Her ne kadar `merhaba_cargo` projesi basit bir projeymiş gibi görünüyor olsa da Rust kariyeriniz boyunca karşılaşacağınız birçok aleti kullanmanızı sağlıyor. Bununla birlikte mevcut herhangi bir Rust projesi üzerinde çalışabilmeniz için, Git üzerinden arzu ettiğiniz kodu indirmek, ardından projenin bulunduğu dizinde kodu derleyecek olan şu komutları girmeniz yeterlidir:
+
+```console
+$ git clone herhangibirurl.com/herhangibirproje
+$ cd herhangibirproje
+$ cargo build
+```
+
+Cargo hakkında daha fazla bilgi edinmek istiyorsanız [kendi belgelerine](https://doc.rust-lang.org/cargo/) bakmanız yeterlidir. 
+
+## Özet
+
+Oldukça iyi başlayan Rust yolculuğunuzda aşağıdakileri öğrendiniz:
+
+* Rust'ı, `rustup` kullanarak en son kararlı sürümüne yüklemek.
+* Rust'ı daha yeni bir sürümüne yükseltmek.
+* Yerel olarak yüklenen belgelere erişmek.
+* Bir "Merhaba, dünya!" programını yazarak doğrudan `rustc` kullanarak çalıştırmak.
+* Yeni bir projeyi Cargo komut ve kurallarını kullanarak derleyip çalıştırmak.
+
+Şimdi Rust kodu okuyup yazma becerilerimizi geliştirebilmek için daha sağlam bir program yazmamız gerekiyor. Bu nedenle 2. Bölümde bir tahmin oyunu programı yazacak ve inceleyeceğiz. Eğer öğrenme sürecinize "Ortak Programlama Kavramları"nın nasıl çalıştığını öğrenerek devam etmek istiyorsanız 3. Bölüme ilerleyebilir, ardından 2. Bölüme geri dönebilirsiniz.  
