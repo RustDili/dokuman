@@ -75,7 +75,6 @@ Ekranımıza `Merhaba, dünya!` yazısını bastıran programda neler olup bitti
 
 ```rust
 fn main() {
-#    println!("Merhaba, dünya!");	
 
 }
 ```
