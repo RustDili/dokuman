@@ -43,7 +43,7 @@ Artık *merhaba_dunya* dizini içinde bulunduğumuza göre, programın kaynak ko
 
 ```rust
 fn main() {
-	println!("Merhaba, dünya!");
+    println!("Merhaba, dünya!");
 }
 ```
 
@@ -88,9 +88,7 @@ Dikkat ederseniz işlev gövdesinin süslü parantezler `{}` içine alınmış o
 Gövdesi süslü parantezler ile sarmalanmış olan `main` işlevinin içinde aşağıdaki kod satırı bulunur.
 
 ```rust
-#fn main() {
-	println!("Merhaba, dünya!");
-#}
+    println!("Merhaba, dünya!");
 ```
 Bu küçük programdaki tüm işi üstlenerek metni ekrana yazdıran bu satırda dikkat edilmesi gereken dört önemli ayrıntı yer almaktadır.
 
