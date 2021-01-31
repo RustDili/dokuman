@@ -106,4 +106,12 @@ Yine Bölüm 1'den hatırlayacağınız üzere, ekrana bir dizi karakter yazdır
 
     println!("Lütfen tahmininizi giriniz.");
 ```
+
+### Değerleri Değişkenlerde Saklamak
+
+Artık aşağıdaki gösterildiği gibi kullanıcı girişini depolayacağımız bir yer oluşturabiliriz:
+
+```rust
+    let mut tahmin = String::new();
+```
 <!-- Kaldım-->
