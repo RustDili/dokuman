@@ -53,4 +53,54 @@ $ cargo run
 Hello, world!
 ```
 
+Bu uygulamada da sıkça kullanacağımız `run` komutu, bir projeyi çabucak derleyip çalıştırmamız ve bir sonraki derleme adımına hızlıca gitmemiz gerektiğinde oldukça faydalıdır.
+
+Şimdi tahmin oyunu uygulamasının kodlarını yazacağımız *src/main.rs* dosyasını yeniden açalım.
+
+## Giriş Verisinin İşlenmesi
+
+Tahmin oyununun ilk bölümü, kullanıcıdan bir değer girmesini isteyecek ve bu girdiyi işleyerek beklenen biçimde olup olmadığını denetlemekten ibarettir. Oyunu kullanıcının bir tahmin yapmasına izin vererek başlatalım. Örnek 2-1'de yer alan kodu *src/main.rs* dosyasına ekleyelim:
+
+<span class="filename">Dosya adı: main.rs</span>
+
+```rust
+use std::io;
+
+fn main() {
+    println!("Tuttuğum sayıyı tahmin edin!");
+
+    println!("Lütfen tahmininizi giriniz.");
+
+    let mut tahmin = String::new();
+
+    io::stdin()
+    	.read_line(&mut tahmin)
+    	.expect("Veri okuma hatası!");
+
+    println!("Tahmin ettiğiniz sayı: {}", tahmin);
+}
+```
+
+<span class="caption"> Örnek 2-1: Kullanıcıdan bir tahmin verisi alarak bunu yazdıran kod</span>
+
+Bu kod fazlasıyla bilgi içerdiğinden kendisini satır satır inceleyerek gidelim. Öncelikle kullanıcı girdisini yakalamak ve sonucu çıktı olarak yazdırabilmek için io (input/output) kütüphanesini içe aktarmamız gerekir. Bu kitaplık `std` olarak bilinen Rust standart kütüphanesinin bir parçasıdır. 
+
+```rust, ignore
+
+use std::io;
+#
+#fn main() {
+#    println!("Tuttuğum sayıyı tahmin edin!");
+#
+#    println!("Lütfen tahmininizi giriniz.");
+#
+#    let mut tahmin = String::new();
+#
+#    io::stdin()
+#    	.read_line(&mut tahmin)
+#   	.expect("Veri okuma hatası!");
+#
+#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
+#}
+```
 <!-- Kaldım-->
