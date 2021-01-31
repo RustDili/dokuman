@@ -145,4 +145,10 @@ Hatırlayacağınız gibi daha programımın ilk satırında `use std::io` söz 
     	.read_line(&mut tahmin)
 ```
 
+Eğer programın en başına `use std::io` satırını eklememiş olsaydık, `stdin` işlev çağrısını, kod içinde `std::io::stdin` şeklinde yazmamız yetecekti. Bu işlev uçbirimimizde standart girdinin işlenmesi sağlayan `std::io::Stdin` türünün bir örneğini döndürür. 
+  
+
+Kodun bir sonraki bölümü olan `.read_line(&mut tahmin)` ifadesindeyse, kullanıcıdan veri almak amacıyla standart girişteki `read_line` metodu çağrılarak, kendisine `&mut tahmin` verisi argüman olarak iletilir.
+
+`read_line` metodunun görevi, kullanıcı tarafından girilen karakterleri standart girişten okumak ve elde edilen veriyi iletilecek olan dizgiye yerleştirmektir. Yöntemin, kullanıcı girdisi eklendikçe dizgi içeriğini değiştirilebilmesi için kendisine verilen argümanın değiştirilebilir olması gerekmektedir.
 <!-- Kaldım-->
