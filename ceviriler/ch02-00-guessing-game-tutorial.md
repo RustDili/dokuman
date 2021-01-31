@@ -85,22 +85,7 @@ fn main() {
 
 Bu kod fazlasıyla bilgi içerdiğinden kendisini satır satır inceleyerek gidelim. Öncelikle kullanıcı girdisini yakalamak ve sonucu çıktı olarak yazdırabilmek için io (input/output) kütüphanesini içe aktarmamız gerekir. Bu kitaplık `std` olarak bilinen Rust standart kütüphanesinin bir parçasıdır. 
 
-```rust,ignore
-
+```rust
 use std::io;
-#
-#fn main() {
-#    println!("Tuttuğum sayıyı tahmin edin!");
-#
-#    println!("Lütfen tahmininizi giriniz.");
-#
-#    let mut tahmin = String::new();
-#
-#    io::stdin()
-#    	.read_line(&mut tahmin)
-#   	.expect("Veri okuma hatası!");
-#
-#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
-#}
 ```
 <!-- Kaldım-->
