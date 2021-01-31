@@ -99,7 +99,7 @@ fn main() {
 
 *Function* kelimesinden türemiş olan `fn` anahtar kellimesi yeni bir işlev bildirirken parantezler `()` işlevin herhangi bir giriş parametresi almadığını, küme ayracı `{` ise işlev gözdesinin başlangıç noktasını gösterir.
 
-Birinci bölümden hatırlayacağınız üzere, ekrana bir dizi karakter yazdırmak içinse  `println!` makrosundan yararlanıyoruz.
+Yine Bölüm 1'den hatırlayacağınız üzere, ekrana bir dizi karakter yazdırmak içinse  `println!` makrosundan yararlanıyoruz.
 
 ```rust
     println!("Tuttuğum sayıyı tahmin edin!");
