@@ -114,4 +114,35 @@ Artık aşağıdaki gösterildiği gibi kullanıcı girişini depolayacağımız
 ```rust
     let mut tahmin = String::new();
 ```
+
+Ve bu satırda program ilgiçleşmeye başlıyor. burada bir değişken oluşturabilmek için `let` anahtar sözcüğü kullanılmaktadır. İşte size başka bir örnek:
+
+```rust, ignore
+let foo = bar;
+```
+
+Bu satır foo adında yeni bir değişken yaratarak onu bar değeri ile ilklendirir. Rust'ta değişkenlerin varsayılan olarak değişmez oldukları kabul edilir. Bu kavramı 3. Bölümümüz olan ["Değişkenler ve Değişkenlik"](ch03-01-variables-and-mutability.html) başlığı altında ayrıntılarıyla inceleyeceğiz. Aşağıdaki örnek bize, bir değişkeni değiştirilebilir kılmak için değişken adından önce `mut` anahtar kelimesinin kullanılacağını gösterir:
+
+```rust
+let foo = 5;    // değişmez
+let mut bar = 5;// değişebilir
+```
+
+> Not: `//` söz dizimi satır sonuna kadar uzanan bir açıklamanın başlangıcını belirtir. 3. Bölümde ayrıntılarıyla ele alacağımız yorum satırları, buraya yazılanları Rust'ın derleme aşamasında görmezden gelmesini sağlıyor.
+
+Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeriği değiştirilebilir olarak saklanan* tahmin adında bir değişken tanımı olduğunu anlıyorsunuzdur. Eşittir `=` işaretinin diğer tarafında, yeni bir dizgi örneği döndürmek amacıyla yararlandığımız `String::new` işlevinden elde edilen ve `tahmin` değişkenin ilklendirilmesinde kullanılan değer bulunmaktadır. Dizgiler, UTF-8 baytlarıyla kodlanmış, boyutları değiştirilebilen ve standart kütüphane tarafından sağlanan `String` türündeki metin parçalarıdır.
+
+`String::new()` içindeki `::` söz dizimi, `new()`'in String türünün ilişkili işlevi olduğunu gösterir. İlişkili işlevler türe özgü olduklarından, new işlevinden dönen dizgi bir `String` örneği olarak değil, bir  türüşeklinde elde edilmektedir. Bazı dillerde buna *statik metot* adı verilir.
+
+Bu `new` işlev, yeni ve boş bir dizgi oluşturur. Genellikle `new` olarak adlandırılan ve ilişkili olduğu türün yeni bir değerini oluşturan bu işlevlere Rust'ın birçok türünde rastlayacaksınız.
+
+Özetle `let mut tahmin = String::new();` satırında bir String türünün yeni ve boş bir örneğiyle ilklendirilen değiştirilebilir bir değişken tanımlanmaktadır. Huh!
+
+Hatırlayacağınız gibi daha programımın ilk satırında `use std::io` söz dizimini kullanarak Rust standart kütüphanesinden giriş/çıkış işlevselliğini uygulamış olduğumuzdan artık `io` modülünde bulunan `stdin` işlevini çağırabiliyoruz:
+
+```rust
+    io::stdin()
+    	.read_line(&mut tahmin)
+```
+
 <!-- Kaldım-->
