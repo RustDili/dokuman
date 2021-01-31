@@ -88,4 +88,12 @@ Bu kod fazlasıyla bilgi içerdiğinden kendisini satır satır inceleyerek gide
 ```rust
 use std::io;
 ```
+
+Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*](https://doc.rust-lang.org/std/prelude/index.html) olarak bilinen ve otomatik içe aktarma veya ön yükleme olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu otomatik içe aktarmaya dahil edilmemişse, bu türleri `use` anahtar sözcüğünü yardımıyla programınıza ithal etmeniz gerekir. Uygulamamızda kullandığımız `std::io` kütüphanesi bize, kullanıcı girdisini kabul etme yeteneği de dahil olmak üzere bir dizi kullanışlı özellik sağlar.
+
+Bölüm 1'den hatırlayacağınız üzere `main` işlevi programın giriş noktasını oluşturur.
+
+```rust
+fn main() {
+```
 <!-- Kaldım-->
