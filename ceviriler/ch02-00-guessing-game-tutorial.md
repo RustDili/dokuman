@@ -130,7 +130,7 @@ let mut bar = 5;// değişebilir
 
 > Not: `//` söz dizimi satır sonuna kadar uzanan bir açıklamanın başlangıcını belirtir. 3. Bölümde ayrıntılarıyla ele alacağımız yorum satırları, buraya yazılanları Rust'ın derleme aşamasında görmezden gelmesini sağlıyor.
 
-Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeriği değiştirilebilir olarak saklanan* tahmin adında bir değişken tanımı olduğunu anlıyorsunuzdur. Eşittir `=` işaretinin diğer tarafında, yeni bir dizgi örneği döndürmek amacıyla yararlandığımız `String::new` işlevinden elde edilen ve `tahmin` değişkenin ilklendirilmesinde kullanılan değer bulunmaktadır. Dizgiler, UTF-8 baytlarıyla kodlanmış, boyutları değiştirilebilen ve standart kütüphane tarafından sağlanan `String` türündeki metin parçalarıdır.
+Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeriği değiştirilebilir olarak saklanan* tahmin adında bir değişken tanımı olduğunu anlıyorsunuzdur. Eşittir `=` işaretinin diğer tarafında, yeni bir dizgi örneği döndürmek amacıyla yararlandığımız `String::new` işlevinden elde edilen ve `tahmin` değişkeninin ilklendirilmesinde kullanılan değer bulunmaktadır. Dizgiler, UTF-8 baytlarıyla kodlanmış, boyutları değiştirilebilen ve standart kütüphane tarafından sağlanan `String` türündeki metin parçalarıdır.
 
 `String::new()` içindeki `::` söz dizimi, `new()`'in String türünün ilişkili işlevi olduğunu gösterir. İlişkili işlevler türe özgü olduklarından, new işlevinden dönen dizgi bir `String` örneği olarak değil, bir  türüşeklinde elde edilmektedir. Bazı dillerde buna *statik metot* adı verilir.
 
