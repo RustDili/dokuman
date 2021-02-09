@@ -49,7 +49,7 @@ Bu "Hello, world!" programını `cargo run` komutu kullanarak tek adımda derley
 $ cargo run
    Compiling tahmin_oyunu v0.1.0 (/home/dogan/projeler/tahmin_oyunu)
     Finished dev [unoptimized + debuginfo] target(s) in 1.50s
-     Running `/home/dogan/projeler/tahmin_oyunu/target/debug/tahmin_oyunu`
+     Running `/home/rustdili/projeler/tahmin_oyunu/target/debug/tahmin_oyunu`
 Hello, world!
 ```
 
