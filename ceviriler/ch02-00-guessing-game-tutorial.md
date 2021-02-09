@@ -97,7 +97,7 @@ Bölüm 1'den hatırlayacağınız üzere `main` işlevi programın giriş nokta
 fn main() {
 ```
 
-*Function* kelimesinden türemiş olan `fn` anahtar kellimesi yeni bir işlev bildirirken parantezler `()` işlevin herhangi bir giriş parametresi almadığını, sağa bakan süslü parantez `{` ise işlev gövdesinin başlangıç noktasını gösterir.
+*Function* kelimesinden türemiş olan `fn` anahtar kellimesi yeni bir işlev bildirirken parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* (sağa bakan süslü parantez)  `{` ise işlev gövdesinin başlangıç noktasını gösterir.
 
 Yine Bölüm 1'den hatırlayacağınız üzere, ekrana bir dizi karakter yazdırmak içinse  `println!` makrosundan yararlanıyoruz.
 
