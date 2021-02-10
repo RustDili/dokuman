@@ -154,5 +154,90 @@ Kodun bir sonraki bölümü olan `.read_line(&mut tahmin)` ifadesindeyse, kullan
 
 `&` işareti bağımsız değişkenin *referans* türünden olduğunu bildirdiğinden, kodun bazı bölümleri tarafından bu değişkenlere, bellekte defalarca kopyalanmaları gerekmeksizin erişimlesi sağlanmış olur. Referanslar dilin güçlü ve karmaşık bir özelliği olmakla birlikte, Rust'ın en önemli avantajlarından biri de bu karmaşık işlevselliği güvenli ve kullanımı kolay hale getirmesidir. Aslında bu programı tamamlayabilmek için çok fazla ayrıntı bilmemize gerek yok. Şimdilik referansların da tıpkı değişmezler gibi varsayılan olarak değişmez kabul edildiğini ve onları değiştirilebilir kılabilmek için `&tahmin` yerine `&mut tahmin` yazmamız  gerektiğini öğrenmemiz yeterlidir. (Referanslar konusu 4.Bölümde ayrıntılı olarak ele alınacaktır.)
 
-### `Result` Türü Aracılığıyla Olası Hataları İşlemek
+### `Result` Türü ile Olası Hataları İşlemek
+
+Kodumuzun bu bölümünde yapılması gereken işleri hebüz bitirmiş sayılmadığımızdan, incelememize `io::stdin` ile başlayan ifadenin üçüncü satırıyla devam ediyoruz. Her ne kadar ayrıymış gibi görünüyor olmasına rağmen, bu satır da tıpkı bir önceki satır gibi, aynı mantıksal kod satırının bir parçasıdır ve koda bir metot eklemektedir:
+
+
+```rust,ignore
+   	.expect("Veri okuma hatası!");
+```
+
+Bir metodu `foo()` söz dizimiyle çağırdığınızda uzun ifadeleri mantıksal parçalara ayırmak için genellikle yeni satırlar ve boşluklar eklemeniz gerekir. Kodumuzu aşağıdaki şekilde de yazabilirdik:
+
+```rust,ignore
+io::stdin().read_line(&mut tahmin).expect("Veri okuma hatası!");
+```
+
+Ancak böyle bir satırı okumak zor olduğundan, ifadenin daha iyi kavranmasını sağlamak amacıyla onu parçalara ayırmak iyi bir yaklaşımdır. Şimdi bu satırın ne anlama geldiğini inceleyelim. 
+
+Daha önce bahsettiğimiz gibi `read_line` işlevi, kullanıcı tarafından girilen verileri kendisine geçirilen bağımsız değişken içine depolarken, bu işin gerçekleştirilmesi sırasında oluşabilecek hataların izlenebilmesi için `io::Result` türünde bir değer döndürür. Rust standart kitaplığı `Result` adı altında, biri genellenmiş türler için, diğeri alt modüllere özgü sürümlerin yer aldığı `io::Result` olmak üzere birkaç tür bulundurur. 
+
+`Result` türleri genellikle `enums` olarak adlandırılan numaralandırmalardır. Numaralandırmalar, sabit bir değerler kümesine sahip olabilen veri türleri olup bu değerler, *enum varyantları* olarak adlandırılır. Bu türleri 6. Bölümde ayrıntılarıyla ele alacağız.
+
+`Result` türünün `Ok` ve `Err` adında iki varyantı bulunur. Bu varyantların ilki olan `OK`, işlem sonucunun başarılı olması durumunda döndürülen değere ev sahipliği yaparken, işlemin başarısız olması anlamına gelen `Err` varyantında ise bu başarısızlığın nasıl ve neden olduğunu açıklayan bilgiler depolanır.
+
+Bu `Result` türlerinin amacı, hata işleme bilgilerini kodlamaktır. Tüm türlerde olduğu gibi `Result` türü değerleri de kendileri için tanımlanmış ilişkili yöntemlere sahiptir. Bir `io::Result` örneğinin, `expect` adında çağırabileceğimiz bir metodu bulunmaktadır. Bu metot çağrıldığında, `io..Result` örneği `Err` değeriyse `expect` programın çökmesine neden olacak ve kendisine argüman olarak ilettiğiniz mesajı görüntüleyecektir. Eğer `read_line` metodu bir `Err` döndürürse bunun nedeni büyük olasılıkla işletim sisteminden kaynaklanan bir hata olacaktır. Ama `io::Result` örneği bir `Ok` değeriyse, `expect` metodu sadece `Ok` içinde saklanan dönüş değerini alarak kullanabilmeniz için size döndürecektir. Bu durumda bu `Ok` değeri kullanıcı tarafından standart girdiye girilen bayt sayısı olacaktır.
+
+Bununla birlikte `expect` metodunu çağırmadığınız hallerde de programınız derlenecek, fakat aşağıdaki gibi bir uyarı verecektir:
+
+```console
+   Compiling tahmin_oyunu v0.1.0 (/home/rustdili/projeler/tahmin_oyunu)
+warning: unused `std::result::Result` that must be used
+  --> src/main.rs:10:5
+   |
+10 | /     io::stdin()
+11 | |         .read_line(&mut tahmin);
+   | |________________________________^
+   |
+   = note: `#[warn(unused_must_use)]` on by default
+   = note: this `Result` may be an `Err` variant, which should be handled
+
+warning: 1 warning emitted
+
+    Finished dev [unoptimized + debuginfo] target(s) in 0.84s
+```
+
+Rust `read_line` tarafından döndürülen `Result` değerini kullanmadığınız konusunda uyarıda bulunarak, programın olası bir hatayı işlemediğini bildirir.
+
+Aslında uyarıyı bastırmanın doğru yolu bir hata işleyici yazmaktan geçiyor olsa da, şu aşamada tek yapmak istediğimiz, bir sorun oluştuğunda programın çömesini sağlamak olduğundan `expect` metodunu kullanıyoruz. Hata işlemek konusunu kitabın 9. Bölümünde ayrıntılarıyla inceleyeceğiz.
+
+
+### `Println!` Yer Tutucuları ile Değerleri Yazdırmak
+
+Bu aşamada, kodumuzun sonlandığı noktayı gösteren *kapanış ayracı* (sola bakan süslü parantez) haricinde tartışacağımız bir satırımız daha var:
+
+```rust,ignore
+    println!("Tahmin ettiğiniz sayı: {}", tahmin);
+```
+
+Bu satır kullanıcı girdisini kaydettiğimiz dizgiyi yazdırır. Yer tutucuları temsil eden süslü parantezleri `{}` ise bir değerin yerini tutan yengeç kıskaçları olarak hayal edebilirsiniz. Çok sayıda değeri göstermek için de kullanabileceğiniz süslü parantezlerin ilk çifti, biçimlendirilmiş dizgiden sonraki ilk değeri içerirken, sonraki parantez ikinci değerii bir sonraki üçüncü değeri v.b. gösterir. Böyle bir `println!` çağrısı aşağıdaki gibi görünecektir:
+
+```rust
+let x = 5;
+let y = 10;
+
+println!("x değeri = {}, y değeri = {}", x, y);
+```
+
+Bu kodun çıktısı ekrana `x değeri = 5, y değeri = 10` yazdıracaktır.
+
+
+### İlk Bölümü Test Etmek
+
+İlk bölümün testini `cargo run` komutuyla çalıştırarak yapalım:
+
+```console
+$ cargo run
+   Compiling tahmin_oyunu v0.1.0 (/home/rustdili/projeler/tahmin_oyunu)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.36s
+     Running `target/debug/tahmin_oyunu`
+Tuttuğum sayıyı tahmin edin!
+Lütfen tahmininizi giriniz.
+6
+Tahmin ettiğiniz sayı: 6
+```
+
+Klavyeden girdi alıp onu ekrana yazdırabildiğimize göre oyunun ilk bölümünün tamamlanmış demektir. 
+
 <!-- Kaldım-->
