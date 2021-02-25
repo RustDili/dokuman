@@ -238,6 +238,6 @@ Lütfen tahmininizi giriniz.
 Tahmin ettiğiniz sayı: 6
 ```
 
-Klavyeden girdi alıp onu ekrana yazdırabildiğimize göre oyunun ilk bölümünün tamamlanmış demektir. 
+Klavyeden girdi alıp onu ekrana yazdırabildiğimize göre oyunun ilk bölümü tamamlanmış demektir. 
 
 <!-- Kaldım-->
