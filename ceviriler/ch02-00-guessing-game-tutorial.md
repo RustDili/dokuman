@@ -225,7 +225,7 @@ Bu kodun çıktısı ekrana `x değeri = 5, y değeri = 10` yazdıracaktır.
 
 ### İlk Bölümü Test Etmek
 
-İlk bölümün testini `cargo run` komutuyla çalıştırarak yapalım:
+Programımızın ilk bölümünü `cargo run` komutunu kullanarak test edelim:
 
 ```console
 $ cargo run
