@@ -107,18 +107,18 @@ Yine 1. Bölüm'den hatırlayacağınız üzere, bir dizi karakterin ekrana yazd
     println!("Lütfen tahmininizi giriniz.");
 ```
 
-Yukarıdaki kod ise oyun hakkında bilgi vererek kullanıcılardan bir sayı girmesini ister.
+Yukarıdaki kodda ise oyun hakkında bilgi verilerek kullanıcılardan bir sayı girmesi istenmektedir.
 
 ### Değerleri Değişkenlerde Saklamak
 
-Artık aşağıdaki gösterildiği gibi kullanıcı girişini depolayacağımız bir yer oluşturabiliriz:
+Sırada aşağıda gösterildiği gibi kullanıcı girdisini depolayacağımız bir yer oluşturmak var:
 
 ```rust
     let mut tahmin = String::new();
 ```
 
-Ve bu satırda program ilgiçleşmeye başlıyor. burada bir değişken oluşturabilmek için `let` anahtar sözcüğü kullanılmaktadır. İşte size başka bir örnek:
-
+Çok şeyin gerçekleştiği bu satırda program ilginçleşmeye başlıyor. Bu satırın değişken oluşturmak için kullanılan bir `let` ifadesiyle başladığına dikkat edin. İşte size başka bir örnek:
+<!--Kaldım-->
 ```rust, ignore
 let foo = bar;
 ```
