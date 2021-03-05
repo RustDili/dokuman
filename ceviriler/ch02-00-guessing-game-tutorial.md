@@ -414,6 +414,7 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
+// --Kesilen bölüm--
     println!("Tahmin ettiğiniz sayı: {}", tahmin);
 
     match tahmin.cmp(&gizli_sayi) {
@@ -470,6 +471,7 @@ Bu sorunu çözebilmek için programın kullanıcı girdisi olarak okuduğu `Str
 <span class="filename">Dosya adı: src/main.rs</span>
 
 ```rust,ignore
+// --Kesilen bölüm--
     let mut tahmin = String::new();
 
     io::stdin()Ek bölümler
@@ -582,7 +584,6 @@ Kullanıcının doğru tahmin yaparak oyunu kazanması durumunda, oyunu sonland�
 <span class="filename">Dosya adı: src/main.rs</span>
 
 ```rust,ignore
-// --Kesilen bölüm
        
         // --Kesilen bölüm--
         match tahmin.cmp(&gizli_sayi) {
