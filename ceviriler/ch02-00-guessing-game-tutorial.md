@@ -1,21 +1,21 @@
 # Bir Tahmin Oyunu Programlamak
 
-Haydi birlikte uygulamalı bir proje üzerinde çalışarak Rust'ın derinliklerine dalmaya hazırlanalım! Bu bölüm size Rust bazı temel kavramlarını tanıtarak bunları gerçek bir programda nasıl uygulayacağınızı gösterir. Bölüm boyunca let ve match anahtar kelimelerini, ilişkili metotlar ve işlevleri, harici sandıklar gibi kavramları alıştırma amaçlı ele alacak ve bu kavramları ilerleyen bölümlerde derinlemesine inceleyeceğiz.   
+Haydi hep birlikte uygulamalı bir proje üzerinde çalışarak Rust'ın derinliklerine inmeye başlayalım! Bu bölüm size Rust'ın temel kavramlarından bazılarını tanıtacak ve bu kavramları gerçek bir programda nasıl kullanacağınızı gösterecektir. Bölüm boyunca let ve match anahtar kelimelerini, ilişkili metotlar ve işlevleri, harici sandıklar gibi kavramları alıştırma amaçlı ele alacak ve bu kavramları ilerleyen bölümlerde derinlemesine inceleyeceğiz.   
 
-Projemizde klasik bir programlama problemi olan sayı tahmin oyununu kodlayacağız. Program 1 ile 100 arasında rastgele bir sayı oluşturacak ve oyuncudan bu sayıyı tahmin etmesini isteyecektir. Oyuncudan bir tahmin alındığında, alınan tahmin programın oluşturduğu sayı ile karşılaştırılacak, sayı yüksek veya düşükse bu bilgi oyuncu ile paylaşılarak yeniden tahmin etmesi istenecek, doğru sayı bulunduğunda ise bir tebrik mesajı yazdırılacak ve programdan çıkılacaktır.
+Projemizde klasik bir programlama problemi olan sayı tahmin oyununu kodlayacağız. Program 1 ile 100 arasında rastgele bir sayı oluşturacak ve oyuncudan bu sayıyı tahmin etmesini isteyecektir. Oyuncudan bir tahmin girdisi alındığında, alınan tahmin değeri, programın oluşturduğu sayı ile karşılaştırılacak, sayı yüksek veya düşükse bu bilgi oyuncu ile paylaşılarak yeniden tahmin girmesi istenecek, doğru sayı bulunduğunda ise bir tebrik mesajı yazdırılarak programdan çıkılacaktır.
 
 ##  Yeni Bir Proje Oluşturmak
 
-Yeni bir proje oluşturmak için 1. Bölümde oluşturduğumuz *projeler* dizinine giderek aşağıdaki gibi yeni bir proje oluşturun:
+Yeni bir proje oluşturmak için 1. Bölümde oluşturduğumuz *projeler* dizinine giderek aşağıdaki komutları uygulayın:
 
 ```console
 $ cargo new tahmin_oyunu
 $ cd tahmin_oyunu
 ```
 
-İlk komutumuz `cargo new` birinci argüman olarak proje adımız olan *tahmin_oyunu* adını alır. İkinci komut ise bizi Cargo tarafından oluşturulan yeni projemizin dizinine yönlendirir. 
+İlk komutumuz `cargo new` birinci argüman olarak projeye verdiğimiz *tahmin_oyunu* adını alır. İkinci komut ise bizi Cargo tarafından oluşturulan yeni proje  dizinine yönlendirir. 
 
-Bu dizinde oluşturulan *Cargo.toml* dosyasına göz atalım:
+Bu dizinde Cargo tarafından oluşturulmuş bulunan *Cargo.toml* dosyasına göz atalım:
 
 <span class="filename">Dosya adı: Cargo.toml</span>
 
@@ -31,9 +31,9 @@ edition = "2018"
 [dependencies] 
 ```
 
-Cargo'nun ortamınızdan elde ettiği yazar bilgileri doğru görünmüyorsa, gereken değişikliği gerçekleştirdikten sonra dosyayı yeniden kaydedebilirsiniz.
+Cargo'nun ortamınızdan elde ettiği yazar bilgileri doğru görünmüyorsa, yazar bilgilerini düzenleyerek dosyayı yeniden kaydedebilirsiniz.
 
-Birinci bölümden de hatırlayacağınız gibi `cargo new` komutu sizin için bir "Hello, world!" programı oluşturur. Şimdi *tahmin_oyunu* dizininde bulunan *src/main.rs* dosyasına göz atalım:
+Birinci bölümden de hatırlayacağınız gibi `cargo new` komutu sizin için hazır bir "Hello, world!" programı oluşturuyordu. Şimdi *tahmin_oyunu* dizininde oluşturulması gereken bu dosyayı inceleyelim:
 
 <span class="filename">Dosya adı: main.rs</span>
 
@@ -43,7 +43,7 @@ fn main() {
 }
 ```
 
-Bu "Hello, world!" programını `cargo run` komutu kullanarak tek adımda derleyip çalıştıralım:
+Ve bu programı `cargo run` komutu kullanarak tek seferde derleyip çalıştıralım:
 
 ```console
 $ cargo run
@@ -53,13 +53,13 @@ $ cargo run
 Hello, world!
 ```
 
-Bu uygulamada da sıkça kullanacağımız `run` komutu, bir projeyi çabucak derleyip çalıştırmamız ve bir sonraki derleme adımına hızlıca gitmemiz gerektiğinde oldukça faydalıdır.
+Sıklıkla kullanılan `run` komutu, bir projeyi çabucak derleyip çalıştırmamız ve bir sonraki derleme adımına hızlıca gitmemiz gerektiğinde oldukça faydalıdır.
 
-Şimdi tahmin oyunu uygulamasının kodlarını yazacağımız *src/main.rs* dosyasını yeniden açalım.
+Haydi oyun kodlarının yer alacağı *src/main.rs* dosyasını yeniden açarak kodlamaya başlayalım!
 
 ## Giriş Verisinin İşlenmesi
 
-Tahmin oyununun ilk bölümü, kullanıcıdan bir değer girmesini isteyecek ve bu girdiyi işleyerek beklenen biçimde olup olmadığını denetlemekten ibarettir. Oyunu kullanıcının bir tahmin yapmasına izin vererek başlatalım. Örnek 2-1'de yer alan kodu *src/main.rs* dosyasına ekleyelim:
+Tahmin oyununun ilk bölümünde, kullanıcılardan bir değer girmesini isteyecek ve bu girdiyi alarak beklenen biçimde olup olmadığını denetleyeceğiz. Programımıza kullanıcılardan bir tahmin girdisi alacak kodları yazarak başlayacağız. Örnek 2-1'de yer alan kodu *src/main.rs* dosyasına ekleyelim:
 
 <span class="filename">Dosya adı: main.rs</span>
 
@@ -83,15 +83,15 @@ fn main() {
 
 <span class="caption"> Örnek 2-1: Kullanıcıdan bir tahmin verisi alarak bunu yazdıran kod</span>
 
-Bu kod fazlasıyla bilgi içerdiğinden kendisini satır satır inceleyerek gidelim. Öncelikle kullanıcı girdisini yakalamak ve sonucu çıktı olarak yazdırabilmek için io (input/output) kütüphanesini içe aktarmamız gerekir. Bu kitaplık `std` olarak bilinen Rust standart kütüphanesinin bir parçasıdır. 
+Bu aşama yoğun bilgi içerdiğinden kodları satır satır inceleyerek gidelim. İlk etapta kullanıcı girdisini elde etmek ve değerini yazdırabilmek için Rust standart kütüphanesi `std`'nin bir parçası olan `io` (input/output) kütüphanesini içe aktarmamız gerekir.
 
 ```rust
 use std::io;
 ```
 
-Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*](https://doc.rust-lang.org/std/prelude/index.html) olarak bilinen ve otomatik içe aktarma veya ön yükleme olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu otomatik içe aktarmaya dahil edilmemişse, bu türleri `use` anahtar sözcüğünü yardımıyla programınıza ithal etmeniz gerekir. Uygulamamızda kullandığımız `std::io` kütüphanesi bize, kullanıcı girdisini kabul etme yeteneği de dahil olmak üzere bir dizi kullanışlı özellik sağlar.
+Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*](https://doc.rust-lang.org/std/prelude/index.html) olarak bilinen ve *otomatik içe aktarma* veya *ön yükleme* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği de dahil bir dizi kullanışlı özellikle birlikte gelir.
 
-Bölüm 1'den hatırlayacağınız üzere `main` işlevi programın giriş noktasını oluşturur.
+1. Bölümden hatırlayacağınız üzere `main()` işlevi programın giriş noktasını oluşturur.
 
 ```rust
 fn main() {
