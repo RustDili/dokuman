@@ -414,21 +414,6 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
-    // --Ayrı bölüm--
-#    println!("Tuttuğum sayıyı tahmin edin!");
-#   
-#   let gizli_sayi = rand::thread_rng().gen_range(1..101);
-#   
-#   println!("Gizli sayı: {}", gizli_sayi);
-#
-#   println!("Lütfen tahmininizi giriniz.");
-#   
-#   let mut tahmin = String::new();
-#
-#   io::stdin()
-#   	.read_line(&mut tahmin)
-#   	.expect("Veri okuma hatası!");
-
     println!("Tahmin ettiğiniz sayı: {}", tahmin);
 
     match tahmin.cmp(&gizli_sayi) {
@@ -445,7 +430,7 @@ Bu koda eklediğimiz ilk yenilik `std::cmp::Ordering;` adındaki bir türü stan
 
 Kodumuza eklediğimiz ikinci yenilik ise, bu `enum` türünü kullanmak amacıyla kodun en alt kısmına yerleştirdiğimiz beş tane yeni satırdan oluşan bir eşleme ifadesidir. Bu eşleme ifadesinde kullandığımız `cmp` metodu, birbiriyle karşılaştırılabilecek her şey için uygulanabilen bir işlevsellik olup, iki değerin karşılaştırılması amacıyla kullanılır. Karşılaştırılması istenen değerin referansını alarak çalışan bu metot, `tahmin` değişkeni içindeki değeri `gizli_sayı` değişkenindeki değer ile karşılaştıracak ve `use` anahtar kelimesiyle kod kapsamına aldığımız `Ordering` türünün varyantlarından uygun olan birini döndürecektir. Elde ettiğimiz dönüş değeriyle ne yapılacağına ise `tahmin` ve `gizli_sayi` değerlerini karşılaştıran `cmp` çağrısından döndürülecek olası sonuçlarla eşleştirdiğimiz ifadelerle karar veriyoruz. 
 
-Dilimize *eşleme* olarak çevirebileceğimiz `match` olası durumları ifade eden dallardan meydana gelir. Bu dallar, bir örüntü *(kalıp, şablon)* ve eşleme ifadesinin başlangıcında belirtilen değerin bu örüntüyle eşleşmesi halinde yürütülecek olan koddan ibarettir. Eşleştirilecek değeri alan Rust bunu sırasıyla her dalın örüntüsüyle karşılaştıracak ve eşleşen daldaki kodu işletecektir. Rust'ın `match` yapısı ve örüntüleri, kodunuzda karşılaşabileceğiniz çeşitli durumları ifade etmenize ve olası her durumun ele alındığından emin olmanızı sağlayan güçlü özelliklerdir. Bu özellikler sırasıyla 6. ve 18. bölümlerde ayrıntılı biçimde ele alınacaktır.
+Dilimize *eşleme* olarak çevirebileceğimiz [`match`](ch06-02-match.html) olası durumları ifade eden dallardan meydana gelir. Bu dallar, bir örüntü *(kalıp, şablon)* ve eşleme ifadesinin başlangıcında belirtilen değerin bu örüntüyle eşleşmesi halinde yürütülecek olan koddan ibarettir. Eşleştirilecek değeri alan Rust bunu sırasıyla her dalın örüntüsüyle karşılaştıracak ve eşleşen daldaki kodu işletecektir. Rust'ın `match` yapısı ve örüntüleri, kodunuzda karşılaşabileceğiniz çeşitli durumları ifade etmenize ve olası her durumun ele alındığından emin olmanızı sağlayan güçlü özelliklerdir. Bu özellikler sırasıyla 6. ve 18. bölümlerde ayrıntılı biçimde ele alınacaktır.
 
 Burada kullanılan eşleme ifadesinin nasıl çalışacağını hayal etmeye çalışalım. Kullanıcının tahmin ettiği sayının 50, rasgele üretilen sayının da 38 olduğunu varsayalım. Kod 50 ile 38 sayılarını karşılaştırdığında, 50 sayısı 38'den büyük olduğundan `cmp` metodu `Ordering::Greater` döndürecek ve `match` ifadesi `Ordering::Greater` değerini alarak her dalın örüntüsünü teker teker kontrol edilmeye başlayacaktır. İlk dalın `Ordering::Less` örüntüsü kontrol edildiğinde bu değerin `Ordering::Greater` ile eşleşmediği görülecek ve bu daldaki kodlar yok sayılarak hemen arkasından bir sonraki dal kontrol edilecektir. Bir sonraki dal incelendiğinde, dalın `Ordering::Greater` örüntüsünün `match` ifademizin almış olduğu `Ordering::Greater` değeriyle aynı olduğu görülecek ve bu koldaki kodlar çalıştırılarak ekrana `Sayınız büyük` yazdırılacaktır. Bu aşamada `match` ifadesi artık bir eşleme yapılmış olduğundan son dala bakmaya gerek duymayacak ve çalışmasını sonlandıracaktır.
 
@@ -478,29 +463,16 @@ error: could not compile `guessing_game`
 To learn more, run the command again with --verbose.
 ```
 
-Çıktıyı dikkatlice incelediğimizde derleyicinin bize aldığımız hatanın temelinde *tür uyumsuzluğunun* yattığını bildirdiğini görüyoruz. Rust statik ve güçlü bir tür sistemine sahip olmasına rağmen aynı zamanda tür çıkarım özelliğine de sahip bir programlama dili olduğundan, tahmin değişkenini `let mut tahmin = String::new()` olarak bildirdiğimizde `tahmin` değişkeninin `String` türünde olacağını varsayarak bizi değişkenin türünü açıkça belirtmemiz için zorlamaz. Fakat programımızın rastgele ürettiği `gizli_sayi` değişkenimiz ise sayısal bir değer içermektedir. Rust'ta 1 ile 100 arasındaki sayılartı gösterebilecek belirli sayısal türler vardır. Bunlar, işaretli 32 bitlik sayı türlerini gösteren `i32`, işaretsiz 32 bitlik sayı türlerini göstermek için kullanılan `u32`, işaretli 64 bitlik sayı türlerini gösteren `i64` ve benzerleri gibi sayı türleridir. Eğer kodun farklı bir noktasında, türün farklı olduğunun değerlendirilebileceği şekilde tür bilgisi girilmedikçe, Rust varsayılan tamsayı türünü `i32` olarak varsayacağından `gizli_sayi` değişken türü otomatik olarak `i32` olarak atanacaktır. Dolayısıyla kodu derlemeye kalkıştığımızda aldığımız hatanın nedeni Rust'ın bir `String` türü ile bir sayı türünü karşılaştıramamasıdır.
+Çıktıyı dikkatlice incelediğimizde derleyicinin bize aldığımız hatanın temelinde *tür uyumsuzluğu*nun yattığını bildirdiğini görüyoruz. Rust statik ve güçlü bir tür sistemine sahip olmasına rağmen aynı zamanda tür çıkarım özelliğine de sahip bir programlama dili olduğundan, tahmin değişkenini `let mut tahmin = String::new()` olarak bildirdiğimizde `tahmin` değişkeninin `String` türünde olacağını varsayarak bizi değişkenin türünü açıkça belirtmemiz için zorlamaz. Fakat programımızın rastgele ürettiği `gizli_sayi` değişkenimiz ise sayısal bir değer içermektedir. Rust'ta 1 ile 100 arasındaki sayılartı gösterebilecek belirli sayısal türler vardır. Bunlar, işaretli 32 bitlik sayı türlerini gösteren `i32`, işaretsiz 32 bitlik sayı türlerini göstermek için kullanılan `u32`, işaretli 64 bitlik sayı türlerini gösteren `i64` ve benzerleri gibi sayı türleridir. Eğer kodun farklı bir noktasında, türün farklı olduğunun değerlendirilebileceği şekilde tür bilgisi girilmedikçe, Rust varsayılan tamsayı türünü `i32` olarak varsayacağından `gizli_sayi` değişken türü otomatik olarak `i32` olarak atanacaktır. Dolayısıyla kodu derlemeye kalkıştığımızda aldığımız hatanın nedeni Rust'ın bir `String` türü ile bir sayı türünü karşılaştıramamasıdır.
 
 Bu sorunu çözebilmek için programın kullanıcı girdisi olarak okuduğu `String` türünü bir gerçek bir sayı türüne dönüştürerek onu sayısal değere sahip olan `gizli_sayi` değişkeniyle karşılaştırmamız gerekir. Bunu `main()` işlevine ekleyeğimiz tek satır kod ile gerçekleştirebiliriz:
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
-```rust
-use std::io;
-use std::cmp::Ordering;
-use rand::Rng;
-
-fn main() {
-    println!("Tuttuğum sayıyı tahmin edin!");
-    
-    let gizli_sayi = rand::thread_rng().gen_range(1..101);
-    
-    println!("Gizli sayı: {}", gizli_sayi);
-
-    println!("Lütfen tahmininizi giriniz.");
-    
+```rust,ignore
     let mut tahmin = String::new();
 
-    io::stdin()
+    io::stdin()Ek bölümler
     	.read_line(&mut tahmin)
     	.expect("Veri okuma hatası!");
 
@@ -518,17 +490,17 @@ fn main() {
 
 Eklediğimiz yeni satır aşağıda yer almaktadır:
 
-```rust
+```rust,ignore
 let tahmin: u32 = tahmin.trim().parse().expect("Lütfen bir sayı türü giriniz!");
 ```
 
 Bu satır programımızda `tahmin` adında yeni bir değişken oluşturur. Hatırlayacağınız üzere programımızda halihazırda kullanılmakta olan bir `tahmin` değişkeni zaten vardı. O halde bu satırla oluşturulan `tahmin` değişkeni ne anlama gelmektedir? Rust bir değişkeni, aynı adlı başka bir değişkenle değiştirmemize izin verir. Gölgeleme olarak adlandırılan bu özellik, bir değeri olduğu türden başka bir türe çevirmek istediğiniz durumlarda oldukça kullanışlıdır. Bu özellik örneğin `tahmin_str` ve `tahmin` gibi iki benzersiz değişken oluşturmak yerine `tahmin` değişken adını yeniden kullanmamıza izin verir. *Gölgeleme konusu 3. Bölümde ayrıntılarıyla ele alınmaktadır.*
 
-Yeniden oluşturduğumuz `tahmin` değişkenini `tahmin.trim().parse()` ifadesine bağladığımızda, ifade içindeki `tahmin` `String` türündeki kullanıcı girdisini içeren orjinal `tahmin` değişkenini gösterir. Bir `String` örneğine uygulanan `trim` metodu ise kendisine iletilen dizginin baş ve sonunda bulunan beyaz boşlukları temizler. Her ne kadar `u32` türü yalnızca sayısal karakterler içeriyor olsa da kullanıcının `read_line` işlemini yerine getirmek için enter tuşuna basması gereklidir. Kullanıcı enter tuşuna bastığındaysa dizgiye yeni bir satır eklenecektir. Örneğin kullanıcının tahmin ettiği sayıyı 5 olarak yazıp enter tuşuna bastığınını düşünelim. Bu gerçekleştiğinde `tahmin` içindeki veri `5\n` olarak görünecek, enter tuşuna basılmasından kaynaklı `tahmin` dizgisine İngilizce karşılığı "newline" olan ve *yeni bir satırı* temsil eden `\n` karakteri eklenecektir. İşte `trim` metodunu kullanmakla `\n` karakterini temizleyerek girdinin 5 olmasını sağlamış oluyoruz.
+Yeniden oluşturduğumuz `tahmin` değişkenini `tahmin.trim().parse()` ifadesine Ek bölümlerbağladığımızda, ifade içindeki `tahmin` `String` türündeki kullanıcı girdisini içeren orjinal `tahmin` değişkenini gösterir. Bir `String` örneğine uygulanan `trim` metodu ise kendisine iletilen dizginin baş ve sonunda bulunan beyaz boşlukları temizler. Her ne kadar `u32` türü yalnızca sayısal karakterler içeriyor olsa da kullanıcının `read_line` işlemini yerine getirmek için enter tuşuna basması gereklidir. Kullanıcı enter tuşuna bastığındaysa dizgiye yeni bir satır eklenecektir. Örneğin kullanıcının tahmin ettiği sayıyı 5 olarak yazıp enter tuşuna bastığınını düşünelim. Bu gerçekleştiğinde `tahmin` içindeki veri `5\n` olarak görünecek, enter tuşuna basılmasından kaynaklı `tahmin` dizgisine İngilizce karşılığı "newline" olan ve *yeni bir satırı* temsil eden `\n` karakteri eklenecektir. İşte `trim` metodunu kullanmakla `\n` karakterini temizleyerek girdinin 5 olmasını sağlamış oluyoruz.
 
 Dizgilerle kullanılan [`parse`](https://github.com/rust-lang/book/blob/master/std/primitive.str.html#method.parse) metodu ise, bir karakter dizisini bir sayı türüne ayrıştırır.Bu metot çeşitli sayı türlerini ayrıştırabildiğinden yapmak istediğimizi Rust'a `let tahmin: u32 ` şeklinde açıkça bildirmemiz gerekir. `tahmin` değişkeninin hemen arkasından gelen `(:)` iki nokta üst üste ise bildirdiğimiz değişkene tür açıklaması ekleyeceğimizi gösterir. Rust'ta birkaç yerleşik sayısal tür  bulunur ve burada kullandığımız `u32` ise işaretsiz 32 bitlik bir tamsayıyı olup küçük bir pozitif sayı için gayet iyi bir tercihtir. Diğer sayı türlerini 3. Bölümde inceleyeceğiz bilgisine ek olarak, bu örnek programa eklediğimiz `u32` tür açıklaması ve bunun `gizli_sayi` ile karşılaştırılması Rust'ın `gizli_sayi` değişken türünü de `u32` olarak çıkarsayacağı anlamına gelmektedir. Bu da artık karşılaştırma işleminin aynı türden iki değer arasında gerçekleştirileceü, anlamına gelmektedir!
 
-Eğer dizgi içeriğinde `A👍%` şeklinde bir değer bulunuyorsa, bu değeri başarılı şekilde bir sayıya dönüştürmenin herhangi bir yolu olmadığından ayrıştırma çağrısı kolaylıkla bir hataya neden olabilir. O nedenle bu metot başarısız olma olasılığına karşı, daha önce *`Result` Türü ile Olası Hataları İşlemek* başlığında incelediğimiz gibi ve `read_line` metoduna benzer şekilde bir `Result` türü döndürür. Döndürülen `Result` türünü yine aynı şekilde `expect` metodunu kullanarak değerlendireceğiz. Eğer `parse` metoduyla dizgiden bir sayı elde edilemez ve `Result` türü `Err` varyantını döndürürse `expect` çağrısı programı çökertecek ve kendisine parametre olarak ilettiğimiz *Lütfen bir sayı türü giriniz!* mesajını gösterecektir. Fakat `parse` metodu başarılı olur ve bir sayı üretebilirse, `Result` türü `Ok` varyantını döndüreceğinden `expect` çağrısından da `Ok` varyantı içinde depolanan bu değer döndürülmüş olacaktır.   
+Eğer dizgi içeriğinde `A👍%` şeklinde bir değer bulunuyorsa, bu değeri başarılı şekilde bir sayıya dönüştürmenin herhangi bir yolu olmadığından ayrıştırma çağrısı kolaylıkla bir hataya neden olabilir. O nedenle bu metot başarısız olma olasılığına karşı, daha önce [*`Result` Türü ile Olası Hataları İşlemek*](#result-türü-ile-olası-hataları-i̇şlemek) başlığında incelediğimiz gibi ve `read_line` metoduna benzer şekilde bir `Result` türü döndürür. Döndürülen `Result` türünü yine aynı şekilde `expect` metodunu kullanarak değerlendireceğiz. Eğer `parse` metoduyla dizgiden bir sayı elde edilemez ve `Result` türü `Err` varyantını döndürürse `expect` çağrısı programı çökertecek ve kendisine parametre olarak ilettiğimiz *Lütfen bir sayı türü giriniz!* mesajını gösterecektir. Fakat `parse` metodu başarılı olur ve bir sayı üretebilirse, `Result` türü `Ok` varyantını döndüreceğinden `expect` çağrısından da `Ok` varyantı içinde depolanan bu değer döndürülmüş olacaktır.   
 
 Haydi şimdi programımız yeniden çalıştıralım!
 
@@ -555,31 +527,15 @@ Bir anahtar kelime olan `loop` sonsuz bir döngü oluşturmakta kullanılır. Ş
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
-```rust
-use std::io;
-use std::cmp::Ordering;
-use rand::Rng;
-
-fn main() {
-    println!("Tuttuğum sayıyı tahmin edin!");
-    
-    let gizli_sayi = rand::thread_rng().gen_range(1..101);
-    
+```rust,ignore
+    // --Kesilen bölüm--
     println!("Gizli sayı: {}", gizli_sayi);
 
     loop {
         println!("Lütfen tahmininizi giriniz.");
-    
-        let mut tahmin = String::new();
 
-        io::stdin()
-            .read_line(&mut tahmin)
-            .expect("Veri okuma hatası!");
-
-        let tahmin: u32 = tahmin.trim().parse().expect("Lütfen bir sayı türü girin!");
-
-        println!("Tahmin ettiğiniz sayı: {}", tahmin);
-
+        // --Kesilen bölüm--
+        
         match tahmin.cmp(&gizli_sayi) {
             Ordering::Less => println!("Sayınız küçük!"),
             Ordering::Greater => println!("Sayınız büyük!"),
@@ -591,7 +547,7 @@ fn main() {
 
 Kolaylıkla fark edeceğiniz gibi tahmin giriş isteminden itibaren her şeyi döngü kapsamına taşıdık. Şimdi döngü içinde yer alan her satırı dört boşluk daha girintiledikten sonra programınızı çalıştırın. Programımız bu aşamada tam olarak istediğimiz şeyi yapmakla beraber, kullanıcının çıkmasına izin vermeden sonsuza kadar tahmin bekleyen yeni bir sorunla karşılaşıyor ve kullanıcılarımız oturumlarını kapatamıyor gibi görünüyor değil mi?
 
-Aslında kullanıcılar *ctrl+d* klavye kısayolunu kullanarak programı her zaman sonlandırabilecek olmalarına rağmen bu doyumsuz canavardan kaçmanın bir başka yolu daha var. *Tahmin Sayısının Gizli Sayı ile Karşılaştırılması* başlığında tartıştığımız `parse` konusundan hatırlayacağınız gibi programdan çıkabilmek için, kullanıcının sayı olmayan bir tahmin verisi girmesiyle programın çökecek olmasından yararlanabiliriz.
+Aslında kullanıcılar *ctrl+d* klavye kısayolunu kullanarak programı her zaman sonlandırabilecek olmalarına rağmen bu doyumsuz canavardan kaçmanın bir başka yolu daha var. [Tahmin Sayısının Gizli Sayı ile Karşılaştırılması](#tahmin-sayısının-gizli-sayı-ile-karşılaştırılması) başlığında tartıştığımız `parse` konusundan hatırlayacağınız gibi programdan çıkabilmek için, kullanıcının sayı olmayan bir tahmin verisi girmesiyle programın çökecek olmasından yararlanabiliriz.
 
 ```console
 $ cargo run
@@ -625,31 +581,10 @@ Kullanıcının doğru tahmin yaparak oyunu kazanması durumunda, oyunu sonland�
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
-```rust
-use std::io;
-use std::cmp::Ordering;
-use rand::Rng;
-
-fn main() {
-    println!("Tuttuğum sayıyı tahmin edin!");
-    
-    let gizli_sayi = rand::thread_rng().gen_range(1..101);
-    
-    println!("Gizli sayı: {}", gizli_sayi);
-
-    loop {
-        println!("Lütfen tahmininizi giriniz.");
-    
-        let mut tahmin = String::new();
-
-        io::stdin()
-            .read_line(&mut tahmin)
-            .expect("Veri okuma hatası!");
-
-        let tahmin: u32 = tahmin.trim().parse().expect("Lütfen bir sayı türü girin!");
-
-        println!("Tahmin ettiğiniz sayı: {}", tahmin);
-
+```rust,ignore
+// --Kesilen bölüm
+       
+        // --Kesilen bölüm--
         match tahmin.cmp(&gizli_sayi) {
             Ordering::Less => println!("Sayınız küçük!"),
             Ordering::Greater => println!("Sayınız büyük!"),
@@ -670,23 +605,9 @@ Oyunun davranışını daha da iyileştirebilmek adına, kullanıcı sayısal ol
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
-```rust
-use std::io;
-use std::cmp::Ordering;
-use rand::Rng;
-
-fn main() {
-    println!("Tuttuğum sayıyı tahmin edin!");
-    
-    let gizli_sayi = rand::thread_rng().gen_range(1..101);
-    
-    println!("Gizli sayı: {}", gizli_sayi);
-
-    loop {
-        println!("Lütfen tahmininizi giriniz.");
-    
-        let mut tahmin = String::new();
-
+```rust,ignore
+// --Kesilen bölüm--
+  
         io::stdin()
             .read_line(&mut tahmin)
             .expect("Veri okuma hatası!");
@@ -697,17 +618,9 @@ fn main() {
         };
 
         println!("Tahmin ettiğiniz sayı: {}", tahmin);
-
-        match tahmin.cmp(&gizli_sayi) {
-            Ordering::Less => println!("Sayınız küçük!"),
-            Ordering::Greater => println!("Sayınız büyük!"),
-            Ordering::Equal => {
-                println!("Bildiniz!");
-                break;
-            }
-        }
-    }
-}
+        
+        // --Kesilen bölüm--
+      
 ```
 
 <span class="caption">Örnek 2-5: Sayı olmayan bir tahmin girildiğinde programı çökertmek yerine yeni bir tahminin istenmesi</span>
@@ -716,7 +629,7 @@ Bir `expect` çağrısını `match` ifadesiyle değiştirmek, genellikle program
 
 Dizgi `parse` metoduyla başarılı biçimde bir sayıya dönüştürülebildiğinde elde edilen sayıyı içeren bir `Ok` değeri döndürülür. Bu `Ok` değeri ilk dalın örüntüsüyle eşleşecek `match` ifadesi yalnızca `parse` ile oluşturulan `sayi` değerini döndürecek ve `Ok` değerinini içine yerleştirecek ve böylelikle bu sayı yeni oluşturduğumuz `tahmin` değişkeninde yerini alacaktır.
 
-Dizgi `parse` metodunda sayıya dönüştürülemediğindeyse hata hakkında detaylı bilgi içeren `Err` değeri döndürülücektir. Bu değer `match` ifadesinin ilk dalı olan `Ok(sayi)` örüntüsüyle değil ikinci dalın örüntüsü olan `Err(_)` kalıbıyla eşleşecektir. Bu kalıpta yer alan alt çizgi `_` ise her şeyin kapsanmasını isteyen bir değer olup, `Err` varyantındaki değerin ne olduğuna bakılmaksızın tüm `Err`  değerlerinin bu dal ile eşleştirileceğini söylemektedir. Program ikinci dalı çalıştırmakla bu dalda bulunan ve döngünün bir sonraki yinelemesine devam ederek yeni bir tahmin verisi istemesini sağlayan `continue` kodunu çalıştıracak böylelikle `parse` metodunun karşılaşabileceği tüm olası hatalar göz ardı edilir.    
+Dizgi `parse` metodunda sayıya dönüştürülemediğindeyse hata hakkında detaylı bilgi içeren `Err` değeri döndürülücektir. Bu değer `match` ifadesinin ilk dalı olan `Ok(sayi)` örüntüsüyle değil ikinci dalın örüntüsü olan `Err(_)` kalıbıyla eşleşecektir. Bu kalıpta yer alan alt çizgi `_` ise her şeyin kapsanmasını isteyen bir değer olup, `Err` varyantındaki değerin ne olduğuna bakılmaksızın tüm `Err`  değerlerinin bu dal ile eşleştirileceğini söylemektedir. Program ikinci dalı çalıştırmakla bu dalda bulunan ve döngünün bir sonraki yinelemesine devam ederek yeni bir tahmin verisi istemesini sağlayan `continue` ifadesi işletilecek, böylelikle `parse` metodunun karşılaşabileceği tüm olası hatalar göz ardı edilmiş olacaktır.    
 
 Bu aşamada artık programımızdaki her şey beklendiği gibi çalışacaktır. Deneyelim:
 
@@ -742,7 +655,7 @@ Tahmin ettiğiniz sayı: 90
 Bildiniz!
 ```
 
-Harika! Küçük bir ince ayar daha yaptıktan sonra oyunumuzu bitireceğiz. Programın halen gizli numarayı ekrana yazdırdığını hatırlıyorsunuz değil mi? Kodlarımız test aşamasında gayet güzel çalışıyorken `gizli_sayi`'nın açık seçik ortada olması oyunun tüm eğlencesini bozuyor. Bunu düzeltebilmek için `gizli_sayi`'yı ekrana bastıran `println!` satırını silmemiz yeterli olacaktır. Aşağıda yer alan Örnek 2-6 kodun hatasız çalışan halini göstermektedir.
+Harika! Küçük bir ince ayar daha yaptıktan sonra oyunumuzu bitireceğiz. Programın halen gizli numarayı ekrana yazdırdığını hatırlıyorsunuz değil mi? Kodlarımız test aşamasında gayet güzel çalışıyorken `gizli_sayi`'nın açık seçik ortada olması oyunun tüm eğlencesini bozuyor. Bunu düzeltebilmek için `gizli_sayi`'yı ekrana bastıran `println!` satırını silmemiz yeterli olacaktır. Aşağıda yer alan Örnek 2-6 kodun tam ve hatasız çalışan halini göstermektedir.
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
