@@ -57,7 +57,7 @@ Sıklıkla kullanılan `run` komutu, bir projeyi çabucak derleyip çalıştırm
 
 Haydi oyun kodlarının yer alacağı *src/main.rs* dosyasını yeniden açarak kodlamaya başlayalım!
 
-## Giriş Verisinin İşlenmesi
+## Kullanıcı Girdisinin İşlenmesi
 
 Tahmin oyununun ilk bölümünde, kullanıcılardan bir değer girmesini isteyecek ve bu girdiyi alarak beklenen biçimde olup olmadığını denetleyeceğiz. Programımıza kullanıcılardan bir tahmin girdisi alacak kodları yazarak başlayacağız. Örnek 2-1'de yer alan kodu *src/main.rs* dosyasına ekleyelim:
 
@@ -91,21 +91,23 @@ use std::io;
 
 Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*](https://doc.rust-lang.org/std/prelude/index.html) olarak bilinen ve *otomatik içe aktarma* veya *ön yükleme* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği de dahil bir dizi kullanışlı özellikle birlikte gelir.
 
-1. Bölümden hatırlayacağınız üzere `main()` işlevi programın giriş noktasını oluşturur.
+Birinci bölümden hatırlayacağınız üzere `main()` işlevi programın giriş noktasını oluşturur.
 
 ```rust
 fn main() {
 ```
 
-*Function* kelimesinden türemiş olan `fn` anahtar kellimesi yeni bir işlev bildirirken parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* (sağa bakan süslü parantez)  `{` ise işlev gövdesinin başlangıç noktasını gösterir.
+*Function* kelimesinin kısaltılmışı olan `fn` söz dizimi yeni bir işlev bildirirken, içi boş parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* olarak da bilinen sağa bakan süslü parantez `{` ise işlev gövdesinin başlangıç noktasını gösterir.
 
-Yine Bölüm 1'den hatırlayacağınız üzere, ekrana bir dizi karakter yazdırmak içinse  `println!` makrosundan yararlanıyoruz.
+Yine 1. Bölüm'den hatırlayacağınız üzere, bir dizi karakterin ekrana yazdırılması amacıyla `println!` makrosunu kullanıyorduk.
 
 ```rust
     println!("Tuttuğum sayıyı tahmin edin!");
 
     println!("Lütfen tahmininizi giriniz.");
 ```
+
+Yukarıdaki kod ise oyun hakkında bilgi vererek kullanıcılardan bir sayı girmesini ister.
 
 ### Değerleri Değişkenlerde Saklamak
 
