@@ -699,6 +699,7 @@ fn main() {
         }
     }
 }
+```
 
 <span class="caption">Örnek 2-6: Tahmin oyunu programının son hali</span>
 
