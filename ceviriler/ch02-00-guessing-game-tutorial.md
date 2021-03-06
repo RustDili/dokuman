@@ -679,11 +679,13 @@ fn main() {
 
         io::stdin()
             .read_line(&mut tahmin)
+            .expect("Failed to read line");
+
         let tahmin: u32 = match tahmin.trim().parse() {
             Ok(sayi) => sayi,
             Err(_) => continue,
-        }
         };
+        
 
         println!("Tahmin ettiğiniz sayı: {}", tahmin);
 
@@ -697,7 +699,6 @@ fn main() {
         }
     }
 }
-```
 
 <span class="caption">Örnek 2-6: Tahmin oyunu programının son hali</span>
 
@@ -706,4 +707,3 @@ fn main() {
 Başarıyla çalışan bir sayı tahmin oyunu oluşturduğunuz için teşekkürler!
 
 Bu proje size; `let`, `match`, *metotlar*, *ilişkili işlevler*, harici sandıkların kullanılması gibi birçok Rust kavramını size tanıtmanın uygulamalı bir yolu olmakla beraber, sonraki bölümlerinde bu kavramlarhakkında daha çok şey öğreneceksiniz. Kitabın 3. Bölümü; değişkenler, veri türleri ve işlevler gibi çoğu programlama dili tarafından kullanılan kavramları kapsayacak ve bunların Rust ile nasıl kullanıldığını gösterecektir. 4. Bölümde ise Rust'ı diğer dillerden ayıran önemli bir özellik olan mülkiyet kavramı incelenecek, 5. Bölümdeyse yapı ve metot söz dizimleri tartışılacak, 6. bölümdeyse `enum` türünün çalışması irdelenecektir.
-
