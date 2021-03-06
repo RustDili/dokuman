@@ -679,7 +679,8 @@ fn main() {
 
         io::stdin()
             .read_line(&mut tahmin)
-            .expect("Failed to read line");
+        	.expect("Veri okuma hatası!");
+
 
         let tahmin: u32 = match tahmin.trim().parse() {
             Ok(sayi) => sayi,
