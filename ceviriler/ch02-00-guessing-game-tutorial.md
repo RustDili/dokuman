@@ -118,43 +118,42 @@ Sırada aşağıda gösterildiği gibi kullanıcı girdisini depolayacağımız 
 ```
 
 Çok şeyin gerçekleştiği bu satırda program ilginçleşmeye başlıyor. Bu satırın değişken oluşturmak için kullanılan bir `let` ifadesiyle başladığına dikkat edin. İşte size başka bir örnek:
-<!--Kaldım-->
+
 ```rust, ignore
 let foo = bar;
 ```
 
-Bu satır foo adında yeni bir değişken yaratarak onu bar değeri ile ilklendirir. Rust'ta değişkenlerin varsayılan olarak değişmez oldukları kabul edilir. Bu kavramı 3. Bölümümüz olan ["Değişkenler ve Değişkenlik"](ch03-01-variables-and-mutability.html) başlığı altında ayrıntılarıyla inceleyeceğiz. Aşağıdaki örnek bize, bir değişkeni değiştirilebilir kılmak için değişken adından önce `mut` anahtar kelimesinin kullanılacağını gösterir:
+Bu satır `foo` adında yeni bir değişken yaratarak onu `bar` değeri ile ilklendirir. Rust'ta değişkenlerin varsayılan olarak değişmez oldukları kabul edilir. Bu kavramı 3. Bölümümüz olan ["Değişkenler ve Değişkenlik"](ch03-01-variables-and-mutability.html) başlığı altında ayrıntılarıyla inceleyeceğiz. Aşağıdaki örnek bize, bir değişkeni değiştirilebilir kılmak için `mut` anahtar kelimesinin nasıl kullanılacağını göstermektedir:
 
 ```rust
 let foo = 5;    // değişmez
 let mut bar = 5;// değişebilir
 ```
 
-> Not: `//` söz dizimi satır sonuna kadar uzanan bir açıklamanın başlangıcını belirtir. 3. Bölümde ayrıntılarıyla ele alacağımız yorum satırları, buraya yazılanları Rust'ın derleme aşamasında görmezden gelmesini sağlıyor.
+> Not: `//` söz dizimi satır sonuna kadar uzanan bir açıklamanın başlangıcını belirtir. Rust tarafından derleme aşamasında görmezden gelinen bu satırları 3. Bölümde tartışacağız.
 
-Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeriği değiştirilebilir olarak saklanan* tahmin adında bir değişken tanımı olduğunu anlıyorsunuzdur. Eşittir `=` işaretinin diğer tarafında, yeni bir dizgi örneği döndürmek amacıyla yararlandığımız `String::new` işlevinden elde edilen ve `tahmin` değişkeninin ilklendirilmesinde kullanılan değer bulunmaktadır. Dizgiler, UTF-8 baytlarıyla kodlanmış, boyutları değiştirilebilen ve standart kütüphane tarafından sağlanan `String` türündeki metin parçalarıdır.
+Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeriği değiştirilebilir olarak saklanan* tahmin adında bir değişken tanımı olduğunu anlıyorsunuzdur. Eşittir `=` işaretinin diğer tarafında, yeni bir dizgi örneği döndürmek amacıyla yararlandığımız `String::new()` işlevinden elde edilen ve `tahmin` değişkeninin ilklendirilmesinde kullanılan değer bulunmaktadır. Dizgiler, UTF-8 baytlarıyla kodlanmış, boyutları değiştirilebilen ve standart kütüphane tarafından sağlanan `String` türündeki metin parçalarıdır.
 
-`String::new()` içindeki `::` söz dizimi, `new()`'in String türünün ilişkili işlevi olduğunu gösterir. İlişkili işlevler türe özgü olduklarından, `new` işlevinden dönen dizgi bir `String` örneği olarak değil, bir `String` türü şeklinde elde edilmektedir. Bazı dillerde buna *statik metot* adı verilir.
+`String::new()` içindeki `::` söz dizimi, `new()`'in String türünün ilişkili işlevi olduğunu gösterir. İlişkili işlevler türe özgü olduklarından, `new` işlevinden dönen dizgi `String` örneği olarak değil, `String` türü şeklinde elde edilmektedir. Bazı dillerde buna *statik metot* adı verilir.
 
-Bu `new` işlev, yeni ve boş bir dizgi oluşturur. Genellikle `new` olarak adlandırılan ve ilişkili olduğu türün yeni bir değerini oluşturan bu işlevlere Rust'ın birçok türünde rastlayacaksınız.
+Bu `new` işlevi, yeni ve boş bir dizgi oluşturur. Genellikle `new` olarak adlandırılan ve ilişkili olduğu türün yeni bir değerini oluşturan bu işlevlere Rust'ın birçok türünde rastlayacaksınız.
 
-Özetle `let mut tahmin = String::new();` satırında bir String türünün yeni ve boş bir örneğiyle ilklendirilen değiştirilebilir bir değişken tanımlanmaktadır. Huh!
+Özetle `let mut tahmin = String::new();` satırında bir String türünün yeni ve boş bir örneğiyle ilklendirilen değiştirilebilir bir değişken tanımlanmaktadır.
 
-Hatırlayacağınız gibi daha programımın ilk satırında `use std::io` söz dizimini kullanarak Rust standart kütüphanesinden giriş/çıkış işlevselliğini uygulamış olduğumuzdan artık `io` modülünde bulunan `stdin` işlevini çağırabiliyoruz:
+Hatırlayacağınız gibi programın ilk satırında `use std::io` söz dizimini kullanarak Rust standart kütüphanesinden giriş/çıkış işlevselliğini uygulamıştık. Şimdiyse `io` modülünde bulunan `stdin` işlevini çağıracağız:
 
 ```rust
     io::stdin()
     	.read_line(&mut tahmin)
 ```
 
-Eğer programın en başına `use std::io` satırını eklememiş olsaydık, `stdin` işlev çağrısını, kod içinde `std::io::stdin` şeklinde yazmamız yetecekti. Bu işlev uçbirimimizde standart girdinin işlenmesi sağlayan `std::io::Stdin` türünün bir örneğini döndürür. 
-  
+Eğer programın en başına `use std::io` satırını eklememiş olsaydık, `stdin` işlev çağrısını, kod içinde `std::io::stdin` şeklinde yazmamız gerekecekti. Bu işlev uçbirimimizde standart girdinin işlenmesi sağlayan `std::io::Stdin` türünün bir örneğini döndürür. 
 
 Kodun bir sonraki bölümü olan `.read_line(&mut tahmin)` ifadesindeyse, kullanıcıdan veri almak amacıyla standart girişteki `read_line` metodu çağrılarak, kendisine `&mut tahmin` verisi argüman olarak iletilir.
 
-`read_line` metodunun görevi, kullanıcı tarafından girilen karakterleri standart girişten okumak ve elde edilen veriyi iletilecek olan dizgiye yerleştirmektir. Yöntemin, kullanıcı girdisi eklendikçe dizgi içeriğini değiştirilebilmesi için kendisine iletilen bağımsız değişkenin değiştirilebilir olması gerekmektedir.
+`read_line` metodunun görevi, kullanıcı tarafından girilen karakterleri standart girişten okumak ve elde edilen veriyi iletilecek olan dizgiye yerleştirmektir. Yöntemin, kullanıcı girdisi eklendikçe dizgi içeriğini değiştirilebilmesi için, kendisine iletilen argümanın değişebilir olması gerekmektedir.
 
-`&` işareti bağımsız değişkenin *referans* türünden olduğunu bildirdiğinden, kodun bazı bölümleri tarafından bu değişkenlere, bellekte defalarca kopyalanmaları gerekmeksizin erişimlesi sağlanmış olur. Referanslar dilin güçlü ve karmaşık bir özelliği olmakla birlikte, Rust'ın en önemli avantajlarından biri de bu karmaşık işlevselliği güvenli ve kullanımı kolay hale getirmesidir. Aslında bu programı tamamlayabilmek için çok fazla ayrıntı bilmemize gerek yok. Şimdilik referansların da tıpkı değişmezler gibi varsayılan olarak değişmez kabul edildiğini ve onları değiştirilebilir kılabilmek için `&tahmin` yerine `&mut tahmin` yazmamız  gerektiğini öğrenmemiz yeterlidir. (Referanslar konusu 4.Bölümde ayrıntılı olarak ele alınacaktır.)
+`&` işareti bağımsız değişkenin *referans* türünden olduğunu bildirdiğinden, kodun bazı bölümleri tarafından bu değişkenlere, bellekte defalarca kopyalanmaları gerekmeksizin erişilmesi sağlanmış olur. Referanslar dilin güçlü ve karmaşık bir özelliği olmakla birlikte, Rust'ın en önemli avantajlarından biri de bu karmaşık işlevselliği güvenli ve kullanımı kolay hale getirmesidir. Aslında bu programı tamamlayabilmek için çok fazla ayrıntı bilmemize gerek yok. Şimdilik referansların da tıpkı değişmezler gibi varsayılan olarak değişmez kabul edildiğini ve onları değiştirilebilir kılabilmek için `&tahmin` yerine `&mut tahmin` yazmamız  gerektiğini öğrenmemiz yeterlidir. (Referanslar konusu 4.Bölümde ayrıntılı olarak ele alınacaktır.)
 
 ### `Result` Türü ile Olası Hataları İşlemek
 
