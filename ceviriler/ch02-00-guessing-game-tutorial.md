@@ -33,9 +33,9 @@ edition = "2018"
 
 Eğer, Cargo'nun ortamınızdan elde ettiği yazar bilgileri doğru görünmüyorsa, bu bilgileri düzenledikten sonra dosyayı yeniden kaydedin.
 
-Birinci bölümden de hatırlayacağınız gibi `cargo new` komutu sizin için hazır bir "Hello, world!" programı oluşturuyordu. Şimdi *tahmin_oyunu* dizininde oluşturulması gereken bu dosyayı inceleyelim:
+Birinci bölümden hatırlayacağınız gibi `cargo new` komutu size hazır bir "Hello, world!" programı sunar. `src/main.rs` dosyasını kontrol edelim:
 
-<span class="filename">Dosya adı: main.rs</span>
+<span class="filename">Dosya adı: src/main.rs</span>
 
 ```rust
 fn main() {
@@ -55,11 +55,11 @@ Hello, world!
 
 Sıklıkla kullanılan `run` komutu, bir projeyi çabucak derleyip çalıştırmamız ve bir sonraki derleme adımına hızlıca gitmemiz gerektiğinde oldukça faydalıdır.
 
-Haydi oyun kodlarının yer alacağı *src/main.rs* dosyasını yeniden açarak kodlamaya başlayalım!
+Programımızı oluşturacağımız *src/main.rs* dosyasını yeniden açarak kodlamaya başlayalım!
 
 ## Kullanıcı Girdisinin İşlenmesi
 
-Tahmin oyununun ilk bölümünde, kullanıcılardan bir değer girmesini isteyecek ve bu girdiyi alarak beklenen biçimde olup olmadığını denetleyeceğiz. Programımıza kullanıcılardan bir tahmin girdisi alacak kodları yazarak başlayacağız. Örnek 2-1'de yer alan kodu *src/main.rs* dosyasına ekleyelim:
+Tahmin oyununun ilk bölümünde, kullanıcılardan bir değer girmesini isteyecek ve bu girdiyi işleyerek beklenen biçimde olup olmadığını denetleyeceğiz. Programımıza kullanıcılardan bir tahmin girdisi alacak kodları yazarak başlayacağız. Örnek 2-1'de yer alan kodu *src/main.rs* dosyasına ekleyelim:
 
 <span class="filename">Dosya adı: main.rs</span>
 
