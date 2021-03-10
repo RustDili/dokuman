@@ -1,8 +1,8 @@
 # Bir Tahmin Oyunu Programlamak
 
-Haydi hep birlikte uygulamalı bir proje üzerinde çalışarak Rust'ın derinliklerine inmeye başlayalım! Bu bölüm size Rust'ın temel kavramlarından bazılarını tanıtacak ve bu kavramları gerçek bir programda nasıl kullanacağınızı gösterecektir. Bölüm boyunca let ve match anahtar kelimelerini, ilişkili metotlar ve işlevleri, harici sandıklar gibi kavramları alıştırma amaçlı ele alacak ve bu kavramları ilerleyen bölümlerde derinlemesine inceleyeceğiz.   
+Haydi hep birlikte uygulamalı bir proje üzerinde ilerleyerek Rust'ın derinliklerini kavramaya çalışalım! Bu bölümde sizlere Rust'ın temel kavramlarından bazıları tanıtılacak ve bu kavramların gerçek bir programda nasıl kullanılacağı gösterilecektir. Bölüm boyunca `let` ve `match` anahtar kelimeleri, ilişkili metotlar ve işlevler, harici sandıklar gibi kavramlar alıştırma amaçlı ele alınacak ve ilerleyen bölümlerde bu kavramlar derinlemesine incelenecektir.   
 
-Projemizde klasik bir programlama problemi olan sayı tahmin oyununu kodlayacağız. Program 1 ile 100 arasında rastgele bir sayı oluşturacak ve oyuncudan bu sayıyı tahmin etmesini isteyecektir. Oyuncudan bir tahmin girdisi alındığında, alınan tahmin değeri, programın oluşturduğu sayı ile karşılaştırılacak, sayı yüksek veya düşükse bu bilgi oyuncu ile paylaşılarak yeniden tahmin girmesi istenecek, doğru sayı bulunduğunda ise bir tebrik mesajı yazdırılarak programdan çıkılacaktır.
+Projemizde klasik bir programlama problemi olan sayı tahmin oyununu kodlayacağız. Program 1 ile 100 arasında rastgele bir sayı oluşturacak ve oyuncudan bu sayıyı tahmin etmesini isteyecektir. Oyuncu tahmin ettiği sayıyı girdiğinde bu değer, programın oluşturduğu sayı ile karşılaştırılacak, sayı yüksek veya düşükse bu bilgi oyuncu ile paylaşılarak yeniden tahmin girilmesi istenecek, doğru sayı bulunduğunda bir tebrik mesajı yazdırılarak programdan çıkılacaktır.
 
 ##  Yeni Bir Proje Oluşturmak
 
@@ -13,9 +13,9 @@ $ cargo new tahmin_oyunu
 $ cd tahmin_oyunu
 ```
 
-İlk komutumuz `cargo new` birinci argüman olarak projeye verdiğimiz *tahmin_oyunu* adını alır. İkinci komut ise bizi Cargo tarafından oluşturulan yeni proje  dizinine yönlendirir. 
+İlk satırdaki `cargo new` komutu argüman olarak projeye verdiğimiz *tahmin_oyunu* adını alır. İkinci satırdaki `cd tahmin_oyunu` komutu bizi, Cargo tarafından oluşturulan bu yeni dizine yönlendirir. 
 
-Bu dizinde Cargo tarafından oluşturulmuş bulunan *Cargo.toml* dosyasına göz atalım:
+Cargo tarafından otomatik oluşturulan *Cargo.toml* dosyasına göz atalım:
 
 <span class="filename">Dosya adı: Cargo.toml</span>
 
@@ -31,7 +31,7 @@ edition = "2018"
 [dependencies] 
 ```
 
-Cargo'nun ortamınızdan elde ettiği yazar bilgileri doğru görünmüyorsa, yazar bilgilerini düzenleyerek dosyayı yeniden kaydedebilirsiniz.
+Eğer, Cargo'nun ortamınızdan elde ettiği yazar bilgileri doğru görünmüyorsa, bu bilgileri düzenledikten sonra dosyayı yeniden kaydedin.
 
 Birinci bölümden de hatırlayacağınız gibi `cargo new` komutu sizin için hazır bir "Hello, world!" programı oluşturuyordu. Şimdi *tahmin_oyunu* dizininde oluşturulması gereken bu dosyayı inceleyelim:
 
