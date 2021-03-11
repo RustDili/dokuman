@@ -243,14 +243,13 @@ Klavyeden girdi alıp onu ekrana yazdırabildiğimize göre oyunun ilk bölümü
 
 ### Gizli Sayıyı Oluşturmak
 
-Programımızın bu bölümünde kullanıcının tahmin etmeye çalışacağı gizli sayıyı oluşturmaya çalışacağız. Oyunu eğlenceli hale getirip tekrar oynanmasını sağlayabilmek için her defasında bu gizli sayıyı değiştirmemiz ve oyunu kolaylaştırmak amacıyla tahmin edilecek sayıyı, 1 ile 100 aralığıyla sınırlayarak, bu sayıların seçimini tesadüfü şekilde yapmamız gerekecektir. Rastgele sayı oluşturabileceğimiz bir işlev Rust'ın standart kitaplığında bulundurulmadığından, yine Rust ekibi tarafından sağlanan [`rand`](https://crates.io/crates/rand) adlı harici sandıktan yararlanacağız.
+Programımızın bu bölümünde kullanıcının tahmin etmeye çalışacağı gizli sayıyı oluşturmaya çalışacağız. Oyunu eğlenceli hale getirip tekrar oynanmasını sağlayabilmek amacıyla her defasında bu gizli sayıyı değiştirmemiz ve oyunu kolaylaştırmak için, tahmin edilecek sayıyı, 1 ile 100 aralığıyla sınırlayarak, bu sayıların seçimini tesadüfü şekilde yapmamız gerekecektir. Rastgele sayı oluşturabileceğimiz bir işlev Rust'ın standart kitaplığında bulundurulmadığından, yine Rust ekibi tarafından sağlanan [`rand`](https://crates.io/crates/rand) adlı harici sandıktan yararlanacağız.
 
 ### İlave İşlevler İçin Sandıkları Kullanmak
 
-Sandıklar, Rust kaynak kodu dosyalarından oluşan birer koleksiyondur. Şu anda geliştirmekte olduğumuz bu proje bile,aslında çalıştırılabilir bir ikili *(binary)* sandıktır. Bize harici olarak sunulan `rand` sandığı başka programlarda kullanılması amaçlanan kodları içeren bir *kütüphane sandığı*dır.
+Sandıklar, Rust kaynak kodu dosyalarından oluşan birer koleksiyondur. Şu anda geliştirmekte olduğumuz bu proje bile, aslında çalıştırılabilir bir ikili *(binary)* sandıktır. Bize harici olarak sunulan `rand` sandığı başka programlarda kullanılması amaçlanan kodları içeren bir *kütüphane sandığı*dır.
 
-Harici sandıkların kullanımı `Cargo` aracının kolaylaştırıcı özelliklerinin ön plana çıktığı en iyi yerlerden biridir. kodlarımızda `rand` sandığı işlevselliğini kullanmadan önce `Cargo.toml` dosyasının bu bağımlılığı içerecek şekilde güncellenmesi gerekir. Bunu gerçekleştirebilmek için aşağıdaki satırları, `Cargo.toml` dosyasında yer alan 
-`[dependencies]` başlığının altına doğru biçimde ekleyelim:
+Harici sandıkların kullanımı, `Cargo` aracının kolaylaştırıcı özelliklerinin ön plana çıktığı yerlerden biridir. kodlarımıza `rand` sandığı işlevselliğini uygulamadan önce `Cargo.toml` dosyasının bu bağımlılığı içerecek şekilde güncellenmesi gerekir. Bunu gerçekleştirebilmek için aşağıdaki satırları, `Cargo.toml` dosyasında yer alan `[dependencies]` başlığının altına doğru şekilde ekleyelim:
 
 <span class="filename">Dosya adı: Cargo.toml</span>
 
@@ -259,9 +258,9 @@ Harici sandıkların kullanımı `Cargo` aracının kolaylaştırıcı özellikl
 rand = "0.8.3"
 ```
 
-`Cargo.toml` dosyasındaki bir bölüm başlığını takip eden her şey, başka bir bölüm başlayana kadar devam eden bölümün bir parçasıdır. Bu dosyanın bağımlılıklar `[dependencies]` başlıklı bölümü, projenizin çalışabilmesi için hangi harici sandıklara ve bu sandıkların hangi sürümlerine ihtiyaç duyulduğunu bildirdiğiniz yerdir. Şu aşamada projemizde kullanacağımız`rand` sandığı sürümünü `0.8.3` olarak belirleyeceğiz. Cargo, sürüm numaralarını bildirmekte standart olarak kullanılan [anlamsal sürümleme(http://semver.org/)]yi (SemVer olarak da adlandırılır.) yorumlamayı bildiğinden `0.8.3`'ün aslında `^0.8.3`'ün kısaltması olduğunu anlar. Bağımlılık olarak bildirdiğimiz `rand` sandığının sürüm numarası `0.8.3` ise projemizin en az `0.8.3` olan ancak `0.9.0`'ın altında kalan herhangi bir sürümle çalışabileceği anlamına gelmektedir. Bu durumda Cargo, `0.8.3`'den `0.9.0`'a kadar olası sandık sürümlerinin `0.8.3` sürümüyle uyumlu bir genel API'ye sahip olduğunu varsayar ve projemizin derlenebilmesi için gereken en son sürümü edinerek projemizin çalışmasını sağlar. Bununla birlikte `0.9.0` veya daha sonraki herhangi bir sürümün aşağıdaki örneklerin kullandığı API ile aynı API'ye sahip olacağı gareanti edilmez.
+`Cargo.toml` dosyasındaki bölüm başlıklarını takip eden her şey, başka bir bölüm başlayana kadar devam eden bölümün parçasıdır. Bu dosyanın bağımlılıklar `[dependencies]` başlıklı bölümü, projenizin çalışabilmesi için ihtiyaç duyduğu sandıkları ve bu sandıkların ilgili sürümlerini bildirdiğiniz yer olduğundan projemizde kullanacağımız `rand` sandığı sürümünü `0.8.3` olarak belirleyeceğiz. Cargo, sürüm numaralarını bildirmekte standart olarak kullanılan [anlamsal sürümleme](http://semver.org/) sistemini -SemVer olarak da adlandırılır- yorumlamayı bildiğinden, `0.8.3`'ün aslında `^0.8.3`'ün kısaltması olduğunu anlar. Bağımlılık olarak bildirdiğimiz `rand` sandığının sürüm numarası `0.8.3`, projemizin en az `0.8.3` olan ancak `0.9.0`'ın altında kalan herhangi bir sürümle çalışabileceği anlamına gelmektedir. Bu durumda Cargo, `0.8.3`'den `0.9.0`'a kadar olan olası sandık sürümlerinin, `0.8.3` sürümüyle uyumlu genel API'ye sahip olduğunu varsayarak, projemizin derlenebilmesi için gereken en son sürümü ediner ve projemizin çalışmasını sağlar. Bununla birlikte `0.9.0` veya daha sonraki herhangi bir sürümün aşağıdaki örneklerin kullandığı API ile aynı API'ye sahip olacağı garanti edilmez.
 
-Şimdi projemizi kodlarımızda hiç bir değişiklik yapmadan tıpkı Örnek 2-2'de gösterildiği gibi oluşturalım.
+Tıpkı Örnek 2-2'de gösterildiği haliyle kodlarımızda hiç bir değişikliğe gitmeden projemizi oluşturalım.
 
 ```console
 $ cargo build
@@ -283,17 +282,17 @@ $ cargo build
     Finished dev [unoptimized + debuginfo] target(s) in 1m 21s
 ```
 
-<span class="caption">Örnek 2-2: Rand sandığını bağımlılık olarak ekledikten sonra `cargo build` komutu ile elde edeceğimiz çıktı</span>
+<span class="caption">Örnek 2-2: Bağımlılık olarak eklenen `rand` sandığı sonrasında `cargo build` komutuyla elde edilen çıktı.</span>
 
-Bu aşamada tam olarak aynı sürüm numaralarını ve aynı satırlarda göremeyebilirsiniz. Anlamsal sürümleme *(SemVer)* sayesinde kodumuzla uyumlu olan sürümler işletim sistemimize bağlı olarak farklı sıra ve satırlarda olabilir.  
+Derleme esnasında oluşan çıktı işletim sisteminize bağlı olarak değişebileceğinden derlenen paket adları ve sürüm numaraları ekranınızda farklı sırayla yansıtılabilir. Bununla birlikte yüklenen sürümler *anlamsal sürümleme* sayesinde kodumuzla uyumlu olacaktır.
 
-Artık harici bir bağlantımız olduğuna göre Cargo, [Crates.io](https://crates.io/)'daki verilerin bir kopyası olan *kayıt defteri*nden, ihtiyaç duyduğumuz tüm bağımlılıkların en son sürümlerini alır. Crates.io, Rust ekosistemindeki geliştiricilerin açık kaynak projelerini başkaları ile paylaşmak amacıyla sandıklar şeklinde yayınladıkları bir çevrimiçi kaynaktır.   
+Artık harici bir bağlantımız olduğuna göre Cargo, [Crates.io](https://crates.io/)'daki verilerin bir kopyası olan *kayıt defteri*nden, ihtiyaç duyduğumuz tüm bağımlılıkların en son sürümlerini çekecektir. Crates.io, Rust ekosistemindeki geliştiricilerin açık kaynak projelerini başkaları ile paylaşmak amacıyla sandıklar şeklinde yayınladıkları çevrimiçi bir kaynaktır.   
 
-Kayıt güncellendikten sonra Cargo, `[dependencies]` bölümünü kontrol ederek henüz sahip olmadığımız sandıkları indirir. Bu aşamada Cargo'nun, bağımlılık olarak sadece rand kütüphanesini eklememize rağmen, bu kütüphane ile çalışabilmemiz için gerekli diğer sandıkları da yüklediğine şahit olacaksınız. Gerekli sandıklar indirildikten sonra Rust önce bu sandıkları derleyecek, arkasından projemizi mevcut bağımlılıklar ile yenicen oluşturacaktır.  
+Kayıt defteri güncellendikten sonra Cargo, `[dependencies]` bölümünü kontrol ederek henüz sahip olmadığımız sandıkları indirir. Bu aşamada Cargo'nun, bağımlılık olarak sadece `rand` kütüphanesini eklememize rağmen, bu kütüphane ile çalışabilmemiz için gerekli diğer sandıkları da yüklediğini göreceksiniz. Gerekli sandıklar indirildikten sonra Rust önce bu sandıkları derleyecek, arkasından projemizi mevcut bağımlılıklar ile yeniden oluşturacaktır.  
 
-Bu aşamada projenizde hiçbir değişiklik yapmadan yeniden `cargo build` komutunu çalıştırırsanız terminalinizde `Finished` satırının dışında herhangi bir çıktı alamazsınız. Bu eylemsizlik Cargo'nun, kodda bir değişiklik yapılmadığını, bağımlılıkların indirilip derlendiğini ve *Cargo.toml* dosyasında yeni bir ekleme bulunmadığını bilmesinden kaynaklanır. Bu durumda Cargo yapılacak bir şey bulunmadığını9 bildiğinden programı derlemez ve süreci sonlandırır.
+Bu aşamada projenizde hiçbir değişiklik yapmayıp `cargo build` komutunu yeniden çalıştırırsanız, uçbiriminizde `Finished` satırını görürsünüz. Bu eylemsizlik Cargo'nun; bağımlılıkların indirilip derlendiğini, kodda değişiklik yapılmadığını ve *Cargo.toml* dosyasının aynı kaldığını bilmesinden kaynaklanır. Bu durumda yapacak bir şey olmadığını fark eden Cargo programı derlemeden süreci sonlandırır.
 
-Eğer *src/main.rs* dosyasını açarak üzerinde basit bir değişiklik yaparak yeniden kaydedip derlerseniz yalnızca iki satırdan oluşan aşağıdaki çıktıyı görürsünüz: 
+Fakat *src/main.rs* dosyasını açıp üzerinde basit bir değişiklik yaparak kaydedip derlerseniz, yalnızca iki satırdan oluşan aşağıdaki çıktıyla karşılaşırsınız: 
 
 ```console
 $ cargo build
@@ -301,7 +300,7 @@ $ cargo build
     Finished dev [unoptimized + debuginfo] target(s) in 0.28s
 ```
 
-Bu satırlar derlemenin sadece *src/main.rs* dosyasındaki küçük değişiklikler ile güncellenerek gerçekleştirdildiğini göstermektedir. Bağımlılıkların değişmediğini, projemizin daha önce indirilip derlenen bağımlılıklarla kullanılabileceğini bilen Cargo, kodu sadece değişen kısmıyla yeniden oluşturur.   
+Bu satırlar derlemenin sadece *src/main.rs* dosyasındaki küçük değişiklikler gözetilerek gerçekleştirdildiğini gösterir. Bağımlılıkların değişmediğini ve projenin, önceden indirilip derlenen bağımlılıklarla kullanılmasının mümkün olduğunu anlayan Cargo, kodu sadece değişen kısmıyla yeniden oluşturur.   
 
 
 #### `Cargo.lock` Dosyası ile Derlemeleri Tekrarlamak
