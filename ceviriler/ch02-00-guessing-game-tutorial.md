@@ -243,7 +243,7 @@ Klavyeden girdi alıp onu ekrana yazdırabildiğimize göre oyunun ilk bölümü
 
 ### Gizli Sayıyı Oluşturmak
 
-Programımızın bu bölümünde kullanıcının tahmin etmeye çalışacağı gizli sayıyı oluşturmamız gerekiyor. Oluşturulacak bu gizli sayı, oyunun tekrar tekrar oynanmasını eğlenceli kılabilmek için her defasında farklı bir numaradan oluşturulmalıdır. Oyunun zorlaşmaması için tahmin edilecek sayıyı, 1 ile 100 arasındaki sayılardan tesadüfü şekilde seçmemiz yerinde olacaktır. Ancak bu rastgele sayıyı oluşturmamızı sağlayacak bir işlev Rust'ın standart kitaplığında  yer almadığından, yine Rust ekibi tarafından sağlanan [`rand`](https://crates.io/crates/rand) adlı harici sandıktan yararlanacağız.
+Programımızın bu bölümünde kullanıcının tahmin etmeye çalışacağı gizli sayıyı oluşturmaya çalışacağız. Oyunu eğlenceli hale getirip tekrar oynanmasını sağlayabilmek için her defasında bu gizli sayıyı değiştirmemiz ve oyunu kolaylaştırmak amacıyla tahmin edilecek sayıyı, 1 ile 100 aralığıyla sınırlayarak, bu sayıların seçimini tesadüfü şekilde yapmamız gerekecektir. Rastgele sayı oluşturabileceğimiz bir işlev Rust'ın standart kitaplığında bulundurulmadığından, yine Rust ekibi tarafından sağlanan [`rand`](https://crates.io/crates/rand) adlı harici sandıktan yararlanacağız.
 
 ### İlave İşlevler İçin Sandıkları Kullanmak
 
