@@ -365,20 +365,20 @@ fn main() {
 
 <span class="caption">Örnek 2-3: Rastgele sayı üretmek için eklenen kodlar.</span>
 
-İlk önce projemizin kapsam alanına `use rand::Rng` şeklinde bir `use` satırı ekliyoruz. Rand kütüphanesinin `Rng` özelliği *(trait)* rastgele sayı üreteçlerinin uyguladığı metotları tanımladığından, bu yöntemleri kullanabilmemiz için kapsama dahil edilmek zorundadır. Özellikler konusunu 10. Bölümde etraflıca inceleyeceğiz.
+Önce projemizin kapsam alanına `use rand::Rng` şeklinde bir `use` satırı ekliyoruz. Rand kütüphanesinin `Rng` özelliği, rastgele sayı üreteçlerinin uyguladığı metotları tanımladığından, bu yöntemlerin kullanabilmesi için, kütüphanenin kapsama dahil edilmesi gerekir. Özellikler *(trait)* konusunu 10. Bölümde etraflıca inceleyeceğiz.
 
 Hemen ardından ilk ekran çıktısını üreten satırdan sonra iki satır daha ekleyeceğiz. Bu satırlardan ilki olan `rand::thread_rng()` işlevinde, işletim sistemi tarafından başlatılan ve geçerli olan iş parçacığına özgü kullanılan rastgele sayı üreteci başlatılacak ve üretilecek olan sayı `gizli_sayi` adlı değişkende saklanacaktır. Bu sayının üretiminde ise `rand::Rng` olarak kapsama alanına dahil ettiğimiz `Rng` özelliğinde tanımlanmış `gen_range()` metodundan yararlanılacaktır. Kendisine verilen bir aralığa göre rasgele sayı üreten `gen_range()` metodunda kullanılan aralık ifadesi `başlangıç..bitiş` şeklinde olup, başlangıç olarak verilen alt sınır değeri kapsanmakta, bitiş olarak verilen üst sınır değeri ise hariç tutulmaktadır. Bu nedenle 1 ile 100 arasındaki sayılar arasından birini rastgele olarak talep edebilmemiz için metoda ileteceğimiz aralık değerlerini, aralığa dahil edilecek olan 1 ile aralığa dahil edilmeyecek olan üst sayı sınırını bildiren 101 olarak bildirmemiz gerekir. Eğer bu ifade biçimi size karışık geliyorsa, aynı işi yapan ve hem başlangıç hem de bitiş değerlerini aralığa dahil olarak gösterebileceğiniz `1..=100` şeklindeki gösterimi `gen_range()` metoduna aralık olarak iletebilirsiniz.
 
 > Bir sandığın hangi özellik, metot ve işlevlerinin kullanılabileceğini her zaman bilemeyebilirsiniz.
 > Sandıkların nasıl kullanılması gerektiğine dair talimatlar o sandığa ait belgelerde yer almaktadır.
 > Cargo'nun bir başka güzel özelliği de, tüm bağımlılıklarınız tarafından sağlanan dökümantasyonu yerel 
-> olarak oluşturup, tarayıcınızda uyumlu ollartak çalıştıracak olan `cargo doc --open` komutunu sağlamasıdır.
+> olarak oluşturup, tarayıcınızda uyumlu olarak çalıştıracak olan `cargo doc --open` komutunu sağlamasıdır.
 > örneğin `rand` sandığındaki bulunan diğer işlevler hakkında bilgilenmek istiyorsanız, `cargo doc --open`
-> komutunu çalıştırarak sol kenar çubuğunda yer alan `rand` seçeneğine tıklamanız yeterli olacaktır.     
+> komutunu çalıştırarak, sol kenar çubuğunda yer alan `rand` seçeneğine tıklamanız yeterlidir.     
 
-Eklediğimiz ikinci satır ise `gizli_sayi` değişkenini yazdırmak için kullanılacaktır. Programı geliştirme aşamasında test amaçlı kullanacağımız bu satır, programımızın nihai sürümünde yer almayacaktır. Fakat daha başlatılır başlatılmaz tahmin edilmesi istenen gizli sayıyı gösteren bir programın da oyun olduğunu pek iddia edemeyiz.
+Eklediğimiz ikinci satır ise `gizli_sayi` değişkenini yazdırmak için kullanılacaktır. Kodumuzun gelişme aşamasında test amaçlı kullanacağımız bu satır, programımızın nihai sürümünde yer almayacaktır. Başlatılır başlatılmaz gizli kalması gereken sayıyı açık eden program oyun değildir!
 
-Programı birkaç kez çalıştırmayı deneyin:
+Programı birkaç defa çalıştırarak deneyin:
 
 ```console
 $ cargo run
