@@ -83,13 +83,13 @@ fn main() {
 
 <span class="caption"> Örnek 2-1: Kullanıcıdan alınan tahmin verisini yazdıran kod</span>
 
-Bu aşama yoğun bilgi içerdiğinden kodların satır satır incelenmesi öğretici olacaktır. İlk etapta kullanıcı girdisini elde etmek ve değerini yazdırabilmek için Rust standart kütüphanesi `std`'nin bir parçası olan `io` (input/output) kütüphanesini içe aktarmamız gerekir.
+Bu aşama yoğun bilgi içerdiğinden kodun satır satır incelenmesi öğretici olacaktır. İlk etapta kullanıcı girdisini elde etmek ve değerini yazdırabilmek için Rust standart kütüphanesi `std`'nin bir parçası olan `io` (input/output) kütüphanesini içe aktarmamız gerekir.
 
 ```rust
 use std::io;
 ```
 
-Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*](https://doc.rust-lang.org/std/prelude/index.html) olarak bilinen ve *otomatik içe aktarma* veya *ön yükleme* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği de dahil bir dizi kullanışlı özellikle birlikte gelir.
+Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*](https://doc.rust-lang.org/std/prelude/index.html) olarak bilinen ve *otomatik içe aktarma* veya *ön yükleme* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği dahil bir dizi kullanışlı özellikle birlikte gelir.
 
 Birinci bölümden hatırlayacağınız üzere `main()` işlevi programın giriş noktasını oluşturur.
 
