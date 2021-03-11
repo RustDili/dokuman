@@ -400,11 +400,11 @@ Lütfen tahmininizi giriniz.
 Tahmin ettiğiniz sayı: 5
 ```
 
-Programınız her çalıştırıldığında 1 ile 100 arasında farklı bir sayı gösteriyorsa bu konuda başarılı olduk demektir!
+Program her çalıştırıldığında 1 ile 100 arasında farklı bir sayı gösteriyorsa tasarımımız başarılı demektir!
 
 ## Tahmin Sayısının Gizli Sayı ile Karşılaştırılması
 
-Artık kullanıcıdan alınan bir tahmin sayısı ve tasadüfi olarak üretilen bir sayıya sahip olduğumuza göre bunları rahatlıkla karşılaştırabiliriz. Bu aşama Örnek 2-4'te gösterilmekte olup, bu kod daha sonra açıklayacağımız nedenlerden ötürü henüz derlenmemektedir. 
+Elimizde kullanıcıdan alınan bir tahmin sayısı ve tasadüfi olarak üretilen bir `gizli_sayı` olduğuna göre bunları karşılaştırabiliriz. Kodun bu bölümü Örnek 2-4'te gösterilmekte olup, daha sonra açıklayacağımız nedenlerden ötürü henüz derlenmemektedir. 
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
@@ -414,7 +414,8 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
-// --Kesilen bölüm--
+    // --Kesilen bölüm--
+    
     println!("Tahmin ettiğiniz sayı: {}", tahmin);
 
     match tahmin.cmp(&gizli_sayi) {
@@ -427,15 +428,15 @@ fn main() {
 
 <span class="caption">Örnek 2-4: Karşılaştırılan iki sayıdan dönen olası değerleri işlemek.</span>
 
-Bu koda eklediğimiz ilk yenilik `std::cmp::Ordering;` adındaki bir türü standart kütüphaneden kod kapsamımıza aktaran yeni bir `use` deyiminin kullanılmış olmasıdır. Tıpkı `Result` türü gibi bir başka `enum` türü olan `Ordering` türü de, `less`, `Greater`, `Equal` şeklinde üç karşılaştırma varyantından oluşur ve bunlar iki değeri karşılaştırırken ortaya çıkan üç olası sonucu temsil etmekte kullanılırllar.
+Bu koda eklediğimiz ilk yenilik, `std::cmp::Ordering;` adındaki bir türü standart kütüphaneden kod kapsamımıza aktaran yeni bir `use` deyiminin kullanılmış olmasıdır. Tıpkı `Result` türü gibi bir başka `enum` türü olan `Ordering` türü de, `less`, `Greater`, `Equal` şeklinde üç karşılaştırma varyantından oluşur ve bunlar, iki değeri karşılaştırırken ortaya çıkan üç olası sonucu temsil etmekte kullanılırlar.
 
-Kodumuza eklediğimiz ikinci yenilik ise, bu `enum` türünü kullanmak amacıyla kodun en alt kısmına yerleştirdiğimiz beş tane yeni satırdan oluşan bir eşleme ifadesidir. Bu eşleme ifadesinde kullandığımız `cmp` metodu, birbiriyle karşılaştırılabilecek her şey için uygulanabilen bir işlevsellik olup, iki değerin karşılaştırılması amacıyla kullanılır. Karşılaştırılması istenen değerin referansını alarak çalışan bu metot, `tahmin` değişkeni içindeki değeri `gizli_sayı` değişkenindeki değer ile karşılaştıracak ve `use` anahtar kelimesiyle kod kapsamına aldığımız `Ordering` türünün varyantlarından uygun olan birini döndürecektir. Elde ettiğimiz dönüş değeriyle ne yapılacağına ise `tahmin` ve `gizli_sayi` değerlerini karşılaştıran `cmp` çağrısından döndürülecek olası sonuçlarla eşleştirdiğimiz ifadelerle karar veriyoruz. 
+Kodumuza eklediğimiz ikinci yenilik ise, bu `enum` türünü kullanmak amacıyla kodun en alt kısmına yerleştirdiğimiz beş tane yeni satırdan oluşan bir eşleme ifadesidir. Bu eşleme ifadesinde kullandığımız `cmp` metodu, birbiriyle karşılaştırılabilecek her şey için uygulanabilen bir işlevsellik olup, iki değerin karşılaştırılması amacıyla kullanılır. Karşılaştırılması istenen değerin referansını alarak çalışan bu metot, `tahmin` değişkeni içindeki değeri `gizli_sayı` değişkenindeki değer ile karşılaştıracak ve `use` anahtar kelimesiyle kod kapsamına aldığımız `Ordering` türünün varyantlarından uygun olan birini döndürecektir. Elde ettiğimiz dönüş değeriyle ne yapılacağına ise `tahmin` ve `gizli_sayi` değerlerini karşılaştıran `cmp` çağrısından döndürülecek olası sonuçlarla eşleştirdiğimiz ifadelerle karar verilecektir. 
 
-Dilimize *eşleme* olarak çevirebileceğimiz [`match`](ch06-02-match.html) olası durumları ifade eden dallardan meydana gelir. Bu dallar, bir örüntü *(kalıp, şablon)* ve eşleme ifadesinin başlangıcında belirtilen değerin bu örüntüyle eşleşmesi halinde yürütülecek olan koddan ibarettir. Eşleştirilecek değeri alan Rust bunu sırasıyla her dalın örüntüsüyle karşılaştıracak ve eşleşen daldaki kodu işletecektir. Rust'ın `match` yapısı ve örüntüleri, kodunuzda karşılaşabileceğiniz çeşitli durumları ifade etmenize ve olası her durumun ele alındığından emin olmanızı sağlayan güçlü özelliklerdir. Bu özellikler sırasıyla 6. ve 18. bölümlerde ayrıntılı biçimde ele alınacaktır.
+Dilimize *eşleme* olarak çevirebileceğimiz [`match`](ch06-02-match.html) olası durumları ifade eden dallardan meydana gelir. Bu dallar, bir örüntü *(kalıp, şablon)* ve eşleme ifadesinin başlangıcında belirtilen değerin bu örüntüyle eşleşmesi halinde yürütülecek olan koddan ibarettir. Eşleştirilecek değeri alan Rust bunu sırasıyla her dalın örüntüsüyle karşılaştıracak ve eşleşen daldaki kodu işletecektir. Rust'ın `match` yapısı ve örüntüleri, kodunuzda karşılaşabileceğiniz çeşitli durumları ifade etmenize yarayan ve olası her durumun ele alındığından emin olmanızı sağlayan güçlü özelliklerdir. Bu özellikler sırasıyla 6. ve 18. bölümlerde ayrıntılı biçimde ele alınacaktır.
 
-Burada kullanılan eşleme ifadesinin nasıl çalışacağını hayal etmeye çalışalım. Kullanıcının tahmin ettiği sayının 50, rasgele üretilen sayının da 38 olduğunu varsayalım. Kod 50 ile 38 sayılarını karşılaştırdığında, 50 sayısı 38'den büyük olduğundan `cmp` metodu `Ordering::Greater` döndürecek ve `match` ifadesi `Ordering::Greater` değerini alarak her dalın örüntüsünü teker teker kontrol edilmeye başlayacaktır. İlk dalın `Ordering::Less` örüntüsü kontrol edildiğinde bu değerin `Ordering::Greater` ile eşleşmediği görülecek ve bu daldaki kodlar yok sayılarak hemen arkasından bir sonraki dal kontrol edilecektir. Bir sonraki dal incelendiğinde, dalın `Ordering::Greater` örüntüsünün `match` ifademizin almış olduğu `Ordering::Greater` değeriyle aynı olduğu görülecek ve bu koldaki kodlar çalıştırılarak ekrana `Sayınız büyük` yazdırılacaktır. Bu aşamada `match` ifadesi artık bir eşleme yapılmış olduğundan son dala bakmaya gerek duymayacak ve çalışmasını sonlandıracaktır.
+Burada kullanılan eşleme ifadesinin nasıl çalışacağını hayal etmeye çalışalım. Kullanıcının tahmin ettiği sayının 50, rasgele üretilen sayının da 38 olduğunu varsayalım. Kod 50 ile 38 sayılarını karşılaştırdığında, 50 sayısı 38'den büyük olduğundan `cmp` metodu `Ordering::Greater` döndürecek ve `match` ifadesi `Ordering::Greater` değerini alarak her dalın örüntüsünü teker teker kontrol etmeye başlayacaktır. İlk dalın `Ordering::Less` örüntüsü kontrol edildiğinde, bu değerin `Ordering::Greater` ile eşleşmediği görülecek ve bu daldaki kodlar yok sayılarak hemen bir sonraki dala geçilecektir. Geçilen bu dal incelendiğinde, daldaki `Ordering::Greater` örüntüsünün `match` ifademizin almış olduğu `Ordering::Greater` değeriyle aynı olduğu görülecek ve bu koldaki kodlar çalıştırılarak ekrana `Sayınız büyük!` mesajı yazdırılacaktır. Artık bir eşleme bulunmuş olduğundan `match` ifadesi kalan son dala bakmaya gerek duymayacak ve çalışmasını sonlandıracaktır.
 
-Ancak Örnek 2-4'teki kodumuzu derlemeye çalıştığımızda henüz derlenmediğine şahit olacaksınız:
+Ancak Örnek 2-4'teki kodu derlemek istediğinizde henüz derlenmediğini göreceksiniz:
 
 ```console
 $ cargo build
@@ -463,8 +464,8 @@ error: could not compile `guessing_game`
 
 To learn more, run the command again with --verbose.
 ```
-
-Çıktıyı dikkatlice incelediğimizde derleyicinin bize aldığımız hatanın temelinde *tür uyumsuzluğu*nun yattığını bildirdiğini görüyoruz. Rust statik ve güçlü bir tür sistemine sahip olmasına rağmen aynı zamanda tür çıkarım özelliğine de sahip bir programlama dili olduğundan, tahmin değişkenini `let mut tahmin = String::new()` olarak bildirdiğimizde `tahmin` değişkeninin `String` türünde olacağını varsayarak bizi değişkenin türünü açıkça belirtmemiz için zorlamaz. Fakat programımızın rastgele ürettiği `gizli_sayi` değişkenimiz ise sayısal bir değer içermektedir. Rust'ta 1 ile 100 arasındaki sayılartı gösterebilecek belirli sayısal türler vardır. Bunlar, işaretli 32 bitlik sayı türlerini gösteren `i32`, işaretsiz 32 bitlik sayı türlerini göstermek için kullanılan `u32`, işaretli 64 bitlik sayı türlerini gösteren `i64` ve benzerleri gibi sayı türleridir. Eğer kodun farklı bir noktasında, türün farklı olduğunun değerlendirilebileceği şekilde tür bilgisi girilmedikçe, Rust varsayılan tamsayı türünü `i32` olarak varsayacağından `gizli_sayi` değişken türü otomatik olarak `i32` olarak atanacaktır. Dolayısıyla kodu derlemeye kalkıştığımızda aldığımız hatanın nedeni Rust'ın bir `String` türü ile bir sayı türünü karşılaştıramamasıdır.
+<!--Kaldım-->
+Çıktıda sorunun *tür uyumsuzluğu* kaynaklı olduğu belirtiliyor. Rust hem güçlü ve statik bir tür sistemine, hem tür çıkarım özelliğine sahip bir programlama dili olduğundan, tahmin değişkenini `let mut tahmin = String::new()` olarak bildirdiğimizde, değişkenin `String` türünde olacağını varsayar. Bu nedenle değişkenin türünü açıkça belirtmemiz gerekmez. Fakat programımızın rastgele ürettiği `gizli_sayi` değişkeni ise sayısal bir değer içermektedir. Rust'ta 1 ile 100 arasındaki sayıları gösterebilecek belirli sayısal türler vardır. Bunlar, işaretli 32 bitlik sayı türlerini gösteren `i32`, işaretsiz 32 bitlik sayı türlerini göstermek için kullanılan `u32`, işaretli 64 bitlik sayı türlerini gösteren `i64` ve benzerleri gibi sayı türleridir. Kodun farklı bir yerinde, türün farklı olduğunun değerlendirilebileceği şekilde tür bilgisi girilmedikçe, Rust tamsayı türünü `i32` olarak varsayacağından `gizli_sayi` değişken türü otomatik olarak `i32` olarak atanacaktır. Dolayısıyla kodu derlemeye kalkıştığımızda aldığımız hatanın nedeni Rust'ın bir `String` türü ile bir sayı türünü karşılaştıramamasıdır.
 
 Bu sorunu çözebilmek için programın kullanıcı girdisi olarak okuduğu `String` türünü bir gerçek bir sayı türüne dönüştürerek onu sayısal değere sahip olan `gizli_sayi` değişkeniyle karşılaştırmamız gerekir. Bunu `main()` işlevine ekleyeğimiz tek satır kod ile gerçekleştirebiliriz:
 
