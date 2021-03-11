@@ -136,7 +136,7 @@ Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeri
 
 `String::new()` içindeki `::` söz dizimi, `new()`'in String türünün ilişkili işlevi olduğunu gösterir. İlişkili işlevler türe özgü olduklarından, `new` işlevinden dönen dizgi `String` örneği olarak değil, `String` türü şeklinde elde edilmektedir. Bazı dillerde buna *statik metot* adı verilir.
 
-Bu `new` işlevi, yeni ve boş bir dizgi oluşturur. Genellikle `new` olarak adlandırılan ve ilişkili olduğu türün yeni bir değerini oluşturan bu işlevlere Rust'ın birçok türünde rastlayacaksınız.
+`new` işlevi, yeni ve boş bir dizgi oluşturur. Genellikle `new` olarak adlandırılan ve ilişkili olduğu türün yeni bir değerini oluşturan bu işlevlerle Rust'ın birçok türünde karşılaşacaksınız.
 
 Özetle `let mut tahmin = String::new();` satırında bir String türünün yeni ve boş bir örneğiyle ilklendirilen değiştirilebilir bir değişken tanımlanmaktadır.
 
@@ -153,18 +153,18 @@ Kodun bir sonraki bölümü olan `.read_line(&mut tahmin)` ifadesindeyse, kullan
 
 `read_line` metodunun görevi, kullanıcı tarafından girilen karakterleri standart girişten okumak ve elde edilen veriyi iletilecek olan dizgiye yerleştirmektir. Yöntemin, kullanıcı girdisi eklendikçe dizgi içeriğini değiştirilebilmesi için, kendisine iletilen argümanın değişebilir olması gerekmektedir.
 
-`&` işareti bağımsız değişkenin *referans* türünden olduğunu bildirdiğinden, kodun bazı bölümleri tarafından bu değişkenlere, bellekte defalarca kopyalanmaları gerekmeksizin erişilmesi sağlanmış olur. Referanslar dilin güçlü ve karmaşık bir özelliği olmakla birlikte, Rust'ın en önemli avantajlarından biri de bu karmaşık işlevselliği güvenli ve kullanımı kolay hale getirmesidir. Aslında bu programı tamamlayabilmek için çok fazla ayrıntı bilmemize gerek yok. Şimdilik referansların da tıpkı değişkenler gibi varsayılan olarak değişmez kabul edildiğini ve onları değiştirilebilir kılabilmek için `&tahmin` yerine `&mut tahmin` yazmamız  gerektiğini öğrenmemiz yeterlidir. (Referanslar konusu 4.Bölümde ayrıntılı olarak ele alınacaktır.)
+`&` işareti, bağımsız değişkenin *referans* türünden olduğunu bildirdiğinden, kodun bazı bölümleri tarafından bu değişkenlere, bellekte defalarca kopyalanmaları gerekmeksizin erişilmesi sağlanmış olur. Referanslar dilin güçlü ve karmaşık özelliklerinden olmakla birlikte, Rust'ın önemli avantajlarından biri de, bu karmaşık işlevselliği, güvenilir ve kullanışlı hale getirmesidir. Aslında bu aşamada programı tamamlayabilmek için daha fazla ayrıntıya ihtiyacınız yok. Şimdilik referansların da tıpkı değişkenler gibi varsayılan olarak değişmez kabul edildiğini ve onları değiştirilebilir kılabilmek için `&tahmin` yerine `&mut tahmin` yazmamız  gerektiğini öğrenmemiz yeterlidir. (Referanslar konusu 4.Bölümde ayrıntılı olarak ele alınacaktır.)
 
 ### `Result` Türü ile Olası Hataları İşlemek
 
-İncelememize `io::stdin` ile başlayan ifadenin üçüncü satırıyla devam ediyoruz. Her ne kadar ayrı bir satırmış gibi görünmesine rağmen, bu satır da tıpkı bir önceki satır gibi, tek bir mantıksal kod satırına ait olup `expect` metodunu koda eklemektedir:
+İncelememize `io::stdin` ile başlayan ifadenin üçüncü satırıyla devam edelim. Her ne kadar ayrı bir satırmış gibi görünmesine rağmen, bu satır da tıpkı bir önceki satır gibi, aynı mantıksal kod satırının parçası olup koda `expect` metodunu eklemektedir:
 
 
 ```rust,ignore
    	.expect("Veri okuma hatası!");
 ```
 
-Bir metodu `foo()` söz dizimiyle çağırdığınızda uzun ifadeleri mantıksal parçalara ayırmak için genellikle yeni satırlar ve boşluklar eklemeniz gerekir. Kodumuzu aşağıdaki şekilde de yazabilirdik:
+Bir metodu `foo()` söz dizimiyle çağırdığınızda, uzun ifadeleri mantıksal parçalara bölebilmeniz için genellikle yeni satırlar ve boşluklar eklemeniz gerekir. Oysa kodumuzu aşağıdaki şekilde de yazabilirdik:
 
 ```rust,ignore
 io::stdin().read_line(&mut tahmin).expect("Veri okuma hatası!");
@@ -178,9 +178,9 @@ Daha önce bahsettiğimiz gibi `read_line` işlevi, kullanıcı tarafından giri
 
 `Result` türünün `Ok` ve `Err` adında iki varyantı bulunur. Bu varyantların ilki olan `Ok`, işlem sonucunun başarılı olması durumunda döndürülen değere ev sahipliği yaparken, işlemin başarısız olması anlamına gelen `Err` varyantında ise bu başarısızlığın nasıl ve neden olduğunu açıklayan bilgiler depolanır.
 
-`Result` türlerinin amacı, hata işleme bilgilerini kodlamaktır. Tüm türlerde olduğu gibi `Result` türü değerleri de kendileri için tanımlanmış ilişkili yöntemlere sahiptir. Mesela bir `io::Result` örneğinin, `expect` adında bir metodu bulunmaktadır. Bu metot çağrıldığında, `io..Result` örneği `Err` değerindeyse `expect` programın çökmesine neden olacak ve kendisine argüman olarak ilettiğiniz mesajı görüntüleyecektir. `read_line` metodunun `Err` varyantını döndürmesi genellikle işletim sisteminden kaynaklanan bir hatadır. Bununla birlikte `io::Result` örneği `Ok` değerindeyse, `expect` metodu sadece `Ok` içinde saklanan dönüş değerini alacak ve bunu kullanmanız için size döndürecektir. Bu durumda döndürülen `Ok` değeri kullanıcı tarafından standart girdiye iletilen bayt sayısından ibaret olacaktır.
+`Result` türlerinin amacı, hata işleme bilgilerini kodlamaktır. Tüm türlerde olduğu gibi `Result` türü değerleri de kendileri için tanımlanmış ilişkili yöntemlere sahiptir. Mesela bir `io::Result` örneğinin, `expect` adında bir metodu bulunmaktadır. Bu metot çağrıldığında, `io..Result` örneği `Err` değerindeyse `expect` programın çökmesine neden olacak ve kendisine argüman olarak ilettiğiniz mesajı görüntüleyecektir. `read_line` metodunun `Err` varyantını döndürmesi genellikle işletim sisteminden kaynaklanan bir hatadır. Bununla birlikte `io::Result` örneği `Ok` değerindeyse, `expect` metodu sadece `Ok` içinde saklanan dönüş değerini alacak ve kullanmanız için size döndürecektir. Bu durumda döndürülen `Ok` değeri kullanıcı tarafından standart girdiye iletilen bayt sayısından ibaret olacaktır.
 
-Bu aşamada `expect` metodunu çağırmasanız bile programınız derlenir ancak aşağıdaki gibi bir uyarı alırsınız:
+Bu aşamada `expect` metodunu çağırmasanız bile programınız derlenir fakat aşağıdaki gibi bir uyarı alırsınız:
 
 ```console
    Compiling tahmin_oyunu v0.1.0 (/home/rustdili/projeler/tahmin_oyunu)
@@ -199,14 +199,14 @@ warning: 1 warning emitted
     Finished dev [unoptimized + debuginfo] target(s) in 0.84s
 ```
 
-Rust `read_line` tarafından döndürülen `Result` değerini kullanmadığınız konusunda uyarıda bulunarak, programın olası bir hatayı işlemediğini bildirir.
+Rust `read_line` tarafından döndürülen `Result` değerini kullanmadığınızı hatırlatarak, programın olası bir hatayı işlemediğini bildirmektedir.
 
-Her ne kadar uyarıları bastırmanın yolu bir hata işleyici yazmaktan geçiyor gibi görünse de, bu noktada yapmak istediğimiz şey, bir sorun oluştuğunda programın çökmesini sağlamak olduğundan `expect` metodunu kullanmak zorundayız. Hata işlemek konusunu kitabın 9. Bölümünde ayrıntılarıyla inceleyeceğiz.
+Her ne kadar bir hata işleyici yazarak uyarıları bastırabilecek olsak bile, bu noktada yapmak istediğimiz şey, sorun oluştuğunda programın çökmesini sağlamak olduğundan `expect` metodunu kullanmak zorundayız. Hata işlemek konusunu kitabın 9. Bölümünde ayrıntılarıyla inceleyeceğiz.
 <!-- Kaldım-->
 
 ### `Println!` Yer Tutucuları ile Değerleri Yazdırmak
 
-Bu aşamada, kodumuzun sonlandığı noktayı gösteren *kapanış ayracı* (sola bakan süslü parantez) haricinde tartışacağımız bir satırımız daha var:
+Kodun sonlandığı noktayı gösteren *kapanış ayracı* (sola bakan süslü parantez) haricinde değerlendirilmesi gereken bir satırımız daha var:
 
 ```rust,ignore
     println!("Tahmin ettiğiniz sayı: {}", tahmin);
