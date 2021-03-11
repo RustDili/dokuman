@@ -305,15 +305,15 @@ Bu satırlar derlemenin sadece *src/main.rs* dosyasındaki küçük değişiklik
 
 #### `Cargo.lock` Dosyası ile Derlemeleri Tekrarlamak
 
-Cargo, siz aksini belirtinceye kadar, kodunuzun her derlenişinde aynı bağımlılık sürümlerini kullanarak aynı yapının yeniden oluşturulmasını sağlayan bir mekanizmaya sahiptir. Peki ama `rand` sandığı, yakın gelecekte önemli bir hatanın giderildiği ancak kodumuzun bozulmasına neden olan başka bir düzeltmeyi içeren `0.8.4` sürüm numarasıyla yeniden yayınlanırsa ne olur?  
+Cargo, siz aksini belirtinceye kadar, kodunuzun her derlenişinde aynı bağımlılık sürümlerini kullanarak, aynı yapının yeniden oluşturulmasını sağlayan bir mekanizmaya sahiptir. Peki ama ileride önemli bir hatasını giderildiği ama kodumuzun bozulmasına sebep olan başka bir düzeltmeyi içeren `rand` sandığı, `0.8.4` sürümüyle yeniden yayınlanırsa ne olur?  
 
 Bunun cevabı, `cargo build` komutunu ilk çalıştırdığınızda *tahmin_oyunu* dizininde oluşturulan *Cargo.lock* dosyasında bulunmaktadır. Bir projeyi ilk kez derlediğinizde kriterlere uyan tüm bağımlılık sürümleri Cargo tarafından belirlenerek *Cargo.lock* dosyasına yazılır. Daha sonraki bir zamanda projeyi yeniden derlemeniz gerektiğinde Cargo, *Cargo.lock* dosyasının halihazırda var olduğunu görecek ve tüm sürüm oluşturma işlemlerini yapmak yerine, orada belirtilmiş sürümleri kullanacaktır. Bu ise otomatik olarak tekrarlanabilir derlemelere sahip olmanızı sağlar. Başka bir ifadeyle, *Cargo.lock* dosyası sayesinde projeniz açık bir biçimde yeniden güncellenene kadar `0.8.3` sürümünde kalmaya devam eder.
 
 #### Bir Sandığı Yeni Bir Sürüme Güncellemek
 
-Bir sandığı güncellemek istediğinizde Cargo size, *Cargo.lock* dosyasını yok sayacak ve *Cargo.toml* dosyanızdaki kriterlerinize uygun en son sürümleri bulmanızı sağlayacak `update` adında bir komut daha sağlar. Süreç başarıyla tamamlanırsa güncellenen bu sürümler *Cargo.lock* dosyasına yazılacaktır.
+Bir sandığı güncellemek istediğinizde Cargo size, *Cargo.lock* dosyasını yok sayacak ve *Cargo.toml* dosyanızdaki kriterlere uygun son sürümleri bulmanızı sağlayacak `update` adında bir komut daha sağlar. Süreç başarıyla tamamlanırsa güncellenen bu sürümler *Cargo.lock* dosyasına yazılır.
 
-Sürüm güncelleme için `cargo update` komutunu kullanıldığında varsayılan olarak sadece `0.8.3`'ten büyük `0.9.0`'dan küçük olan sürümler aranacaktır. Eğer `rand` sandığı için `0.8.4` ve `0.9.0` olmak üzere iki yeni sürüm yayınlanmışsa `update` komutunu çalıştırdığınızda aşağıdaki gibi bir çıktı görürsünüz:
+Ancak güncelleme esnasında varsayılan olarak sadece `0.8.3`'ten büyük `0.9.0`'dan küçük olan sürümler aranacaktır. Eğer `rand` sandığı için `0.8.4` ve `0.9.0` olmak üzere iki yeni sürüm yayınlanmışsa `update` komutunu çalıştırdığınızda aşağıdaki gibi bir çıktı görünecektir:
 
 ```console
 $ cargo update
@@ -321,18 +321,18 @@ $ cargo update
     Updating rand v0.8.3 -> v0.8.4
 ```
 
-Bu aşamada *Cargo.lock* dosyanızda halihazırda kullanmakta olduğunuz rand sandık sürümünün `0.8.4` olduğunu belirten bir değişiklik yapıldığını da görebilirsiniz.
+Bu noktada *Cargo.lock* dosyanızda kullanmakta olduğunuz `rand` sandığı sürümünün `0.8.4`'e yükseltildiğini belirten değişikliğin yapıldığını fark edeceksiniz.
 
-Eğer rand sandığının `0.9.0` veya `0.9.x` sürümlerinden birini kullanmak isterseniz, *Cargo.toml* dosyanızı aşağıdaki şekilde güncellemeniz gerekecektir:
+Eğer rand sandığının `0.9.0` veya `0.9.x` sürümlerinden birini kullanmak isterseniz, *Cargo.toml* dosyanızı aşağıdaki şekilde güncellemeniz gerekir:
 
 ```toml
 [dependencies]
 rand = "0.9.0"
 ```
 
-Bundan sonra `cargo build` komutunu çalıştırdığınızda, Cargo mevcut sandıkların kayıtlarını güncelleyerek `rand` kütüphanesi gereksinimlerini bildirdiğiniz yeni sürüme göre yeniden değerlendirecektir.
+Ardından `cargo build` komutunu çalıştırdığınızda, Cargo mevcut sandıkların kayıtlarını güncelleyerek `rand` kütüphanesi gereksinimlerini bildirdiğiniz yeni sürüme göre yeniden değerlendirecektir.
 
-[Cargo ekosistemi](http://doc.crates.io/) hakkında söylenecek çok şey olmasına rağmen bunları, konuyu ayrıntılarıyla tartışacağımız 14. Bölüme saklayacağız. Şimdilik Cargo'nun kütüphanelerin yeniden kullanımını kolaylaştırdığını ve geliştiricilere, bir dizi paketi bir araya getirerek küçük projeler yazma olanağı sağladığını bilmemiz yeterlidir.  
+[Cargo ekosistemi](http://doc.crates.io/) hakkında söylenecek çok şey olmasına rağmen bunları, konuyu ayrıntılarıyla tartışacağımız 14. Bölüme saklayacağız. Şimdilik Cargo'nun, kütüphanelerin yeniden kullanım olanaklarını kolaylaştırdığını ve geliştiricilere, paketleri bir araya getirerek küçük projeler yazma olanağı sağladığını bilmemiz yeterlidir.
 
 ### Rastgele Sayı Üretmek
 
