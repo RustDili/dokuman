@@ -212,7 +212,7 @@ Kodun sonlandığı noktayı gösteren *kapanış ayracı* (sola bakan süslü p
     println!("Tahmin ettiğiniz sayı: {}", tahmin);
 ```
 
-Bu satır kullanıcı girdisini kaydettiğimiz dizgiyi yazdırır. Yer tutucuları temsil eden süslü parantezleri `{}` ise bir değerin yerini tutan yengeç kıskaçları olarak hayal edebilirsiniz. Çok sayıda değeri göstermek için de kullanabileceğiniz süslü parantezlerin ilk çifti, biçimlendirilmiş dizgiden sonraki ilk değeri içerirken, sonraki parantez ikinci değerii bir sonraki üçüncü değeri v.b. gösterir. Böyle bir `println!` çağrısı aşağıdaki gibi görünecektir:
+Bu satır kullanıcı girdisini kaydettiğimiz dizgiyi ekrana yazdırabilmek için vardır. Yer tutucuları temsil eden süslü parantezleri `{}` ise bir değerin yerini tutan yengeç kıskaçlarına benzetebilirsiniz. Çok sayıda değerin gösterilmesi amacıyla da kullanabileceğiniz bu parantezlerin ilk çifti, biçimlendirilmiş dizgiden sonraki ilk değeri içerirken, sonraki parantez ikinci değeri, bir sonraki üçüncü değeri gösterecektir. İki farklı değişkenin değerlerini ekrana yazdıran örnek `println!` çağrısı aşağıdakine benzeyecektir:
 
 ```rust
 let x = 5;
@@ -221,12 +221,12 @@ let y = 10;
 println!("x değeri = {}, y değeri = {}", x, y);
 ```
 
-Bu kodun çıktısı ekrana `x değeri = 5, y değeri = 10` yazdıracaktır.
+Bu örneğin çıktısı ekrana `x değeri = 5, y değeri = 10` yazdırmaktadır.
 
 
 ### İlk Bölümü Test Etmek
 
-Programımızın ilk bölümünü `cargo run` komutunu kullanarak test edelim:
+Artık `cargo run` komutunu kullanarak programımızın ilk bölümünü test edebiliriz:
 
 ```console
 $ cargo run
