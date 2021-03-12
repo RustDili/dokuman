@@ -1,0 +1,1 @@
+# Ortak Programlama Kavramları
