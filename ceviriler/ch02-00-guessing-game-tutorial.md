@@ -526,7 +526,7 @@ Oyunun büyük bölümü doğru çalışıyormuş gibi görünüyor olsa da sade
 
 ## Döngü ile Çok Sayıda Tahmine İzin Vermek
 
-Bir anahtar kelime olan `loop` sonsuz bir döngü oluşturmakta kullanılır. Şimdi bu döngüyü oyunumuzda kullanıcılara daha fazla tahmin şansı verebilmek için kodumuza ekleyeceğiz.
+Bir anahtar kelime olan `loop` sonsuz bir döngü oluşturmakta kullanılır. Kullanıcıların tahmin olanaklarını arttırabilmemiz için kodumuzda `loop` döngüsünden yararlanacağız.
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
@@ -548,8 +548,8 @@ Bir anahtar kelime olan `loop` sonsuz bir döngü oluşturmakta kullanılır. Ş
 }
 ```
 
-Kolaylıkla fark edeceğiniz gibi tahmin giriş isteminden itibaren her şeyi döngü kapsamına taşıdık. Şimdi döngü içinde yer alan her satırı dört boşluk daha girintiledikten sonra programınızı çalıştırın. Programımız bu aşamada tam olarak istediğimiz şeyi yapmakla beraber, kullanıcının çıkmasına izin vermeden sonsuza kadar tahmin bekleyen yeni bir sorunla karşılaşıyor ve kullanıcılarımız oturumlarını kapatamıyor gibi görünüyor değil mi?
-
+Göreceğiniz gibi 'tahmin giriş talebi'nden itibaren olan her şeyi döngü kapsamına taşıyarak, her satır için dört boşluk değerinde girinti oluşturduk. Programı çalıştırdığınızda kodun tam olarak istediğimiz şeyi yapmakla beraber, sonsuza kadar tahmin yapılmasını bekleyen yeni bir sorunla kullanıcı çıkışını engellediğini fark edeceksiniz!
+<!--Kaldım-->
 Aslında kullanıcılar *ctrl+d* klavye kısayolunu kullanarak programı her zaman sonlandırabilecek olmalarına rağmen bu doyumsuz canavardan kaçmanın bir başka yolu daha var. [Tahmin Sayısının Gizli Sayı ile Karşılaştırılması](#tahmin-sayısının-gizli-sayı-ile-karşılaştırılması) başlığında tartıştığımız `parse` konusundan hatırlayacağınız gibi programdan çıkabilmek için, kullanıcının sayı olmayan bir tahmin verisi girmesiyle programın çökecek olmasından yararlanabiliriz.
 
 ```console
