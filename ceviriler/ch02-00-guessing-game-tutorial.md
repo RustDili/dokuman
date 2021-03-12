@@ -549,8 +549,8 @@ Bir anahtar kelime olan `loop` sonsuz bir döngü oluşturmakta kullanılır. Ku
 ```
 
 Göreceğiniz gibi 'tahmin giriş talebi'nden itibaren olan her şeyi döngü kapsamına taşıyarak, her satır için dört boşluk değerinde girinti oluşturduk. Programı çalıştırdığınızda kodun tam olarak istediğimiz şeyi yapmakla beraber, sonsuza kadar tahmin yapılmasını bekleyen yeni bir sorunla kullanıcı çıkışını engellediğini fark edeceksiniz!
-<!--Kaldım-->
-Aslında kullanıcılar *ctrl+d* klavye kısayolunu kullanarak programı her zaman sonlandırabilecek olmalarına rağmen bu doyumsuz canavardan kaçmanın bir başka yolu daha var. [Tahmin Sayısının Gizli Sayı ile Karşılaştırılması](#tahmin-sayısının-gizli-sayı-ile-karşılaştırılması) başlığında tartıştığımız `parse` konusundan hatırlayacağınız gibi programdan çıkabilmek için, kullanıcının sayı olmayan bir tahmin verisi girmesiyle programın çökecek olmasından yararlanabiliriz.
+
+Kullanıcılar *ctrl+d* klavye kısayolunu kullanarak programı her zaman sonlandırabilirler. Ancak bu doyumsuz canavardan kaçmanın başka bir yolu daha var. [Tahmin Sayısının Gizli Sayı ile Karşılaştırılması](#tahmin-sayısının-gizli-sayı-ile-karşılaştırılması) başlığında tartıştığımız `parse` konusundan hatırlayacağınız gibi, tahmin verisine sayısal olmayan bir verinin girilmesi programın çökerek sonlanmasını sağlıyordu. Programı çalıştırarak tahmin değerine sayısal olmayan herhangi bir veri ekleyebilirsiniz. Aşağıdaki örnekte tahmin değerine `çıkış` şeklinde bir karakter dizisi iletilmiştir: 
 
 ```console
 $ cargo run
@@ -576,7 +576,7 @@ thread 'main' panicked at 'Lütfen bir sayı türü girin!: ParseIntError { kind
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-*Çıkış* gibi sayı olmayan herhangi bir ifadenin girilmesi programdan çıkılmasına yetiyor gibi görünse de bu mekanizma, "Tahmin sayısının doğru girilmesi halinde programın otomatik olarak sonlanması" talebimizi henüz karşılamıyor.
+Tahmin değişkenine *çıkış* gibi sayısal olmayan herhangi bir ifadenin girilmesi programdan çıkılmasına yetiyor gibi görünse de bu mekanizma, "Tahmin sayısının doğru girilmesi halinde programın otomatik olarak sonlanması" talebimizi henüz karşılamıyor.
 
 ### Doğru Tahmin Sonrası Oyunu Sonlandırmak
 
