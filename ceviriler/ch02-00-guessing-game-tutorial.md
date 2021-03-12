@@ -599,11 +599,11 @@ Kullanıcının doğru tahmin yaparak oyunu kazanması durumunda, oyunu sonland�
 }
 ```
 
-Kullanıcın doğru tahmini yaptığı ve "Bildiniz!" mesajının ekran yazdırıldığı satırın ardına eklenen `break` ifadesi programın döngüden çıkmasını sağlar. Döngü `main` işlevinin son bölümü olduğundan döngüden çıkmak aynı zamanda programdan çıkmak anlamına da gelmektedir. 
+Kullanıcın doğru tahmini yaptığı ve "Bildiniz!" mesajının ekrana yazdırıldığı satırın ardına eklenen `break` ifadesi programın döngüden çıkmasını sağlar. Döngü `main` işlevinin son bölümü olduğundan döngüden çıkmak aynı zamanda programdan çıkmak anlamına da gelir. 
 
 ### Geçersiz Veri Girişlerini İşlemek
 
-Oyunun davranışını daha da iyileştirebilmek adına, kullanıcı sayısal olmayan bir değer girdiğinde programı çökertmek yerine, programın sayısal olmayan değerleri yok saymasını sağlayarak kullanıcının doğru sayı tahminine devam etmesini sağlayabiliriz. Bunu aşağıda yer alan Örnek 2-5'te gösterildiği gibi `tahmin` değişkenini `String` türünden `u32` türüne dönüştüren satırı değiştirerek gerçekleştirebiliriz.
+Oyunun davranışını daha da iyileştirebilmek amacıyla, sayısal olmayan bir değer alındığında programı çökertmek yerine, bu değerlerin yok sayılmasını ve kullanıcının doğru sayıyı bulana kadar tahmine devam etmesini sağlayalım. Bu iyileştirmeyi Örnek 2-5'te gösterildiği şekilde, `String` türündeki `tahmin` değişkenini, `u32` türüne dönüştüren satırda değişiklik yaparak gerçekleştirebiliriz.
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
@@ -627,11 +627,11 @@ Oyunun davranışını daha da iyileştirebilmek adına, kullanıcı sayısal ol
 
 <span class="caption">Örnek 2-5: Sayı olmayan bir tahmin girildiğinde programı çökertmek yerine yeni bir tahminin istenmesi</span>
 
-Bir `expect` çağrısını `match` ifadesiyle değiştirmek, genellikle programı çökerten bir hatadan düzgün şekilde işlenmiş bir hataya geçmek için kullanılan tekniktir. Ayrıştırma işlemini gerçekleştiren `parse` metodunun bir `Result` türü döndürdüğünü ve bu türün `OK` veya `Err` varyantlarına sahip bir `enum` türü olduğunu unutmayın. Tıpkı `cmp` metodunun `Ordering` türünden döndürdüğü sonuç değerlerini işlediğimiz gibi burada da bir `match` ifadesi kullandığımıza dikkat edin.
+`expect` çağrısını `match` ifadesiyle değiştirmek genellikle, programı çökerten bir hatadan düzgün şekilde işlenmiş bir hataya geçmek için kullanılan tekniktir. Ayrıştırma işlemini gerçekleştiren `parse` metodunun bir `Result` türü döndürdüğünü ve bu türün `OK` veya `Err` varyantlarına sahip bir `enum` türü olduğunu unutmayın. Tıpkı `cmp` metodunun `Ordering` türünden döndürdüğü sonuç değerlerini işlediğimiz gibi burada da bir `match` ifadesi kullandığımıza dikkat edin.
 
-Dizgi `parse` metoduyla başarılı biçimde bir sayıya dönüştürülebildiğinde elde edilen sayıyı içeren bir `Ok` değeri döndürülür. Bu `Ok` değeri ilk dalın örüntüsüyle eşleşecek `match` ifadesi yalnızca `parse` ile oluşturulan `sayi` değerini döndürecek ve `Ok` değerinini içine yerleştirecek ve böylelikle bu sayı yeni oluşturduğumuz `tahmin` değişkeninde yerini alacaktır.
+`parse` metoduyla dizgi, başarılı şekilde bir sayıya dönüştürebiliyorsa, elde edilen sayıyı içeren bir `Ok` değeri döndürülür. Bu `Ok` değeri ilk dalın örüntüsüyle eşleşecek, `match` ifadesi `parse` ile oluşturulan `sayi` değerini döndürerek `Ok` değerinini içine yerleştirecek ve bu sayı yeni oluşturduğumuz `tahmin` değişkeninde saklanacaktır.
 
-Dizgi `parse` metodunda sayıya dönüştürülemediğindeyse hata hakkında detaylı bilgi içeren `Err` değeri döndürülücektir. Bu değer `match` ifadesinin ilk dalı olan `Ok(sayi)` örüntüsüyle değil ikinci dalın örüntüsü olan `Err(_)` kalıbıyla eşleşecektir. Bu kalıpta yer alan alt çizgi `_` ise her şeyin kapsanmasını isteyen bir değer olup, `Err` varyantındaki değerin ne olduğuna bakılmaksızın tüm `Err`  değerlerinin bu dal ile eşleştirileceğini söylemektedir. Program ikinci dalı çalıştırmakla bu dalda bulunan ve döngünün bir sonraki yinelemesine devam ederek yeni bir tahmin verisi istemesini sağlayan `continue` ifadesi işletilecek, böylelikle `parse` metodunun karşılaşabileceği tüm olası hatalar göz ardı edilmiş olacaktır.    
+Dizgi `parse` metodunda sayıya dönüştürülemiyorsa da, hata hakkında detaylı bilgi içeren `Err` değeri döndürülücektir. Bu değer `match` ifadesinin ilk dalı olan `Ok(sayi)` örüntüsüyle değil, ikinci dalın örüntüsü olan `Err(_)` kalıbıyla eşleşecektir. Bu kalıpta yer alan alt çizgi `_` ise, her şeyin kapsandığı bir değer olup, `Err` varyantındaki değerin ne olduğuna bakılmaksızın tüm `Err`  değerlerinin bu dal ile eşleştirileceğini söylemektedir. Program ikinci dalı çalıştırmakla, bu dalda bulunan ve döngünün bir sonraki yinelemesine devam ederek yeni bir tahmin verisi istemesini sağlayan `continue` ifadesi işletilecek, böylelikle `parse` metodunun karşılaşabileceği tüm olası hatalar göz ardı edilmiş olacaktır.    
 
 Bu aşamada artık programımızdaki her şey beklendiği gibi çalışacaktır. Deneyelim:
 
@@ -657,7 +657,7 @@ Tahmin ettiğiniz sayı: 90
 Bildiniz!
 ```
 
-Harika! Küçük bir ince ayar daha yaptıktan sonra oyunumuzu bitireceğiz. Programın halen gizli numarayı ekrana yazdırdığını hatırlıyorsunuz değil mi? Kodlarımız test aşamasında gayet güzel çalışıyorken `gizli_sayi`'nın açık seçik ortada olması oyunun tüm eğlencesini bozuyor. Bunu düzeltebilmek için `gizli_sayi`'yı ekrana bastıran `println!` satırını silmemiz yeterli olacaktır. Aşağıda yer alan Örnek 2-6 kodun tam ve hatasız çalışan halini göstermektedir.
+Harika! Küçük bir ince ayar daha yaptıktan sonra oyunumuzu bitireceğiz. Fark edeceğiniz gibi program gizli numarayı hala ekrana yazdırıyor. Bu durum test aşamasında gayet iyi ve güzelken, oyunun bitmiş halinde `gizli_sayi`'nın açık seçik ortada olması tüm eğlenceyi bozuyor. Bunu durum `gizli_sayi` değişkenini ekrana yazdıran `println!` satırının silinmesiyle düzelir. Örnek 2-6 kodun tam ve hatasız çalışan halini göstermektedir.
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
@@ -707,4 +707,5 @@ fn main() {
 
 Başarıyla çalışan bir sayı tahmin oyunu oluşturduğunuz için teşekkürler!
 
-Bu proje size; `let`, `match`, *metotlar*, *ilişkili işlevler*, harici sandıkların kullanılması gibi birçok Rust kavramını size tanıtmanın uygulamalı bir yolu olmakla beraber, sonraki bölümlerinde bu kavramlarhakkında daha çok şey öğreneceksiniz. Kitabın 3. Bölümü; değişkenler, veri türleri ve işlevler gibi çoğu programlama dili tarafından kullanılan kavramları kapsayacak ve bunların Rust ile nasıl kullanıldığını gösterecektir. 4. Bölümde ise Rust'ı diğer dillerden ayıran önemli bir özellik olan mülkiyet kavramı incelenecek, 5. Bölümdeyse yapı ve metot söz dizimleri tartışılacak, 6. bölümdeyse `enum` türünün çalışması irdelenecektir.
+Bu proje, `let`, `match`, *metotlar*, *ilişkili işlevler*, harici sandıkların kullanılması gibi birçok Rust kavramını size tanıtmanın uygulamalı bir yoluydu. Kitabın ilerleyen bölümlerinde bu kavramlar hakkında daha çok şey öğreneceksiniz. 
+3. Bölümde değişkenler, veri türleri, işlevler gibi çoğu programlama dili tarafından kullanılan kavramları kapsanacak ve bunların Rust ile nasıl kullanıldığı gösterilecektir. 4. Bölümde ise Rust'ı diğer dillerden ayıran önemli bir özellik olan mülkiyet kavramı incelenecek, 5. Bölümde yapı ve metot söz dizimleri tartışılacak, 6. bölümdeyse `enum` türünün çalışması irdelenecektir.
