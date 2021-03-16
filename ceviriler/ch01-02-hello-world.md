@@ -1,6 +1,6 @@
 ## Merhaba, Dünya
 
-Artık Rust'ı yüklediğimize göre ilk Rust programımızı yazabiliriz. Yeni bir programlama dilini öğrenme aşamasında `Merhaba, dünya!` çıktısını ekrana yazdırmak neredeyse gelenek haline geldiğinden biz de burada bu geleneğe uyacağız.
+Artık Rust'ı yüklediğimize göre ilk Rust programımızı yazabiliriz. Yeni bir programlama dili öğrenilirken `Merhaba, dünya!` çıktısını ekrana yazdırmak artık gelenek haline geldiğinden biz de bu geleneğe uyacağız.
 
 > Not: Bu kitap komut satırı hakkında temel düzeyde bilgi sahibi olduğunuzu varsayar. Bununla birlikte Rust,
 > kodlarınızı nasıl düzenleyeceğinize, hangi araçları kullanacağınıza veya onları nereye kaydedeceğinize 
