@@ -90,13 +90,13 @@ Gövdesi süslü parantezler ile sarmalanmış olan `main` işlevinin içinde a�
 ```
 Bu küçük programdaki tüm işi üstlenerek metni ekrana yazdıran bu satırda dikkat edilmesi gereken dört önemli ayrıntı yer almaktadır.
 
-**İlki** ve en az dikkat edileni, Rust biçimsel girintilerinde bir sekme *(tab)* yerine dört boşluk *(space)* kullanılmasıdır.
+İlki ve en az dikkat edileni, Rust biçimsel girintilerinde bir sekme *(tab)* yerine dört boşluk *(space)* kullanılmasıdır.
 
-**İkincisi**, `println!` adlı bir Rust makrosunun çağrılmasıdır. Eğer kodda bir işlev çağrısı yapılsaydı, `println` (`!` olmadan) yazılmış olacaktı. Rust makrolarını 19. bölümde ayrıntılarıyla inceleyeceğimizden şu an için `!` işaretini gördüğünüz her yerde bunun bir işlev yerine, bir makroya yapılan çağrı olduğunu bilmeniz yeterlidir.
+İkincisi, `println!` adlı bir Rust makrosunun çağrılmasıdır. Eğer kodda bir işlev çağrısı yapılsaydı, `println` (`!` olmadan) yazılmış olacaktı. Rust makrolarını 19. bölümde ayrıntılarıyla inceleyeceğimizden şu an için `!` işaretini gördüğünüz her yerde bunun bir işlev yerine, bir makroya yapılan çağrı olduğunu bilmeniz yeterlidir.
 
-**Üçüncüsü**, `println!` makrosuna argüman olarak geçirilen `"Merhaba, dünya!"` dizgesinin, ekrana yazdırılmasıdır.
+Üçüncüsü, `println!` makrosuna argüman olarak geçirilen `"Merhaba, dünya!"` dizgesinin, ekrana yazdırılmasıdır.
 
-**Son olarak** satırın noktalı virgül (`;`) ile sonlandırılması, artık ifadenin bittiğini ve bir sonraki ifadenin başlayabileceğini bildirir. Rust kodlarındaki pek çok satır noktalı virgül ile sonlandırılır.
+Son olarak satırın noktalı virgül (`;`) ile sonlandırılması, artık ifadenin bittiğini ve bir sonraki ifadenin başlayabileceğini bildirir. Rust kodlarındaki pek çok satır noktalı virgül ile sonlandırılır.
 
 ### Derlemek ve Çalıştırmak Ayrı Birer Adımdır
 
