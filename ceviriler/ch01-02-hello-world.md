@@ -81,9 +81,7 @@ fn main() {
 
 Bu satırlar Rust'ta `main` adındaki bir işlevi tanımlar. Ve `main` işlevi tüm çalıştırılabilir Rust programlarında işletilen ilk kod olduğundan özeldir. Bu işlevin ilk satırında, parametre almayan ve hiçbir şey döndürmeyen `main` adında bir işlevi bildirilir. Eğer bu işleve bir veya birden fazla parametre iletilmiş olsaydı, bu parametreler `()` parantezin içinde yerlerini almış olacaklardı.
 
-Rust'ta bu satırlar bir işlevi tanımlar. Çalıştırılabilir tüm rust programlarında bulunan `main` işlevi, programın işletilen ilk kodu olması bakımından özel bir konumdadır. İlk satır parametre almayan ve hiçbir şey döndürmeyen işlev adını `main` olarak bildirir. Elimizde işleve iletilecek parametreler olsaydı onlar da yerlerini bu `()` parantezin içine konumlandırılmakla bulmuş olacaklardı.
-
-Dikkat ederseniz işlev gövdesinin süslü parantezler `{}` içine alınmış olduğunu göreceksiniz. Rust'ta işlev gövdeleri bu süslü parantezler içine alınmak zorundadır. İşlev gövdesini saran ilk süslü parantezi, işlev bildirimiyle aynı satıra yerleştirirken arada bir boşluk bırakmak iyi bir kod yazım tekniğidir. Rust projelerinde standart kod yazım tekniğine  bağlı kalmak ve kodlarınızı belirli bir şekilde biçimlendirmek için `rustfmt` adındaki otomatik biçimlendirme aracını kullanabilirsiniz. Bu araç Rust ekibi tarafından tıpkı `rustc` gibi standart Rust dağıtımına dahil edildiğinden halihazırda bilgisayarınızda kurulu durumda olmalıdır. Daha fazla ayrıntı için çevrimiçi belgelere başvurabilirsiniz.
+Dikkat ederseniz işlev gövdesinin süslü parantezler `{}` içine alınmış olduğunu göreceksiniz. Rust'ta işlev gövdeleri bu süslü parantezler içine alınmak zorundadır. İşlev gövdesini saran ilk süslü parantezi, işlev bildirimiyle aynı satıra yerleştirirken arada bir boşluk bırakmak iyi bir kod yazım tekniğidir. Rust projelerinde standart kod yazım tekniğine bağlı kalmak ve kodlarınızı belirli bir şekilde biçimlendirmek için `rustfmt` adındaki otomatik biçimlendirme aracını kullanabilirsiniz. Bu araç Rust ekibi tarafından tıpkı `rustc` gibi standart Rust dağıtımına dahil edildiğinden halihazırda bilgisayarınızda kurulu durumda olmalıdır. Daha fazla ayrıntı için çevrimiçi belgelere başvurabilirsiniz.
 
 Gövdesi süslü parantezler ile sarmalanmış olan `main` işlevinin içinde aşağıdaki kod satırı bulunur.
 
@@ -92,12 +90,11 @@ Gövdesi süslü parantezler ile sarmalanmış olan `main` işlevinin içinde a�
 ```
 Bu küçük programdaki tüm işi üstlenerek metni ekrana yazdıran bu satırda dikkat edilmesi gereken dört önemli ayrıntı yer almaktadır.
 
-İlki ve en az dikkat edileni, Rust stili girintilerde bir sekme *(tab)* yerine dört boşluk *(space)* kullanılmasıdır.
+İlki ve en az dikkat edileni, Rust biçimsel girintilerinde bir sekme *(tab)* yerine dört boşluk *(space)* kullanılmasıdır.
 
 İkincisi, `println!` adlı bir Rust makrosunun çağrılmasıdır. Eğer kodda bir işlev çağrısı yapılsaydı, `println` (`!` olmadan) yazılmış olacaktı. Rust makrolarını 19. bölümde ayrıntılarıyla inceleyeceğimizden şu an için `!` işaretini gördüğünüz her yerde bunun bir işlev yerine, bir makroya yapılan çağrı olduğunu bilmeniz yeterlidir.
 
-
-Üçüncüsü, `"Merhaba, dünya!"` olarak gördüğünüz dizginin, `println!` makrosuna argüman olarak geçirildiğinde ekrana yazdırılmasıdır.
+Üçüncüsü, `println!` makrosuna argüman olarak geçirilen `"Merhaba, dünya!"` dizgesinin, ekrana yazdırılmasıdır.
 
 Son olarak satırın noktalı virgül (`;`) ile sonlandırılması, artık ifadenin bittiğini ve bir sonraki ifadenin başlayabileceğini bildirir. Rust kodlarındaki pek çok satır noktalı virgül ile sonlandırılır.
 
