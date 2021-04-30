@@ -14,6 +14,7 @@
 * **Dereferencing** - `[Referansı kaldırmak]` | [Dereferencing] - Bir referans tarafından atıfta bulunulan verilere erişmek/işlemek.
 * **Designated initializer** - `[İsimli ilklendirici]` - Yapı üyelerinin isimle ilklendirilmeleri.
 * **Destruct** - `[Sonlandırma]` - Nesnenin kullanımdan kaldırılması sırasında yapılması gereken işlemler.
+* **Destructure** - `[Çözme]` - "Bir liste veya yapı elemanlarına erişim işlemi".
 * **Destructor** - `[Sonlandırıcı]` - Nesneyi sonlandıran işlev.
 * **Diamond problem** - `[Diamond problemi]` - Nesne yönelimli programlamada çoklu kalıtım sırasında karşılaşılan çakışma sorunu.
 * **Directory** - `[Dizin]` | [klasör] - Dosyaların barındırıldığı sistematik yapı.
