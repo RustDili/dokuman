@@ -94,14 +94,13 @@ Ek E'de ise, Rust'ın sürümlerine yer verilmektedir.
 
 Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği hata mesajlarının nasıl okunacağını öğrenmektir. Bu mesajlar sizi doğru koda yönlendireceğinden, pekçok hata senaryosunu içeren derlenmeyen örnekler vereceğiz. Rastgele bir örneği kopyalayıp çalıştırır ve bir hata alırsanız bunun hata gösterim örneği olup olmadığını anlamak için ilişkili metni okuduğunuzdan emin olun. Maskotumuz Ferris'i dikkatle takip ederseniz, çalışmaması gereken kodları kolayca anlayabilirsiniz. 
 
-<!-- Feris Resim ve açıklamalalrında kaldım --> 
 
 | Ferris                                                                 | Anlamı                                          |
 |------------------------------------------------------------------------|--------------------------------------------------|
-| <img src="https://github.com/rust-lang/book/blob/master/src/img/ferris/does_not_compile.svg" class="ferris-explain"/>    | Bu kod derlenmez!                      |
-| <img src="https://github.com/rust-lang/book/blob/master/src/img/ferris/panics.svg" class="ferris-explain"/>              | Bu kod panik üretir!                   |
-| <img src="https://github.com/rust-lang/book/raw/master/src/img/ferris/unsafe.svg" class="ferris-explain"/>              | Bu kod bloğu güvenli olmayan kod içerir.|
-| <img src="https://github.com/rust-lang/book/raw/master/src/img/ferris/not_desired_behavior.svg" class="ferris-explain"/>| Bu kod beklenen davranışı üretmiyor. |
+| <img src="img/ferris/does_not_compile.svg" class="ferris-explain"/>    | Bu kod derlenmez!                      |
+| <img src="img/ferris/panics.svg" class="ferris-explain"/>              | Bu kod panik üretir!                   |
+| <img src="img/ferris/unsafe.svg" class="ferris-explain"/>              | Bu kod bloğu güvenli olmayan kod içerir.|
+| <img src="img/ferris/not_desired_behavior.svg" class="ferris-explain"/>| Bu kod beklenen davranışı üretmiyor. |
 
 
 Çoğu durumda, hangi kod sürümünün çalışması gerektiğine dair sizi yönlendireceğiz.
