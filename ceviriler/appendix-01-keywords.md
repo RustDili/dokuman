@@ -1,7 +1,7 @@
 ## Ek A: Anahtar Kelimeler
-Aşağıdaki listede, Rust dili tarafından geçerli veya gelecekteki kullanım için ayrılmış anahtar kelimeler bulunmaktadır. Bu yüzden "[Ham Tanımlayıcılar][raw-identifiers]<!-- ignore -->" bölümünde tartışacağımız ham tanımlayıcılar hariç olmak kaydıyla) listede yer alan kelimeler; işlev isimlerini, değişkenleri, parametreleri, yapı alanlarını, modülleri, sandıkları, sabitleri, makroları, statik değerleri, nitelikleri, türleri, özellikleri veya yaşam sürelerini  tanımlamak için kullanılamazlar.
+Aşağıdaki listede, Rust dili tarafından geçerli veya gelecekteki kullanım için ayrılmış anahtar kelimeler bulunmaktadır. Bu yüzden "[Ham Tanımlayıcılar][ham-tanımlayıcılar]<!-- ignore -->" bölümünde tartışacağımız ham tanımlayıcılar hariç olmak kaydıyla) listede yer alan kelimeler; işlev isimlerini, değişkenleri, parametreleri, yapı alanlarını, modülleri, sandıkları, sabitleri, makroları, statik değerleri, nitelikleri, türleri, özellikleri veya yaşam sürelerini  tanımlamak için kullanılamazlar.
 
-[raw-identifiers]: #raw-identifiers
+[ham-tanımlayıcılar]: #ham-tanımlayıcılar
 
 ### Halihazırda kullanılmakta olan anahtar kelimeler
 * Aşağıdaki anahtar kelimeler şu anda açıklanan işlevselliğe sahiptir.
