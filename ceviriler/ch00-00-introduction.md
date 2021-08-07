@@ -110,6 +110,6 @@ Rust öğrenme sürecinin önemli bir parçası, derleyicinin görüntülediği 
 
 ## Kaynak Kodu
 
-Bu kitabın oluşmasını sağlayan kaynak kodlara [GitHub][kitap]
+Bu kitabın oluşmasını sağlayan kaynak kodlara [GitHub][kitap] üzerinden ulaşabilirsiniz.
 
-[kitap]: https://github.com/RustDili/dokuman/tree/master/ceviriler üzerinden ulaşabilirsiniz.
+[kitap]: https://github.com/RustDili/dokuman/tree/master/ceviriler
