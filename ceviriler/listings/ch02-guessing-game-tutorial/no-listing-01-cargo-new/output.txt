@@ -1,0 +1,5 @@
+$ cargo run
+   Compiling tahmin_oyunu v0.1.0 (/home/rustdili/projeler/tahmin_oyunu)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.50s
+     Running `/home/rustdili/projeler/tahmin_oyunu/target/debug/tahmin_oyunu`
+Hello, world!
