@@ -63,22 +63,8 @@ Tahmin oyununun ilk bölümünde, kullanıcılardan bir değer girmesini isteyec
 
 <span class="filename">Dosya adı: src/main.rs</span>
 
-```rust
-use std::io;
-
-fn main() {
-    println!("Tuttuğum sayıyı tahmin edin!");
-
-    println!("Lütfen tahmininizi giriniz.");
-
-    let mut tahmin = String::new();
-
-    io::stdin()
-    	.read_line(&mut tahmin)
-    	.expect("Veri okuma hatası!");
-
-    println!("Tahmin ettiğiniz sayı: {}", tahmin);
-}
+```rust,ignore
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:all}}
 ```
 
 <span class="caption"> Örnek 2-1: Kullanıcıdan alınan tahmin verisini yazdıran kod</span>
