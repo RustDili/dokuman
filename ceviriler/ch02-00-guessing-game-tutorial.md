@@ -85,7 +85,7 @@ fn main() {
 
 Bu aşama yoğun bilgi içerdiğinden kodun satır satır incelenmesi öğretici olacaktır. İlk etapta kullanıcı girdisini elde etmek ve değerini yazdırabilmek için Rust standart kütüphanesi `std`'nin bir parçası olan `io` (input/output) kütüphanesini içe aktarmamız gerekir.
 
-```rust
+```rust,ignore
 use std::io;
 #
 #fn main() {
@@ -103,24 +103,49 @@ use std::io;
 #}
 ```
 
-Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*][prelude] olarak bilinen ve *otomatik içe aktarma* veya *ön yükleme* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği dahil bir dizi kullanışlı özellikle birlikte gelir.
-
-[prelude]: https://doc.rust-lang.org/std/prelude/index.html
+Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*][prelude] <!-- ignore --> olarak teleffuz edebileceğimiz ve *otomatik içe aktarılan* veya başlangıç için gerekli olan program özelliklerinini *ön yüklemesi* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği dahil bir dizi kullanışlı özellikle birlikte gelir.
 
 Birinci bölümden hatırlayacağınız üzere `main()` işlevi programın giriş noktasını oluşturur.
 
-```rust
+```rust,ignore
+#use std::io;
+#
 fn main() {
+#    println!("Tuttuğum sayıyı tahmin edin!");
+#
+#    println!("Lütfen tahmininizi giriniz.");
+#
+#    let mut tahmin = String::new();
+#
+#    io::stdin()
+#    	.read_line(&mut tahmin)
+#    	.expect("Veri okuma hatası!");
+#
+#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
+#}
 ```
 
 *Function* kelimesinin kısaltılmışı olan `fn` söz dizimi yeni bir işlev bildirirken, içi boş parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* olarak da bilinen sağa bakan süslü parantez `{` ise işlev gövdesinin başlangıç noktasını gösterir.
 
 Yine 1. Bölüm'den hatırlayacağınız üzere, bir dizi karakterin ekrana yazdırılması amacıyla `println!` makrosunu kullanıyorduk.
 
-```rust
+
+```rust,ignore
+#use std::io;
+#
+#fn main() {
     println!("Tuttuğum sayıyı tahmin edin!");
 
     println!("Lütfen tahmininizi giriniz.");
+#
+#    let mut tahmin = String::new();
+#
+#    io::stdin()
+#    	.read_line(&mut tahmin)
+#    	.expect("Veri okuma hatası!");
+#
+#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
+#}
 ```
 
 Yukarıdaki kodda ise oyun hakkında bilgi verilerek kullanıcılardan bir sayı girmesi istenmektedir.
@@ -129,28 +154,43 @@ Yukarıdaki kodda ise oyun hakkında bilgi verilerek kullanıcılardan bir sayı
 
 Sırada aşağıda gösterildiği gibi kullanıcı girdisini depolayacağımız bir yer oluşturmak var:
 
-```rust
+```rust,ignore
+#use std::io;
+#
+#fn main() {
+#    println!("Tuttuğum sayıyı tahmin edin!");
+#
+#    println!("Lütfen tahmininizi giriniz.");
+#
     let mut tahmin = String::new();
+#
+#    io::stdin()
+#    	.read_line(&mut tahmin)
+#    	.expect("Veri okuma hatası!");
+#
+#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
+#}
 ```
 
-Çok şeyin gerçekleştiği bu satırda program ilginçleşmeye başlıyor. Bu satırın değişken oluşturmak için kullanılan bir `let` ifadesiyle başladığına dikkat edin. İşte size başka bir örnek:
+Çok şeyin gerçekleştiği bu satırda program ilginçleşmeye başlıyor. Bu satırın *değişken* oluşturmak için kullanılan bir `let` ifadesiyle başladığına dikkat edin. İşte size başka bir örnek:
 
 ```rust, ignore
 let foo = bar;
 ```
 
-Bu satır `foo` adında yeni bir değişken yaratarak onu `bar` değeri ile ilklendirir. Rust'ta değişkenlerin varsayılan olarak değişmez oldukları kabul edilir. Bu kavramı 3. Bölümümüz olan ["Değişkenler ve Değişkenlik"](ch03-01-variables-and-mutability.html) başlığı altında ayrıntılarıyla inceleyeceğiz. Aşağıdaki örnek bize, bir değişkeni değiştirilebilir kılmak için `mut` anahtar kelimesinin nasıl kullanılacağını göstermektedir:
+Bu satır `foo` adında yeni bir değişken oluşturarak onu `bar` değerine bağlar. Rust'ta değişkenlerin varsayılan olarak değişmez oldukları kabul edilir. Bu kavramı 3. Bölümümüz olan ["Değişkenler ve Değişkenlik"][variables-and-mutability] <!-- ignore --> başlığı altında ayrıntılarıyla inceleyeceğiz. Aşağıdaki örnek bize, bir değişkeni değiştirilebilir kılmak için `mut` anahtar kelimesinin nasıl kullanılacağını göstermektedir:
 
 ```rust
 let foo = 5;    // değişmez
 let mut bar = 5;// değişebilir
 ```
 
-> Not: `//` söz dizimi satır sonuna kadar uzanan bir açıklamanın başlangıcını belirtir. Rust tarafından derleme aşamasında görmezden gelinen bu satırları 3. Bölümde tartışacağız.
+> Not: `//` söz dizimi satır sonuna kadar uzanan bir açıklamanın başlangıcını belirtir. 
+> Rust tarafından derleme aşamasında görmezden gelinen bu satırları 3. Bölümde tartışacağız.
 
-Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeriği değiştirilebilir olarak saklanan* tahmin adında bir değişken tanımı olduğunu anlıyorsunuzdur. Eşittir `=` işaretinin diğer tarafında, yeni bir dizgi örneği döndürmek amacıyla yararlandığımız `String::new()` işlevinden elde edilen ve `tahmin` değişkeninin ilklendirilmesinde kullanılan değer bulunmaktadır. Dizgiler, UTF-8 baytlarıyla kodlanmış, boyutları değiştirilebilen ve standart kütüphane tarafından sağlanan `String` türündeki metin parçalarıdır.
+Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeriği değiştirilebilir olarak saklanan* tahmin adında bir değişken tanımı olduğunu anlıyorsunuzdur. Eşittir `=` işaretinin diğer tarafında, yeni bir dizgi örneği döndürmek amacıyla yararlandığımız `String::new()` işlevinden elde edilen ve `tahmin` değişkeninin ilklendirilmesinde kullanılan değer bulunmaktadır. Dizgiler, UTF-8 baytlarıyla kodlanmış, boyutları değiştirilebilen ve standart kütüphane tarafından sağlanan [`String`][string]<!-- ignore --> türündeki metin parçalarıdır.
 
-`String::new()` içindeki `::` söz dizimi, `new()`'in String türünün ilişkili işlevi olduğunu gösterir. İlişkili işlevler türe özgü olduklarından, `new` işlevinden dönen dizgi `String` örneği olarak değil, `String` türü şeklinde elde edilmektedir. Bazı dillerde buna *statik metot* adı verilir.
+`String::new()` içindeki `::` söz dizimi, `new()`'in işlevinin `String` türünün ilişkili işlevi yani bu türün metodu olduğunu göstermektedir. İlişkili işlevler türe özgü olduklarından, `new` işlevinden dönen dizgi `String` örneği olarak değil, `String` türü şeklinde elde edilmektedir. Bazı dillerde buna *statik metot* adı verilir.
 
 `new` işlevi, yeni ve boş bir dizgi oluşturur. Genellikle `new` olarak adlandırılan ve ilişkili olduğu türün yeni bir değerini oluşturan bu işlevlerle Rust'ın birçok türünde karşılaşacaksınız.
 
@@ -725,3 +765,7 @@ Başarıyla çalışan bir sayı tahmin oyunu oluşturduğunuz için teşekkürl
 
 Bu proje, `let`, `match`, *metotlar*, *ilişkili işlevler*, harici sandıkların kullanılması gibi birçok Rust kavramını size tanıtmanın uygulamalı bir yoluydu. Kitabın ilerleyen bölümlerinde bu kavramlar hakkında daha çok şey öğreneceksiniz. 
 3. Bölümde değişkenler, veri türleri, işlevler gibi çoğu programlama dili tarafından kullanılan kavramları kapsanacak ve bunların Rust ile nasıl kullanıldığı gösterilecektir. 4. Bölümde ise Rust'ı diğer dillerden ayıran önemli bir özellik olan mülkiyet kavramı incelenecek, 5. Bölümde yapı ve metot söz dizimleri tartışılacak, 6. bölümdeyse `enum` türünün çalışması irdelenecektir.
+
+[prelude]: https://doc.rust-lang.org/std/prelude/index.html
+[variables-and-mutability]: ch03-01-variables-and-mutability.html
+[string]: https://doc.rust-lang.org/std/string/struct.String.html
