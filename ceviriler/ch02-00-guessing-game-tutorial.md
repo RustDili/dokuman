@@ -20,15 +20,7 @@ Cargo tarafından otomatik oluşturulan *Cargo.toml* dosyasına göz atalım:
 <span class="filename">Dosya adı: Cargo.toml</span>
 
 ```toml
-[package]
-name = "tahmin_oyunu"
-version = "0.1.0"
-authors = ["RustDili <rustdili@gmail.com>"]
-edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies] 
+{{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/Cargo.toml}}
 ```
 
 Eğer, Cargo'nun ortamınızdan elde ettiği yazar bilgileri doğru görünmüyorsa, bu bilgileri düzenledikten sonra dosyayı yeniden kaydedin.
@@ -38,19 +30,13 @@ Birinci bölümden hatırlayacağınız gibi `cargo new` komutu size hazır bir 
 <span class="filename">Dosya adı: src/main.rs</span>
 
 ```rust
-fn main() {
-    println!("Hello, world!");
-}
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/src/main.rs}}
 ```
 
 Ve bu programı `cargo run` komutu kullanarak tek seferde derleyip çalıştıralım:
 
 ```console
-$ cargo run
-   Compiling tahmin_oyunu v0.1.0 (/home/dogan/projeler/tahmin_oyunu)
-    Finished dev [unoptimized + debuginfo] target(s) in 1.50s
-     Running `/home/rustdili/projeler/tahmin_oyunu/target/debug/tahmin_oyunu`
-Hello, world!
+{{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/output.txt}}
 ```
 
 Sıklıkla kullanılan `run` komutu, bir projeyi çabucak derleyip çalıştırmamız ve bir sonraki derleme adımına hızlıca gitmemiz gerektiğinde oldukça faydalıdır.
@@ -72,21 +58,7 @@ Tahmin oyununun ilk bölümünde, kullanıcılardan bir değer girmesini isteyec
 Bu aşama yoğun bilgi içerdiğinden kodun satır satır incelenmesi öğretici olacaktır. İlk etapta kullanıcı girdisini elde etmek ve değerini yazdırabilmek için Rust standart kütüphanesi `std`'nin bir parçası olan `io` (input/output) kütüphanesini içe aktarmamız gerekir.
 
 ```rust,ignore
-use std::io;
-#
-#fn main() {
-#    println!("Tuttuğum sayıyı tahmin edin!");
-#
-#    println!("Lütfen tahmininizi giriniz.");
-#
-#    let mut tahmin = String::new();
-#
-#    io::stdin()
-#    	.read_line(&mut tahmin)
-#    	.expect("Veri okuma hatası!");
-#
-#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
-#}
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:io}}
 ```
 
 Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*][prelude] <!-- ignore --> olarak teleffuz edebileceğimiz ve *otomatik içe aktarılan* veya başlangıç için gerekli olan program özelliklerinini *ön yüklemesi* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği dahil bir dizi kullanışlı özellikle birlikte gelir.
@@ -94,44 +66,15 @@ Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak bir
 Birinci bölümden hatırlayacağınız üzere `main()` işlevi programın giriş noktasını oluşturur.
 
 ```rust,ignore
-#use std::io;
-#
-fn main() {
-#    println!("Tuttuğum sayıyı tahmin edin!");
-#
-#    println!("Lütfen tahmininizi giriniz.");
-#
-#    let mut tahmin = String::new();
-#
-#    io::stdin()
-#    	.read_line(&mut tahmin)
-#    	.expect("Veri okuma hatası!");
-#
-#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
-#}
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:main}}
 ```
 
-*Function* kelimesinin kısaltılmışı olan `fn` söz dizimi yeni bir işlev bildirirken, içi boş parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* olarak da b```rust,ignoreilinen sağa bakan süslü parantez `{` ise işlev gövdesinin başlangıç noktasını gösterir.
+*Function* kelimesinin kısaltılmışı olan `fn` söz dizimi yeni bir işlev bildirirken, içi boş parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* olarak da bilinen sağa bakan süslü parantez `{` ise işlev gövdesinin başlangıç noktasını gösterir.
 
 Yine 1. Bölüm'den hatırlayacağınız üzere, bir dizi karakterin ekrana yazdırılması amacıyla `println!` makrosunu kullanıyorduk.
 
-
 ```rust,ignore
-#use std::io;
-#
-#fn main() {
-    println!("Tuttuğum sayıyı tahmin edin!");
-
-    println!("Lütfen tahmininizi giriniz.");
-#
-#    let mut tahmin = String::new();
-#
-#    io::stdin()
-#    	.read_line(&mut tahmin)
-#    	.expect("Veri okuma hatası!");
-#
-#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
-#}
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:print}}
 ```
 
 Yukarıdaki kodda ise oyun hakkında bilgi verilerek kullanıcılardan bir sayı girmesi istenmektedir.
@@ -141,21 +84,7 @@ Yukarıdaki kodda ise oyun hakkında bilgi verilerek kullanıcılardan bir sayı
 Sırada aşağıda gösterildiği gibi kullanıcı girdisini depolayacağımız bir yer oluşturmak var:
 
 ```rust,ignore
-#use std::io;
-#
-#fn main() {
-#    println!("Tuttuğum sayıyı tahmin edin!");
-#
-#    println!("Lütfen tahmininizi giriniz.");
-#
-    let mut tahmin = String::new();
-#
-#    io::stdin()
-#    	.read_line(&mut tahmin)
-#    	.expect("Veri okuma hatası!");
-#
-#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
-#}
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:string}}
 ```
 
 Çok şeyin gerçekleştiği bu satırda program ilginçleşmeye başlıyor. Bu satırın *değişken* oluşturmak için kullanılan bir `let` ifadesiyle başladığına dikkat edin. İşte size başka bir örnek:
@@ -166,7 +95,7 @@ let foo = bar;
 
 Bu satır `foo` adında yeni bir değişken oluşturarak onu `bar` değerine bağlar. Rust'ta değişkenlerin varsayılan olarak değişmez oldukları kabul edilir. Bu kavramı 3. Bölümümüz olan ["Değişkenler ve Değişkenlik"][variables-and-mutability] <!-- ignore --> başlığı altında ayrıntılarıyla inceleyeceğiz. Aşağıdaki örnek bize, bir değişkeni değiştirilebilir kılmak için `mut` anahtar kelimesinin nasıl kullanılacağını göstermektedir:
 
-```rust
+```rust,ignore
 let foo = 5;    // değişmez
 let mut bar = 5;// değişebilir
 ```
@@ -184,21 +113,20 @@ Tahmin oyunumuza geri dönersek, artık `let mut tahmin` söz diziminin, *içeri
 
 Hatırlayacağınız gibi programın ilk satırında `use std::io` söz dizimini kullanarak Rust standart kütüphanesinden giriş/çıkış işlevselliğini uygulamıştık. Şimdiyse `io` modülünde bulunan `stdin` işlevini çağıracağız:
 
-```rust
-    io::stdin()
-    	.read_line(&mut tahmin)
+```rust,ignore
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:read}}
 ```
 
-Eğer programın en başına `use std::io` satırını eklememiş olsaydık, `stdin` işlev çağrısını, kod içinde `std::io::stdin` şeklinde yazmamız gerekecekti. Bu işlev uçbirimimizde standart girdinin işlenmesi sağlayan `std::io::Stdin` türünün bir örneğini döndürür. 
+Eğer programın en başına `use std::io` satırını eklememiş olsaydık, `stdin` işlev çağrısını, kod içinde `std::io::stdin` şeklinde yazmamız gerekecekti. Bu işlev uçbirimimizde standart girdinin işlenmesi sağlayan [`std::io::Stdin`][iostdin]<!-- ignore --> türünün bir örneğini döndürür. 
 
-Kodun bir sonraki bölümü olan `.read_line(&mut tahmin)` ifadesindeyse, kullanıcıdan veri almak amacıyla standart girişteki `read_line` metodu çağrılarak, kendisine `&mut tahmin` verisi argüman olarak iletilir.
+Kodun bir sonraki bölümü olan `.read_line(&mut tahmin)` ifadesindeyse, kullanıcıdan veri almak amacıyla standart girişteki [`read_line`][read_line]<!-- ignore --> metodu çağrılarak, kendisine `&mut tahmin` verisi argüman olarak iletilir.
 
 `read_line` metodunun görevi, kullanıcı tarafından girilen karakterleri standart girişten okumak ve elde edilen veriyi iletilecek olan dizgiye yerleştirmektir. Yöntemin, kullanıcı girdisi eklendikçe dizgi içeriğini değiştirilebilmesi için, kendisine iletilen argümanın değişebilir olması gerekmektedir.
 
 `&` işareti, bağımsız değişkenin *referans* türünden olduğunu bildirdiğinden, kodun bazı bölümleri tarafından bu değişkenlere, bellekte defalarca kopyalanmaları gerekmeksizin erişilmesi sağlanmış olur. Referanslar dilin güçlü ve karmaşık özelliklerinden olmakla birlikte, Rust'ın önemli avantajlarından biri de, bu karmaşık işlevselliği, güvenilir ve kullanışlı hale getirmesidir. Aslında bu aşamada programı tamamlayabilmek için daha fazla ayrıntıya ihtiyacınız yok. Şimdilik referansların da tıpkı değişkenler gibi varsayılan olarak değişmez kabul edildiğini ve onları değiştirilebilir kılabilmek için `&tahmin` yerine `&mut tahmin` yazmamız  gerektiğini öğrenmemiz yeterlidir. (Referanslar konusu 4.Bölümde ayrıntılı olarak ele alınacaktır.)
 
 ### `Result` Türü ile Olası Hataları İşlemek
-
+<!-- Kaldım -->
 İncelememize `io::stdin` ile başlayan ifadenin üçüncü satırıyla devam edelim. Her ne kadar ayrı bir satırmış gibi görünmesine rağmen, bu satır da tıpkı bir önceki satır gibi, aynı mantıksal kod satırının parçası olup koda `expect` metodunu eklemektedir:
 
 
@@ -297,7 +225,7 @@ Harici sandıkların kullanımı, `Cargo` aracının kolaylaştırıcı özellik
 
 ```toml
 [dependencies]
-rand = "0.8.3"
+rand = "0.8.3"..
 ```
 
 `Cargo.toml` dosyasındaki bölüm başlıklarını takip eden her şey, başka bir bölüm başlayana kadar devam eden bölümün parçasıdır. Bu dosyanın bağımlılıklar `[dependencies]` başlıklı bölümü, projenizin çalışabilmesi için ihtiyaç duyduğu sandıkları ve bu sandıkların ilgili sürümlerini bildirdiğiniz yer olduğundan projemizde kullanacağımız `rand` sandığı sürümünü `0.8.3` olarak belirleyeceğiz. Cargo, sürüm numaralarını bildirmekte standart olarak kullanılan [anlamsal sürümleme](http://semver.org/) sistemini -SemVer olarak da adlandırılır- yorumlamayı bildiğinden, `0.8.3`'ün aslında `^0.8.3`'ün kısaltması olduğunu anlar. Bağımlılık olarak bildirdiğimiz `rand` sandığının sürüm numarası `0.8.3`, projemizin en az `0.8.3` olan ancak `0.9.0`'ın altında kalan herhangi bir sürümle çalışabileceği anlamına gelmektedir. Bu durumda Cargo, `0.8.3`'den `0.9.0`'a kadar olan olası sandık sürümlerinin, `0.8.3` sürümüyle uyumlu genel API'ye sahip olduğunu varsayarak, projemizin derlenebilmesi için gereken en son sürümü ediner ve projemizin çalışmasını sağlar. Bununla birlikte `0.9.0` veya daha sonraki herhangi bir sürümün aşağıdaki örneklerin kullandığı API ile aynı API'ye sahip olacağı garanti edilmez.
@@ -755,3 +683,5 @@ Bu proje, `let`, `match`, *metotlar*, *ilişkili işlevler*, harici sandıkları
 [prelude]: https://doc.rust-lang.org/std/prelude/index.html
 [variables-and-mutability]: ch03-01-variables-and-mutability.html
 [string]: https://doc.rust-lang.org/std/string/struct.String.html
+[iostdin]: https://doc.rust-lang.org/std/io/struct.Stdin.html
+[read_line]: https://doc.rust-lang.org//std/io/struct.Stdin.html#method.read_line
