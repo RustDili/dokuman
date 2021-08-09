@@ -125,7 +125,7 @@ fn main() {
 #}
 ```
 
-*Function* kelimesinin kısaltılmışı olan `fn` söz dizimi yeni bir işlev bildirirken, içi boş parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* olarak da bilinen sağa bakan süslü parantez `{` ise işlev gövdesinin başlangıç noktasını gösterir.
+*Function* kelimesinin kısaltılmışı olan `fn` söz dizimi yeni bir işlev bildirirken, içi boş parantezler `()` işlevin herhangi bir giriş parametresi almadığını, *açılış ayracı* olarak da b```rust,ignoreilinen sağa bakan süslü parantez `{` ise işlev gövdesinin başlangıç noktasını gösterir.
 
 Yine 1. Bölüm'den hatırlayacağınız üzere, bir dizi karakterin ekrana yazdırılması amacıyla `println!` makrosunu kullanıyorduk.
 
@@ -174,7 +174,7 @@ Sırada aşağıda gösterildiği gibi kullanıcı girdisini depolayacağımız 
 
 Çok şeyin gerçekleştiği bu satırda program ilginçleşmeye başlıyor. Bu satırın *değişken* oluşturmak için kullanılan bir `let` ifadesiyle başladığına dikkat edin. İşte size başka bir örnek:
 
-```rust, ignore
+```rust,ignore
 let foo = bar;
 ```
 
