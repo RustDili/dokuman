@@ -87,9 +87,25 @@ Bu aşama yoğun bilgi içerdiğinden kodun satır satır incelenmesi öğretici
 
 ```rust
 use std::io;
+#
+#fn main() {
+#    println!("Tuttuğum sayıyı tahmin edin!");
+#
+#    println!("Lütfen tahmininizi giriniz.");
+#
+#    let mut tahmin = String::new();
+#
+#    io::stdin()
+#    	.read_line(&mut tahmin)
+#    	.expect("Veri okuma hatası!");
+#
+#    println!("Tahmin ettiğiniz sayı: {}", tahmin);
+#}
 ```
 
-Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*](https://doc.rust-lang.org/std/prelude/index.html) olarak bilinen ve *otomatik içe aktarma* veya *ön yükleme* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği dahil bir dizi kullanışlı özellikle birlikte gelir.
+Varsayılan haliyle Rust başlatılan her program kapsamına otomatik olarak birkaç türü dahil eder. Bu teknoloji [*prelüd*][prelude] olarak bilinen ve *otomatik içe aktarma* veya *ön yükleme* olarak kavramlaştırabileceğimiz bir teknolojidir. Eğer kullanmak istediğiniz veri türleri bu ön yükleme modülüne dahil edilmemişse, bunları `use` anahtar sözcüğü kullanarak programınıza dahil etmeniz gerekecektir. Uygulamamızda kullandığımız `std::io` kütüphanesi, kullanıcı girdisini kabul etme yeteneği dahil bir dizi kullanışlı özellikle birlikte gelir.
+
+[prelude]: https://doc.rust-lang.org/std/prelude/index.html
 
 Birinci bölümden hatırlayacağınız üzere `main()` işlevi programın giriş noktasını oluşturur.
 
