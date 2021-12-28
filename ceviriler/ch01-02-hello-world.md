@@ -57,7 +57,7 @@ $ ./main
 Merhaba, dünya!
 ```
 
-Windows kullanıyorsanız `./main` yerine `./main.exe` komutunu kullanmanız gerekir:
+Windows kullanıyorsanız `./main` yerine `.\main.exe` komutunu kullanmanız gerekir:
 
 ```powershell
 > rustc main.rs
