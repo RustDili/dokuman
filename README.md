@@ -29,5 +29,9 @@ Katkılarınızı bekleyen bu mini sözlük, Rust dili belge havuzu ve çevirile
  
  [Rust Programlama Dili - Resmi kitap çevirisi](https://github.com/RustDili/dokuman/tree/master/ceviriler)
  
+ ### Rust Programlama Dili 2021
+ [lang-book-tr /02-12-2021](https://github.com/RustDili/rust-book-tr/blob/main/TURKISH/) 
+ <!--
  # Çevrim-içi Kitaplar
  ## [Rust Programlama Dili](https://rustdili.github.io/)
+-->
