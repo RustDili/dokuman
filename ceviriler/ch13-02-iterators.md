@@ -110,7 +110,7 @@ Dosya adı: src/main.rs
 ````
 Örnek 13-17: Bir yineleyici adaptörü olan `map` metodunu yeni bir yineleyici oluşturmak üzere çağırmak
 
-ldığımız uyarının çıktısı aşağıdaki gibidir:
+aldığımız uyarının çıktısı aşağıdaki gibidir:
 
 ```Binary
 
@@ -133,7 +133,7 @@ warning: unused `std::iter::Map` that must be used
 
 Bu durumu düzeltmek ve yineleyiciyi kullanabilmek için Bölüm 12, Örnek 12-1'de yer alan ve `env::args` ile kullandığımız `collect` metodundan yararlanacağız. Bu metod yineleyiciyi tüketerek elde ettiği değerleri bir koleksiyon veri türüne depolar.
 
-Örnek 13-18'de `map` metoduna yapılan çağrı vasıtasıyla yineleyici üzerinde yapılan yinelemeden döndürülen sonuçları bir vektörde topluyoruz. Sonuçların depolandığu bu vektör, orijinal vektördeki her öğenin değerine 1 eklenmiş sayılardan oluşmaktadır.
+Örnek 13-18'de `map` metoduna yapılan çağrı vasıtasıyla yineleyici üzerinde yapılan yinelemeden döndürülen sonuçları bir vektörde topluyoruz. Sonuçların depolandığı bu vektör, orijinal vektördeki her öğenin değerine 1 eklenmiş sayılardan oluşmaktadır.
 
 Dosya adı: src/main.rs
 
